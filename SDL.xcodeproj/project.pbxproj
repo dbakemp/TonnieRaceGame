@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		94F521D71D7A001700E2802C /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 94F521D61D7A001700E2802C /* main.cpp */; };
+		94F521DE1D7A00E000E2802C /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94F521DD1D7A00E000E2802C /* SDL2.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +26,7 @@
 /* Begin PBXFileReference section */
 		94F521D31D7A001700E2802C /* SDL */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SDL; sourceTree = BUILT_PRODUCTS_DIR; };
 		94F521D61D7A001700E2802C /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		94F521DD1D7A00E000E2802C /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = ../../../../Library/Frameworks/SDL2.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -32,6 +34,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				94F521DE1D7A00E000E2802C /* SDL2.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -41,6 +44,7 @@
 		94F521CA1D7A001700E2802C = {
 			isa = PBXGroup;
 			children = (
+				94F521DD1D7A00E000E2802C /* SDL2.framework */,
 				94F521D51D7A001700E2802C /* SDL */,
 				94F521D41D7A001700E2802C /* Products */,
 			);
@@ -209,6 +213,10 @@
 		94F521DB1D7A001700E2802C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(LOCAL_LIBRARY_DIR)/Frameworks",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -216,6 +224,10 @@
 		94F521DC1D7A001700E2802C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(LOCAL_LIBRARY_DIR)/Frameworks",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
