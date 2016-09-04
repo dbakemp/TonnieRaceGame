@@ -120,9 +120,11 @@
     <ClCompile Include="CEngine.cpp" />
     <ClCompile Include="CEntity.cpp" />
     <ClCompile Include="CEntityCircle.cpp" />
+    <ClCompile Include="CEntityManager.cpp" />
     <ClCompile Include="CEntitySquare.cpp" />
     <ClCompile Include="CInputManager.cpp" />
     <ClCompile Include="IDrawListener.cpp" />
+    <ClCompile Include="IEntityListener.cpp" />
     <ClCompile Include="IInputListener.cpp" />
     <ClCompile Include="Main.cpp" />
   </ItemGroup>
@@ -131,9 +133,11 @@
     <ClInclude Include="CEngine.h" />
     <ClInclude Include="CEntity.h" />
     <ClInclude Include="CEntityCircle.h" />
+    <ClInclude Include="CEntityManager.h" />
     <ClInclude Include="CEntitySquare.h" />
     <ClInclude Include="CInputManager.h" />
     <ClInclude Include="IDrawListener.h" />
+    <ClInclude Include="IEntityListener.h" />
     <ClInclude Include="IInputListener.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

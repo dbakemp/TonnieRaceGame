@@ -3,12 +3,14 @@
 
 #include "IDrawListener.h"
 #include "IInputListener.h"
+#include "CEntity.h"
 
-class CEntitySquare : public IDrawListener, public IInputListener {
+class CEntitySquare : public CEntity, public IDrawListener, public IInputListener {
 public:
 	CEntitySquare(CEngine *engine);
 	void Draw(SDL_Renderer *renderer);
 	void Input(SDL_Event *event);
+	void Update();
 };
 
 #endif
