@@ -1,5 +1,6 @@
 #ifndef CDINPUTMANAGER_H
 #define CDINPUTMANAGER_H
+#include "SDL.h"
 #include <vector>
 
 class IInputListener;
@@ -10,7 +11,7 @@ public:
 
 	void AddListener(IInputListener *inputListener);
 	void RemoveListener(IInputListener *inputListener);
-	void Tick();
+	void Tick(SDL_Event *event);
 };
 
 

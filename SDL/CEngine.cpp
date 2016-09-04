@@ -14,31 +14,28 @@ CEngine::CEngine() {
 
 	SDL_Init(SDL_INIT_EVERYTHING);
 	window = SDL_CreateWindow("test", 100, 100, 1920, 1080, SDL_WINDOW_SHOWN);
+	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 
 	int running = 1;
 
 	while (running)
 	{
-		SDL_Event event;
-		while (SDL_PollEvent(&event) != 0)
-		{
-		}
-
 		Tick();
 	}
-
-	SDL_Delay(4000);
 }
 
 void CEngine::Tick()
 {
-	SDL_Renderer *renderer = NULL;
-	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+	SDL_Event *event = new SDL_Event();
+	while (SDL_PollEvent(event) != 0)
+	{
+		inputManager->Tick(event);
+	}
+
 	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 
 	SDL_RenderClear(renderer);
 
-	inputManager->Tick();
 	drawManager->Tick(renderer);
 
 	SDL_RenderPresent(renderer);

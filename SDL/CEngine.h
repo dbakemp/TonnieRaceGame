@@ -12,6 +12,7 @@ public:
 	CDrawManager *drawManager;
 	CInputManager *inputManager;
 	SDL_Window  *window;
+	SDL_Renderer *renderer;
 private:
 	void Tick();
 };
