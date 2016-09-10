@@ -11,6 +11,9 @@ public:
 	void Draw(SDL_Renderer *renderer);
 	void Input(SDL_Event *event);
 	void Update();
+	int rCol, gCol, bCol;
+private:
+	CEngine *engine;
 };
 
 #endif

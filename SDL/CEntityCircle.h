@@ -9,6 +9,9 @@ public:
 	CEntityCircle(CEngine *engine);
 	void Draw(SDL_Renderer *renderer);
 	void Update();
+	int rCol, gCol, bCol;
+private:
+	CEngine *engine;
 };
 
 #endif

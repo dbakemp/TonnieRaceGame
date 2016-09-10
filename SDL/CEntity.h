@@ -9,11 +9,10 @@ class CEntity: public IEntityListener {
 public:
 	CEntity(CEngine *engine);
 	void Update();
-
-	int xVel;
-	int yVel;
+	int xPos, yPos;
+	int xVel, yVel;
+	int height, width;
 private:
-
 };
 
 #endif CENTITY_H

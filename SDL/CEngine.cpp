@@ -5,19 +5,29 @@
 #include "CEntityManager.h"
 #include "CEntityCircle.h"
 #include "CEntitySquare.h"
+#include "CCamera.h"
+#include <time.h>
+#include <iostream>
 
 CEngine::CEngine() {
 	drawManager = new CDrawManager();
 	inputManager = new CInputManager();
 	entityManager = new CEntityManager();
+	camera = new CCamera();
 
-	CEntitySquare *sq1 = new CEntitySquare(this);
-	CEntityCircle *cl1 = new CEntityCircle(this);
+	srand(time(NULL));
 
+	for (int i = 0; i < 10000; i++) {
+		new CEntityCircle(this);
+	}
+	
+	CEntity *player = new CEntitySquare(this);
+	camera->SetChild(player);
+
+	
 	SDL_Init(SDL_INIT_EVERYTHING);
-	window = SDL_CreateWindow("test", 100, 100, 1920, 1080, SDL_WINDOW_SHOWN);
+	window = SDL_CreateWindow("test", 100, 100, 800, 600, SDL_WINDOW_SHOWN);
 	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
-
 
 	Tick();
 }
@@ -30,17 +40,17 @@ void CEngine::Tick()
 
 	while (running)
 	{
-		SDL_Event *event = new SDL_Event();
+		SDL_Event event;
 
-		while (SDL_PollEvent(event) != 0)
+		while (SDL_PollEvent(&event) != 0)
 		{
-			inputManager->Tick(event);
+			inputManager->Tick(&event);
 		}
 
 		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-
 		SDL_RenderClear(renderer);
 
+		camera->Update();
 		entityManager->Tick();
 		drawManager->Tick(renderer);
 

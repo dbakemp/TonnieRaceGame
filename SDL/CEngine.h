@@ -6,6 +6,7 @@
 class CDrawManager;
 class CInputManager;
 class CEntityManager;
+class CCamera;
 
 class CEngine {
 public:
@@ -13,6 +14,7 @@ public:
 	CDrawManager *drawManager;
 	CInputManager *inputManager;
 	CEntityManager *entityManager;
+	CCamera *camera;
 	SDL_Window  *window;
 	SDL_Renderer *renderer;
 private:

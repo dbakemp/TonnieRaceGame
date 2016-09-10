@@ -1,19 +1,30 @@
 #include "SDL.h"
 #include "CEntitySquare.h"
 #include "CEntity.h"
+#include "CEngine.h"
+#include "CCamera.h"
+#include <cstdlib>
 
 CEntitySquare::CEntitySquare(CEngine *engine): CEntity(engine), IDrawListener(engine), IInputListener(engine)
 {
-	xPos = 0;
-	yPos = 0;
+	xPos = rand() % 800;
+	yPos = rand() % 600;
+	height = rand() % 100;
+	width = rand() % 100;
+
+	rCol = rand() % 255;
+	gCol = rand() % 255;
+	bCol = rand() % 255;
+
 	xVel = 0;
 	yVel = 0;
+	this->engine = engine;
 }
 
 void CEntitySquare::Draw(SDL_Renderer *renderer)
 {
-	SDL_Rect rect = { xPos, yPos, 100, 100 };
-	SDL_SetRenderDrawColor(renderer, 0, 0, 255, 255);
+	SDL_Rect rect = { xPos-engine->camera->posX, yPos-engine->camera->posY, height, width };
+	SDL_SetRenderDrawColor(renderer, rCol, gCol, bCol, 255);
 	SDL_RenderFillRect(renderer, &rect);
 }
 
@@ -22,16 +33,16 @@ void CEntitySquare::Input(SDL_Event *event) {
 		case SDL_KEYDOWN:
 			switch (event->key.keysym.sym) {
 				case SDLK_LEFT:
-					xVel = -2;
+					xVel = -3;
 					break;
 				case SDLK_RIGHT:
-					xVel = 2;
+					xVel = 3;
 					break;
 				case SDLK_UP:
-					yVel = -2;
+					yVel = -3;
 					break;
 				case SDLK_DOWN:
-					yVel = 2;
+					yVel = 3;
 					break;
 				default:
 					break;
