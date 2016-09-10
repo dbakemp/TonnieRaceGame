@@ -26,7 +26,7 @@ CEngine::CEngine() {
 
 	
 	SDL_Init(SDL_INIT_EVERYTHING);
-	window = SDL_CreateWindow("test", 100, 100, 800, 600, SDL_WINDOW_SHOWN);
+	window = SDL_CreateWindow("test", 100, 100, 1920, 1080, SDL_WINDOW_SHOWN);
 	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 
 	Tick();

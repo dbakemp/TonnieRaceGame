@@ -12,6 +12,7 @@ public:
 	void Input(SDL_Event *event);
 	void Update();
 	int rCol, gCol, bCol;
+	float friction;
 private:
 	CEngine *engine;
 };

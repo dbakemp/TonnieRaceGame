@@ -7,14 +7,14 @@
 
 CEntityCircle::CEntityCircle(CEngine *engine): CEntity(engine), IDrawListener(engine)
 {
-	xPos = rand() % 1200;
-	yPos = rand() % 1200;
-	height = rand() % 100;
-	width = rand() % 100;
+	xPos = rand() % 12000;
+	yPos = rand() % 12000;
+	height = 10;
+	width = 10;
 
-	rCol = rand() % 255;
-	gCol = rand() % 255;
-	bCol = rand() % 255;
+	rCol = 25;
+	gCol = 255;
+	bCol = 25;
 
 	xVel = 0;
 	yVel = 0;

@@ -10,8 +10,8 @@ CCamera::CCamera()
 
 void CCamera::Update()
 {
-	posX += ((child->xPos - ((800-child->width)/2) - posX) / 16);
-	posY += ((child->yPos - ((600-child->height)/2) - posY) / 16);
+	posX += ((child->xPos - ((1920-child->width)/2) - posX) / 8);
+	posY += ((child->yPos - ((1080-child->height)/2) - posY) / 8);
 }
 
 void CCamera::SetChild(CEntity * child)

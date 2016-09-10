@@ -3,27 +3,29 @@
 #include "CEntity.h"
 #include "CEngine.h"
 #include "CCamera.h"
+#include <math.h>
 #include <cstdlib>
 
 CEntitySquare::CEntitySquare(CEngine *engine): CEntity(engine), IDrawListener(engine), IInputListener(engine)
 {
-	xPos = rand() % 800;
-	yPos = rand() % 600;
-	height = rand() % 100;
-	width = rand() % 100;
+	xPos = 6000;
+	yPos = 6000;
+	height = 100;
+	width = 60;
 
-	rCol = rand() % 255;
-	gCol = rand() % 255;
-	bCol = rand() % 255;
+	rCol = 255;
+	gCol = 25;
+	bCol = 25;
 
 	xVel = 0;
 	yVel = 0;
+	friction = 0.5;
 	this->engine = engine;
 }
 
 void CEntitySquare::Draw(SDL_Renderer *renderer)
 {
-	SDL_Rect rect = { xPos-engine->camera->posX, yPos-engine->camera->posY, height, width };
+	SDL_Rect rect = { xPos-engine->camera->posX, yPos-engine->camera->posY, width,  height };
 	SDL_SetRenderDrawColor(renderer, rCol, gCol, bCol, 255);
 	SDL_RenderFillRect(renderer, &rect);
 }
@@ -31,46 +33,52 @@ void CEntitySquare::Draw(SDL_Renderer *renderer)
 void CEntitySquare::Input(SDL_Event *event) {
 	switch (event->type) {
 		case SDL_KEYDOWN:
-			switch (event->key.keysym.sym) {
-				case SDLK_LEFT:
-					xVel = -3;
-					break;
-				case SDLK_RIGHT:
-					xVel = 3;
-					break;
-				case SDLK_UP:
-					yVel = -3;
-					break;
-				case SDLK_DOWN:
-					yVel = 3;
-					break;
-				default:
-					break;
+			if(event->key.keysym.sym == SDLK_w) {
+				yAcc = -1;
+			} else if (event->key.keysym.sym == SDLK_s) {
+				yAcc = 1;
 			}
-			break;
+			if (event->key.keysym.sym == SDLK_a) {
+				xAcc = -1;
+			} else if (event->key.keysym.sym == SDLK_d) {
+				xAcc = 1;
+			}
+		break;
 		case SDL_KEYUP:
-			switch (event->key.keysym.sym) {
-			case SDLK_LEFT:
-				xVel = 0;
-				break;
-			case SDLK_RIGHT:
-				xVel = 0;
-				break;
-			case SDLK_UP:
-				yVel = 0;
-				break;
-			case SDLK_DOWN:
-				yVel = 0;
-				break;
-			default:
-				break;
+			if (event->key.keysym.sym == SDLK_w) {
+				yAcc = 0;
 			}
-			break;
+			if (event->key.keysym.sym == SDLK_s) {
+				yAcc = 0;
+			}
+			if (event->key.keysym.sym == SDLK_a) {
+				xAcc = 0;
+			}
+			if (event->key.keysym.sym == SDLK_d) {
+				xAcc = 0;
+			}
+		break;
 	}
 }
 
 void CEntitySquare::Update()
 {
+	xVel += xAcc;
+	yVel += yAcc;
+
+	float speed = sqrt(xVel*xVel + yVel*yVel);
+
+	if (speed > friction) {
+		speed -= friction;
+	}
+	else {
+		speed = 0;
+	}
+
+	float angle = atan2(yVel, xVel);
+	xVel = cos(angle) * speed;
+	yVel = sin(angle) * speed;
+
 	xPos += xVel;
 	yPos += yVel;
 }

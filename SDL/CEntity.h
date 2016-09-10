@@ -9,8 +9,9 @@ class CEntity: public IEntityListener {
 public:
 	CEntity(CEngine *engine);
 	void Update();
-	int xPos, yPos;
-	int xVel, yVel;
+	float xPos, yPos;
+	float xVel, yVel;
+	float xAcc, yAcc;
 	int height, width;
 private:
 };
