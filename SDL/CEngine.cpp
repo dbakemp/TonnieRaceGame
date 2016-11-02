@@ -13,10 +13,11 @@
 CEngine::CEngine() {
 	int windowHeight = 720;
 	int windowWidth = 1280;
+	fps = 60;
 
-	b2Vec2 gravity(0, -9.8);
+	b2Vec2 gravity(0, 0);
 
-	b2World* myWorld = new b2World(gravity);
+	world = new b2World(gravity);
 
 	drawManager = new CDrawManager();
 	inputManager = new CInputManager();
@@ -60,6 +61,7 @@ void CEngine::Tick()
 		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 		SDL_RenderClear(renderer);
 
+		world->Step(fps, 8, 3);
 		camera->Update();
 		entityManager->Tick();
 		drawManager->Tick(renderer);

@@ -20,12 +20,24 @@ CEntitySquare::CEntitySquare(CEngine *engine): CEntity(engine), IDrawListener(en
 	xVel = 0;
 	yVel = 0;
 	friction = 0.5;
+
+
+	bodyDef.type = b2_dynamicBody;
+	bodyDef.position.Set(xPos, yPos);
+	bodyDef.angle = 0;
+	body = engine->world->CreateBody(&bodyDef);
+	polygon.SetAsBox(width, height);
+	fixture.shape = &polygon;
+	fixture.density = 10;
+	body->CreateFixture(&fixture);
+
 	this->engine = engine;
 }
 
 void CEntitySquare::Draw(SDL_Renderer *renderer)
 {
-	SDL_Rect rect = { xPos-engine->camera->posX, yPos-engine->camera->posY, width,  height };
+	b2Vec2 position = body->GetPosition(); 
+	SDL_Rect rect = { position.x - engine->camera->posX, position.y - engine->camera->posY, width, height };
 	SDL_SetRenderDrawColor(renderer, rCol, gCol, bCol, 255);
 	SDL_RenderFillRect(renderer, &rect);
 }
@@ -63,22 +75,19 @@ void CEntitySquare::Input(SDL_Event *event) {
 
 void CEntitySquare::Update()
 {
-	xVel += xAcc;
-	yVel += yAcc;
+	xPos = body->GetPosition().x;
+	yPos = body->GetPosition().y;
 
-	float speed = sqrt(xVel*xVel + yVel*yVel);
-
-	if (speed > friction) {
-		speed -= friction;
+	if (yAcc == -1) {
+		body->ApplyForce(b2Vec2(0, -50), body->GetWorldCenter(), true);
 	}
-	else {
-		speed = 0;
+	if (yAcc == 1) {
+		body->ApplyForce(b2Vec2(0, 50), body->GetWorldCenter(), true);
 	}
-
-	float angle = atan2(yVel, xVel);
-	xVel = cos(angle) * speed;
-	yVel = sin(angle) * speed;
-
-	xPos += xVel;
-	yPos += yVel;
+	if (xAcc == -1) {
+		body->ApplyForce(b2Vec2(-50, 0), body->GetWorldCenter(), true);
+	}
+	if (xAcc == 1) {
+		body->ApplyForce(b2Vec2(50, 0), body->GetWorldCenter(), true);
+	}
 }
