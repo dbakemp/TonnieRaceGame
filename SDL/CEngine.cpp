@@ -36,7 +36,6 @@ CEngine::CEngine() {
 	
 	CEntity* player = new CEntitySquare(this);
 	camera->SetChild(player);
-
 	
 	SDL_Init(SDL_INIT_EVERYTHING);
 	window = SDL_CreateWindow("RaceGame", 100, 100, windowWidth, windowHeight, SDL_WINDOW_SHOWN);

@@ -4,6 +4,7 @@
 #include "CEngine.h"
 #include "CCamera.h"
 #include "IBox2DListener.h"
+#include "Box2DUtils.h"
 #include <math.h>
 #include <cstdlib>
 
@@ -11,8 +12,8 @@ CEntitySquare::CEntitySquare(CEngine *engine): CEntity(engine), IDrawListener(en
 {
 	xPos = 0;
 	yPos = 0;
-	height = 50;
-	width = 50;
+	height = 30;
+	width = 30;
 
 	rCol = 255;
 	gCol = 25;
@@ -26,10 +27,11 @@ CEntitySquare::CEntitySquare(CEngine *engine): CEntity(engine), IDrawListener(en
 	bodyDef.type = b2_dynamicBody;
 	bodyDef.position.Set(xPos, yPos);
 	bodyDef.angle = 0;
+	bodyDef.fixedRotation = true;
 	body = engine->world->CreateBody(&bodyDef);
 	polygon.SetAsBox(width, height);
 	fixture.shape = &polygon;
-	fixture.density = 10;
+	fixture.density = 1;
 	body->CreateFixture(&fixture);
 
 	this->engine = engine;
@@ -37,10 +39,11 @@ CEntitySquare::CEntitySquare(CEngine *engine): CEntity(engine), IDrawListener(en
 
 void CEntitySquare::Draw(SDL_Renderer *renderer)
 {
-	b2Vec2 position = body->GetPosition(); 
-	SDL_Rect rect = { position.x - engine->camera->posX, position.y - engine->camera->posY, width, height };
+	/*b2Vec2 position = body->GetPosition(); 
+	SDL_Rect rect = { position.x - engine->camera->posX, position.y - engine->camera->posY, (width * 30) * 2, (width * 30) * 2 };
 	SDL_SetRenderDrawColor(renderer, rCol, gCol, bCol, 255);
-	SDL_RenderFillRect(renderer, &rect);
+	SDL_RenderFillRect(renderer, &rect);*/
+	Box2DUtils::DrawBody(renderer, body, engine->camera, rCol, gCol, bCol, 255, rCol, gCol, bCol, 255, false);
 }
 
 void CEntitySquare::Input(SDL_Event *event) {
@@ -80,16 +83,16 @@ void CEntitySquare::Update()
 	yPos = body->GetPosition().y;
 
 	if (yAcc == -1) {
-		body->ApplyForce(b2Vec2(0, -50), body->GetWorldCenter(), true);
+		body->ApplyForce(b2Vec2(0, -150), body->GetWorldCenter(), true);
 	}
 	if (yAcc == 1) {
-		body->ApplyForce(b2Vec2(0, 50), body->GetWorldCenter(), true);
+		body->ApplyForce(b2Vec2(0, 150), body->GetWorldCenter(), true);
 	}
 	if (xAcc == -1) {
-		body->ApplyForce(b2Vec2(-50, 0), body->GetWorldCenter(), true);
+		body->ApplyForce(b2Vec2(-150, 0), body->GetWorldCenter(), true);
 	}
 	if (xAcc == 1) {
-		body->ApplyForce(b2Vec2(50, 0), body->GetWorldCenter(), true);
+		body->ApplyForce(b2Vec2(150, 0), body->GetWorldCenter(), true);
 	}
 }
 
