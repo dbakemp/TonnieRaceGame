@@ -2,7 +2,8 @@
 #include "CDrawManager.h"
 #include "CInputManager.h"
 #include "CEntityManager.h"
-#include "CEntityCircle.h"
+#include "CBox2DManager.h"
+#include "CEntitySmallSquare.h"
 #include "CEntitySquare.h"
 #include "CCamera.h"
 #include <time.h>
@@ -22,14 +23,15 @@ CEngine::CEngine() {
 	drawManager = new CDrawManager();
 	inputManager = new CInputManager();
 	entityManager = new CEntityManager();
+	box2DManager = new CBox2DManager();
 	camera = new CCamera();
 	camera->windowHeight = windowHeight;
 	camera->windowWidth = windowWidth;
 
 	srand(time(NULL));
 
-	for (int i = 0; i < 10000; i++) {
-		new CEntityCircle(this);
+	for (int i = 0; i < 200; i++) {
+		new CEntitySmallSquare(this);
 	}
 	
 	CEntity* player = new CEntitySquare(this);

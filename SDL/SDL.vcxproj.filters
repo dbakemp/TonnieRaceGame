@@ -57,9 +57,6 @@
     <ClCompile Include="CEntitySquare.cpp">
       <Filter>Source Files\Entities</Filter>
     </ClCompile>
-    <ClCompile Include="CEntityCircle.cpp">
-      <Filter>Source Files\Entities</Filter>
-    </ClCompile>
     <ClCompile Include="CEntityManager.cpp">
       <Filter>Source Files\Managers</Filter>
     </ClCompile>
@@ -68,6 +65,15 @@
     </ClCompile>
     <ClCompile Include="CCamera.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CEntitySmallSquare.cpp">
+      <Filter>Source Files\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="IBox2DListener.cpp">
+      <Filter>Source Files\Interfaces</Filter>
+    </ClCompile>
+    <ClCompile Include="CBox2DManager.cpp">
+      <Filter>Source Files\Managers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -92,9 +98,6 @@
     <ClInclude Include="CEntitySquare.h">
       <Filter>Header Files\Entities</Filter>
     </ClInclude>
-    <ClInclude Include="CEntityCircle.h">
-      <Filter>Header Files\Entities</Filter>
-    </ClInclude>
     <ClInclude Include="CEntityManager.h">
       <Filter>Header Files\Managers</Filter>
     </ClInclude>
@@ -103,6 +106,15 @@
     </ClInclude>
     <ClInclude Include="CCamera.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CEntitySmallSquare.h">
+      <Filter>Header Files\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="IBox2DListener.h">
+      <Filter>Header Files\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="CBox2DManager.h">
+      <Filter>Header Files\Managers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

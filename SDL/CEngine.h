@@ -7,6 +7,7 @@
 class CDrawManager;
 class CInputManager;
 class CEntityManager;
+class CBox2DManager;
 class CCamera;
 
 class CEngine {
@@ -15,6 +16,7 @@ public:
 	CDrawManager *drawManager;
 	CInputManager *inputManager;
 	CEntityManager *entityManager;
+	CBox2DManager *box2DManager;
 	CCamera *camera;
 	SDL_Window  *window;
 	SDL_Renderer *renderer;

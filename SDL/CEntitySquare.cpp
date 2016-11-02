@@ -3,15 +3,16 @@
 #include "CEntity.h"
 #include "CEngine.h"
 #include "CCamera.h"
+#include "IBox2DListener.h"
 #include <math.h>
 #include <cstdlib>
 
-CEntitySquare::CEntitySquare(CEngine *engine): CEntity(engine), IDrawListener(engine), IInputListener(engine)
+CEntitySquare::CEntitySquare(CEngine *engine): CEntity(engine), IDrawListener(engine), IInputListener(engine), IBox2DListener(engine)
 {
-	xPos = 6000;
-	yPos = 6000;
-	height = 100;
-	width = 60;
+	xPos = 0;
+	yPos = 0;
+	height = 50;
+	width = 50;
 
 	rCol = 255;
 	gCol = 25;
@@ -90,4 +91,8 @@ void CEntitySquare::Update()
 	if (xAcc == 1) {
 		body->ApplyForce(b2Vec2(50, 0), body->GetWorldCenter(), true);
 	}
+}
+
+void CEntitySquare::Create(b2World * world)
+{
 }
