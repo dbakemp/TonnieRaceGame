@@ -11,6 +11,7 @@ public:
 	void SetChild(CEntity *child);
 	CEntity *GetChild();
 	int posX, posY;
+	int windowHeight, windowWidth;
 private:
 	CEntity *child;
 };

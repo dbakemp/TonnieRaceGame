@@ -1,4 +1,3 @@
-#include "SDL.h"
 #include "CEngine.h"
 #include "CDrawManager.h"
 #include "CInputManager.h"
@@ -8,12 +7,23 @@
 #include "CCamera.h"
 #include <time.h>
 #include <iostream>
+#include <Box2D\Box2D.h>
+#include <SDL.h>
 
 CEngine::CEngine() {
+	int windowHeight = 720;
+	int windowWidth = 1280;
+
+	b2Vec2 gravity(0, -9.8);
+
+	b2World* myWorld = new b2World(gravity);
+
 	drawManager = new CDrawManager();
 	inputManager = new CInputManager();
 	entityManager = new CEntityManager();
 	camera = new CCamera();
+	camera->windowHeight = windowHeight;
+	camera->windowWidth = windowWidth;
 
 	srand(time(NULL));
 
@@ -21,12 +31,12 @@ CEngine::CEngine() {
 		new CEntityCircle(this);
 	}
 	
-	CEntity *player = new CEntitySquare(this);
+	CEntity* player = new CEntitySquare(this);
 	camera->SetChild(player);
 
 	
 	SDL_Init(SDL_INIT_EVERYTHING);
-	window = SDL_CreateWindow("test", 100, 100, 1920, 1080, SDL_WINDOW_SHOWN);
+	window = SDL_CreateWindow("RaceGame", 100, 100, windowWidth, windowHeight, SDL_WINDOW_SHOWN);
 	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 
 	Tick();
