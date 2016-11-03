@@ -4,16 +4,19 @@
 
 CCamera::CCamera()
 {
-	posX = 0;
-	posY = 0;
+	posX = -500;
+	posY = -500;
 	windowHeight = 720;
 	windowWidth = 1280;
+	child = nullptr;
 }
 
 void CCamera::Update()
 {
-	posX += ((child->xPos - ((windowWidth -child->width)/2) - posX) / 8);
-	posY += ((child->yPos - ((windowHeight -child->height)/2) - posY) / 8);
+	if (child != nullptr) {
+		posX += ((child->xPos - ((windowWidth - child->width) / 2) - posX) / 8);
+		posY += ((child->yPos - ((windowHeight - child->height) / 2) - posY) / 8);
+	}
 }
 
 void CCamera::SetChild(CEntity * child)

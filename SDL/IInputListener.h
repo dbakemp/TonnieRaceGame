@@ -10,6 +10,9 @@ public:
 	virtual void Input(SDL_Event *event) = 0;
 	IInputListener(CEngine *engine);
 	~IInputListener();
+
+	int controlState;
+	enum InputDirections { LEFT = 1, RIGHT = 2, UP = 3, DOWN = 4 };
 private:
 	CEngine *engine;
 };

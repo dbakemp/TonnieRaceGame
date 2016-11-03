@@ -132,9 +132,11 @@
     <ClCompile Include="CDrawManager.cpp" />
     <ClCompile Include="CEngine.cpp" />
     <ClCompile Include="CEntity.cpp" />
+    <ClCompile Include="CEntityCar.cpp" />
     <ClCompile Include="CEntitySmallSquare.cpp" />
     <ClCompile Include="CEntityManager.cpp" />
     <ClCompile Include="CEntitySquare.cpp" />
+    <ClCompile Include="CEntityTire.cpp" />
     <ClCompile Include="CInputManager.cpp" />
     <ClCompile Include="IBox2DListener.cpp" />
     <ClCompile Include="IDrawListener.cpp" />
@@ -150,9 +152,11 @@
     <ClInclude Include="CDrawManager.h" />
     <ClInclude Include="CEngine.h" />
     <ClInclude Include="CEntity.h" />
+    <ClInclude Include="CEntityCar.h" />
     <ClInclude Include="CEntitySmallSquare.h" />
     <ClInclude Include="CEntityManager.h" />
     <ClInclude Include="CEntitySquare.h" />
+    <ClInclude Include="CEntityTire.h" />
     <ClInclude Include="CInputManager.h" />
     <ClInclude Include="IBox2DListener.h" />
     <ClInclude Include="IDrawListener.h" />

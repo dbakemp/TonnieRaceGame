@@ -10,11 +10,12 @@
 #include <iostream>
 #include <Box2D\Box2D.h>
 #include <SDL.h>
+#include "CEntityCar.h"
 
 CEngine::CEngine() {
 	int windowHeight = 720;
 	int windowWidth = 1280;
-	fps = 60;
+	fps = 1;
 
 	b2Vec2 gravity(0, 0);
 
@@ -30,12 +31,8 @@ CEngine::CEngine() {
 
 	srand(time(NULL));
 
-	for (int i = 0; i < 200; i++) {
-		new CEntitySmallSquare(this);
-	}
+	CEntityCar* car = new CEntityCar(this);
 	
-	CEntity* player = new CEntitySquare(this);
-	camera->SetChild(player);
 	
 	SDL_Init(SDL_INIT_EVERYTHING);
 	window = SDL_CreateWindow("RaceGame", 100, 100, windowWidth, windowHeight, SDL_WINDOW_SHOWN);
@@ -62,9 +59,9 @@ void CEngine::Tick()
 		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 		SDL_RenderClear(renderer);
 
-		world->Step(fps, 8, 3);
 		camera->Update();
 		entityManager->Tick();
+		world->Step(0.016f, 8, 3);
 		drawManager->Tick(renderer);
 
 		SDL_RenderPresent(renderer);

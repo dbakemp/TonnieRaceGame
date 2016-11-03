@@ -10,8 +10,8 @@
 
 CEntitySquare::CEntitySquare(CEngine *engine): CEntity(engine), IDrawListener(engine), IInputListener(engine), IBox2DListener(engine)
 {
-	xPos = 0;
-	yPos = 0;
+	xPos = -100;
+	yPos = -100;
 	height = 30;
 	width = 30;
 

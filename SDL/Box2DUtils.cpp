@@ -53,8 +53,8 @@ void Box2DUtils::DrawBody(SDL_Renderer *buffer, b2Body *body, CCamera *camera, i
 			for (int32 i = 0; i < vertexCount; ++i)
 			{
 				vertices[i] = b2Mul(xf, poly->m_vertices[i]);
-				xv[i] = (int)vertices[i].x - camera->posX;
-				yv[i] = (int)vertices[i].y - camera->posY;
+				xv[i] = (int)((vertices[i].x*5) - camera->posX);
+				yv[i] = (int)((vertices[i].y*5) - camera->posY);
 			}
 			if (falpha > 0)
 			{
