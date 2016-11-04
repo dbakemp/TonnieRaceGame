@@ -2,18 +2,18 @@
 #define CCAMERA_H
 
 #include "CCamera.h"
-#include "CEntity.h"
+#include "IBox2DListener.h"
 
 class CCamera {
 public:
 	CCamera();
 	void Update();
-	void SetChild(CEntity *child);
-	CEntity *GetChild();
+	void SetChild(IBox2DListener *child);
+	IBox2DListener *GetChild();
 	int posX, posY;
 	int windowHeight, windowWidth;
 private:
-	CEntity *child;
+	IBox2DListener *child;
 };
 
 #endif 

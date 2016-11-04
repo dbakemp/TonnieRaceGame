@@ -9,10 +9,10 @@
 
 CEntitySmallSquare::CEntitySmallSquare(CEngine *engine): CEntity(engine), IDrawListener(engine), IBox2DListener(engine)
 {
-	xPos = rand() % 1000;
-	yPos = rand() % 1000;
-	height = 10;
-	width = 10;
+	xPos = rand() % 500;
+	yPos = rand() % 500;
+	height = 2;
+	width = 2;
 
 	rCol = 25;
 	gCol = 255;

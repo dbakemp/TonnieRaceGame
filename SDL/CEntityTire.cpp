@@ -6,14 +6,14 @@ CEntityTire::CEntityTire(CEngine * engine) : CEntity(engine), IDrawListener(engi
 	bodyDef.type = b2_dynamicBody;
 	body = engine->world->CreateBody(&bodyDef);
 
-	polygon.SetAsBox(0.5f, 1.25f);
+	polygon.SetAsBox(0.75f, 1.25f);
 	body->CreateFixture(&polygon, 1);
 
 	body->SetUserData(this);
 
-	maxForwardSpeed = 150;
-	maxBackwardsSpeed = -20;
-	maxDriveForce = 250;
+	maxForwardSpeed = 500;
+	maxBackwardsSpeed = -40;
+	maxDriveForce = 550;
 
 	this->engine = engine;
 }
@@ -54,7 +54,7 @@ void CEntityTire::Create(b2World * world)
 
 void CEntityTire::UpdateFriction()
 {
-	float maxLateralImpulse = 2.5f;
+	float maxLateralImpulse = 6.0f;
 	b2Vec2 impulse = body->GetMass() * -GetLateralVelocity();
 	if (impulse.Length() > maxLateralImpulse)
 		impulse *= maxLateralImpulse / impulse.Length();
@@ -64,7 +64,7 @@ void CEntityTire::UpdateFriction()
 
 	b2Vec2 currentForwardNormal = GetForwardVelocity();
 	float currentForwardSpeed = currentForwardNormal.Normalize();
-	float dragForceMagnitude = -2 * currentForwardSpeed;
+	float dragForceMagnitude = -5 * currentForwardSpeed;
 	body->ApplyForce(dragForceMagnitude * currentForwardNormal, body->GetWorldCenter(), true);
 }
 

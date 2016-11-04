@@ -32,7 +32,11 @@ CEngine::CEngine() {
 	srand(time(NULL));
 
 	CEntityCar* car = new CEntityCar(this);
-	
+	camera->SetChild(car);
+
+	for (int i = 0; i < 200; i++) {
+		new CEntitySmallSquare(this);
+	}
 	
 	SDL_Init(SDL_INIT_EVERYTHING);
 	window = SDL_CreateWindow("RaceGame", 100, 100, windowWidth, windowHeight, SDL_WINDOW_SHOWN);
@@ -59,9 +63,9 @@ void CEngine::Tick()
 		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 		SDL_RenderClear(renderer);
 
-		camera->Update();
 		entityManager->Tick();
 		world->Step(0.016f, 8, 3);
+		camera->Update();
 		drawManager->Tick(renderer);
 
 		SDL_RenderPresent(renderer);

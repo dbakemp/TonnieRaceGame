@@ -11,7 +11,7 @@ CEntityCar::CEntityCar(CEngine * engine) : CEntity(engine), IDrawListener(engine
 {
 	bodyDef.type = b2_dynamicBody;
 	body = engine->world->CreateBody(&bodyDef);
-	body->SetAngularDamping(2);
+	body->SetAngularDamping(5);
 
 	b2Vec2 vertices[8];
 	vertices[0].Set(1.5, 0);
@@ -24,8 +24,7 @@ CEntityCar::CEntityCar(CEngine * engine) : CEntity(engine), IDrawListener(engine
 	vertices[7].Set(-1.5, 0);
 	b2PolygonShape polygonShape;
 	polygonShape.Set(vertices, 8);
-	b2Fixture* fixture = body->CreateFixture(&polygonShape, 0.1f);
-
+	b2Fixture* fixture = body->CreateFixture(&polygonShape, 0.5f);
 	b2RevoluteJointDef jointDef;
 	jointDef.bodyA = body;
 	jointDef.enableLimit = true;
@@ -86,7 +85,7 @@ void CEntityCar::Input(SDL_Event * event)
 void CEntityCar::Update()
 {
 	//control steering
-	float lockAngle = 40 * DEGTORAD;
+	float lockAngle = 45 * DEGTORAD;
 	float turnSpeedPerSec = 160 * DEGTORAD;//from lock to lock in 0.5 sec
 	float turnPerTimeStep = turnSpeedPerSec / 60.0f;
 	float desiredAngle = 0;
@@ -94,7 +93,6 @@ void CEntityCar::Update()
 	switch (controlState) {
 		case InputDirections::RIGHT: desiredAngle = lockAngle; break;
 		case InputDirections::LEFT: desiredAngle = -lockAngle; break;
-		default: return;
 	}
 
 	float angleNow = flJoint->GetJointAngle();

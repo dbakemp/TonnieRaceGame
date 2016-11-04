@@ -13,18 +13,30 @@ CCamera::CCamera()
 
 void CCamera::Update()
 {
+	b2AABB aabb;
+	aabb.lowerBound = b2Vec2(FLT_MAX, FLT_MAX);
+	aabb.upperBound = b2Vec2(-FLT_MAX, -FLT_MAX);
+	b2Fixture* fixture = child->body->GetFixtureList();
+	while (fixture != NULL)
+	{
+		aabb.Combine(aabb, fixture->GetAABB(0));
+		fixture = fixture->GetNext();
+	}
+
+	
+
 	if (child != nullptr) {
-		posX += ((child->xPos - ((windowWidth - child->width) / 2) - posX) / 8);
-		posY += ((child->yPos - ((windowHeight - child->height) / 2) - posY) / 8);
+		posX += (((aabb.lowerBound.x*5) - ((windowWidth - ((aabb.upperBound.x - aabb.lowerBound.x) * 5)) / 2) - posX) / 8);
+		posY += (((aabb.lowerBound.y*5) - ((windowHeight - ((aabb.upperBound.y - aabb.lowerBound.y) * 5)) / 2) - posY) / 8);
 	}
 }
 
-void CCamera::SetChild(CEntity * child)
+void CCamera::SetChild(IBox2DListener * child)
 {
 	this->child = child;
 }
 
-CEntity *CCamera::GetChild()
+IBox2DListener *CCamera::GetChild()
 {
 	return child;
 }
