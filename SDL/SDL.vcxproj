@@ -138,6 +138,7 @@
     <ClCompile Include="CEntitySquare.cpp" />
     <ClCompile Include="CEntityTire.cpp" />
     <ClCompile Include="CInputManager.cpp" />
+    <ClCompile Include="CStateManager.cpp" />
     <ClCompile Include="IBox2DListener.cpp" />
     <ClCompile Include="IDrawListener.cpp" />
     <ClCompile Include="IEntityListener.cpp" />
@@ -158,6 +159,7 @@
     <ClInclude Include="CEntitySquare.h" />
     <ClInclude Include="CEntityTire.h" />
     <ClInclude Include="CInputManager.h" />
+    <ClInclude Include="CStateManager.h" />
     <ClInclude Include="IBox2DListener.h" />
     <ClInclude Include="IDrawListener.h" />
     <ClInclude Include="IEntityListener.h" />
