@@ -56,7 +56,13 @@ void CEngine::Tick()
 
 		while (SDL_PollEvent(&event) != 0)
 		{
-			inputManager->Tick(&event);
+			if (event.type == SDL_QUIT) {
+				running = false;
+				SDL_Quit();
+			}
+			else {
+				inputManager->Tick(&event);
+			}
 		}
 
 		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);

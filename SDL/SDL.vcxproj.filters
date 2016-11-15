@@ -143,6 +143,9 @@
     </ClCompile>
     <ClCompile Include="include\common\shapes.cc">
       <Filter>Source Files\Helpers\Triangulate</Filter>
+	</ClCompile>
+    <ClCompile Include="CStateManager.cpp">
+      <Filter>Source Files\Managers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -211,5 +214,8 @@
     <Text Include="Resources\Maps\map1.json">
       <Filter>Resource Files\Maps</Filter>
     </Text>
+    <ClInclude Include="CStateManager.h">
+      <Filter>Header Files\Managers</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

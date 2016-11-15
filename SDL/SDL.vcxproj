@@ -140,6 +140,7 @@
     <ClCompile Include="CInputManager.cpp" />
     <ClCompile Include="CLevelFactory.cpp" />
     <ClCompile Include="CMap.cpp" />
+    <ClCompile Include="CStateManager.cpp" />
     <ClCompile Include="IBox2DListener.cpp" />
     <ClCompile Include="IDrawListener.cpp" />
     <ClCompile Include="IEntityListener.cpp" />
@@ -169,6 +170,7 @@
     <ClInclude Include="CInputManager.h" />
     <ClInclude Include="CLevelFactory.h" />
     <ClInclude Include="CMap.h" />
+    <ClInclude Include="CStateManager.h" />
     <ClInclude Include="IBox2DListener.h" />
     <ClInclude Include="IDrawListener.h" />
     <ClInclude Include="IEntityListener.h" />
