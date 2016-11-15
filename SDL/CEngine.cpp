@@ -20,6 +20,7 @@ CEngine::CEngine() {
 	b2Vec2 gravity(0, 0);
 
 	world = new b2World(gravity);
+	musicHelper = new MusicHelper();
 
 	drawManager = new CDrawManager();
 	inputManager = new CInputManager();
