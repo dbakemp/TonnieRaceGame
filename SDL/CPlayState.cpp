@@ -4,6 +4,9 @@
 #include "CEngine.h"
 #include "CEntityCar.h"
 #include "CEntitySmallSquare.h"
+#include "CInputManager.h"
+#include "CEntityManager.h"
+#include "CDrawManager.h"
 
 void CPlayState::init()
 {
@@ -46,9 +49,28 @@ void CPlayState::handleEvents(CEngine * engine)
 {
 }
 
-void CPlayState::update(CEngine * engine)
+void CPlayState::update(CEngine *engine)
 {
+	SDL_Event event;
 
+	while (SDL_PollEvent(&event) != 0)
+	{
+		if (event.type == SDL_QUIT) {
+			engine->running = false;
+			SDL_Quit();
+		}
+		else {
+			engine->inputManager->Tick(&event);
+		}
+	}
+
+	SDL_SetRenderDrawColor(engine->renderer, 0, 0, 0, 255);
+	SDL_RenderClear(engine->renderer);
+
+	engine->entityManager->Tick();
+	engine->world->Step(0.016f, 8, 3);
+	camera->Update();
+	engine->drawManager->Tick(engine->renderer);
 }
 
 void CPlayState::draw(CEngine * engine)

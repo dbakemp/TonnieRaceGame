@@ -43,32 +43,13 @@ CEngine::CEngine() {
 
 void CEngine::Tick()
 {
-	int running = 1;
+	running = true;
 
 	double nextFrame = static_cast<double>(SDL_GetTicks());
 
 	while (running)
 	{
-		SDL_Event event;
-
-		while (SDL_PollEvent(&event) != 0)
-		{
-			if (event.type == SDL_QUIT) {
-				running = false;
-				SDL_Quit();
-			}
-			else {
-				inputManager->Tick(&event);
-			}
-		}
-
-		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-		SDL_RenderClear(renderer);
-
-		entityManager->Tick();
-		world->Step(0.016f, 8, 3);
-		camera->Update();
-		drawManager->Tick(renderer);
+		stateManager->getCurrentState()->update(this);
 
 		SDL_RenderPresent(renderer);
 
