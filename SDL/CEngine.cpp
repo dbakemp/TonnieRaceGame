@@ -3,6 +3,9 @@
 #include "CInputManager.h"
 #include "CEntityManager.h"
 #include "CBox2DManager.h"
+#include "CEntitySmallSquare.h"
+#include "CEntitySquare.h"
+#include "CStateManager.h"
 #include "CCamera.h"
 #include "CLevelFactory.h"
 #include <time.h>
@@ -16,30 +19,24 @@ CEngine::CEngine() {
 	int windowWidth = 1280;
 	fps = 1;
 
-	b2Vec2 gravity(0, 0);
-
-	world = new b2World(gravity);
 	musicHelper = new MusicHelper();
-
 	drawManager = new CDrawManager();
 	inputManager = new CInputManager();
 	entityManager = new CEntityManager();
 	box2DManager = new CBox2DManager();
-	camera = new CCamera();
-	camera->windowHeight = windowHeight;
-	camera->windowWidth = windowWidth;
+	stateManager = new CStateManager();
 
 	CLevelFactory* factory = new CLevelFactory(this);
 	factory->LoadMap("Resources/Maps/map1.json");
 
 	srand(time(NULL));
-
-	CEntityCar* car = new CEntityCar(this);
-	camera->SetChild(car);
 	
 	SDL_Init(SDL_INIT_EVERYTHING);
 	window = SDL_CreateWindow("RaceGame", 100, 100, windowWidth, windowHeight, SDL_WINDOW_SHOWN);
 	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+
+	EGameState state = Playing;
+	stateManager->changeState(state, this);
 
 	Tick();
 }
