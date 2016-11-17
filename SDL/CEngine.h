@@ -23,6 +23,8 @@ public:
 	SDL_Window  *window;
 	SDL_Renderer *renderer;
 	b2World* world;
+
+	bool running;
 private:
 	void Tick();
 	int fps;

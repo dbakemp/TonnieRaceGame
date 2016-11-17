@@ -17,7 +17,7 @@ public:
 	void resume();
 
 	void handleEvents(CEngine* engine);
-	void update(CEngine* engine);
+	void update(CEngine *engine);
 	void draw(CEngine* engine);
 
 	CPlayState(CEngine* engine);
