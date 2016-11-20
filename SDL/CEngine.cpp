@@ -3,9 +3,8 @@
 #include "CInputManager.h"
 #include "CEntityManager.h"
 #include "CBox2DManager.h"
-#include "CEntitySmallSquare.h"
-#include "CEntitySquare.h"
 #include "CCamera.h"
+#include "CLevelFactory.h"
 #include <time.h>
 #include <iostream>
 #include <Box2D\Box2D.h>
@@ -29,14 +28,13 @@ CEngine::CEngine() {
 	camera->windowHeight = windowHeight;
 	camera->windowWidth = windowWidth;
 
+	CLevelFactory* factory = new CLevelFactory(this);
+	factory->LoadMap("Resources/Maps/map1.json");
+
 	srand(time(NULL));
 
 	CEntityCar* car = new CEntityCar(this);
 	camera->SetChild(car);
-
-	for (int i = 0; i < 200; i++) {
-		new CEntitySmallSquare(this);
-	}
 	
 	SDL_Init(SDL_INIT_EVERYTHING);
 	window = SDL_CreateWindow("RaceGame", 100, 100, windowWidth, windowHeight, SDL_WINDOW_SHOWN);
