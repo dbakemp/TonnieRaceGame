@@ -33,6 +33,22 @@ CEngine::CEngine() {
 	window = SDL_CreateWindow("RaceGame", 100, 100, windowWidth, windowHeight, SDL_WINDOW_SHOWN);
 	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 
+	SDL_GameController *controller = NULL;
+	for (int i = 0; i < SDL_NumJoysticks(); ++i) {
+		if (SDL_IsGameController(i)) {
+			printf("Index \'%i\' is a compatible controller, named \'%s\'\n", i, SDL_GameControllerNameForIndex(i));
+			controller = SDL_GameControllerOpen(i);
+			if (controller) {
+				cout << "Sucesfully opened GameController.\n";
+				SDL_GameControllerAddMappingsFromFile("Recources\\gamecontrollerdb.txt");
+				cout << "Controller mapping DB succesfully loaded.\n";
+			}
+			else {
+				fprintf(stderr, "Could not open gamecontroller %i: %s\n", i, SDL_GetError());
+			}
+		}
+	}
+
 	EGameState state = Start;
 	stateManager->changeState(state, this);
 
