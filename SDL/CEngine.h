@@ -25,7 +25,6 @@ public:
 	SDL_Renderer *renderer;
 	b2World* world;
 	MusicHelper *musicHelper;
-
 	bool running;
 private:
 	void Tick();

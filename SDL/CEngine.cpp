@@ -29,7 +29,6 @@ CEngine::CEngine() {
 
 	CLevelFactory* factory = new CLevelFactory(this);
 	factory->LoadMap("Resources/Maps/map1.json");
-
 	srand(time(NULL));
 	
 	SDL_Init(SDL_INIT_EVERYTHING);
