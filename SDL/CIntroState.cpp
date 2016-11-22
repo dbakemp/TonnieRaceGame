@@ -16,7 +16,7 @@ void CIntroState::init(CEngine *engine)
 {
 	TTF_Init();
 
-	TTF_Font *fntPricedown = TTF_OpenFont("fonts\\pricedown.ttf", 48);
+	TTF_Font *fntPricedown = TTF_OpenFont("Resources/Fonts/pricedown.ttf", 48);
 
 	SDL_Color color = { 16, 157, 232 };
 	SDL_Surface * surface = TTF_RenderText_Solid(fntPricedown,
@@ -24,7 +24,7 @@ void CIntroState::init(CEngine *engine)
 
 	SDL_Texture * texture = SDL_CreateTextureFromSurface(engine->renderer, surface);
 
-	SDL_Surface * background = IMG_Load("images\\mainbackground.png");
+	SDL_Surface * background = IMG_Load("Resources/Images/mainbackground.png");
 	SDL_Texture * background_texture = SDL_CreateTextureFromSurface(engine->renderer, background);
 
 	int texW = 0;

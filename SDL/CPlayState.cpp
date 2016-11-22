@@ -21,9 +21,6 @@ void CPlayState::init(CEngine* engine)
 
 	engine->world = new b2World(gravity);
 
-	SDL_Surface * map = IMG_Load("Resources/Maps/map1.png");
-	backmapTexture = SDL_CreateTextureFromSurface(engine->renderer, map);
-
 	SDL_QueryTexture(backmapTexture, NULL, NULL, &texW, &texH);
 
 	CLevelFactory* factory = new CLevelFactory(engine);
@@ -78,8 +75,6 @@ void CPlayState::update(CEngine *engine)
 	engine->world->Step(0.016f, 8, 3);
 	camera->Update();
 
-	SDL_Rect dstrect = {-engine->camera->posX, -engine->camera->posY, texW, texH };
-	SDL_RenderCopy(engine->renderer, backmapTexture, NULL, &dstrect);
 	engine->drawManager->Tick(engine->renderer);
 }
 

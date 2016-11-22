@@ -60,7 +60,7 @@
     </Filter>
     <Filter Include="Source Files\Helpers\Triangulate">
       <UniqueIdentifier>{0943e25d-a321-444f-9f91-4cb34b0311ec}</UniqueIdentifier>
-	</Filter>
+    </Filter>
     <Filter Include="Header Files\States">
       <UniqueIdentifier>{6b61b2a4-4841-453b-bb58-e1f2f50298f7}</UniqueIdentifier>
     </Filter>
@@ -149,7 +149,7 @@
     </ClCompile>
     <ClCompile Include="include\common\shapes.cc">
       <Filter>Source Files\Helpers\Triangulate</Filter>
-	</ClCompile>
+    </ClCompile>
     <ClCompile Include="CStateManager.cpp">
       <Filter>Source Files\Managers</Filter>
     </ClCompile>
@@ -158,6 +158,9 @@
     </ClCompile>
     <ClCompile Include="CPlayState.cpp">
       <Filter>Source Files\States</Filter>
+    </ClCompile>
+    <ClCompile Include="CEntityTile.cpp">
+      <Filter>Source Files\Entities</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -219,6 +222,9 @@
       <Filter>Header Files\Debug</Filter>
     </ClInclude>
     <ClInclude Include="CEntityBorder.h">
+      <Filter>Header Files\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="CEntityTile.h">
       <Filter>Header Files\Entities</Filter>
     </ClInclude>
   </ItemGroup>

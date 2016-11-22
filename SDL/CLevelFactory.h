@@ -16,7 +16,7 @@ public:
 	void CreateBorder(Json::Value* root);
 private:
 	CEngine* engine;
-	CMap map;
+	CMap* map;
 };
 
 #endif 
