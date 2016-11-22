@@ -79,9 +79,20 @@
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
-      <AdditionalLibraryDirectories>./lib/Box2D;./lib/SDL2;./lib/SDL2_gfx;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>Box2D.lib;SDL2.lib;SDL2_gfx.lib;SDL2main.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>./lib/SDL2_image;./lib/Box2D;./lib/SDL2;./lib/SDL2_gfx;./lib/SDL2_ttf;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>Box2D.lib;SDL2.lib;SDL2_gfx.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>copy "$(SolutionDir)SDL\lib\SDL2_ttf\SDL2_ttf.dll" "$(TargetDir)"
+copy "$(SolutionDir)SDL\lib\SDL2_ttf\libfreetype-6.dll" "$(TargetDir)"
+copy "$(SolutionDir)SDL\lib\SDL2_ttf\zlib1.dll" "$(TargetDir)"
+copy "$(SolutionDir)SDL\lib\SDL2_image\libjpeg-9.dll" "$(TargetDir)"
+copy "$(SolutionDir)SDL\lib\SDL2_image\libpng16-16.dll" "$(TargetDir)"
+copy "$(SolutionDir)SDL\lib\SDL2_image\libtiff-5.dll" "$(TargetDir)"
+copy "$(SolutionDir)SDL\lib\SDL2_image\libwebp-4.dll" "$(TargetDir)"
+copy "$(SolutionDir)SDL\lib\SDL2_image\SDL2_image.dll" "$(TargetDir)"
+</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>

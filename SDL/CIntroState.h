@@ -9,6 +9,7 @@ class CIntroState: public CGameState
 {
 public:
 	void init();
+	void init(CEngine* engine);
 	void clean();
 
 	void pause();
@@ -17,6 +18,8 @@ public:
 	void handleEvents(CEngine* engine);
 	void update(CEngine* engine);
 	void draw(CEngine* engine);
+
+	CIntroState(CEngine* engine);
 
 private:
 

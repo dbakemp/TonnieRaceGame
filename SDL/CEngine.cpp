@@ -11,6 +11,8 @@
 #include <iostream>
 #include <Box2D\Box2D.h>
 #include <SDL.h>
+#include "SDL_image.h"
+#include "SDL_ttf.h"
 #include "CEntityCar.h"
 
 CEngine::CEngine() {
@@ -30,7 +32,7 @@ CEngine::CEngine() {
 	window = SDL_CreateWindow("RaceGame", 100, 100, windowWidth, windowHeight, SDL_WINDOW_SHOWN);
 	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 
-	EGameState state = Playing;
+	EGameState state = Start;
 	stateManager->changeState(state, this);
 
 	Tick();
