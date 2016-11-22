@@ -46,6 +46,8 @@ void CIntroState::init(CEngine *engine)
 	SDL_DestroyTexture(texture);
 	SDL_FreeSurface(surface);
 	TTF_Quit();
+
+	engine->musicHelper->playSingleTrack("music\\title.mp3");
 }
 
 void CIntroState::clean()
