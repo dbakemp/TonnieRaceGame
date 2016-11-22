@@ -76,6 +76,7 @@ void CLevelFactory::CreateBorder(Json::Value * root)
 {
 	CDebugLogger::PrintDebug("Creating Border");
 
+	const double scale = 5;
 	const int verticesCount = (*root)["polygon"].size();
 
 	std::vector<p2t::Point*> polyline;
@@ -85,7 +86,7 @@ void CLevelFactory::CreateBorder(Json::Value * root)
 	double yPos = (*root).get("y", 0).asDouble();
 	for (Json::Value polygon : (*root)["polygon"])
 	{
-		polyline.push_back(new p2t::Point((polygon.get("x", 0).asDouble()+xPos)/4, (polygon.get("y", 0).asDouble()+yPos)/4));
+		polyline.push_back(new p2t::Point((polygon.get("x", 0).asDouble()+xPos)/ scale, (polygon.get("y", 0).asDouble()+yPos)/ scale));
 		i++;
 	}
 

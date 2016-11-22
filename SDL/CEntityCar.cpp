@@ -13,8 +13,8 @@ CEntityCar::CEntityCar(CEngine * engine) : CEntity(engine), IDrawListener(engine
 	body = engine->world->CreateBody(&bodyDef);
 	body->SetAngularDamping(5);
 
-	double xPos = 220;
-	double yPos = 330;
+	double xPos = 115;
+	double yPos = 265;
 
 	b2Vec2 vertices[8];
 	vertices[0].Set(1.5+xPos, 0+yPos);

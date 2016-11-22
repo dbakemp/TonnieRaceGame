@@ -23,6 +23,10 @@ public:
 	CPlayState(CEngine* engine);
 	~CPlayState();
 
+	//temp
+	int texW = 0;
+	int texH = 0;
+	SDL_Texture * backmapTexture;
 private:
 	CCamera* camera;
 };
