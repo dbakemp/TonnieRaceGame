@@ -46,6 +46,8 @@ void CIntroState::init(CEngine *engine)
 	SDL_DestroyTexture(texture);
 	SDL_FreeSurface(surface);
 	TTF_Quit();
+
+	engine->musicHelper->playTrack("music\\title.mp3", false);
 }
 
 void CIntroState::clean()
@@ -77,11 +79,17 @@ void CIntroState::update(CEngine * engine)
 		else if (event.type == SDL_KEYDOWN) {
 			switch (event.key.keysym.sym) {
 			case SDLK_SPACE:
-				std::cout << "next";
 				engine->stateManager->changeState(Playing, engine);
 				break;
 			default:
 				break;
+			}
+		}
+		else if (event.type == SDL_CONTROLLERBUTTONDOWN)
+		{
+			if (event.cbutton.button == SDL_CONTROLLER_BUTTON_A)
+			{
+				engine->stateManager->changeState(Playing, engine);
 			}
 		}
 		else {
