@@ -13,15 +13,18 @@ CEntityCar::CEntityCar(CEngine * engine) : CEntity(engine), IDrawListener(engine
 	body = engine->world->CreateBody(&bodyDef);
 	body->SetAngularDamping(5);
 
+	double xPos = 220;
+	double yPos = 330;
+
 	b2Vec2 vertices[8];
-	vertices[0].Set(1.5, 0);
-	vertices[1].Set(3, 2.5);
-	vertices[2].Set(2.8, 5.5);
-	vertices[3].Set(1, 10);
-	vertices[4].Set(-1, 10);
-	vertices[5].Set(-2.8, 5.5);
-	vertices[6].Set(-3, 2.5);
-	vertices[7].Set(-1.5, 0);
+	vertices[0].Set(1.5+xPos, 0+yPos);
+	vertices[1].Set(3 + xPos, 2.5 + yPos);
+	vertices[2].Set(2.8 + xPos, 5.5 + yPos);
+	vertices[3].Set(1 + xPos, 10 + yPos);
+	vertices[4].Set(-1 + xPos, 10 + yPos);
+	vertices[5].Set(-2.8 + xPos, 5.5 + yPos);
+	vertices[6].Set(-3 + xPos, 2.5 + yPos);
+	vertices[7].Set(-1.5 + xPos, 0 + yPos);
 	b2PolygonShape polygonShape;
 	polygonShape.Set(vertices, 8);
 	b2Fixture* fixture = body->CreateFixture(&polygonShape, 0.5f);
@@ -34,25 +37,25 @@ CEntityCar::CEntityCar(CEngine * engine) : CEntity(engine), IDrawListener(engine
 
 	CEntityTire* tire = new CEntityTire(engine);
 	jointDef.bodyB = tire->body;
-	jointDef.localAnchorA.Set(-3, 0.75f);
+	jointDef.localAnchorA.Set(-3 + xPos, 0.75f + yPos);
 	engine->world->CreateJoint(&jointDef);
 	tires.push_back(tire);
 
 	tire = new CEntityTire(engine);
 	jointDef.bodyB = tire->body;
-	jointDef.localAnchorA.Set(3, 0.75f);
+	jointDef.localAnchorA.Set(3 + xPos, 0.75f + yPos);
 	engine->world->CreateJoint(&jointDef);
 	tires.push_back(tire);
 
 	tire = new CEntityTire(engine);
 	jointDef.bodyB = tire->body;
-	jointDef.localAnchorA.Set(-3, 8.5f);
+	jointDef.localAnchorA.Set(-3 + xPos, 8.5f + yPos);
 	flJoint = (b2RevoluteJoint*)engine->world->CreateJoint(&jointDef);
 	tires.push_back(tire);
 
 	tire = new CEntityTire(engine);
 	jointDef.bodyB = tire->body;
-	jointDef.localAnchorA.Set(3, 8.5f);
+	jointDef.localAnchorA.Set(3 + xPos, 8.5f + yPos);
 	frJoint = (b2RevoluteJoint*)engine->world->CreateJoint(&jointDef);
 	tires.push_back(tire);
 
@@ -61,7 +64,7 @@ CEntityCar::CEntityCar(CEngine * engine) : CEntity(engine), IDrawListener(engine
 
 void CEntityCar::Draw(SDL_Renderer * renderer)
 {
-	Box2DUtils::DrawBody(renderer, body, engine->camera, 0, 0, 255, 255, 0, 0, 255, 255, false);
+	Box2DUtils::DrawBody(renderer, body, engine->camera, 0, 0, 255, 255, 0, 0, 255, 120, false);
 }
 
 void CEntityCar::Input(SDL_Event * event)
@@ -85,7 +88,7 @@ void CEntityCar::Input(SDL_Event * event)
 void CEntityCar::Update()
 {
 	//control steering
-	float lockAngle = 45 * DEGTORAD;
+	float lockAngle = 60 * DEGTORAD;
 	float turnSpeedPerSec = 160 * DEGTORAD;//from lock to lock in 0.5 sec
 	float turnPerTimeStep = turnSpeedPerSec / 60.0f;
 	float desiredAngle = 0;

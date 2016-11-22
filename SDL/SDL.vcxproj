@@ -129,19 +129,27 @@
     <ClCompile Include="CBox2DManager.cpp" />
     <ClCompile Include="CCamera.cpp" />
     <ClCompile Include="CDebugDraw.cpp" />
+    <ClCompile Include="CDebugLogger.cpp" />
     <ClCompile Include="CDrawManager.cpp" />
     <ClCompile Include="CEngine.cpp" />
     <ClCompile Include="CEntity.cpp" />
+    <ClCompile Include="CEntityBorder.cpp" />
     <ClCompile Include="CEntityCar.cpp" />
-    <ClCompile Include="CEntitySmallSquare.cpp" />
     <ClCompile Include="CEntityManager.cpp" />
-    <ClCompile Include="CEntitySquare.cpp" />
     <ClCompile Include="CEntityTire.cpp" />
     <ClCompile Include="CInputManager.cpp" />
+    <ClCompile Include="CLevelFactory.cpp" />
+    <ClCompile Include="CMap.cpp" />
     <ClCompile Include="IBox2DListener.cpp" />
     <ClCompile Include="IDrawListener.cpp" />
     <ClCompile Include="IEntityListener.cpp" />
     <ClCompile Include="IInputListener.cpp" />
+    <ClCompile Include="include\common\shapes.cc" />
+    <ClCompile Include="include\sweep\advancing_front.cc" />
+    <ClCompile Include="include\sweep\cdt.cc" />
+    <ClCompile Include="include\sweep\sweep.cc" />
+    <ClCompile Include="include\sweep\sweep_context.cc" />
+    <ClCompile Include="jsoncpp.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MusicHelper.cpp" />
   </ItemGroup>
@@ -150,20 +158,29 @@
     <ClInclude Include="CBox2DManager.h" />
     <ClInclude Include="CCamera.h" />
     <ClInclude Include="CDebugDraw.h" />
+    <ClInclude Include="CDebugLogger.h" />
     <ClInclude Include="CDrawManager.h" />
     <ClInclude Include="CEngine.h" />
     <ClInclude Include="CEntity.h" />
+    <ClInclude Include="CEntityBorder.h" />
     <ClInclude Include="CEntityCar.h" />
-    <ClInclude Include="CEntitySmallSquare.h" />
     <ClInclude Include="CEntityManager.h" />
-    <ClInclude Include="CEntitySquare.h" />
     <ClInclude Include="CEntityTire.h" />
     <ClInclude Include="CInputManager.h" />
+    <ClInclude Include="CLevelFactory.h" />
+    <ClInclude Include="CMap.h" />
     <ClInclude Include="IBox2DListener.h" />
     <ClInclude Include="IDrawListener.h" />
     <ClInclude Include="IEntityListener.h" />
     <ClInclude Include="IInputListener.h" />
     <ClInclude Include="MusicHelper.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Resources\Maps\map1.json">
+      <DeploymentContent>true</DeploymentContent>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+      <FileType>Text</FileType>
+    </Text>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
