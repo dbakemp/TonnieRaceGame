@@ -79,9 +79,20 @@
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
-      <AdditionalLibraryDirectories>./lib/Box2D;./lib/SDL2;./lib/SDL2_gfx;../Bass;../Bass/c;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>Box2D.lib;SDL2.lib;SDL2_gfx.lib;SDL2main.lib;bass.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>./lib/Box2D;./lib/SDL2;./lib/SDL2_gfx;../Bass;../Bass/c;./lib/SDL2_ttf;./lib/SDL2_image;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>Box2D.lib;SDL2.lib;SDL2_gfx.lib;SDL2main.lib;bass.lib;SDL2_image.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>copy "$(SolutionDir)SDL\lib\SDL2_ttf\SDL2_ttf.dll" "$(TargetDir)"
+copy "$(SolutionDir)SDL\lib\SDL2_ttf\libfreetype-6.dll" "$(TargetDir)"
+copy "$(SolutionDir)SDL\lib\SDL2_ttf\zlib1.dll" "$(TargetDir)"
+copy "$(SolutionDir)SDL\lib\SDL2_image\libjpeg-9.dll" "$(TargetDir)"
+copy "$(SolutionDir)SDL\lib\SDL2_image\libpng16-16.dll" "$(TargetDir)"
+copy "$(SolutionDir)SDL\lib\SDL2_image\libtiff-5.dll" "$(TargetDir)"
+copy "$(SolutionDir)SDL\lib\SDL2_image\libwebp-4.dll" "$(TargetDir)"
+copy "$(SolutionDir)SDL\lib\SDL2_image\SDL2_image.dll" "$(TargetDir)"
+</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -140,6 +151,9 @@
     <ClCompile Include="CInputManager.cpp" />
     <ClCompile Include="CLevelFactory.cpp" />
     <ClCompile Include="CMap.cpp" />
+    <ClCompile Include="CIntroState.cpp" />
+    <ClCompile Include="CPlayState.cpp" />
+    <ClCompile Include="CStateManager.cpp" />
     <ClCompile Include="IBox2DListener.cpp" />
     <ClCompile Include="IDrawListener.cpp" />
     <ClCompile Include="IEntityListener.cpp" />
@@ -166,9 +180,13 @@
     <ClInclude Include="CEntityCar.h" />
     <ClInclude Include="CEntityManager.h" />
     <ClInclude Include="CEntityTire.h" />
+    <ClInclude Include="CGameState.h" />
     <ClInclude Include="CInputManager.h" />
     <ClInclude Include="CLevelFactory.h" />
     <ClInclude Include="CMap.h" />
+    <ClInclude Include="CIntroState.h" />
+    <ClInclude Include="CPlayState.h" />
+    <ClInclude Include="CStateManager.h" />
     <ClInclude Include="IBox2DListener.h" />
     <ClInclude Include="IDrawListener.h" />
     <ClInclude Include="IEntityListener.h" />
