@@ -27,8 +27,6 @@ CEngine::CEngine() {
 	box2DManager = new CBox2DManager();
 	stateManager = new CStateManager();
 
-	CLevelFactory* factory = new CLevelFactory(this);
-	factory->LoadMap("Resources/Maps/map1.json");
 	srand(time(NULL));
 	
 	SDL_Init(SDL_INIT_EVERYTHING);

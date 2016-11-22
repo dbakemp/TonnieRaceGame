@@ -7,6 +7,7 @@
 #include "CInputManager.h"
 #include "CEntityManager.h"
 #include "CDrawManager.h"
+#include "CLevelFactory.h"
 
 void CPlayState::init()
 {
@@ -18,6 +19,9 @@ void CPlayState::init(CEngine* engine)
 	b2Vec2 gravity(0, 0);
 
 	engine->world = new b2World(gravity);
+
+	CLevelFactory* factory = new CLevelFactory(engine);
+	factory->LoadMap("Resources/Maps/map1.json");
 
 	camera = new CCamera();
 	camera->windowHeight = 720;
