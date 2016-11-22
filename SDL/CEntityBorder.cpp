@@ -40,7 +40,7 @@ CEntityBorder::CEntityBorder(CEngine* engine, p2t::Triangle* triangle) : CEntity
 
 void CEntityBorder::Draw(SDL_Renderer * renderer)
 {
-	Box2DUtils::DrawBody(renderer, body, engine->camera, 0, 255, 0, 255, 0, 0, 240, 0, false);
+	Box2DUtils::DrawBody(renderer, body, engine->camera, 0, 0, 0, 0, 0, 0, 255, 255, false);
 }
 
 void CEntityBorder::Update()
