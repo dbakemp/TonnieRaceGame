@@ -4,7 +4,6 @@
 #include "CEntityManager.h"
 #include "CBox2DManager.h"
 #include "CEntitySmallSquare.h"
-#include "CEntitySquare.h"
 #include "CStateManager.h"
 #include "CCamera.h"
 #include "CLevelFactory.h"

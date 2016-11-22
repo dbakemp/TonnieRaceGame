@@ -28,9 +28,6 @@ void CPlayState::init(CEngine* engine)
 	CEntityCar* car = new CEntityCar(engine);
 	camera->SetChild(car);
 
-	for (int i = 0; i < 200; i++) {
-		new CEntitySmallSquare(engine);
-	}
 }
 
 void CPlayState::clean()
