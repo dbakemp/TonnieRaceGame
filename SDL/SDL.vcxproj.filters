@@ -48,23 +48,6 @@
     </Filter>
     <Filter Include="Source Files\States">
       <UniqueIdentifier>{d012645a-d60b-46f7-b8e6-7fbdaf1e9573}</UniqueIdentifier>
-    <Filter Include="Resource Files\Maps">
-      <UniqueIdentifier>{bd015252-3406-4b8c-9f71-e2a4d2a4dcad}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Level">
-      <UniqueIdentifier>{349ade12-e2f3-45ff-bacd-c4036ee043fd}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Level">
-      <UniqueIdentifier>{e8b156c2-2d67-417a-a769-4a0b1ed5bc25}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Factories">
-      <UniqueIdentifier>{62ed3dd4-eeaa-44ab-854f-64f6d638c214}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Factories">
-      <UniqueIdentifier>{051389b9-497d-4a04-ad49-465aedbcf293}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Helpers\Triangulate">
-      <UniqueIdentifier>{0943e25d-a321-444f-9f91-4cb34b0311ec}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -89,6 +72,9 @@
     <ClCompile Include="IDrawListener.cpp">
       <Filter>Source Files\Interfaces</Filter>
     </ClCompile>
+    <ClCompile Include="CEntitySquare.cpp">
+      <Filter>Source Files\Entities</Filter>
+    </ClCompile>
     <ClCompile Include="CEntityManager.cpp">
       <Filter>Source Files\Managers</Filter>
     </ClCompile>
@@ -97,6 +83,9 @@
     </ClCompile>
     <ClCompile Include="CCamera.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CEntitySmallSquare.cpp">
+      <Filter>Source Files\Entities</Filter>
     </ClCompile>
     <ClCompile Include="IBox2DListener.cpp">
       <Filter>Source Files\Interfaces</Filter>
@@ -124,38 +113,6 @@
     </ClCompile>
     <ClCompile Include="CPlayState.cpp">
       <Filter>Source Files\States</Filter>
-    <ClCompile Include="MusicHelper.cpp">
-      <Filter>Source Files\Helpers</Filter>
-    </ClCompile>
-    <ClCompile Include="jsoncpp.cpp">
-      <Filter>Source Files\Helpers</Filter>
-    </ClCompile>
-    <ClCompile Include="CMap.cpp">
-      <Filter>Source Files\Level</Filter>
-    </ClCompile>
-    <ClCompile Include="CLevelFactory.cpp">
-      <Filter>Source Files\Factories</Filter>
-    </ClCompile>
-    <ClCompile Include="CDebugLogger.cpp">
-      <Filter>Source Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="CEntityBorder.cpp">
-      <Filter>Source Files\Entities</Filter>
-    </ClCompile>
-    <ClCompile Include="include\sweep\advancing_front.cc">
-      <Filter>Source Files\Helpers\Triangulate</Filter>
-    </ClCompile>
-    <ClCompile Include="include\sweep\cdt.cc">
-      <Filter>Source Files\Helpers\Triangulate</Filter>
-    </ClCompile>
-    <ClCompile Include="include\sweep\sweep.cc">
-      <Filter>Source Files\Helpers\Triangulate</Filter>
-    </ClCompile>
-    <ClCompile Include="include\sweep\sweep_context.cc">
-      <Filter>Source Files\Helpers\Triangulate</Filter>
-    </ClCompile>
-    <ClCompile Include="include\common\shapes.cc">
-      <Filter>Source Files\Helpers\Triangulate</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -177,6 +134,9 @@
     <ClInclude Include="CDrawManager.h">
       <Filter>Header Files\Managers</Filter>
     </ClInclude>
+    <ClInclude Include="CEntitySquare.h">
+      <Filter>Header Files\Entities</Filter>
+    </ClInclude>
     <ClInclude Include="CEntityManager.h">
       <Filter>Header Files\Managers</Filter>
     </ClInclude>
@@ -185,6 +145,9 @@
     </ClInclude>
     <ClInclude Include="CCamera.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CEntitySmallSquare.h">
+      <Filter>Header Files\Entities</Filter>
     </ClInclude>
     <ClInclude Include="IBox2DListener.h">
       <Filter>Header Files\Interfaces</Filter>
@@ -216,25 +179,5 @@
     <ClInclude Include="CPlayState.h">
       <Filter>Header Files\States</Filter>
     </ClInclude>
-    <ClInclude Include="MusicHelper.h">
-      <Filter>Header Files\Helpers</Filter>
-    </ClInclude>
-    <ClInclude Include="CMap.h">
-      <Filter>Header Files\Level</Filter>
-    </ClInclude>
-    <ClInclude Include="CLevelFactory.h">
-      <Filter>Header Files\Factories</Filter>
-    </ClInclude>
-    <ClInclude Include="CDebugLogger.h">
-      <Filter>Header Files\Debug</Filter>
-    </ClInclude>
-    <ClInclude Include="CEntityBorder.h">
-      <Filter>Header Files\Entities</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="Resources\Maps\map1.json">
-      <Filter>Resource Files\Maps</Filter>
-    </Text>
   </ItemGroup>
 </Project>

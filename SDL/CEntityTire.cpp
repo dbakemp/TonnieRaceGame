@@ -3,16 +3,12 @@
 
 CEntityTire::CEntityTire(CEngine * engine) : CEntity(engine), IDrawListener(engine), IInputListener(engine), IBox2DListener(engine)
 {
-	double xPos = 220;
-	double yPos = 330;
-
 	bodyDef.type = b2_dynamicBody;
-	bodyDef.position.Set(xPos, yPos);
 	body = engine->world->CreateBody(&bodyDef);
-	
-	bodyDef.position.Set(xPos, yPos);
+
 	polygon.SetAsBox(0.75f, 1.25f);
 	body->CreateFixture(&polygon, 1);
+
 	body->SetUserData(this);
 
 	maxForwardSpeed = 500;
