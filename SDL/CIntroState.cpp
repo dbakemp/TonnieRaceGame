@@ -24,7 +24,7 @@ void CIntroState::init(CEngine *engine)
 
 	SDL_Texture * texture = SDL_CreateTextureFromSurface(engine->renderer, surface);
 
-	SDL_Surface * background = IMG_Load("images\\mainbackground.jpg");
+	SDL_Surface * background = IMG_Load("images\\mainbackground.png");
 	SDL_Texture * background_texture = SDL_CreateTextureFromSurface(engine->renderer, background);
 
 	int texW = 0;
@@ -79,11 +79,17 @@ void CIntroState::update(CEngine * engine)
 		else if (event.type == SDL_KEYDOWN) {
 			switch (event.key.keysym.sym) {
 			case SDLK_SPACE:
-				std::cout << "next";
 				engine->stateManager->changeState(Playing, engine);
 				break;
 			default:
 				break;
+			}
+		}
+		else if (event.type == SDL_CONTROLLERBUTTONDOWN)
+		{
+			if (event.cbutton.button == SDL_CONTROLLER_BUTTON_A)
+			{
+				engine->stateManager->changeState(Playing, engine);
 			}
 		}
 		else {
