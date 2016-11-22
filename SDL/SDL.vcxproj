@@ -75,12 +75,12 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>./include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>./include;../Bass/c;../Bass;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
-      <AdditionalLibraryDirectories>./lib/Box2D;./lib/SDL2;./lib/SDL2_gfx;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>Box2D.lib;SDL2.lib;SDL2_gfx.lib;SDL2main.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>./lib/Box2D;./lib/SDL2;./lib/SDL2_gfx;../Bass;../Bass/c;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>Box2D.lib;SDL2.lib;SDL2_gfx.lib;SDL2main.lib;bass.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -88,10 +88,10 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>./include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>./include;%(AdditionalIncludeDirectories);./c;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <AdditionalLibraryDirectories>./lib/Box2D;./lib/SDL2;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>./lib/Box2D;./lib/SDL2;%(AdditionalLibraryDirectories);./Bass</AdditionalLibraryDirectories>
     </Link>
     <Link>
       <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2test.lib;Box2D.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -151,6 +151,7 @@
     <ClCompile Include="include\sweep\sweep_context.cc" />
     <ClCompile Include="jsoncpp.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="MusicHelper.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Box2DUtils.h" />
@@ -172,6 +173,7 @@
     <ClInclude Include="IDrawListener.h" />
     <ClInclude Include="IEntityListener.h" />
     <ClInclude Include="IInputListener.h" />
+    <ClInclude Include="MusicHelper.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Resources\Maps\map1.json">
