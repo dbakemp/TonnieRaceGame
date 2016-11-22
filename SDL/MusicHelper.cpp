@@ -15,21 +15,19 @@ MusicHelper::~MusicHelper()
 {
 }
 
-void MusicHelper::playSingleTrack(std::string file) {
+void MusicHelper::playTrack(std::string file, bool loop) {
 	/* Load your soundfile and play it */
-	/*char fileArray[file.size + 1];
-	strcpy(fileArray, file.c_str());*/
+	const char *fileString = file.c_str();
 
-	HSTREAM streamHandle = BASS_StreamCreateFile(FALSE, "music\\title.mp3", 0, 0, 0);
-	BASS_ChannelPlay(streamHandle, FALSE);
-}
+	HSTREAM streamHandle;
 
-void MusicHelper::playBackgroundMusic(std::string file) {
-	/* Load your soundfile and play it */
-	/*char fileArray[file.size + 1];
-	strcpy(fileArray, file.c_str());*/
+	if (loop) {
+		streamHandle = BASS_StreamCreateFile(FALSE, fileString, 0, 0, BASS_SAMPLE_LOOP);
+	}
+	else {
+		streamHandle = BASS_StreamCreateFile(FALSE, fileString, 0, 0, 0);
+	}
 
-	HSTREAM streamHandle = BASS_StreamCreateFile(FALSE, "music\\boerharms.mp3", 0, 0, BASS_SAMPLE_LOOP);
-	//audioStreams.push_back(streamHandle);
+	audioStreams.push_back(streamHandle);	
 	BASS_ChannelPlay(streamHandle, FALSE);
 }

@@ -47,7 +47,7 @@ void CIntroState::init(CEngine *engine)
 	SDL_FreeSurface(surface);
 	TTF_Quit();
 
-	engine->musicHelper->playSingleTrack("music\\title.mp3");
+	engine->musicHelper->playTrack("music\\title.mp3", false);
 }
 
 void CIntroState::clean()

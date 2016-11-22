@@ -12,8 +12,7 @@ public:
 	MusicHelper();
 	~MusicHelper();
 
-	void playBackgroundMusic(std::string file);
-	void playSingleTrack(std::string file);
+	void playTrack(std::string file, bool loop);
 
 private:
 	std::vector<HSTREAM> audioStreams;
