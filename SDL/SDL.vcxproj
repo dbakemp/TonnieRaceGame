@@ -75,12 +75,12 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>./include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>./include;../Bass/c;../Bass;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
-      <AdditionalLibraryDirectories>./lib/SDL2_image;./lib/Box2D;./lib/SDL2;./lib/SDL2_gfx;./lib/SDL2_ttf;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>Box2D.lib;SDL2.lib;SDL2_gfx.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>./lib/SDL2_image;./lib/Box2D;./lib/SDL2;./lib/SDL2_gfx;./lib/SDL2_ttf;../Bass;../Bass/c;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>Box2D.lib;SDL2.lib;SDL2_gfx.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;bass.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>copy "$(SolutionDir)SDL\lib\SDL2_ttf\SDL2_ttf.dll" "$(TargetDir)"
@@ -99,10 +99,10 @@ copy "$(SolutionDir)SDL\lib\SDL2_image\SDL2_image.dll" "$(TargetDir)"
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>./include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>./include;%(AdditionalIncludeDirectories);./c;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <AdditionalLibraryDirectories>./lib/Box2D;./lib/SDL2;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>./lib/Box2D;./lib/SDL2;%(AdditionalLibraryDirectories);./Bass</AdditionalLibraryDirectories>
     </Link>
     <Link>
       <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2test.lib;Box2D.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -140,46 +140,65 @@ copy "$(SolutionDir)SDL\lib\SDL2_image\SDL2_image.dll" "$(TargetDir)"
     <ClCompile Include="CBox2DManager.cpp" />
     <ClCompile Include="CCamera.cpp" />
     <ClCompile Include="CDebugDraw.cpp" />
+    <ClCompile Include="CDebugLogger.cpp" />
     <ClCompile Include="CDrawManager.cpp" />
     <ClCompile Include="CEngine.cpp" />
     <ClCompile Include="CEntity.cpp" />
+    <ClCompile Include="CEntityBorder.cpp" />
     <ClCompile Include="CEntityCar.cpp" />
-    <ClCompile Include="CEntitySmallSquare.cpp" />
     <ClCompile Include="CEntityManager.cpp" />
-    <ClCompile Include="CEntitySquare.cpp" />
     <ClCompile Include="CEntityTire.cpp" />
     <ClCompile Include="CInputManager.cpp" />
     <ClCompile Include="CIntroState.cpp" />
     <ClCompile Include="CPlayState.cpp" />
     <ClCompile Include="CStateManager.cpp" />
+    <ClCompile Include="CLevelFactory.cpp" />
+    <ClCompile Include="CMap.cpp" />
     <ClCompile Include="IBox2DListener.cpp" />
     <ClCompile Include="IDrawListener.cpp" />
     <ClCompile Include="IEntityListener.cpp" />
     <ClCompile Include="IInputListener.cpp" />
+    <ClCompile Include="include\common\shapes.cc" />
+    <ClCompile Include="include\sweep\advancing_front.cc" />
+    <ClCompile Include="include\sweep\cdt.cc" />
+    <ClCompile Include="include\sweep\sweep.cc" />
+    <ClCompile Include="include\sweep\sweep_context.cc" />
+    <ClCompile Include="jsoncpp.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="MusicHelper.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Box2DUtils.h" />
     <ClInclude Include="CBox2DManager.h" />
     <ClInclude Include="CCamera.h" />
     <ClInclude Include="CDebugDraw.h" />
+    <ClInclude Include="CDebugLogger.h" />
     <ClInclude Include="CDrawManager.h" />
     <ClInclude Include="CEngine.h" />
     <ClInclude Include="CEntity.h" />
+    <ClInclude Include="CEntityBorder.h" />
     <ClInclude Include="CEntityCar.h" />
-    <ClInclude Include="CEntitySmallSquare.h" />
     <ClInclude Include="CEntityManager.h" />
-    <ClInclude Include="CEntitySquare.h" />
     <ClInclude Include="CEntityTire.h" />
     <ClInclude Include="CGameState.h" />
     <ClInclude Include="CInputManager.h" />
     <ClInclude Include="CIntroState.h" />
     <ClInclude Include="CPlayState.h" />
     <ClInclude Include="CStateManager.h" />
+    <ClInclude Include="CLevelFactory.h" />
+    <ClInclude Include="CMap.h" />
     <ClInclude Include="IBox2DListener.h" />
     <ClInclude Include="IDrawListener.h" />
     <ClInclude Include="IEntityListener.h" />
     <ClInclude Include="IInputListener.h" />
+    <ClInclude Include="MusicHelper.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Resources\Maps\map1.json">
+      <DeploymentContent>true</DeploymentContent>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+      <FileType>Text</FileType>
+    </Text>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

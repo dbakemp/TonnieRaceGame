@@ -2,6 +2,7 @@
 #define CENGINE_H
 
 #include "SDL.h"
+#include "MusicHelper.h"
 #include <Box2D\Box2D.h>
 
 class CDrawManager;
@@ -23,8 +24,9 @@ public:
 	SDL_Window  *window;
 	SDL_Renderer *renderer;
 	b2World* world;
-
 	bool running;
+	MusicHelper *musicHelper;
+
 private:
 	void Tick();
 	int fps;
