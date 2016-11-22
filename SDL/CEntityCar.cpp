@@ -1,6 +1,7 @@
 #include "CEntityCar.h"
 #include "CEntityTire.h"
 #include "Box2DUtils.h"
+#include <iostream>
 
 #ifndef DEGTORAD
 #define DEGTORAD 0.0174532925199432957f
@@ -82,8 +83,38 @@ void CEntityCar::Input(SDL_Event * event)
 		case SDLK_d: controlState &= ~InputDirections::RIGHT; break;
 		}
 		break;
+	case SDL_CONTROLLERAXISMOTION:
+		OnControllerAxis(event->caxis);
+		break;
+		break;
 	}
 }
+
+void CEntityCar::OnControllerAxis(const SDL_ControllerAxisEvent sdlEvent)
+{
+	const int JOYSTICK_DEAD_ZONE = 8000;
+
+	//X axis motion
+	if (sdlEvent.axis == 0)
+	{
+		//Left of dead zone
+		if (sdlEvent.value < -JOYSTICK_DEAD_ZONE)
+		{
+			controlState |= InputDirections::LEFT;
+		}
+		//Right of dead zone
+		else if (sdlEvent.value > JOYSTICK_DEAD_ZONE)
+		{
+			controlState |= InputDirections::RIGHT;
+		}
+		else
+		{
+			controlState &= ~InputDirections::LEFT;
+			controlState &= ~InputDirections::RIGHT;
+		}
+	}
+}
+
 
 void CEntityCar::Update()
 {

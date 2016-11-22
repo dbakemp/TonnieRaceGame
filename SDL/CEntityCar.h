@@ -19,6 +19,7 @@ public:
 	void Create(b2World* world);
 	b2RevoluteJoint *flJoint, *frJoint;
 	std::vector<CEntityTire*> tires;
+	void OnControllerAxis(const SDL_ControllerAxisEvent sdlEvent);
 private:
 	CEngine *engine;
 };

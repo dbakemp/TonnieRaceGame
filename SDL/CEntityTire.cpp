@@ -1,5 +1,6 @@
 #include "CEntityTire.h"
 #include "Box2DUtils.h" 
+#include <iostream>
 
 CEntityTire::CEntityTire(CEngine * engine) : CEntity(engine), IDrawListener(engine), IInputListener(engine), IBox2DListener(engine)
 {
@@ -42,6 +43,46 @@ void CEntityTire::Input(SDL_Event * event)
 			case SDLK_s: controlState &= ~InputDirections::DOWN; break;
 		}
 		break;
+	case SDL_CONTROLLERBUTTONDOWN:
+	case SDL_CONTROLLERBUTTONUP:
+		OnControllerButton(event->cbutton);
+		break;
+
+	}
+}
+
+void CEntityTire::OnControllerButton(const SDL_ControllerButtonEvent sdlEvent)
+{
+	if (sdlEvent.button == SDL_CONTROLLER_BUTTON_RIGHTSHOULDER)
+	{
+		if (sdlEvent.state == SDL_PRESSED)
+		{
+			controlState |= InputDirections::UP;
+			std::cout << "RIGHT SHOULDER PRESSED \n";
+		}
+		else if (sdlEvent.state == SDL_RELEASED)
+		{
+			controlState &= ~InputDirections::UP;
+			std::cout << "RIGHT SHOULDER RELEASED\n";
+		}
+		
+	}
+	else if (sdlEvent.button == SDL_CONTROLLER_BUTTON_LEFTSHOULDER)
+	{
+		if (sdlEvent.state == SDL_PRESSED)
+		{
+			controlState |= InputDirections::DOWN;
+			std::cout << "LEFT SHOULDER PRESSED \n";
+		}
+		else if (sdlEvent.state == SDL_RELEASED)
+		{
+			controlState &= ~InputDirections::DOWN;
+			std::cout << "LEFT SHOULDER RELEASED\n";
+		}
+	}
+	else if (sdlEvent.button == SDL_CONTROLLER_BUTTON_START)
+	{
+		std::cout << "Button: Start\n";
 	}
 }
 
