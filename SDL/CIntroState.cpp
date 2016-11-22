@@ -24,7 +24,7 @@ void CIntroState::init(CEngine *engine)
 
 	SDL_Texture * texture = SDL_CreateTextureFromSurface(engine->renderer, surface);
 
-	SDL_Surface * background = IMG_Load("Resources/Images/mainbackground.jpg");
+	SDL_Surface * background = IMG_Load("Resources/Images/mainbackground.png");
 	SDL_Texture * background_texture = SDL_CreateTextureFromSurface(engine->renderer, background);
 
 	int texW = 0;
