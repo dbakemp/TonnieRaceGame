@@ -1,7 +1,7 @@
 #include "CEntityBorder.h"
 #include "Box2DUtils.h"
 
-CEntityBorder::CEntityBorder(CEngine * engine) : CEntity(engine), IDrawListener(engine), IBox2DListener(engine)
+CEntityBorder::CEntityBorder(CEngine* engine) : CEntity(engine), IDrawListener(engine), IBox2DListener(engine)
 {
 	bodyDef.type = b2_staticBody;
 	body = engine->world->CreateBody(&bodyDef);
@@ -22,7 +22,8 @@ CEntityBorder::CEntityBorder(CEngine * engine) : CEntity(engine), IDrawListener(
 	this->engine = engine;
 }
 
-CEntityBorder::CEntityBorder(CEngine* engine, p2t::Triangle* triangle) : CEntity(engine), IDrawListener(engine), IBox2DListener(engine) {
+CEntityBorder::CEntityBorder(CEngine* engine, p2t::Triangle* triangle) : CEntity(engine), IDrawListener(engine), IBox2DListener(engine)
+{
 	bodyDef.type = b2_staticBody;
 	body = engine->world->CreateBody(&bodyDef);
 
@@ -38,7 +39,7 @@ CEntityBorder::CEntityBorder(CEngine* engine, p2t::Triangle* triangle) : CEntity
 	this->engine = engine;
 }
 
-void CEntityBorder::Draw(SDL_Renderer * renderer)
+void CEntityBorder::Draw(SDL_Renderer* renderer)
 {
 	//Box2DUtils::DrawBody(renderer, body, engine->camera, 0, 0, 0, 0, 0, 0, 255, 255, false);
 }
@@ -47,6 +48,6 @@ void CEntityBorder::Update()
 {
 }
 
-void CEntityBorder::Create(b2World * world)
+void CEntityBorder::Create(b2World* world)
 {
 }

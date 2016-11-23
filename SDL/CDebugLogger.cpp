@@ -12,7 +12,7 @@ void CDebugLogger::PrintDebug(std::string log)
 	const std::chrono::duration<double> tse = t.time_since_epoch();
 	std::chrono::seconds::rep milliseconds = std::chrono::duration_cast<std::chrono::milliseconds>(tse).count() % 1000;
 
-	std::cout << "[" 
+	std::cout << "["
 		<< std::setfill('0') << std::setw(2) << localTime.tm_hour << ':'
 		<< std::setfill('0') << std::setw(2) << localTime.tm_min << ':'
 		<< std::setfill('0') << std::setw(2) << localTime.tm_sec << '.'

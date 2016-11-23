@@ -6,12 +6,13 @@
 
 class IBox2DListener;
 
-class CBox2DManager {
+class CBox2DManager
+{
 public:
 	std::vector<IBox2DListener*> listeners;
 
-	void AddListener(IBox2DListener *box2DListener);
-	void RemoveListener(IBox2DListener *box2DListener);
+	void AddListener(IBox2DListener* box2DListener);
+	void RemoveListener(IBox2DListener* box2DListener);
 	void Tick(b2World* world);
 };
 

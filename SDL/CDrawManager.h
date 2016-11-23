@@ -5,13 +5,14 @@
 
 class IDrawListener;
 
-class CDrawManager {
+class CDrawManager
+{
 public:
 	std::vector<IDrawListener*> listeners;
 
-	void AddListener(IDrawListener *drawListener);
-	void RemoveListener(IDrawListener *drawListener);
-	void Tick(SDL_Renderer *renderer);
+	void AddListener(IDrawListener* drawListener);
+	void RemoveListener(IDrawListener* drawListener);
+	void Tick(SDL_Renderer* renderer);
 };
 
 

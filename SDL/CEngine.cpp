@@ -15,7 +15,8 @@
 #include "SDL_ttf.h"
 #include "CEntityCar.h"
 
-CEngine::CEngine() {
+CEngine::CEngine()
+{
 	int windowHeight = 720;
 	int windowWidth = 1280;
 	fps = 1;
@@ -28,23 +29,27 @@ CEngine::CEngine() {
 	stateManager = new CStateManager();
 
 	srand(time(NULL));
-	
+
 	SDL_Init(SDL_INIT_EVERYTHING);
 	window = SDL_CreateWindow("RaceGame", 100, 100, windowWidth, windowHeight, SDL_WINDOW_SHOWN);
 	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 
-	SDL_GameController *controller = NULL;
+	SDL_GameController* controller = NULL;
 	SDL_Haptic* gControllerHaptic = NULL;
-	for (int i = 0; i < SDL_NumJoysticks(); ++i) {
-		if (SDL_IsGameController(i)) {
+	for (int i = 0; i < SDL_NumJoysticks(); ++i)
+	{
+		if (SDL_IsGameController(i))
+		{
 			printf("Index \'%i\' is a compatible controller, named \'%s\'\n", i, SDL_GameControllerNameForIndex(i));
 			controller = SDL_GameControllerOpen(i);
-			if (controller) {
+			if (controller)
+			{
 				cout << "Sucesfully opened GameController.\n";
 				SDL_GameControllerAddMappingsFromFile("Recources\\gamecontrollerdb.txt");
 				cout << "Controller mapping DB succesfully loaded.\n";
 			}
-			else {
+			else
+			{
 				fprintf(stderr, "Could not open gamecontroller %i: %s\n", i, SDL_GetError());
 			}
 		}
@@ -70,8 +75,9 @@ void CEngine::Tick()
 
 		SDL_RenderPresent(renderer);
 
-		int delay = static_cast<Uint32> (nextFrame - static_cast<double>(SDL_GetTicks()));
-		if (delay > 0) {
+		int delay = static_cast<Uint32>(nextFrame - static_cast<double>(SDL_GetTicks()));
+		if (delay > 0)
+		{
 			SDL_Delay(delay);
 		}
 		nextFrame += 1000.0 / 60;

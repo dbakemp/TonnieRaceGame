@@ -2,7 +2,7 @@
 #include "Box2DUtils.h" 
 #include <iostream>
 
-CEntityTire::CEntityTire(CEngine * engine) : CEntity(engine), IDrawListener(engine), IInputListener(engine), IBox2DListener(engine)
+CEntityTire::CEntityTire(CEngine* engine) : CEntity(engine), IDrawListener(engine), IInputListener(engine), IBox2DListener(engine)
 {
 	double xPos = 115;
 	double yPos = 265;
@@ -10,7 +10,7 @@ CEntityTire::CEntityTire(CEngine * engine) : CEntity(engine), IDrawListener(engi
 	bodyDef.type = b2_dynamicBody;
 	bodyDef.position.Set(xPos, yPos);
 	body = engine->world->CreateBody(&bodyDef);
-	
+
 	bodyDef.position.Set(xPos, yPos);
 	polygon.SetAsBox(0.75f, 1.25f);
 	body->CreateFixture(&polygon, 1);
@@ -23,31 +23,37 @@ CEntityTire::CEntityTire(CEngine * engine) : CEntity(engine), IDrawListener(engi
 	this->engine = engine;
 }
 
-void CEntityTire::Draw(SDL_Renderer * renderer)
+void CEntityTire::Draw(SDL_Renderer* renderer)
 {
 	Box2DUtils::DrawBody(renderer, body, engine->camera, 0, 0, 255, 255, 0, 0, 255, 255, false);
 }
 
-void CEntityTire::Input(SDL_Event * event)
+void CEntityTire::Input(SDL_Event* event)
 {
-	switch (event->type) {
+	switch (event->type)
+	{
 	case SDL_KEYDOWN:
-		switch(event->key.keysym.sym) {
-			case SDLK_w: controlState |= InputDirections::UP; break;
-			case SDLK_s: controlState |= InputDirections::DOWN; break;
+		switch (event->key.keysym.sym)
+		{
+		case SDLK_w: controlState |= InputDirections::UP;
+			break;
+		case SDLK_s: controlState |= InputDirections::DOWN;
+			break;
 		}
 		break;
 	case SDL_KEYUP:
-		switch (event->key.keysym.sym) {
-			case SDLK_w: controlState &= ~InputDirections::UP; break;
-			case SDLK_s: controlState &= ~InputDirections::DOWN; break;
+		switch (event->key.keysym.sym)
+		{
+		case SDLK_w: controlState &= ~InputDirections::UP;
+			break;
+		case SDLK_s: controlState &= ~InputDirections::DOWN;
+			break;
 		}
 		break;
 	case SDL_CONTROLLERBUTTONDOWN:
 	case SDL_CONTROLLERBUTTONUP:
 		OnControllerButton(event->cbutton);
 		break;
-
 	}
 }
 
@@ -65,7 +71,6 @@ void CEntityTire::OnControllerButton(const SDL_ControllerButtonEvent sdlEvent)
 			controlState &= ~InputDirections::UP;
 			std::cout << "RIGHT SHOULDER RELEASED\n";
 		}
-		
 	}
 	else if (sdlEvent.button == SDL_CONTROLLER_BUTTON_LEFTSHOULDER)
 	{
@@ -93,7 +98,7 @@ void CEntityTire::Update()
 	UpdateTurn();
 }
 
-void CEntityTire::Create(b2World * world)
+void CEntityTire::Create(b2World* world)
 {
 }
 
@@ -116,36 +121,45 @@ void CEntityTire::UpdateFriction()
 void CEntityTire::UpdateDrive()
 {
 	float desiredSpeed = 0;
-	switch (controlState) {
-		case InputDirections::UP: desiredSpeed = maxForwardSpeed; break;
-		case InputDirections::DOWN: desiredSpeed = maxBackwardsSpeed; break;
-		default: return;
+	switch (controlState)
+	{
+	case InputDirections::UP: desiredSpeed = maxForwardSpeed;
+		break;
+	case InputDirections::DOWN: desiredSpeed = maxBackwardsSpeed;
+		break;
+	default: return;
 	}
-	
+
 	b2Vec2 currentForwardNormal = body->GetWorldVector(b2Vec2(0, 1));
 	float currentSpeed = b2Dot(GetForwardVelocity(), currentForwardNormal);
 
 	float force = 0;
-	if (desiredSpeed > currentSpeed) {
+	if (desiredSpeed > currentSpeed)
+	{
 		force = maxDriveForce;
 	}
-	else if (desiredSpeed < currentSpeed) {
+	else if (desiredSpeed < currentSpeed)
+	{
 		force -= maxDriveForce;
 	}
-	else {
+	else
+	{
 		return;
 	}
 
-	body->ApplyForce(force*currentForwardNormal, body->GetWorldCenter(), true);
+	body->ApplyForce(force * currentForwardNormal, body->GetWorldCenter(), true);
 }
 
 void CEntityTire::UpdateTurn()
 {
 	float desiredTorque = 0;
-	switch (controlState) {
-		case InputDirections::UP: desiredTorque = 15; break;
-		case InputDirections::DOWN: desiredTorque = -15; break;
-		default: return;
+	switch (controlState)
+	{
+	case InputDirections::UP: desiredTorque = 15;
+		break;
+	case InputDirections::DOWN: desiredTorque = -15;
+		break;
+	default: return;
 	}
 
 	body->ApplyTorque(desiredTorque, true);
@@ -154,11 +168,11 @@ void CEntityTire::UpdateTurn()
 b2Vec2 CEntityTire::GetLateralVelocity()
 {
 	b2Vec2 currentRightNormal = body->GetWorldVector(b2Vec2(1, 0));
-	return b2Dot(currentRightNormal, body->GetLinearVelocity())*currentRightNormal;
+	return b2Dot(currentRightNormal, body->GetLinearVelocity()) * currentRightNormal;
 }
 
 b2Vec2 CEntityTire::GetForwardVelocity()
 {
 	b2Vec2 currentForwardNormal = body->GetWorldVector(b2Vec2(0, 1));
-	return b2Dot(currentForwardNormal, body->GetLinearVelocity())*currentForwardNormal;
+	return b2Dot(currentForwardNormal, body->GetLinearVelocity()) * currentForwardNormal;
 }

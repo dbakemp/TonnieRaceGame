@@ -4,7 +4,8 @@
 #include <SDL.h>
 #include <iostream>
 
-class CMap {
+class CMap
+{
 public:
 	CMap();
 	~CMap();

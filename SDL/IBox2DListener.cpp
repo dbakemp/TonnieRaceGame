@@ -2,7 +2,7 @@
 #include "CBox2DManager.h"
 #include "CEngine.h"
 
-IBox2DListener::IBox2DListener(CEngine *engine)
+IBox2DListener::IBox2DListener(CEngine* engine)
 {
 	this->engine = engine;
 	engine->box2DManager->AddListener(this);

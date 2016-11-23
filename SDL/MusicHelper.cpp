@@ -15,19 +15,22 @@ MusicHelper::~MusicHelper()
 {
 }
 
-void MusicHelper::playTrack(std::string file, bool loop) {
+void MusicHelper::playTrack(std::string file, bool loop)
+{
 	/* Load your soundfile and play it */
-	const char *fileString = file.c_str();
+	const char* fileString = file.c_str();
 
 	HSTREAM streamHandle;
 
-	if (loop) {
+	if (loop)
+	{
 		streamHandle = BASS_StreamCreateFile(FALSE, fileString, 0, 0, BASS_SAMPLE_LOOP);
 	}
-	else {
+	else
+	{
 		streamHandle = BASS_StreamCreateFile(FALSE, fileString, 0, 0, 0);
 	}
 
-	audioStreams.push_back(streamHandle);	
+	audioStreams.push_back(streamHandle);
 	BASS_ChannelPlay(streamHandle, FALSE);
 }

@@ -5,9 +5,10 @@
 
 class CEngine;
 
-class CEntity: public IEntityListener {
+class CEntity: public IEntityListener
+{
 public:
-	CEntity(CEngine *engine);
+	CEntity(CEngine* engine);
 	void Update();
 	float xPos, yPos;
 	float xVel, yVel;

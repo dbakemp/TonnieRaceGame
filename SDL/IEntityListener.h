@@ -5,13 +5,14 @@
 
 class CEngine;
 
-class IEntityListener {
+class IEntityListener
+{
 public:
 	virtual void Update() = 0;
-	IEntityListener(CEngine *engine);
+	IEntityListener(CEngine* engine);
 	~IEntityListener();
 private:
-	CEngine *engine;
+	CEngine* engine;
 };
 
 

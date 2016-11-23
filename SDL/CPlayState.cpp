@@ -50,21 +50,23 @@ void CPlayState::resume()
 {
 }
 
-void CPlayState::handleEvents(CEngine * engine)
+void CPlayState::handleEvents(CEngine* engine)
 {
 }
 
-void CPlayState::update(CEngine *engine)
+void CPlayState::update(CEngine* engine)
 {
 	SDL_Event event;
 
 	while (SDL_PollEvent(&event) != 0)
 	{
-		if (event.type == SDL_QUIT) {
+		if (event.type == SDL_QUIT)
+		{
 			engine->running = false;
 			SDL_Quit();
 		}
-		else {
+		else
+		{
 			engine->inputManager->Tick(&event);
 		}
 	}
@@ -79,11 +81,11 @@ void CPlayState::update(CEngine *engine)
 	engine->drawManager->Tick(engine->renderer);
 }
 
-void CPlayState::draw(CEngine * engine)
+void CPlayState::draw(CEngine* engine)
 {
 }
 
-CPlayState::CPlayState(CEngine * engine)
+CPlayState::CPlayState(CEngine* engine)
 {
 	init(engine);
 }

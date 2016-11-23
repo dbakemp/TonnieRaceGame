@@ -5,13 +5,14 @@
 
 class CEngine;
 
-class IDrawListener {
+class IDrawListener
+{
 public:
-	virtual void Draw(SDL_Renderer *renderer) = 0;
-	IDrawListener(CEngine *engine);
+	virtual void Draw(SDL_Renderer* renderer) = 0;
+	IDrawListener(CEngine* engine);
 	~IDrawListener();
 private:
-	CEngine *engine;
+	CEngine* engine;
 };
 
 

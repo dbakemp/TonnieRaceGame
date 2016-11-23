@@ -2,7 +2,7 @@
 #include "CEntityManager.h"
 #include "CEngine.h"
 
-IEntityListener::IEntityListener(CEngine * engine)
+IEntityListener::IEntityListener(CEngine* engine)
 {
 	this->engine = engine;
 	engine->entityManager->AddListener(this);

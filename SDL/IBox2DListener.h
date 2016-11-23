@@ -6,10 +6,11 @@
 
 class CEngine;
 
-class IBox2DListener {
+class IBox2DListener
+{
 public:
 	virtual void Create(b2World* world) = 0;
-	IBox2DListener(CEngine *engine);
+	IBox2DListener(CEngine* engine);
 	~IBox2DListener();
 
 	b2BodyDef bodyDef;
@@ -17,7 +18,7 @@ public:
 	b2PolygonShape polygon;
 	b2FixtureDef fixture;
 private:
-	CEngine *engine;
+	CEngine* engine;
 };
 
 

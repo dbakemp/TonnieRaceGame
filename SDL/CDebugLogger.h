@@ -4,7 +4,8 @@
 #include <iostream>
 #include <string>
 
-class CDebugLogger {
+class CDebugLogger
+{
 public:
 	static void PrintDebug(std::string log);
 };

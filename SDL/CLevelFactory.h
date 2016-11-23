@@ -6,7 +6,8 @@
 #include <json\json.h>
 #include <string>
 
-class CLevelFactory {
+class CLevelFactory
+{
 public:
 	CLevelFactory(CEngine* engine);
 	bool LoadMap(std::string path);

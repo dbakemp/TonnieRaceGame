@@ -3,7 +3,8 @@
 
 #include <Box2D\Box2D.h>
 
-class CDebugDraw : public b2Draw {
+class CDebugDraw : public b2Draw
+{
 public:
 private:
 };

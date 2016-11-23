@@ -5,12 +5,13 @@
 
 class IEntityListener;
 
-class CEntityManager {
+class CEntityManager
+{
 public:
 	std::vector<IEntityListener*> listeners;
 
-	void AddListener(IEntityListener *entityListener);
-	void RemoveListener(IEntityListener *entityListener);
+	void AddListener(IEntityListener* entityListener);
+	void RemoveListener(IEntityListener* entityListener);
 	void Tick();
 };
 

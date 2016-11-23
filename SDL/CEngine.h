@@ -12,19 +12,20 @@ class CBox2DManager;
 class CStateManager;
 class CCamera;
 
-class CEngine {
+class CEngine
+{
 public:
 	CEngine();
-	CDrawManager *drawManager;
-	CInputManager *inputManager;
-	CEntityManager *entityManager;
-	CBox2DManager *box2DManager;
-	CStateManager *stateManager;
-	CCamera *camera;
-	SDL_Window  *window;
-	SDL_Renderer *renderer;
+	CDrawManager* drawManager;
+	CInputManager* inputManager;
+	CEntityManager* entityManager;
+	CBox2DManager* box2DManager;
+	CStateManager* stateManager;
+	CCamera* camera;
+	SDL_Window* window;
+	SDL_Renderer* renderer;
 	b2World* world;
-	MusicHelper *musicHelper;
+	MusicHelper* musicHelper;
 	bool running;
 private:
 	void Tick();

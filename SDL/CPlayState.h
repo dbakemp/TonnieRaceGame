@@ -17,7 +17,7 @@ public:
 	void resume();
 
 	void handleEvents(CEngine* engine);
-	void update(CEngine *engine);
+	void update(CEngine* engine);
 	void draw(CEngine* engine);
 
 	CPlayState(CEngine* engine);
@@ -26,7 +26,7 @@ public:
 	//temp
 	int texW = 0;
 	int texH = 0;
-	SDL_Texture * backmapTexture;
+	SDL_Texture* backmapTexture;
 private:
 	CCamera* camera;
 };

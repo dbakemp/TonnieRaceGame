@@ -22,6 +22,5 @@ public:
 	CIntroState(CEngine* engine);
 
 private:
-
 };
 #endif

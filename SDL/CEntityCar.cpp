@@ -8,7 +8,7 @@
 #define RADTODEG 57.295779513082320876f
 #endif
 
-CEntityCar::CEntityCar(CEngine * engine) : CEntity(engine), IDrawListener(engine), IInputListener(engine), IBox2DListener(engine)
+CEntityCar::CEntityCar(CEngine* engine) : CEntity(engine), IDrawListener(engine), IInputListener(engine), IBox2DListener(engine)
 {
 	bodyDef.type = b2_dynamicBody;
 	body = engine->world->CreateBody(&bodyDef);
@@ -18,7 +18,7 @@ CEntityCar::CEntityCar(CEngine * engine) : CEntity(engine), IDrawListener(engine
 	double yPos = 265;
 
 	b2Vec2 vertices[8];
-	vertices[0].Set(1.5+xPos, 0+yPos);
+	vertices[0].Set(1.5 + xPos, 0 + yPos);
 	vertices[1].Set(3 + xPos, 2.5 + yPos);
 	vertices[2].Set(2.8 + xPos, 5.5 + yPos);
 	vertices[3].Set(1 + xPos, 10 + yPos);
@@ -63,24 +63,31 @@ CEntityCar::CEntityCar(CEngine * engine) : CEntity(engine), IDrawListener(engine
 	this->engine = engine;
 }
 
-void CEntityCar::Draw(SDL_Renderer * renderer)
+void CEntityCar::Draw(SDL_Renderer* renderer)
 {
 	Box2DUtils::DrawBody(renderer, body, engine->camera, 0, 0, 255, 255, 0, 0, 255, 120, false);
 }
 
-void CEntityCar::Input(SDL_Event * event)
+void CEntityCar::Input(SDL_Event* event)
 {
-	switch (event->type) {
+	switch (event->type)
+	{
 	case SDL_KEYDOWN:
-		switch (event->key.keysym.sym) {
-		case SDLK_a: controlState |= InputDirections::LEFT; break;
-		case SDLK_d: controlState |= InputDirections::RIGHT; break;
+		switch (event->key.keysym.sym)
+		{
+		case SDLK_a: controlState |= InputDirections::LEFT;
+			break;
+		case SDLK_d: controlState |= InputDirections::RIGHT;
+			break;
 		}
 		break;
 	case SDL_KEYUP:
-		switch (event->key.keysym.sym) {
-		case SDLK_a: controlState &= ~InputDirections::LEFT; break;
-		case SDLK_d: controlState &= ~InputDirections::RIGHT; break;
+		switch (event->key.keysym.sym)
+		{
+		case SDLK_a: controlState &= ~InputDirections::LEFT;
+			break;
+		case SDLK_d: controlState &= ~InputDirections::RIGHT;
+			break;
 		}
 		break;
 	case SDL_CONTROLLERAXISMOTION:
@@ -124,9 +131,12 @@ void CEntityCar::Update()
 	float turnPerTimeStep = turnSpeedPerSec / 60.0f;
 	float desiredAngle = 0;
 
-	switch (controlState) {
-		case InputDirections::RIGHT: desiredAngle = lockAngle; break;
-		case InputDirections::LEFT: desiredAngle = -lockAngle; break;
+	switch (controlState)
+	{
+	case InputDirections::RIGHT: desiredAngle = lockAngle;
+		break;
+	case InputDirections::LEFT: desiredAngle = -lockAngle;
+		break;
 	}
 
 	float angleNow = flJoint->GetJointAngle();
@@ -137,6 +147,6 @@ void CEntityCar::Update()
 	frJoint->SetLimits(newAngle, newAngle);
 }
 
-void CEntityCar::Create(b2World * world)
+void CEntityCar::Create(b2World* world)
 {
 }

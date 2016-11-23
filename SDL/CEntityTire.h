@@ -8,11 +8,12 @@
 #include "CEngine.h"
 #include <Box2D\Box2D.h>
 
-class CEntityTire : public CEntity, public IDrawListener, public IInputListener, public IBox2DListener {
+class CEntityTire : public CEntity, public IDrawListener, public IInputListener, public IBox2DListener
+{
 public:
-	CEntityTire(CEngine *engine);
-	void Draw(SDL_Renderer *renderer);
-	void Input(SDL_Event *event);
+	CEntityTire(CEngine* engine);
+	void Draw(SDL_Renderer* renderer);
+	void Input(SDL_Event* event);
 	void Update();
 	void Create(b2World* world);
 
@@ -29,7 +30,7 @@ public:
 	float maxBackwardsSpeed;
 	float maxDriveForce;
 private:
-	CEngine *engine;
+	CEngine* engine;
 };
 
 #endif

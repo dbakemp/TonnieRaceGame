@@ -1,10 +1,10 @@
 #include "CEntity.h"
 #include "CEngine.h"
 
-CEntity::CEntity(CEngine *engine): IEntityListener(engine)
+CEntity::CEntity(CEngine* engine): IEntityListener(engine)
 {
 }
 
-void CEntity::Update() {
-
+void CEntity::Update()
+{
 }

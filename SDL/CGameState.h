@@ -20,7 +20,6 @@ public:
 	virtual void update(CEngine* engine) = 0;
 	virtual void draw(CEngine* engine) = 0;
 private:
-
 };
 
 #endif

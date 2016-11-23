@@ -2,7 +2,7 @@
 #include "CDrawManager.h"
 #include "CEngine.h"
 
-IDrawListener::IDrawListener(CEngine *engine)
+IDrawListener::IDrawListener(CEngine* engine)
 {
 	this->engine = engine;
 	engine->drawManager->AddListener(this);

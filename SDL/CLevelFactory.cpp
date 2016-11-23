@@ -21,11 +21,13 @@ bool CLevelFactory::LoadMap(std::string path)
 	Json::Reader reader;
 
 	std::ifstream stream(path, std::ifstream::binary);
-	if (reader.parse(stream, root, false)) {
+	if (reader.parse(stream, root, false))
+	{
 		CreateMap(&root);
 		return true;
 	}
-	else {
+	else
+	{
 		return false;
 	}
 }
@@ -50,15 +52,15 @@ void CLevelFactory::CreateMap(Json::Value* root)
 	SDL_Surface* texture = IMG_Load(map->spriteSheetLocation.c_str());
 	map->spriteSheet = SDL_CreateTextureFromSurface(engine->renderer, texture);
 
- 	CDebugLogger::PrintDebug("Itterating Layers");
+	CDebugLogger::PrintDebug("Itterating Layers");
 	for (Json::Value layer : (*root)["layers"])
 	{
-
 		if (layer["type"].asString() == "objectgroup")
 		{
 			CreateObjects(&layer);
 		}
-		else if (layer["type"].asString() == "tilelayer") {
+		else if (layer["type"].asString() == "tilelayer")
+		{
 			CreateTiles(&layer);
 		}
 	}
@@ -78,21 +80,22 @@ void CLevelFactory::CreateObjects(Json::Value* root)
 	}
 }
 
-void CLevelFactory::CreateTiles(Json::Value * root)
+void CLevelFactory::CreateTiles(Json::Value* root)
 {
 	CDebugLogger::PrintDebug("Creating Tiles");
 
 	int number = 0;
 	for (Json::Value tile : (*root)["data"])
 	{
-		if (tile.asInt() != 0) {
+		if (tile.asInt() != 0)
+		{
 			new CEntityTile(this->engine, this->map, tile.asInt(), number);
 		}
 		number++;
 	}
 }
 
-void CLevelFactory::CreateBorder(Json::Value * root)
+void CLevelFactory::CreateBorder(Json::Value* root)
 {
 	CDebugLogger::PrintDebug("Creating Border");
 
@@ -106,7 +109,7 @@ void CLevelFactory::CreateBorder(Json::Value * root)
 	double yPos = (*root).get("y", 0).asDouble();
 	for (Json::Value polygon : (*root)["polygon"])
 	{
-		polyline.push_back(new p2t::Point((polygon.get("x", 0).asDouble()+xPos)/ scale, (polygon.get("y", 0).asDouble()+yPos)/ scale));
+		polyline.push_back(new p2t::Point((polygon.get("x", 0).asDouble() + xPos) / scale, (polygon.get("y", 0).asDouble() + yPos) / scale));
 		i++;
 	}
 
@@ -119,4 +122,3 @@ void CLevelFactory::CreateBorder(Json::Value * root)
 		new CEntityBorder(this->engine, triangle);
 	}
 }
-

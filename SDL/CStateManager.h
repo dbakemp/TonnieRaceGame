@@ -19,7 +19,7 @@ enum EGameState
 class CStateManager
 {
 public:
-	void changeState(EGameState state, CEngine * engine);
+	void changeState(EGameState state, CEngine* engine);
 	void pushState(CGameState* state);
 	void popState();
 

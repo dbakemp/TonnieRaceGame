@@ -8,17 +8,18 @@
 #include "CMap.h"
 #include "CEngine.h"
 
-class CEntityTile : public CEntity, public IDrawListener {
+class CEntityTile : public CEntity, public IDrawListener
+{
 public:
-	CEntityTile(CEngine *engine, CMap* map, int spriteNumber, int tileNumber);
-	void Draw(SDL_Renderer *renderer);
+	CEntityTile(CEngine* engine, CMap* map, int spriteNumber, int tileNumber);
+	void Draw(SDL_Renderer* renderer);
 	void Update();
 
 	SDL_Texture* spriteSheet;
 	int xPos, yPos, textureWidth, textureHeight, textureX, textureY, tileX, tileY;
 	SDL_Rect srcRect;
 private:
-	CEngine *engine;
+	CEngine* engine;
 };
 
 #endif
