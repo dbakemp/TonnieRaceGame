@@ -148,6 +148,7 @@ copy "$(SolutionDir)SDL\lib\Bass\bass.dll" "$(TargetDir)"
     <ClCompile Include="Box2DUtils.cpp" />
     <ClCompile Include="CBox2DManager.cpp" />
     <ClCompile Include="CCamera.cpp" />
+    <ClCompile Include="CCreditsState.cpp" />
     <ClCompile Include="CDebugDraw.cpp" />
     <ClCompile Include="CDebugLogger.cpp" />
     <ClCompile Include="CDrawManager.cpp" />
@@ -164,6 +165,7 @@ copy "$(SolutionDir)SDL\lib\Bass\bass.dll" "$(TargetDir)"
     <ClCompile Include="CIntroState.cpp" />
     <ClCompile Include="CPlayState.cpp" />
     <ClCompile Include="CStateManager.cpp" />
+    <ClCompile Include="CHelpState.cpp" />
     <ClCompile Include="IBox2DListener.cpp" />
     <ClCompile Include="IDrawListener.cpp" />
     <ClCompile Include="IEntityListener.cpp" />
@@ -176,11 +178,13 @@ copy "$(SolutionDir)SDL\lib\Bass\bass.dll" "$(TargetDir)"
     <ClCompile Include="jsoncpp.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MusicHelper.cpp" />
+    <ClCompile Include="CScoresState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Box2DUtils.h" />
     <ClInclude Include="CBox2DManager.h" />
     <ClInclude Include="CCamera.h" />
+    <ClInclude Include="CCreditsState.h" />
     <ClInclude Include="CDebugDraw.h" />
     <ClInclude Include="CDebugLogger.h" />
     <ClInclude Include="CDrawManager.h" />
@@ -198,11 +202,13 @@ copy "$(SolutionDir)SDL\lib\Bass\bass.dll" "$(TargetDir)"
     <ClInclude Include="CIntroState.h" />
     <ClInclude Include="CPlayState.h" />
     <ClInclude Include="CStateManager.h" />
+    <ClInclude Include="CHelpState.h" />
     <ClInclude Include="IBox2DListener.h" />
     <ClInclude Include="IDrawListener.h" />
     <ClInclude Include="IEntityListener.h" />
     <ClInclude Include="IInputListener.h" />
     <ClInclude Include="MusicHelper.h" />
+    <ClInclude Include="CScoresState.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Resources\Maps\map1.json">

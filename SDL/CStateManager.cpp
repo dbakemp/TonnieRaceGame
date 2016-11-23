@@ -2,6 +2,9 @@
 #include "CStateManager.h"
 #include "CIntroState.h"
 #include "CPlayState.h"
+#include "CHelpState.h"
+#include "CScoresState.h"
+#include "CCreditsState.h"
 
 void CStateManager::changeState(EGameState state, CEngine* engine)
 {
@@ -15,7 +18,11 @@ void CStateManager::changeState(EGameState state, CEngine* engine)
 		break;
 	case Pause: states.push_back(new CIntroState(engine));
 		break;
-	case Credits: states.push_back(new CIntroState(engine));
+	case Credits: states.push_back(new CCreditsState(engine));
+		break;
+	case Help: states.push_back(new CHelpState(engine));
+		break;
+	case Scores: states.push_back(new CScoresState(engine));
 		break;
 	}
 	return;
