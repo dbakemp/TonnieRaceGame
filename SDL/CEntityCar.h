@@ -23,6 +23,7 @@ public:
 	b2RevoluteJoint *flJoint, *frJoint;
 	std::vector<CEntityTire*> tires;
 	void OnControllerAxis(const SDL_ControllerAxisEvent sdlEvent);
+	void toggleFPSCounter(CEngine * engine);
 private:
 	CEngine* engine;
 };

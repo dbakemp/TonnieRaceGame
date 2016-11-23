@@ -9,6 +9,7 @@
 #include "CEntityManager.h"
 #include "CDrawManager.h"
 #include "CLevelFactory.h"
+#include "SDL_ttf.h"
 
 void CPlayState::init()
 {
@@ -79,6 +80,42 @@ void CPlayState::update(CEngine* engine)
 	camera->Update();
 
 	engine->drawManager->Tick(engine->renderer);
+
+	if (engine->showFPSCounter) drawFPSCounter(engine);
+	
+
+}
+
+void CPlayState::drawFPSCounter(CEngine* engine)
+{
+	string title = "FPS";
+	title.append(": ");
+	title.append(to_string(engine->fpsCounter));
+
+	const char* fileString = title.c_str();
+	
+
+	TTF_Init();
+	TTF_Font* fpsFont = TTF_OpenFont("Resources/Fonts/opensans.ttf", 16);
+	SDL_Color color = { 255, 255, 255 };
+	SDL_Surface* surface = TTF_RenderText_Solid(fpsFont, fileString, color);
+
+	SDL_Texture* texture = SDL_CreateTextureFromSurface(engine->renderer, surface);
+
+
+	int texW = 0;
+	int texH = 0;
+	SDL_QueryTexture(texture, NULL, NULL, &texW, &texH);
+	SDL_Rect dstrect = { 10, 10, texW, texH };
+
+
+	SDL_RenderCopy(engine->renderer, texture, NULL, &dstrect);
+	SDL_RenderPresent(engine->renderer);
+
+	TTF_CloseFont(fpsFont);
+	SDL_DestroyTexture(texture);
+	SDL_FreeSurface(surface);
+	TTF_Quit();
 }
 
 void CPlayState::draw(CEngine* engine)

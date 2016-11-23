@@ -80,6 +80,16 @@ void CEntityCar::Input(SDL_Event* event)
 			break;
 		case SDLK_d: controlState |= InputDirections::RIGHT;
 			break;
+		case SDLK_f: 
+			if (engine->showFPSCounter)
+			{
+				engine->showFPSCounter = false;
+			}
+			else
+			{
+				engine->showFPSCounter = true;
+			}
+			break;
 		}
 		break;
 	case SDL_KEYUP:
@@ -97,6 +107,7 @@ void CEntityCar::Input(SDL_Event* event)
 		break;
 	}
 }
+
 
 void CEntityCar::OnControllerAxis(const SDL_ControllerAxisEvent sdlEvent)
 {
