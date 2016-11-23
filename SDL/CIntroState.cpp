@@ -20,18 +20,10 @@ void CIntroState::init(CEngine* engine)
 	TTF_Font* fntPricedown = TTF_OpenFont("Resources/Fonts/pricedown.ttf", 48);
 
 	SDL_Color color = {16, 157, 232};
-	SDL_Surface* surface = TTF_RenderText_Solid(fntPricedown,
-	                                            "Tonnie's grote racewereld!", color);
 
-	SDL_Texture* texture = SDL_CreateTextureFromSurface(engine->renderer, surface);
 
-	SDL_Surface* background = IMG_Load("Resources/Images/mainbackground.png");
+	SDL_Surface* background = IMG_Load("Resources/Images/mainmenu.jpg");
 	SDL_Texture* background_texture = SDL_CreateTextureFromSurface(engine->renderer, background);
-
-	int texW = 0;
-	int texH = 0;
-	SDL_QueryTexture(texture, NULL, NULL, &texW, &texH);
-	SDL_Rect dstrect = {100, 50, texW, texH};
 
 	int backW = 0;
 	int backH = 0;
@@ -39,16 +31,10 @@ void CIntroState::init(CEngine* engine)
 	SDL_Rect backrect = {0,0,backW, backH};
 
 	SDL_RenderCopy(engine->renderer, background_texture, NULL, &backrect);
-	SDL_RenderCopy(engine->renderer, texture, NULL, &dstrect);
 	SDL_RenderPresent(engine->renderer);
 
 	TTF_CloseFont(fntPricedown);
-
-	SDL_DestroyTexture(texture);
-	SDL_FreeSurface(surface);
 	TTF_Quit();
-
-	engine->musicHelper->playTrack("music\\title.mp3", false);
 }
 
 void CIntroState::clean()
@@ -85,9 +71,47 @@ void CIntroState::update(CEngine* engine)
 			case SDLK_SPACE:
 				engine->stateManager->changeState(Playing, engine);
 				break;
+			case SDLK_1:
+				engine->stateManager->changeState(Help, engine);
+				break;
+			case SDLK_2:
+				engine->stateManager->changeState(Credits, engine);
+				break;
+			case SDLK_3:
+				engine->stateManager->changeState(Scores, engine);
+				break;
 			default:
 				break;
 			}
+		}
+		else if (event.type == SDL_MOUSEBUTTONDOWN)
+		{
+			int mouseX = event.motion.x;
+			int mouseY = event.motion.y;
+			switch (event.button.button)
+			{
+			case SDL_BUTTON_LEFT:
+				if (mouseX > 240 && mouseX < 384 && mouseY > 615 && mouseY < 672)
+				{
+					engine->stateManager->changeState(Playing, engine);
+				}
+				else if (mouseX > 451 && mouseX < 597 && mouseY > 615 && mouseY < 672)
+				{
+					engine->stateManager->changeState(Help, engine);
+				}
+				else if (mouseX > 663 && mouseX < 809 && mouseY > 615 && mouseY < 672)
+				{
+					engine->stateManager->changeState(Scores, engine);
+				}
+				else if (mouseX > 896 && mouseX < 1042 && mouseY > 615 && mouseY < 672)
+				{
+					engine->stateManager->changeState(Credits, engine);
+				}
+				break;
+			default:
+				break;
+			}
+			break;
 		}
 		else if (event.type == SDL_CONTROLLERBUTTONDOWN)
 		{
@@ -101,11 +125,6 @@ void CIntroState::update(CEngine* engine)
 			engine->inputManager->Tick(&event);
 		}
 	}
-
-	//SDL_SetRenderDrawColor(engine->renderer, 0, 0, 0, 255);
-	//SDL_RenderClear(engine->renderer);
-
-	//engine->drawManager->Tick(engine->renderer);
 }
 
 void CIntroState::draw(CEngine* engine)

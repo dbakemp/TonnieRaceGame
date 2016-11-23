@@ -13,7 +13,9 @@ enum EGameState
 	Menu,
 	Playing,
 	Pause,
-	Credits
+	Credits,
+	Help,
+	Scores
 };
 
 class CStateManager

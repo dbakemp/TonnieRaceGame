@@ -59,7 +59,7 @@ CEngine::CEngine()
 
 	EGameState state = Start;
 	stateManager->changeState(state, this);
-
+	musicHelper->playTrack("music\\title.mp3", false);
 	Tick();
 }
 
