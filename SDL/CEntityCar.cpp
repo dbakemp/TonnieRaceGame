@@ -1,6 +1,7 @@
 #include "CEntityCar.h"
 #include "CEntityTire.h"
 #include "Box2DUtils.h"
+#include "CMap.h"
 #include <iostream>
 
 #ifndef DEGTORAD
@@ -8,14 +9,14 @@
 #define RADTODEG 57.295779513082320876f
 #endif
 
-CEntityCar::CEntityCar(CEngine* engine) : CEntity(engine), IDrawListener(engine), IInputListener(engine), IBox2DListener(engine)
+CEntityCar::CEntityCar(CEngine* engine, CMap* map) : CEntity(engine), IDrawListener(engine), IInputListener(engine), IBox2DListener(engine)
 {
 	bodyDef.type = b2_dynamicBody;
 	body = engine->world->CreateBody(&bodyDef);
 	body->SetAngularDamping(5);
 
-	double xPos = 38;
-	double yPos = 179;
+	double xPos = map->spawnX;
+	double yPos = map->spawnY;
 
 	b2Vec2 vertices[8];
 	vertices[0].Set(1.5 + xPos, 0 + yPos);
@@ -36,25 +37,25 @@ CEntityCar::CEntityCar(CEngine* engine) : CEntity(engine), IDrawListener(engine)
 	jointDef.upperAngle = 0;
 	jointDef.localAnchorB.SetZero();
 
-	CEntityTire* tire = new CEntityTire(engine);
+	CEntityTire* tire = new CEntityTire(engine, map);
 	jointDef.bodyB = tire->body;
 	jointDef.localAnchorA.Set(-3 + xPos, 0.75f + yPos);
 	engine->world->CreateJoint(&jointDef);
 	tires.push_back(tire);
 
-	tire = new CEntityTire(engine);
+	tire = new CEntityTire(engine, map);
 	jointDef.bodyB = tire->body;
 	jointDef.localAnchorA.Set(3 + xPos, 0.75f + yPos);
 	engine->world->CreateJoint(&jointDef);
 	tires.push_back(tire);
 
-	tire = new CEntityTire(engine);
+	tire = new CEntityTire(engine, map);
 	jointDef.bodyB = tire->body;
 	jointDef.localAnchorA.Set(-3 + xPos, 8.5f + yPos);
 	flJoint = static_cast<b2RevoluteJoint*>(engine->world->CreateJoint(&jointDef));
 	tires.push_back(tire);
 
-	tire = new CEntityTire(engine);
+	tire = new CEntityTire(engine, map);
 	jointDef.bodyB = tire->body;
 	jointDef.localAnchorA.Set(3 + xPos, 8.5f + yPos);
 	frJoint = static_cast<b2RevoluteJoint*>(engine->world->CreateJoint(&jointDef));

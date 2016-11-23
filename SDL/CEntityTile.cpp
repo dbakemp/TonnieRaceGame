@@ -23,8 +23,12 @@ CEntityTile::CEntityTile(CEngine* engine, CMap* map, int spriteNumber, int tileN
 
 void CEntityTile::Draw(SDL_Renderer* renderer)
 {
-	SDL_Rect dstrect = {-engine->camera->posX + (tileX * this->textureWidth), -engine->camera->posY + (tileY * this->textureHeight), this->textureWidth, this->textureHeight};
-	SDL_RenderCopy(engine->renderer, spriteSheet, &srcRect, &dstrect);
+	
+	if((tileY * this->textureHeight) > engine->camera->posY-this->textureHeight && (tileX * this->textureWidth) > engine->camera->posX-this->textureWidth && (tileY * this->textureHeight) < engine->camera->posY+engine->windowHeight && (tileX * this->textureWidth) < engine->camera->posX + engine->windowWidth)
+	{
+		SDL_Rect dstrect = { -engine->camera->posX + (tileX * this->textureWidth), -engine->camera->posY + (tileY * this->textureHeight), this->textureWidth, this->textureHeight };
+		SDL_RenderCopy(engine->renderer, spriteSheet, &srcRect, &dstrect);
+	}
 }
 
 void CEntityTile::Update()

@@ -6,6 +6,7 @@
 #include "CEntitySmallSquare.h"
 #include "CStateManager.h"
 #include "CCamera.h"
+#include "CDebugLogger.h"
 #include "CLevelFactory.h"
 #include <time.h>
 #include <iostream>
@@ -17,8 +18,8 @@
 
 CEngine::CEngine()
 {
-	int windowHeight = 720;
-	int windowWidth = 1280;
+	windowHeight = 720;
+	windowWidth = 1280;
 	fps = 1;
 
 	musicHelper = new MusicHelper();

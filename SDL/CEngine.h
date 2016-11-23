@@ -27,6 +27,8 @@ public:
 	b2World* world;
 	MusicHelper* musicHelper;
 	bool running;
+
+	int windowHeight, windowWidth;
 private:
 	void Tick();
 	int fps;

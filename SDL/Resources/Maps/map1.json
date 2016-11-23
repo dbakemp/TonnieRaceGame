@@ -602,15 +602,26 @@
                  "width":0,
                  "x":678,
                  "y":2428
+                }, 
+                {
+                 "height":0,
+                 "id":39,
+                 "name":"",
+                 "rotation":0,
+                 "type":"spawn",
+                 "visible":true,
+                 "width":0,
+                 "x":191,
+                 "y":959
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
          "width":25,
          "x":0,
          "y":0
         }],
- "nextobjectid":38,
+ "nextobjectid":40,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tileheight":128,
@@ -618,11 +629,19 @@
         {
          "columns":31,
          "firstgid":1,
-         "image":"Resources\/Spritesheets\/spritesheet_tiles.png",
+         "image":"..\/..\/..\/..\/Spritesheets\/spritesheet_tiles.png",
          "imageheight":2048,
          "imagewidth":4096,
          "margin":0,
          "name":"spritesheet_tiles",
+         "properties":
+            {
+             "resourcepath":"Resources\/Spritesheets\/spritesheet_tiles.png"
+            },
+         "propertytypes":
+            {
+             "resourcepath":"string"
+            },
          "spacing":2,
          "terrains":[
                 {

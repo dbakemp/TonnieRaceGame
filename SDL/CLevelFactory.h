@@ -4,7 +4,6 @@
 #include "CMap.h"
 #include "CEngine.h"
 #include <json\json.h>
-#include <string>
 
 class CLevelFactory
 {
@@ -14,10 +13,11 @@ public:
 	void CreateMap(Json::Value* root);
 	void CreateObjects(Json::Value* root);
 	void CreateTiles(Json::Value* root);
+	void CreateSpawns(Json::Value* root);
 	void CreateBorder(Json::Value* root);
+	CMap* map;
 private:
 	CEngine* engine;
-	CMap* map;
 };
 
 #endif 

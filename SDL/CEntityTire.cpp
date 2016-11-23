@@ -1,11 +1,13 @@
 #include "CEntityTire.h"
 #include "Box2DUtils.h" 
+#include "CMap.h"
+#include <SDL.h>
 #include <iostream>
 
-CEntityTire::CEntityTire(CEngine* engine) : CEntity(engine), IDrawListener(engine), IInputListener(engine), IBox2DListener(engine)
+CEntityTire::CEntityTire(CEngine* engine, CMap* map) : CEntity(engine), IDrawListener(engine), IInputListener(engine), IBox2DListener(engine)
 {
-	double xPos = 38;
-	double yPos = 179;
+	double xPos = map->spawnX;
+	double yPos = map->spawnY;
 
 	bodyDef.type = b2_dynamicBody;
 	bodyDef.position.Set(xPos, yPos);

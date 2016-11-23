@@ -32,7 +32,7 @@ void CPlayState::init(CEngine* engine)
 
 	engine->camera = camera;
 
-	CEntityCar* car = new CEntityCar(engine);
+	CEntityCar* car = new CEntityCar(engine, factory->map);
 	camera->SetChild(car);
 
 	engine->musicHelper->playTrack("music\\boerharms.mp3", true);

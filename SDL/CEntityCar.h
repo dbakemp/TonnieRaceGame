@@ -10,10 +10,12 @@
 #include <vector>
 #include <Box2D\Box2D.h>
 
+class CMap;
+
 class CEntityCar : public CEntity, public IDrawListener, public IInputListener, public IBox2DListener
 {
 public:
-	CEntityCar(CEngine* engine);
+	CEntityCar(CEngine* engine, CMap* map);
 	void Draw(SDL_Renderer* renderer);
 	void Input(SDL_Event* event);
 	void Update();

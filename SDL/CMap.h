@@ -23,6 +23,9 @@ public:
 	int height;
 	int tileheight;
 	int tilewidth;
+
+	int spawnX;
+	int spawnY;
 private:
 };
 

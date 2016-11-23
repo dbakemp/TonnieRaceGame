@@ -8,10 +8,12 @@
 #include "CEngine.h"
 #include <Box2D\Box2D.h>
 
+class CMap;
+
 class CEntityTire : public CEntity, public IDrawListener, public IInputListener, public IBox2DListener
 {
 public:
-	CEntityTire(CEngine* engine);
+	CEntityTire(CEngine* engine, CMap* map);
 	void Draw(SDL_Renderer* renderer);
 	void Input(SDL_Event* event);
 	void Update();

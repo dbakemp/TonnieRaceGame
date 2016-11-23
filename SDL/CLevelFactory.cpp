@@ -40,7 +40,7 @@ void CLevelFactory::CreateMap(Json::Value* root)
 
 	map->height = root->get("height", 0).asInt();
 	map->width = root->get("width", 0).asInt();
-	map->spriteSheetLocation = (*root)["tilesets"][0].get("image", "").asString();
+	map->spriteSheetLocation = (*root)["tilesets"][0].get("properties", "").get("resourcepath", "").asString();
 	map->spriteSheetColumns = (*root)["tilesets"][0].get("columns", 0).asInt();
 	map->spriteSheetSpacing = (*root)["tilesets"][0].get("spacing", 0).asInt();
 	map->spriteSheetTileWidth = (*root)["tilesets"][0].get("tilewidth", 0).asInt();
@@ -76,6 +76,11 @@ void CLevelFactory::CreateObjects(Json::Value* root)
 		if (object["type"].asString() == "wall")
 		{
 			CreateBorder(&object);
+		}
+
+		else if (object["type"].asString() == "spawn")
+		{
+			CreateSpawns(&object);
 		}
 	}
 }
@@ -121,4 +126,12 @@ void CLevelFactory::CreateBorder(Json::Value* root)
 	{
 		new CEntityBorder(this->engine, triangle);
 	}
+}
+
+void CLevelFactory::CreateSpawns(Json::Value* root)
+{
+	CDebugLogger::PrintDebug("Creating Spawns");
+
+	map->spawnX = (*root).get("x", 0).asInt()/5;
+	map->spawnY = (*root).get("y", 0).asInt()/5;
 }
