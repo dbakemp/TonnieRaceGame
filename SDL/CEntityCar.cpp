@@ -3,6 +3,7 @@
 #include "Box2DUtils.h"
 #include "CMap.h"
 #include <iostream>
+#include <SDL_image.h>
 
 #ifndef DEGTORAD
 #define DEGTORAD 0.0174532925199432957f
@@ -11,25 +12,35 @@
 
 CEntityCar::CEntityCar(CEngine* engine, CMap* map) : CEntity(engine), IDrawListener(engine), IInputListener(engine), IBox2DListener(engine)
 {
+	SDL_Surface* texture = IMG_Load("Resources/Images/spritesheet_vehicles.png");
+	this->spriteSheet = SDL_CreateTextureFromSurface(engine->renderer, texture);
+	srcRect = { 631, 0, 41, 66 };
+
 	bodyDef.type = b2_dynamicBody;
 	body = engine->world->CreateBody(&bodyDef);
-	body->SetAngularDamping(5);
+	//body->SetAngularDamping(5);
 
 	double xPos = map->spawnX;
 	double yPos = map->spawnY;
 
 	b2Vec2 vertices[8];
-	vertices[0].Set(1.5 + xPos, 0 + yPos);
+	/*vertices[0].Set(1.5 + xPos, 0 + yPos);
 	vertices[1].Set(3 + xPos, 2.5 + yPos);
 	vertices[2].Set(2.8 + xPos, 5.5 + yPos);
 	vertices[3].Set(1 + xPos, 10 + yPos);
 	vertices[4].Set(-1 + xPos, 10 + yPos);
 	vertices[5].Set(-2.8 + xPos, 5.5 + yPos);
 	vertices[6].Set(-3 + xPos, 2.5 + yPos);
-	vertices[7].Set(-1.5 + xPos, 0 + yPos);
+	vertices[7].Set(-1.5 + xPos, 0 + yPos);*/
+
+	vertices[0].Set(0 + xPos, 0 + yPos);
+	vertices[1].Set(8 + xPos, 0 + yPos);
+	vertices[2].Set(8 + xPos, 13 + yPos);
+	vertices[3].Set(0 + xPos, 13 + yPos);
+
 	b2PolygonShape polygonShape;
-	polygonShape.Set(vertices, 8);
-	b2Fixture* fixture = body->CreateFixture(&polygonShape, 0.5f);
+	polygonShape.Set(vertices, 4);
+	b2Fixture* fixture = body->CreateFixture(&polygonShape, 0.1f);
 	b2RevoluteJointDef jointDef;
 	jointDef.bodyA = body;
 	jointDef.enableLimit = true;
@@ -39,25 +50,25 @@ CEntityCar::CEntityCar(CEngine* engine, CMap* map) : CEntity(engine), IDrawListe
 
 	CEntityTire* tire = new CEntityTire(engine, map);
 	jointDef.bodyB = tire->body;
-	jointDef.localAnchorA.Set(-3 + xPos, 0.75f + yPos);
+	jointDef.localAnchorA.Set(0.5 + xPos, 1.75f + yPos);
 	engine->world->CreateJoint(&jointDef);
 	tires.push_back(tire);
 
 	tire = new CEntityTire(engine, map);
 	jointDef.bodyB = tire->body;
-	jointDef.localAnchorA.Set(3 + xPos, 0.75f + yPos);
+	jointDef.localAnchorA.Set(7.5 + xPos, 1.75f + yPos);
 	engine->world->CreateJoint(&jointDef);
 	tires.push_back(tire);
 
 	tire = new CEntityTire(engine, map);
 	jointDef.bodyB = tire->body;
-	jointDef.localAnchorA.Set(-3 + xPos, 8.5f + yPos);
+	jointDef.localAnchorA.Set(0.5 + xPos, 10.5f + yPos);
 	flJoint = static_cast<b2RevoluteJoint*>(engine->world->CreateJoint(&jointDef));
 	tires.push_back(tire);
 
 	tire = new CEntityTire(engine, map);
 	jointDef.bodyB = tire->body;
-	jointDef.localAnchorA.Set(3 + xPos, 8.5f + yPos);
+	jointDef.localAnchorA.Set(7.5 + xPos, 10.5f + yPos);
 	frJoint = static_cast<b2RevoluteJoint*>(engine->world->CreateJoint(&jointDef));
 	tires.push_back(tire);
 
@@ -66,7 +77,24 @@ CEntityCar::CEntityCar(CEngine* engine, CMap* map) : CEntity(engine), IDrawListe
 
 void CEntityCar::Draw(SDL_Renderer* renderer)
 {
-	Box2DUtils::DrawBody(renderer, body, engine->camera, 0, 0, 255, 255, 0, 0, 255, 0, false);
+	b2AABB aabb;
+	aabb.lowerBound = b2Vec2(FLT_MAX, FLT_MAX);
+	aabb.upperBound = b2Vec2(-FLT_MAX, -FLT_MAX);
+	b2Fixture* fixture = body->GetFixtureList();
+	while (fixture != NULL)
+	{
+		aabb.Combine(aabb, fixture->GetAABB(0));
+		fixture = fixture->GetNext();
+	}
+
+	double angle = body->GetAngle() * (180.0 / M_PI);
+	SDL_Point center = { 20.5, 33 };
+
+	SDL_Rect dstrect = { ((aabb.upperBound.x + aabb.lowerBound.x)/2 * 5)-engine->camera->posX-(srcRect.w/2), ((aabb.upperBound.y + aabb.lowerBound.y) / 2 * 5) - engine->camera->posY - (srcRect.h / 2), 41, 66 };
+
+	//SDL_RenderCopy(engine->renderer, spriteSheet, &srcRect, &dstrect);
+	SDL_RenderCopyEx(engine->renderer, spriteSheet, &srcRect, &dstrect, angle, &center, SDL_FLIP_VERTICAL);
+	//Box2DUtils::DrawBody(renderer, body, engine->camera, 0, 0, 0, 0, 0, 0, 255, 255, false);
 }
 
 void CEntityCar::Input(SDL_Event* event)
