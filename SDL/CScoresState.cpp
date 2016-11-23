@@ -75,6 +75,24 @@ void CScoresState::update(CEngine* engine)
 				break;
 			}
 		}
+		else if (event.type == SDL_MOUSEBUTTONDOWN)
+		{
+			int mouseX = event.motion.x;
+			int mouseY = event.motion.y;
+			switch (event.button.button)
+			{
+				case SDL_BUTTON_LEFT:
+					if (mouseX > 35 && mouseX < 123 && mouseY > 650 && mouseY < 702)
+					{
+						engine->stateManager->changeState(Menu, engine);
+					}
+
+					break;
+				default:
+					break;
+			}
+			break;
+		}
 		else
 		{
 			engine->inputManager->Tick(&event);

@@ -35,8 +35,6 @@ void CIntroState::init(CEngine* engine)
 
 	TTF_CloseFont(fntPricedown);
 	TTF_Quit();
-
-	engine->musicHelper->playTrack("music\\title.mp3", false);
 }
 
 void CIntroState::clean()
@@ -85,6 +83,35 @@ void CIntroState::update(CEngine* engine)
 			default:
 				break;
 			}
+		}
+		else if (event.type == SDL_MOUSEBUTTONDOWN)
+		{
+			int mouseX = event.motion.x;
+			int mouseY = event.motion.y;
+			switch (event.button.button)
+			{
+			case SDL_BUTTON_LEFT:
+				if (mouseX > 240 && mouseX < 384 && mouseY > 615 && mouseY < 672)
+				{
+					engine->stateManager->changeState(Playing, engine);
+				}
+				else if (mouseX > 451 && mouseX < 597 && mouseY > 615 && mouseY < 672)
+				{
+					engine->stateManager->changeState(Help, engine);
+				}
+				else if (mouseX > 663 && mouseX < 809 && mouseY > 615 && mouseY < 672)
+				{
+					engine->stateManager->changeState(Scores, engine);
+				}
+				else if (mouseX > 896 && mouseX < 1042 && mouseY > 615 && mouseY < 672)
+				{
+					engine->stateManager->changeState(Credits, engine);
+				}
+				break;
+			default:
+				break;
+			}
+			break;
 		}
 		else if (event.type == SDL_CONTROLLERBUTTONDOWN)
 		{
