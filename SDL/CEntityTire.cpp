@@ -27,7 +27,7 @@ CEntityTire::CEntityTire(CEngine* engine, CMap* map) : CEntity(engine), IDrawLis
 
 void CEntityTire::Draw(SDL_Renderer* renderer)
 {
-	Box2DUtils::DrawBody(renderer, body, engine->camera, 0, 0, 255, 255, 0, 0, 255, 255, false);
+	Box2DUtils::DrawBody(renderer, body, engine->camera, 0, 0, 0, 255, 0, 0, 0, 255, false);
 }
 
 void CEntityTire::Input(SDL_Event* event)

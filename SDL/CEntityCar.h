@@ -24,6 +24,9 @@ public:
 	std::vector<CEntityTire*> tires;
 	void OnControllerAxis(const SDL_ControllerAxisEvent sdlEvent);
 	void toggleFPSCounter(CEngine * engine);
+
+	SDL_Texture* spriteSheet;
+	SDL_Rect srcRect;
 private:
 	CEngine* engine;
 };
