@@ -10,7 +10,7 @@ void Box2DUtils::DrawBody(SDL_Renderer* buffer, b2Body* body, CCamera* camera, i
 		{
 		case b2Shape::e_circle:
 			{
-				b2CircleShape* circle = (b2CircleShape*)f->GetShape();
+				b2CircleShape* circle = static_cast<b2CircleShape*>(f->GetShape());
 
 				b2Vec2 center = b2Mul(xf, circle->m_p);
 				float32 radius = circle->m_radius;
@@ -20,29 +20,29 @@ void Box2DUtils::DrawBody(SDL_Renderer* buffer, b2Body* body, CCamera* camera, i
 				//m_debugDraw->DrawSolidCircle(center, radius, axis, color);
 				if (falpha > 0)
 				{
-					filledCircleRGBA(buffer, center.x + camera->posX, center.y + camera->posY, (int)radius, fr, fg, fb, falpha);
+					filledCircleRGBA(buffer, center.x + camera->posX, center.y + camera->posY, static_cast<int>(radius), fr, fg, fb, falpha);
 				}
 				if (lalpha > 0)
 				{
 					if (aa)
 					{
-						aacircleRGBA(buffer, center.x + camera->posX, center.y + camera->posY, (int)radius, lr, lg, lb, lalpha);
+						aacircleRGBA(buffer, center.x + camera->posX, center.y + camera->posY, static_cast<int>(radius), lr, lg, lb, lalpha);
 					}
 					else
 					{
-						aacircleRGBA(buffer, center.x + camera->posX, center.y + camera->posY, (int)radius, lr, lg, lb, lalpha);
+						aacircleRGBA(buffer, center.x + camera->posX, center.y + camera->posY, static_cast<int>(radius), lr, lg, lb, lalpha);
 					}
 				}
 				else if (aa)
 				{
-					aacircleRGBA(buffer, center.x + camera->posX, center.y + camera->posY, (int)radius, fr, fg, fb, falpha);
+					aacircleRGBA(buffer, center.x + camera->posX, center.y + camera->posY, static_cast<int>(radius), fr, fg, fb, falpha);
 				}
 			}
 			break;
 
 		case b2Shape::e_polygon:
 			{
-				b2PolygonShape* poly = (b2PolygonShape*)f->GetShape();
+				b2PolygonShape* poly = static_cast<b2PolygonShape*>(f->GetShape());
 				//int32 vertexCount = poly->m_vertexCount;
 				int32 vertexCount = poly->GetVertexCount();
 				b2Assert(vertexCount <= b2_maxPolygonVertices);
@@ -52,31 +52,35 @@ void Box2DUtils::DrawBody(SDL_Renderer* buffer, b2Body* body, CCamera* camera, i
 				for (int32 i = 0; i < vertexCount; ++i)
 				{
 					vertices[i] = b2Mul(xf, poly->m_vertices[i]);
-					xv[i] = (int)((vertices[i].x * 5) - camera->posX);
-					yv[i] = (int)((vertices[i].y * 5) - camera->posY);
+					xv[i] = static_cast<int>((vertices[i].x * 5) - camera->posX);
+					yv[i] = static_cast<int>((vertices[i].y * 5) - camera->posY);
 				}
 				if (falpha > 0)
 				{
-					filledPolygonRGBA(buffer, xv, yv, (Sint16)vertexCount, fr, fg, fb, falpha);
+					filledPolygonRGBA(buffer, xv, yv, static_cast<Sint16>(vertexCount), fr, fg, fb, falpha);
 				}
 				if (lalpha > 0)
 				{
 					if (aa)
 					{
-						aapolygonRGBA(buffer, xv, yv, (Sint16)vertexCount, lr, lg, lb, lalpha);
+						aapolygonRGBA(buffer, xv, yv, static_cast<Sint16>(vertexCount), lr, lg, lb, lalpha);
 					}
 					else
 					{
-						polygonRGBA(buffer, xv, yv, (Sint16)vertexCount, lr, lg, lb, lalpha);
+						polygonRGBA(buffer, xv, yv, static_cast<Sint16>(vertexCount), lr, lg, lb, lalpha);
 					}
 				}
 				else if (aa)
 				{
-					aapolygonRGBA(buffer, xv, yv, (Sint16)vertexCount, fr, fg, fb, falpha);
+					aapolygonRGBA(buffer, xv, yv, static_cast<Sint16>(vertexCount), fr, fg, fb, falpha);
 				}
 				//m_debugDraw->DrawSolidPolygon(vertices, vertexCount, color);
 			}
 			break;
+		case b2Shape::e_edge: break;
+		case b2Shape::e_chain: break;
+		case b2Shape::e_typeCount: break;
+		default: break;
 		}
 	}
 }

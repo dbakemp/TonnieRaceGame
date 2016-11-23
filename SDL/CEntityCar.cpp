@@ -14,8 +14,8 @@ CEntityCar::CEntityCar(CEngine* engine) : CEntity(engine), IDrawListener(engine)
 	body = engine->world->CreateBody(&bodyDef);
 	body->SetAngularDamping(5);
 
-	double xPos = 115;
-	double yPos = 265;
+	double xPos = 38;
+	double yPos = 179;
 
 	b2Vec2 vertices[8];
 	vertices[0].Set(1.5 + xPos, 0 + yPos);
@@ -51,13 +51,13 @@ CEntityCar::CEntityCar(CEngine* engine) : CEntity(engine), IDrawListener(engine)
 	tire = new CEntityTire(engine);
 	jointDef.bodyB = tire->body;
 	jointDef.localAnchorA.Set(-3 + xPos, 8.5f + yPos);
-	flJoint = (b2RevoluteJoint*)engine->world->CreateJoint(&jointDef);
+	flJoint = static_cast<b2RevoluteJoint*>(engine->world->CreateJoint(&jointDef));
 	tires.push_back(tire);
 
 	tire = new CEntityTire(engine);
 	jointDef.bodyB = tire->body;
 	jointDef.localAnchorA.Set(3 + xPos, 8.5f + yPos);
-	frJoint = (b2RevoluteJoint*)engine->world->CreateJoint(&jointDef);
+	frJoint = static_cast<b2RevoluteJoint*>(engine->world->CreateJoint(&jointDef));
 	tires.push_back(tire);
 
 	this->engine = engine;

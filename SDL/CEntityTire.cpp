@@ -4,8 +4,8 @@
 
 CEntityTire::CEntityTire(CEngine* engine) : CEntity(engine), IDrawListener(engine), IInputListener(engine), IBox2DListener(engine)
 {
-	double xPos = 115;
-	double yPos = 265;
+	double xPos = 38;
+	double yPos = 179;
 
 	bodyDef.type = b2_dynamicBody;
 	bodyDef.position.Set(xPos, yPos);
