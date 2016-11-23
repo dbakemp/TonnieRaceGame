@@ -18,28 +18,24 @@ CEntityCar::CEntityCar(CEngine* engine, CMap* map) : CEntity(engine), IDrawListe
 
 	bodyDef.type = b2_dynamicBody;
 	body = engine->world->CreateBody(&bodyDef);
-	//body->SetAngularDamping(5);
+	body->SetAngularDamping(1);
 
 	double xPos = map->spawnX;
 	double yPos = map->spawnY;
 
 	b2Vec2 vertices[8];
-	/*vertices[0].Set(1.5 + xPos, 0 + yPos);
-	vertices[1].Set(3 + xPos, 2.5 + yPos);
-	vertices[2].Set(2.8 + xPos, 5.5 + yPos);
-	vertices[3].Set(1 + xPos, 10 + yPos);
-	vertices[4].Set(-1 + xPos, 10 + yPos);
-	vertices[5].Set(-2.8 + xPos, 5.5 + yPos);
-	vertices[6].Set(-3 + xPos, 2.5 + yPos);
-	vertices[7].Set(-1.5 + xPos, 0 + yPos);*/
 
-	vertices[0].Set(0 + xPos, 0 + yPos);
-	vertices[1].Set(8 + xPos, 0 + yPos);
-	vertices[2].Set(8 + xPos, 13 + yPos);
-	vertices[3].Set(0 + xPos, 13 + yPos);
+	vertices[0].Set(0 + xPos, 2 + yPos);
+	vertices[1].Set(2 + xPos, 0 + yPos);
+	vertices[2].Set(6 + xPos, 0 + yPos);
+	vertices[3].Set(8 + xPos, 2 + yPos);
+	vertices[4].Set(8 + xPos, 11 + yPos);
+	vertices[5].Set(6 + xPos, 13 + yPos);
+	vertices[6].Set(2 + xPos, 13 + yPos);
+	vertices[7].Set(0 + xPos, 11 + yPos);
 
 	b2PolygonShape polygonShape;
-	polygonShape.Set(vertices, 4);
+	polygonShape.Set(vertices, 8);
 	b2Fixture* fixture = body->CreateFixture(&polygonShape, 0.1f);
 	b2RevoluteJointDef jointDef;
 	jointDef.bodyA = body;
@@ -92,7 +88,6 @@ void CEntityCar::Draw(SDL_Renderer* renderer)
 
 	SDL_Rect dstrect = { ((aabb.upperBound.x + aabb.lowerBound.x)/2 * 5)-engine->camera->posX-(srcRect.w/2), ((aabb.upperBound.y + aabb.lowerBound.y) / 2 * 5) - engine->camera->posY - (srcRect.h / 2), 41, 66 };
 
-	//SDL_RenderCopy(engine->renderer, spriteSheet, &srcRect, &dstrect);
 	SDL_RenderCopyEx(engine->renderer, spriteSheet, &srcRect, &dstrect, angle, &center, SDL_FLIP_VERTICAL);
 	//Box2DUtils::DrawBody(renderer, body, engine->camera, 0, 0, 0, 0, 0, 0, 255, 255, false);
 }
