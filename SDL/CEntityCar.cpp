@@ -66,7 +66,7 @@ CEntityCar::CEntityCar(CEngine* engine, CMap* map) : CEntity(engine), IDrawListe
 
 void CEntityCar::Draw(SDL_Renderer* renderer)
 {
-	Box2DUtils::DrawBody(renderer, body, engine->camera, 0, 0, 255, 255, 0, 0, 255, 120, false);
+	Box2DUtils::DrawBody(renderer, body, engine->camera, 0, 0, 255, 255, 0, 0, 255, 0, false);
 }
 
 void CEntityCar::Input(SDL_Event* event)
