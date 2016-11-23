@@ -37,7 +37,7 @@ CEngine::CEngine()
 	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 
 	SDL_GameController* controller = NULL;
-	SDL_Haptic* gControllerHaptic = NULL;
+	
 	for (int i = 0; i < SDL_NumJoysticks(); ++i)
 	{
 		if (SDL_IsGameController(i))
@@ -56,8 +56,6 @@ CEngine::CEngine()
 			}
 		}
 	}
-
-	SDL_HapticRumblePlay;
 
 	EGameState state = Start;
 	stateManager->changeState(state, this);
