@@ -5,16 +5,24 @@
 
 class CEngine;
 
+
 class CEntity: public IEntityListener
 {
 public:
+
 	CEntity(CEngine* engine);
 	void Update();
+	virtual void CollisionBegin(CEntity* collider);
+	virtual void CollisionEnd(CEntity* collider);
+	enum class Type { CAR, CHECKPOINT };
+	void SetType(Type type);
+	Type GetType();
 	float xPos, yPos;
 	float xVel, yVel;
 	float xAcc, yAcc;
 	int height, width;
 private:
+	Type type;
 };
 
 #endif CENTITY_H

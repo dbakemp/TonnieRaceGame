@@ -5,6 +5,7 @@ CEntityBorder::CEntityBorder(CEngine* engine) : CEntity(engine), IDrawListener(e
 {
 	bodyDef.type = b2_staticBody;
 	body = engine->world->CreateBody(&bodyDef);
+	body->SetUserData(this);
 
 	b2Vec2 vertices[8];
 	vertices[0].Set(1.5, 0);

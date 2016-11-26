@@ -2,6 +2,7 @@
 #include "CDebugLogger.h"
 #include "CEntityBorder.h"
 #include "CEntityTile.h"
+#include "CEntityCheckpoint.h"
 #include "SDL_image.h"
 #include <poly2tri.h>
 #include <vector>
@@ -77,10 +78,13 @@ void CLevelFactory::CreateObjects(Json::Value* root)
 		{
 			CreateBorder(&object);
 		}
-
 		else if (object["type"].asString() == "spawn")
 		{
 			CreateSpawns(&object);
+		}
+		else if (object["type"].asString() == "checkpoint")
+		{
+			CreateCheckpoints(&object);
 		}
 	}
 }
@@ -126,6 +130,21 @@ void CLevelFactory::CreateBorder(Json::Value* root)
 	{
 		new CEntityBorder(this->engine, triangle);
 	}
+}
+
+void CLevelFactory::CreateCheckpoints(Json::Value * root)
+{
+	CDebugLogger::PrintDebug("Creating Checkpoints");
+
+	const double scale = 5;
+
+	double xPos = (*root).get("x", 0).asDouble();
+	double yPos = (*root).get("y", 0).asDouble();
+	b2Vec2* start = new b2Vec2(((*root)["polyline"][0].get("x", 0).asDouble() + xPos) / scale, ((*root)["polyline"][0].get("y", 0).asDouble() + yPos) / scale);
+	b2Vec2* end = new b2Vec2(((*root)["polyline"][1].get("x", 0).asDouble() + xPos) / scale, ((*root)["polyline"][1].get("y", 0).asDouble() + yPos) / scale);
+	int index = (*root).get("properties", "").get("index", 0).asInt();
+
+	new CEntityCheckpoint(this->engine, start, end, index);
 }
 
 void CLevelFactory::CreateSpawns(Json::Value* root)

@@ -1,8 +1,10 @@
 #include "CEntityCar.h"
 #include "CEntityTire.h"
+#include "CDebugLogger.h"
 #include "Box2DUtils.h"
 #include "CMap.h"
 #include <iostream>
+#include <string>
 #include <SDL_image.h>
 
 #ifndef DEGTORAD
@@ -12,13 +14,16 @@
 
 CEntityCar::CEntityCar(CEngine* engine, CMap* map) : CEntity(engine), IDrawListener(engine), IInputListener(engine), IBox2DListener(engine)
 {
+	this->SetType(Type::CAR);
+	this->currentCheckpoint = -1;
+
 	SDL_Surface* texture = IMG_Load("Resources/Images/spritesheet_vehicles.png");
 	this->spriteSheet = SDL_CreateTextureFromSurface(engine->renderer, texture);
 	srcRect = { 631, 0, 41, 66 };
 
 	bodyDef.type = b2_dynamicBody;
 	body = engine->world->CreateBody(&bodyDef);
-	body->SetAngularDamping(1);
+	body->SetUserData(this);
 
 	double xPos = map->spawnX;
 	double yPos = map->spawnY;
@@ -34,9 +39,8 @@ CEntityCar::CEntityCar(CEngine* engine, CMap* map) : CEntity(engine), IDrawListe
 	vertices[6].Set(2 + xPos, 13 + yPos);
 	vertices[7].Set(0 + xPos, 11 + yPos);
 
-	b2PolygonShape polygonShape;
-	polygonShape.Set(vertices, 8);
-	b2Fixture* fixture = body->CreateFixture(&polygonShape, 0.1f);
+	polygon.Set(vertices, 8);
+	b2Fixture* fixture = body->CreateFixture(&polygon, 0.1f);
 	b2RevoluteJointDef jointDef;
 	jointDef.bodyA = body;
 	jointDef.enableLimit = true;
@@ -157,12 +161,32 @@ void CEntityCar::OnControllerAxis(const SDL_ControllerAxisEvent sdlEvent)
 	}
 }
 
+void CEntityCar::CollisionBegin(CEntity* collider)
+{
+	if (collider->GetType() == Type::CHECKPOINT) {
+		CEntityCheckpoint* checkpoint = static_cast<CEntityCheckpoint*>(collider);
+		ProcessCheckpoint(checkpoint);
+	}
+}
+
+void CEntityCar::CollisionEnd(CEntity* collider)
+{
+}
+
+void CEntityCar::ProcessCheckpoint(CEntityCheckpoint * checkpoint)
+{
+	if (checkpoint->checkpointIndex == currentCheckpoint + 1) {
+		currentCheckpoint = checkpoint->checkpointIndex;
+		CDebugLogger::PrintDebug("Passed checkpoint "+ std::to_string(currentCheckpoint));
+	}
+}
+
 
 void CEntityCar::Update()
 {
 	//control steering
 	float lockAngle = 60 * DEGTORAD;
-	float turnSpeedPerSec = 160 * DEGTORAD;//from lock to lock in 0.5 sec
+	float turnSpeedPerSec = 250 * DEGTORAD;//from lock to lock in 0.5 sec
 	float turnPerTimeStep = turnSpeedPerSec / 60.0f;
 	float desiredAngle = 0;
 

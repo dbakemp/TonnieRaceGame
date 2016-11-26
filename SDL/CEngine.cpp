@@ -2,6 +2,7 @@
 #include "CDrawManager.h"
 #include "CInputManager.h"
 #include "CEntityManager.h"
+#include "CCollisionHelper.h"
 #include "CBox2DManager.h"
 #include "CEntitySmallSquare.h"
 #include "CStateManager.h"
@@ -24,6 +25,7 @@ CEngine::CEngine()
 	showFPSCounter = true;
 
 	musicHelper = new MusicHelper();
+	collisionHelper = new CCollisionHelper();
 	drawManager = new CDrawManager();
 	inputManager = new CInputManager();
 	entityManager = new CEntityManager();

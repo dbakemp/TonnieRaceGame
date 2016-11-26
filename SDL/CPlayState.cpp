@@ -10,6 +10,7 @@
 #include "CEntityManager.h"
 #include "CDrawManager.h"
 #include "CLevelFactory.h"
+#include "CCollisionHelper.h"
 #include "SDL_ttf.h"
 #include <iomanip>
 #include <ctime>
@@ -25,6 +26,8 @@ void CPlayState::init(CEngine* engine)
 	b2Vec2 gravity(0, 0);
 
 	engine->world = new b2World(gravity);
+
+	engine->world->SetContactListener(engine->collisionHelper);
 
 	SDL_QueryTexture(backmapTexture, NULL, NULL, &texW, &texH);
 

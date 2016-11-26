@@ -148,6 +148,7 @@ copy "$(SolutionDir)SDL\lib\Bass\bass.dll" "$(TargetDir)"
     <ClCompile Include="Box2DUtils.cpp" />
     <ClCompile Include="CBox2DManager.cpp" />
     <ClCompile Include="CCamera.cpp" />
+    <ClCompile Include="CCollisionHelper.cpp" />
     <ClCompile Include="CCreditsState.cpp" />
     <ClCompile Include="CDebugDraw.cpp" />
     <ClCompile Include="CDebugLogger.cpp" />
@@ -156,6 +157,7 @@ copy "$(SolutionDir)SDL\lib\Bass\bass.dll" "$(TargetDir)"
     <ClCompile Include="CEntity.cpp" />
     <ClCompile Include="CEntityBorder.cpp" />
     <ClCompile Include="CEntityCar.cpp" />
+    <ClCompile Include="CEntityCheckpoint.cpp" />
     <ClCompile Include="CEntityManager.cpp" />
     <ClCompile Include="CEntityTile.cpp" />
     <ClCompile Include="CEntityTire.cpp" />
@@ -184,6 +186,7 @@ copy "$(SolutionDir)SDL\lib\Bass\bass.dll" "$(TargetDir)"
     <ClInclude Include="Box2DUtils.h" />
     <ClInclude Include="CBox2DManager.h" />
     <ClInclude Include="CCamera.h" />
+    <ClInclude Include="CCollisionHelper.h" />
     <ClInclude Include="CCreditsState.h" />
     <ClInclude Include="CDebugDraw.h" />
     <ClInclude Include="CDebugLogger.h" />
@@ -192,6 +195,7 @@ copy "$(SolutionDir)SDL\lib\Bass\bass.dll" "$(TargetDir)"
     <ClInclude Include="CEntity.h" />
     <ClInclude Include="CEntityBorder.h" />
     <ClInclude Include="CEntityCar.h" />
+    <ClInclude Include="CEntityCheckpoint.h" />
     <ClInclude Include="CEntityManager.h" />
     <ClInclude Include="CEntityTile.h" />
     <ClInclude Include="CEntityTire.h" />

@@ -24,7 +24,6 @@ public:
 	void UpdateTurn();
 	void OnControllerButton(const SDL_ControllerButtonEvent sdlEvent);
 
-
 	b2Vec2 GetLateralVelocity();
 	b2Vec2 GetForwardVelocity();
 

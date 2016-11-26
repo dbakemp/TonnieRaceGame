@@ -7,6 +7,7 @@
 #include "CEntity.h"
 #include "CEngine.h"
 #include "CEntityTire.h"
+#include "CEntityCheckpoint.h"
 #include <vector>
 #include <Box2D\Box2D.h>
 
@@ -24,9 +25,13 @@ public:
 	std::vector<CEntityTire*> tires;
 	void OnControllerAxis(const SDL_ControllerAxisEvent sdlEvent);
 	void toggleFPSCounter(CEngine * engine);
+	void CollisionBegin(CEntity* collider) override;
+	void CollisionEnd(CEntity* collider) override;
+	void ProcessCheckpoint(CEntityCheckpoint* checkpoint);
 
 	SDL_Texture* spriteSheet;
 	SDL_Rect srcRect;
+	int currentCheckpoint;
 private:
 	CEngine* engine;
 };

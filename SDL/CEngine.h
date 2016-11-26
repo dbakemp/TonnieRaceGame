@@ -10,6 +10,7 @@ class CInputManager;
 class CEntityManager;
 class CBox2DManager;
 class CStateManager;
+class CCollisionHelper;
 class CCamera;
 
 class CEngine
@@ -26,6 +27,7 @@ public:
 	SDL_Renderer* renderer;
 	b2World* world;
 	MusicHelper* musicHelper;
+	CCollisionHelper* collisionHelper;
 	bool running;
 	bool showFPSCounter;
 	int fpsCounter;
