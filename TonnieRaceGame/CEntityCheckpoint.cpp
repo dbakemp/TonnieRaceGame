@@ -3,8 +3,9 @@
 #include "CDebugLogger.h"
 #include "Box2DUtils.h"
 
-CEntityCheckpoint::CEntityCheckpoint(CEngine* engine, b2Vec2* start, b2Vec2* end, int index) : CEntity(engine), IDrawListener(engine), IBox2DListener(engine)
+CEntityCheckpoint::CEntityCheckpoint(CEngine* engine, b2Vec2* start, b2Vec2* end, int index) : CEntity(engine), IDrawListener(engine), IBox2DListener(engine), IInputListener(engine)
 {
+	visible = false;
 	this->SetType(Type::CHECKPOINT);
 	this->checkpointIndex = index;
 
@@ -30,7 +31,8 @@ CEntityCheckpoint::CEntityCheckpoint(CEngine* engine, b2Vec2* start, b2Vec2* end
 
 void CEntityCheckpoint::Draw(SDL_Renderer * renderer)
 {
-	//Box2DUtils::DrawBody(renderer, body, engine->camera, 0, 0, 0, 0, 0, 0, 255, 255, false);
+	if (!visible) { return; }
+	Box2DUtils::DrawBody(renderer, body, engine->camera, 0, 0, 0, 0, 0, 0, 255, 255, false);
 }
 
 void CEntityCheckpoint::Update()
@@ -50,4 +52,18 @@ void CEntityCheckpoint::CollisionBegin(CEntity* collider)
 
 void CEntityCheckpoint::CollisionEnd(CEntity* collider)
 {
+}
+
+void CEntityCheckpoint::Input(SDL_Event * event)
+{
+	switch (event->type)
+	{
+	case SDL_KEYDOWN:
+		switch (event->key.keysym.sym)
+		{
+		case SDLK_f:
+			visible = !visible;
+			break;
+		}
+	}
 }

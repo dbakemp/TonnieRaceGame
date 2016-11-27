@@ -17,6 +17,7 @@ CEntityCar::CEntityCar(CEngine* engine, CMap* map) : CEntity(engine), IDrawListe
 	this->SetType(Type::CAR);
 	this->currentCheckpoint = -1;
 	this->currentLap = 0;
+	this->debugVisible = false;
 
 	SDL_Surface* texture = IMG_Load("Resources/Images/spritesheet_vehicles.png");
 	this->spriteSheet = SDL_CreateTextureFromSurface(engine->renderer, texture);
@@ -94,7 +95,9 @@ void CEntityCar::Draw(SDL_Renderer* renderer)
 	SDL_Rect dstrect = { ((aabb.upperBound.x + aabb.lowerBound.x)/2 * 5)-engine->camera->posX-(srcRect.w/2), ((aabb.upperBound.y + aabb.lowerBound.y) / 2 * 5) - engine->camera->posY - (srcRect.h / 2), 41, 66 };
 
 	SDL_RenderCopyEx(engine->renderer, spriteSheet, &srcRect, &dstrect, angle, &center, SDL_FLIP_VERTICAL);
-	//Box2DUtils::DrawBody(renderer, body, engine->camera, 0, 0, 0, 0, 0, 0, 255, 255, false);
+	
+	if (!debugVisible) { return; }
+	Box2DUtils::DrawBody(renderer, body, engine->camera, 0, 0, 0, 0, 0, 0, 255, 255, false);
 }
 
 void CEntityCar::Input(SDL_Event* event)
@@ -109,14 +112,7 @@ void CEntityCar::Input(SDL_Event* event)
 		case SDLK_d: controlState |= InputDirections::RIGHT;
 			break;
 		case SDLK_f: 
-			if (engine->showFPSCounter)
-			{
-				engine->showFPSCounter = false;
-			}
-			else
-			{
-				engine->showFPSCounter = true;
-			}
+			debugVisible = !debugVisible;
 			break;
 		}
 		break;

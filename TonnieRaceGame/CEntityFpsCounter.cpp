@@ -2,7 +2,7 @@
 
 CEntityFpsCounter::CEntityFpsCounter(CEngine * engine, TTF_Font * font) : CEntity(engine), IDrawListener(engine), IInputListener(engine)
 {
-	visible = true;
+	visible = false;
 	this->engine = engine;
 	this->font = font;
 }

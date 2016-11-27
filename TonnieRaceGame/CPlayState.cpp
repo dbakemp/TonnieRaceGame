@@ -52,7 +52,7 @@ void CPlayState::init(CEngine* engine)
 	CEntityLapCounter* lapCounter = new CEntityLapCounter(engine, fpsFont);
 	lapCounter->SetLapCountable(car);
 
-	engine->musicHelper->playTrack("music\\boerharms.mp3", true);
+	engine->musicHelper->playTrack("music\\beep.mp3", true);
 }
 
 void CPlayState::clean()

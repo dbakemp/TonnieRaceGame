@@ -5,7 +5,7 @@
 
 CEntityBuild::CEntityBuild(CEngine * engine, TTF_Font * font) : CEntity(engine), IDrawListener(engine), IInputListener(engine)
 {
-	visible = true;
+	visible = false;
 	tm localTime;
 	std::chrono::system_clock::time_point t = std::chrono::system_clock::now();
 	time_t now = std::chrono::system_clock::to_time_t(t);

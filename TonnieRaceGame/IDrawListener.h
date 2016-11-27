@@ -17,6 +17,7 @@ public:
 	TTF_Font* font;
 	std::string text;
 	bool visible;
+	bool debugVisible;
 private:
 	CEngine* engine;
 };
