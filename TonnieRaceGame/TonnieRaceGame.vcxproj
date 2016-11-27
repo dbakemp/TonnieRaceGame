@@ -80,8 +80,8 @@
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
-      <AdditionalLibraryDirectories>./lib/Box2D;./lib/SDL2;./lib/SDL2_gfx;../Bass;../Bass/c;./lib/SDL2_ttf;./lib/SDL2_image;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>Box2D.lib;SDL2.lib;SDL2_gfx.lib;SDL2main.lib;bass.lib;SDL2_image.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>./lib/Box2D;./lib/SDL2;./lib/SDL2_gfx;./lib/LibCurl;../Bass;../Bass/c;./lib/SDL2_ttf;./lib/SDL2_image;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>Box2D.lib;SDL2.lib;SDL2_gfx.lib;SDL2main.lib;bass.lib;SDL2_image.lib;SDL2_ttf.lib;libcurl.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>copy "$(SolutionDir)TonnieRaceGame\lib\SDL2_ttf\SDL2_ttf.dll" "$(TargetDir)"
@@ -112,10 +112,10 @@ copy "$(SolutionDir)TonnieRaceGame\lib\Bass\bass.dll" "$(TargetDir)"
       <AdditionalIncludeDirectories>./include;%(AdditionalIncludeDirectories);./c;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <AdditionalLibraryDirectories>./lib/Box2D;./lib/SDL2;%(AdditionalLibraryDirectories);./Bass</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>./lib/Box2D;./lib/SDL2;./lib/libcurl%(AdditionalLibraryDirectories);./Bass;</AdditionalLibraryDirectories>
     </Link>
     <Link>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2test.lib;Box2D.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2test.lib;Box2D.lib;libcurl.lib%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Console</SubSystem>
     </Link>
   </ItemDefinitionGroup>
