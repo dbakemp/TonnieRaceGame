@@ -1,8 +1,9 @@
 #include "CEntityLapCounter.h"
+#include "CDrawManager.h"
 #include <string.h>
 #include "CMap.h"
 
-CEntityLapCounter::CEntityLapCounter(CEngine* engine, TTF_Font* font) : CEntity(engine), IDrawListener(engine)
+CEntityLapCounter::CEntityLapCounter(CEngine* engine, TTF_Font* font) : CEntity(engine), IDrawListener(engine, (int)CDrawManager::Layers::UI)
 {
 	this->font = font;
 	this->engine = engine;

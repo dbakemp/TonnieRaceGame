@@ -4,6 +4,7 @@
 #include "CDeltaHelper.h"
 #include "CStateManager.h"
 #include "Box2DUtils.h"
+#include "CDrawManager.h"
 #include "CMap.h"
 #include <iostream>
 #include <string>
@@ -14,7 +15,7 @@
 #define RADTODEG 57.295779513082320876f
 #endif
 
-CEntityCar::CEntityCar(CEngine* engine, CMap* map) : CEntity(engine), IDrawListener(engine), IInputListener(engine), IBox2DListener(engine)
+CEntityCar::CEntityCar(CEngine* engine, CMap* map) : CEntity(engine), IDrawListener(engine, (int)CDrawManager::Layers::Object), IInputListener(engine), IBox2DListener(engine)
 {
 	this->SetType(Type::CAR);
 	this->currentCheckpoint = -1;
@@ -53,24 +54,28 @@ CEntityCar::CEntityCar(CEngine* engine, CMap* map) : CEntity(engine), IDrawListe
 	jointDef.localAnchorB.SetZero();
 
 	CEntityTire* tire = new CEntityTire(engine, map);
+	tire->ChangeZIndex(zIndex-1);
 	jointDef.bodyB = tire->body;
 	jointDef.localAnchorA.Set(0.5 + xPos, 1.75f + yPos);
 	engine->world->CreateJoint(&jointDef);
 	tires.push_back(tire);
 
 	tire = new CEntityTire(engine, map);
+	tire->ChangeZIndex(zIndex - 1);
 	jointDef.bodyB = tire->body;
 	jointDef.localAnchorA.Set(7.5 + xPos, 1.75f + yPos);
 	engine->world->CreateJoint(&jointDef);
 	tires.push_back(tire);
 
 	tire = new CEntityTire(engine, map);
+	tire->ChangeZIndex(zIndex - 1);
 	jointDef.bodyB = tire->body;
 	jointDef.localAnchorA.Set(0.5 + xPos, 10.5f + yPos);
 	flJoint = static_cast<b2RevoluteJoint*>(engine->world->CreateJoint(&jointDef));
 	tires.push_back(tire);
 
 	tire = new CEntityTire(engine, map);
+	tire->ChangeZIndex(zIndex - 1);
 	jointDef.bodyB = tire->body;
 	jointDef.localAnchorA.Set(7.5 + xPos, 10.5f + yPos);
 	frJoint = static_cast<b2RevoluteJoint*>(engine->world->CreateJoint(&jointDef));

@@ -37,7 +37,7 @@ CEngine::CEngine()
 	deltaHelper = new CDeltaHelper();
 
 	SDL_Init(SDL_INIT_EVERYTHING);
-	window = SDL_CreateWindow("RaceGame", 100, 100, windowWidth, windowHeight, SDL_WINDOW_SHOWN);
+	window = SDL_CreateWindow("RaceGame", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, windowWidth, windowHeight, SDL_WINDOW_SHOWN);
 	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 
 	SDL_GameController* controller = NULL;

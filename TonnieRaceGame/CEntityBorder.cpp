@@ -1,7 +1,8 @@
 #include "CEntityBorder.h"
 #include "Box2DUtils.h"
+#include "CDrawManager.h"
 
-CEntityBorder::CEntityBorder(CEngine* engine, p2t::Triangle* triangle) : CEntity(engine), IDrawListener(engine), IBox2DListener(engine), IInputListener(engine)
+CEntityBorder::CEntityBorder(CEngine* engine, p2t::Triangle* triangle) : CEntity(engine), IDrawListener(engine, (int)CDrawManager::Layers::Object), IBox2DListener(engine), IInputListener(engine)
 {
 	bodyDef.type = b2_staticBody;
 	body = engine->world->CreateBody(&bodyDef);
