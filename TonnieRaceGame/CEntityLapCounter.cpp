@@ -1,5 +1,6 @@
 #include "CEntityLapCounter.h"
 #include <string.h>
+#include "CMap.h"
 
 CEntityLapCounter::CEntityLapCounter(CEngine* engine, TTF_Font* font) : CEntity(engine), IDrawListener(engine)
 {
@@ -14,7 +15,7 @@ CEntityLapCounter::~CEntityLapCounter()
 
 void CEntityLapCounter::Update()
 {
-	text = "Lap:" + std::to_string(lapCountable->currentLap) + "/3 (Checkpoint: "+std::to_string(lapCountable->currentCheckpoint)+")";
+	text = "Lap:" + std::to_string(lapCountable->currentLap+1) + "/" + std::to_string(engine->currentMap->laps);
 }
 
 void CEntityLapCounter::Draw(SDL_Renderer* renderer)

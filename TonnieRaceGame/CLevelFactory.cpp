@@ -144,7 +144,14 @@ void CLevelFactory::CreateCheckpoints(Json::Value * root)
 	b2Vec2* end = new b2Vec2(((*root)["polyline"][1].get("x", 0).asDouble() + xPos) / scale, ((*root)["polyline"][1].get("y", 0).asDouble() + yPos) / scale);
 	int index = (*root).get("properties", "").get("index", 0).asInt();
 
-	new CEntityCheckpoint(this->engine, start, end, index);
+	bool isFinish = (*root).get("properties", "").get("isFinish", false).asBool();
+
+	if (isFinish) {
+		map->laps = (*root).get("properties", "").get("laps", 3).asInt();
+	}
+
+	map->checkpoints++;
+	new CEntityCheckpoint(this->engine, start, end, index, isFinish);
 }
 
 void CLevelFactory::CreateSpawns(Json::Value* root)

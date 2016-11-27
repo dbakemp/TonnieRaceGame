@@ -14,7 +14,7 @@
 class CEntityCheckpoint : public CEntity, public IDrawListener, public IBox2DListener, public IInputListener
 {
 public:
-	CEntityCheckpoint(CEngine* engine, b2Vec2* start, b2Vec2* end, int index);
+	CEntityCheckpoint(CEngine* engine, b2Vec2* start, b2Vec2* end, int index, bool finish);
 	void Draw(SDL_Renderer* renderer);
 	void Update();
 	void Create(b2World* world);
@@ -22,6 +22,7 @@ public:
 	void CollisionEnd(CEntity* collider) override;
 	void Input(SDL_Event* event);
 	int checkpointIndex;
+	bool isFinish;
 private:
 	CEngine* engine;
 };

@@ -630,12 +630,14 @@
                  "properties":
                     {
                      "index":0,
-                     "isFinish":true
+                     "isFinish":true,
+                     "laps":3
                     },
                  "propertytypes":
                     {
                      "index":"int",
-                     "isFinish":"bool"
+                     "isFinish":"bool",
+                     "laps":"int"
                     },
                  "rotation":0,
                  "type":"checkpoint",

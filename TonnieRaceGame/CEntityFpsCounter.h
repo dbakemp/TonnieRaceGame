@@ -16,8 +16,10 @@ public:
 	void Draw(SDL_Renderer* renderer);
 	void Input(SDL_Event* event);
 private:
-	CEngine* engine;
-	double measurement;
+	CEngine* engine; 
+	int tickindex = 0;
+	int ticksum = 0;
+	int ticklist[1000];
 };
 
 #endif

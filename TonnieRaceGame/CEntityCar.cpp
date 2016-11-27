@@ -175,7 +175,15 @@ void CEntityCar::ProcessCheckpoint(CEntityCheckpoint * checkpoint)
 {
 	if (checkpoint->checkpointIndex == currentCheckpoint + 1) {
 		currentCheckpoint = checkpoint->checkpointIndex;
-		CDebugLogger::PrintDebug("Passed checkpoint "+ std::to_string(currentCheckpoint));
+	}
+	else if (currentCheckpoint+1 == engine->currentMap->checkpoints && checkpoint->isFinish) {
+		if (currentLap+1 == engine->currentMap->laps) {
+			CDebugLogger::PrintDebug("Race finish here");
+		}
+		else {
+			currentCheckpoint = checkpoint->checkpointIndex;
+			currentLap++;
+		}
 	}
 }
 

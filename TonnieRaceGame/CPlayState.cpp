@@ -38,6 +38,7 @@ void CPlayState::init(CEngine* engine)
 
 	CLevelFactory* factory = new CLevelFactory(engine);
 	factory->LoadMap("Resources/Maps/map1.json");
+	engine->currentMap = factory->map;
 
 	camera = new CCamera();
 	camera->windowHeight = 720;

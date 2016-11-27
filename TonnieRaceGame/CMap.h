@@ -24,6 +24,9 @@ public:
 	int tileheight;
 	int tilewidth;
 
+	int laps;
+	int checkpoints;
+
 	int spawnX;
 	int spawnY;
 private:

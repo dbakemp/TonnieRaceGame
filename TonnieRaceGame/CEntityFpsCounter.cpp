@@ -5,7 +5,6 @@
 CEntityFpsCounter::CEntityFpsCounter(CEngine * engine, TTF_Font * font) : CEntity(engine), IDrawListener(engine), IInputListener(engine)
 {
 	visible = false;
-	measurement = 0;
 	this->engine = engine;
 	this->font = font;
 }
@@ -16,9 +15,13 @@ CEntityFpsCounter::~CEntityFpsCounter()
 
 void CEntityFpsCounter::Update()
 {
-	float smoothing = 0.9; // larger=more smoothing
-	measurement = (measurement * smoothing) + ((1.0/engine->deltaHelper->delta) * (1.0 - smoothing));
-	text = "FPS: "+std::to_string(measurement);
+	ticksum -= ticklist[tickindex];  /* subtract value falling off */
+	ticksum += 1.0/engine->deltaHelper->delta;              /* add new value */
+	ticklist[tickindex] = 1.0 / engine->deltaHelper->delta;   /* save new value so it can be subtracted later */
+	if (++tickindex == 1000)    /* inc buffer index */
+		tickindex = 0;
+
+	text = "FPS: "+std::to_string(ticksum / 1000);
 }
 
 void CEntityFpsCounter::Draw(SDL_Renderer * renderer)

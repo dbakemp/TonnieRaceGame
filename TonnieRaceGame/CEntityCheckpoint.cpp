@@ -3,11 +3,12 @@
 #include "CDebugLogger.h"
 #include "Box2DUtils.h"
 
-CEntityCheckpoint::CEntityCheckpoint(CEngine* engine, b2Vec2* start, b2Vec2* end, int index) : CEntity(engine), IDrawListener(engine), IBox2DListener(engine), IInputListener(engine)
+CEntityCheckpoint::CEntityCheckpoint(CEngine* engine, b2Vec2* start, b2Vec2* end, int index, bool finish) : CEntity(engine), IDrawListener(engine), IBox2DListener(engine), IInputListener(engine)
 {
 	visible = false;
 	this->SetType(Type::CHECKPOINT);
 	this->checkpointIndex = index;
+	this->isFinish = finish;
 
 	bodyDef.type = b2_staticBody;
 	b2Vec2 vertices[8];
