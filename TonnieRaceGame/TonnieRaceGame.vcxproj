@@ -172,6 +172,7 @@ copy "$(SolutionDir)TonnieRaceGame\lib\Bass\bass.dll" "$(TargetDir)"
     <ClCompile Include="CPlayState.cpp" />
     <ClCompile Include="CStateManager.cpp" />
     <ClCompile Include="CHelpState.cpp" />
+    <ClCompile Include="CDeltaHelper.cpp" />
     <ClCompile Include="IBox2DListener.cpp" />
     <ClCompile Include="IDrawListener.cpp" />
     <ClCompile Include="IEntityListener.cpp" />
@@ -214,6 +215,7 @@ copy "$(SolutionDir)TonnieRaceGame\lib\Bass\bass.dll" "$(TargetDir)"
     <ClInclude Include="CPlayState.h" />
     <ClInclude Include="CStateManager.h" />
     <ClInclude Include="CHelpState.h" />
+    <ClInclude Include="CDeltaHelper.h" />
     <ClInclude Include="IBox2DListener.h" />
     <ClInclude Include="IDrawListener.h" />
     <ClInclude Include="IEntityListener.h" />

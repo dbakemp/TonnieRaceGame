@@ -192,6 +192,9 @@
     <ClCompile Include="CEntityBuild.cpp">
       <Filter>Source Files\Entities\HUD</Filter>
     </ClCompile>
+    <ClCompile Include="CDeltaHelper.cpp">
+      <Filter>Source Files\Helpers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CEntity.h">
@@ -283,6 +286,9 @@
     </ClInclude>
     <ClInclude Include="CEntityBuild.h">
       <Filter>Header Files\Entities\HUD</Filter>
+    </ClInclude>
+    <ClInclude Include="CDeltaHelper.h">
+      <Filter>Header Files\Helpers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

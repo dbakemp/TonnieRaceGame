@@ -1,6 +1,7 @@
 #include "CEntityCar.h"
 #include "CEntityTire.h"
 #include "CDebugLogger.h"
+#include "CDeltaHelper.h"
 #include "Box2DUtils.h"
 #include "CMap.h"
 #include <iostream>
@@ -182,10 +183,10 @@ void CEntityCar::ProcessCheckpoint(CEntityCheckpoint * checkpoint)
 void CEntityCar::Update()
 {
 	//control steering
-	float lockAngle = 60 * DEGTORAD;
-	float turnSpeedPerSec = 250 * DEGTORAD;//from lock to lock in 0.5 sec
-	float turnPerTimeStep = turnSpeedPerSec / 60.0f;
-	float desiredAngle = 0;
+	double lockAngle = 50 * DEGTORAD;
+	double turnSpeedPerSec = 250 * DEGTORAD;
+	double turnPerTimeStep = turnSpeedPerSec / (1.0/engine->deltaHelper->delta);
+	double desiredAngle = 0;
 
 	switch (controlState)
 	{
@@ -195,10 +196,10 @@ void CEntityCar::Update()
 		break;
 	}
 
-	float angleNow = flJoint->GetJointAngle();
-	float angleToTurn = desiredAngle - angleNow;
+	double angleNow = flJoint->GetJointAngle();
+	double angleToTurn = desiredAngle - angleNow;
 	angleToTurn = b2Clamp(angleToTurn, -turnPerTimeStep, turnPerTimeStep);
-	float newAngle = angleNow + angleToTurn;
+	double newAngle = angleNow + (angleToTurn);
 	flJoint->SetLimits(newAngle, newAngle);
 	frJoint->SetLimits(newAngle, newAngle);
 }

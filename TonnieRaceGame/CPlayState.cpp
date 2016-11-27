@@ -9,6 +9,7 @@
 #include "CEntityBuild.h"
 #include "CInputManager.h"
 #include "CEntityManager.h"
+#include "CDeltaHelper.h"
 #include "CDrawManager.h"
 #include "CLevelFactory.h"
 #include "CCollisionHelper.h"
@@ -92,7 +93,7 @@ void CPlayState::update(CEngine* engine)
 	SDL_RenderClear(engine->renderer);
 
 	engine->entityManager->Tick();
-	engine->world->Step(0.016f, 8, 3);
+	engine->world->Step(engine->deltaHelper->delta, 8, 3);
 	camera->Update();
 
 	engine->drawManager->Tick(engine->renderer);

@@ -10,6 +10,7 @@ class CInputManager;
 class CEntityManager;
 class CBox2DManager;
 class CStateManager;
+class CDeltaHelper;
 class CCollisionHelper;
 class CCamera;
 
@@ -22,6 +23,7 @@ public:
 	CEntityManager* entityManager;
 	CBox2DManager* box2DManager;
 	CStateManager* stateManager;
+	CDeltaHelper* deltaHelper;
 	CCamera* camera;
 	SDL_Window* window;
 	SDL_Renderer* renderer;

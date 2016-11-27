@@ -5,6 +5,7 @@
 #include "CCollisionHelper.h"
 #include "CBox2DManager.h"
 #include "CEntitySmallSquare.h"
+#include "CDeltaHelper.h"
 #include "CStateManager.h"
 #include "CCamera.h"
 #include "CDebugLogger.h"
@@ -31,8 +32,7 @@ CEngine::CEngine()
 	entityManager = new CEntityManager();
 	box2DManager = new CBox2DManager();
 	stateManager = new CStateManager();
-
-	srand(time(NULL));
+	deltaHelper = new CDeltaHelper();
 
 	SDL_Init(SDL_INIT_EVERYTHING);
 	window = SDL_CreateWindow("RaceGame", 100, 100, windowWidth, windowHeight, SDL_WINDOW_SHOWN);
@@ -69,31 +69,12 @@ void CEngine::Tick()
 {
 	running = true;
 
-	double nextFrame = static_cast<double>(SDL_GetTicks());
-	clock_t current_ticks, delta_ticks;
-	clock_t fps = 0;
-
 	while (running)
 	{
-		current_ticks = clock();
+		deltaHelper->SetDelta();
+
 		stateManager->getCurrentState()->update(this);
 
 		SDL_RenderPresent(renderer);
-
-		int delay = static_cast<Uint32>(nextFrame - static_cast<double>(SDL_GetTicks()));
-		if (delay > 0)
-		{
-			SDL_Delay(delay);
-		}
-		nextFrame += 1000.0 / 60;
-
-		delta_ticks = clock() - current_ticks; //the time, in ms, that took to render the scene
-		if (delta_ticks > 0)
-			fps = CLOCKS_PER_SEC / delta_ticks;
-
-		this->fpsCounter = fps;
-	
 	}
-
-	
 }

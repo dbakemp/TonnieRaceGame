@@ -1,8 +1,11 @@
 #include "CEntityFpsCounter.h"
+#include "CDeltaHelper.h"
+
 
 CEntityFpsCounter::CEntityFpsCounter(CEngine * engine, TTF_Font * font) : CEntity(engine), IDrawListener(engine), IInputListener(engine)
 {
 	visible = false;
+	measurement = 0;
 	this->engine = engine;
 	this->font = font;
 }
@@ -13,7 +16,9 @@ CEntityFpsCounter::~CEntityFpsCounter()
 
 void CEntityFpsCounter::Update()
 {
-	text = "FPS: "+std::to_string(engine->fpsCounter);
+	float smoothing = 0.9; // larger=more smoothing
+	measurement = (measurement * smoothing) + ((1.0/engine->deltaHelper->delta) * (1.0 - smoothing));
+	text = "FPS: "+std::to_string(measurement);
 }
 
 void CEntityFpsCounter::Draw(SDL_Renderer * renderer)

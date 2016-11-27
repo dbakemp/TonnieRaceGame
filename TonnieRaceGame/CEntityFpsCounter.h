@@ -17,6 +17,7 @@ public:
 	void Input(SDL_Event* event);
 private:
 	CEngine* engine;
+	double measurement;
 };
 
 #endif

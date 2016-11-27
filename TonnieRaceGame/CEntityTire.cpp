@@ -1,5 +1,6 @@
 #include "CEntityTire.h"
 #include "Box2DUtils.h" 
+#include "CDeltaHelper.h" 
 #include "CMap.h"
 #include <SDL.h>
 #include <iostream>
@@ -106,7 +107,7 @@ void CEntityTire::Create(b2World* world)
 
 void CEntityTire::UpdateFriction()
 {
-	float maxLateralImpulse = 6.0f;
+	float maxLateralImpulse = engine->deltaHelper->delta * 1000;
 	b2Vec2 impulse = body->GetMass() * -GetLateralVelocity();
 	if (impulse.Length() > maxLateralImpulse)
 		impulse *= maxLateralImpulse / impulse.Length();
@@ -116,7 +117,7 @@ void CEntityTire::UpdateFriction()
 
 	b2Vec2 currentForwardNormal = GetForwardVelocity();
 	float currentForwardSpeed = currentForwardNormal.Normalize();
-	float dragForceMagnitude = -5 * currentForwardSpeed;
+	float dragForceMagnitude = -3 * currentForwardSpeed;
 	body->ApplyForce(dragForceMagnitude * currentForwardNormal, body->GetWorldCenter(), true);
 }
 
