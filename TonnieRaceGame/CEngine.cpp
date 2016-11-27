@@ -17,6 +17,7 @@
 #include "SDL_image.h"
 #include "SDL_ttf.h"
 #include "CEntityCar.h"
+#include "AdHelper.h"
 
 CEngine::CEngine()
 {
@@ -25,6 +26,7 @@ CEngine::CEngine()
 	fpsCounter = 1;
 	showFPSCounter = true;
 
+	AdHelper* adHelper = new AdHelper();
 	musicHelper = new MusicHelper();
 	collisionHelper = new CCollisionHelper();
 	drawManager = new CDrawManager();

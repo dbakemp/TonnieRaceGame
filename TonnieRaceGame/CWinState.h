@@ -5,6 +5,8 @@
 #include "SDL.h"
 #include "CGameState.h"
 
+#include "SDL_ttf.h"
+
 class CWinState : public CGameState
 {
 public:
@@ -21,6 +23,8 @@ public:
 
 	CWinState(CEngine* engine);
 
+
 private:
+	TTF_Font* font;
 };
 #endif

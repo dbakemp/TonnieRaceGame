@@ -5,6 +5,14 @@ $query = "SELECT * FROM Ads";
 if ($result = $mysqli->query($query))
 {
 
+    $char = array();
+
+
+    $arr["book"] = "Alice in Wonderland";
+    $arr["year"] = "1865";
+    $arr["characters"] = "";
+
+
     /* fetch associative array */
     while ($row = $result->fetch_assoc())
     {
@@ -16,5 +24,5 @@ if ($result = $mysqli->query($query))
     }
 }
 
-echo '<pre>';
-var_dump($arr);
+//echo '<pre>';
+//var_dump($arr);

@@ -198,6 +198,9 @@
     <ClCompile Include="CWinState.cpp">
       <Filter>Source Files\States</Filter>
     </ClCompile>
+    <ClCompile Include="AdHelper.cpp">
+      <Filter>Source Files\Helpers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CEntity.h">
@@ -295,6 +298,9 @@
     </ClInclude>
     <ClInclude Include="CWinState.h">
       <Filter>Header Files\States</Filter>
+    </ClInclude>
+    <ClInclude Include="AdHelper.h">
+      <Filter>Header Files\Helpers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

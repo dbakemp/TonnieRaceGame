@@ -15,6 +15,7 @@ void CWinState::init()
 
 void CWinState::init(CEngine* engine)
 {
+	font = TTF_OpenFont("Resources/Fonts/opensans.ttf", 120);
 	engine->musicHelper->stopAll();
 	engine->musicHelper->playTrack("music\\daargaatze.mp3", true);
 }
@@ -48,7 +49,7 @@ void CWinState::update(CEngine* engine)
 		}
 	}
 
-	TTF_Font* font = TTF_OpenFont("Resources/Fonts/opensans.ttf", 120);
+	
 	SDL_Surface* surface = TTF_RenderText_Solid(font, "WINNER", { 255, 255, 255 });
 	SDL_Texture* texture = SDL_CreateTextureFromSurface(engine->renderer, surface);
 

@@ -146,6 +146,7 @@ copy "$(SolutionDir)TonnieRaceGame\lib\Bass\bass.dll" "$(TargetDir)"
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AdHelper.cpp" />
     <ClCompile Include="Box2DUtils.cpp" />
     <ClCompile Include="CBox2DManager.cpp" />
     <ClCompile Include="CCamera.cpp" />
@@ -189,6 +190,7 @@ copy "$(SolutionDir)TonnieRaceGame\lib\Bass\bass.dll" "$(TargetDir)"
     <ClCompile Include="CScoresState.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AdHelper.h" />
     <ClInclude Include="Box2DUtils.h" />
     <ClInclude Include="CBox2DManager.h" />
     <ClInclude Include="CCamera.h" />
