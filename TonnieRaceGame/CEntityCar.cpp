@@ -17,7 +17,7 @@
 CEntityCar::CEntityCar(CEngine* engine, CMap* map) : CEntity(engine), IDrawListener(engine), IInputListener(engine), IBox2DListener(engine)
 {
 	this->SetType(Type::CAR);
-	this->currentCheckpoint = 31;
+	this->currentCheckpoint = -1;
 	this->currentLap = 0;
 	this->debugVisible = false;
 
