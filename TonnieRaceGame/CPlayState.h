@@ -18,7 +18,6 @@ public:
 
 	void handleEvents(CEngine* engine);
 	void update(CEngine* engine);
-	void drawFPSCounter(CEngine* engine);
 	void draw(CEngine* engine);
 
 	CPlayState(CEngine* engine);

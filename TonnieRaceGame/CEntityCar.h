@@ -25,7 +25,6 @@ public:
 	b2RevoluteJoint *flJoint, *frJoint;
 	std::vector<CEntityTire*> tires;
 	void OnControllerAxis(const SDL_ControllerAxisEvent sdlEvent);
-	void toggleFPSCounter(CEngine * engine);
 	void CollisionBegin(CEntity* collider) override;
 	void CollisionEnd(CEntity* collider) override;
 	void ProcessCheckpoint(CEntityCheckpoint* checkpoint);

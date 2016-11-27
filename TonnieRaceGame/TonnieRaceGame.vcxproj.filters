@@ -67,6 +67,12 @@
     <Filter Include="Source Files\States">
       <UniqueIdentifier>{d012645a-d60b-46f7-b8e6-7fbdaf1e9573}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Entities\HUD">
+      <UniqueIdentifier>{a896c911-92a9-456c-8394-30b7ec90be8a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Entities\HUD">
+      <UniqueIdentifier>{36f2b0ee-8ec8-4394-bf32-78da6d95b7d6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -178,7 +184,13 @@
       <Filter>Source Files\Helpers</Filter>
     </ClCompile>
     <ClCompile Include="CEntityLapCounter.cpp">
-      <Filter>Source Files\Entities</Filter>
+      <Filter>Source Files\Entities\HUD</Filter>
+    </ClCompile>
+    <ClCompile Include="CEntityFpsCounter.cpp">
+      <Filter>Source Files\Entities\HUD</Filter>
+    </ClCompile>
+    <ClCompile Include="CEntityBuild.cpp">
+      <Filter>Source Files\Entities\HUD</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -260,11 +272,17 @@
     <ClInclude Include="CCollisionHelper.h">
       <Filter>Header Files\Helpers</Filter>
     </ClInclude>
-    <ClInclude Include="CEntityLapCounter.h">
-      <Filter>Header Files\Entities</Filter>
-    </ClInclude>
     <ClInclude Include="ILapCountable.h">
       <Filter>Header Files\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="CEntityFpsCounter.h">
+      <Filter>Header Files\Entities\HUD</Filter>
+    </ClInclude>
+    <ClInclude Include="CEntityLapCounter.h">
+      <Filter>Header Files\Entities\HUD</Filter>
+    </ClInclude>
+    <ClInclude Include="CEntityBuild.h">
+      <Filter>Header Files\Entities\HUD</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

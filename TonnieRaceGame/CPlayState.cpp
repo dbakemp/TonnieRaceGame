@@ -6,15 +6,15 @@
 #include "CEngine.h"
 #include "CEntityCar.h"
 #include "CEntitySmallSquare.h"
+#include "CEntityBuild.h"
 #include "CInputManager.h"
 #include "CEntityManager.h"
 #include "CDrawManager.h"
 #include "CLevelFactory.h"
 #include "CCollisionHelper.h"
 #include "CEntityLapCounter.h"
+#include "CEntityFpsCounter.h"
 #include "SDL_ttf.h"
-#include <iomanip>
-#include <ctime>
 
 
 void CPlayState::init()
@@ -47,6 +47,8 @@ void CPlayState::init(CEngine* engine)
 	CEntityCar* car = new CEntityCar(engine, factory->map);
 	camera->SetChild(car);
 
+	CEntityFpsCounter* fpsCounter = new CEntityFpsCounter(engine, fpsFont);
+	CEntityBuild* build = new CEntityBuild(engine, fpsFont);
 	CEntityLapCounter* lapCounter = new CEntityLapCounter(engine, fpsFont);
 	lapCounter->SetLapCountable(car);
 
@@ -94,57 +96,6 @@ void CPlayState::update(CEngine* engine)
 	camera->Update();
 
 	engine->drawManager->Tick(engine->renderer);
-
-	if (engine->showFPSCounter) drawFPSCounter(engine);
-	
-
-}
-
-void CPlayState::drawFPSCounter(CEngine* engine)
-{
-	string title = "FPS";
-	title.append(": ");
-	title.append(to_string(engine->fpsCounter));
-
-	const char* fileString = title.c_str();
-	
-	time_t t = time(0);   // get time now
-	struct tm * now = localtime(&t);
-
-	string dateString = "Development Build: ";
-	dateString.append(to_string(now->tm_mday));
-	dateString.append("-");
-	dateString.append(to_string(now->tm_mon + 1));
-	dateString.append("-");
-	dateString.append(to_string(now->tm_year + 1900));
-	dateString.append(" ");
-	dateString.append(to_string(now->tm_hour));
-	dateString.append(":");
-	dateString.append(to_string(now->tm_min));
-
-	const char* titleString = dateString.c_str();
-
-	TTF_Font* fpsFont = TTF_OpenFont("Resources/Fonts/opensans.ttf", 16);
-	SDL_Color color = { 255, 255, 255 };
-	SDL_Surface* surface = TTF_RenderText_Solid(fpsFont, fileString, color);
-	SDL_Surface* titleSurface = TTF_RenderText_Solid(fpsFont, titleString, color);
-	SDL_Texture* texture = SDL_CreateTextureFromSurface(engine->renderer, surface);
-	SDL_Texture* titleTexture = SDL_CreateTextureFromSurface(engine->renderer, titleSurface);
-
-
-	int texW = 0;
-	int texH = 0;
-	SDL_QueryTexture(texture, NULL, NULL, &texW, &texH);
-	SDL_Rect dstrect = { 10, 10, texW, texH };
-	SDL_QueryTexture(titleTexture, NULL, NULL, &texW, &texH);
-	SDL_Rect titleRect = { 1000, 700, texW, texH };
-
-	SDL_RenderCopy(engine->renderer, texture, NULL, &dstrect);
-	SDL_RenderCopy(engine->renderer, titleTexture, NULL, &titleRect);
-	SDL_RenderPresent(engine->renderer);
-
-	SDL_DestroyTexture(texture);
-	SDL_FreeSurface(surface);
 }
 
 void CPlayState::draw(CEngine* engine)

@@ -16,6 +16,7 @@ public:
 	~IDrawListener();
 	TTF_Font* font;
 	std::string text;
+	bool visible;
 private:
 	CEngine* engine;
 };
