@@ -66,7 +66,7 @@ void CHelpState::init(CEngine* engine)
 		fclose(file);
 	}
 
-	char *url = "http://localhost/marketing/uploads/20161127181139.png";
+	char *url = "http://www.timvanbeers.nl/20161127181139.png";
 	//char outfilename[FILENAME_MAX] = "C:\Users\Tim\Desktop\Desktop\School\bbb.png";
 	curl = curl_easy_init();
 	if (curl) {
@@ -78,6 +78,7 @@ void CHelpState::init(CEngine* engine)
 		/* always cleanup */
 		curl_easy_cleanup(curl);
 		fclose(fp);
+		cout << "Succesfully written image to file.";
 	}
 }
 
