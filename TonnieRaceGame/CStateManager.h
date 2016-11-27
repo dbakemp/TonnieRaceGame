@@ -14,6 +14,7 @@ enum EGameState
 	Playing,
 	Pause,
 	Credits,
+	Win,
 	Help,
 	Scores
 };

@@ -13,6 +13,7 @@ public:
 	~MusicHelper();
 
 	void playTrack(std::string file, bool loop);
+	void stopAll();
 
 private:
 	std::vector<HSTREAM> audioStreams;

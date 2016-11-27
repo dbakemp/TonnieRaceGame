@@ -2,6 +2,7 @@
 #include "CEntityTire.h"
 #include "CDebugLogger.h"
 #include "CDeltaHelper.h"
+#include "CStateManager.h"
 #include "Box2DUtils.h"
 #include "CMap.h"
 #include <iostream>
@@ -16,7 +17,7 @@
 CEntityCar::CEntityCar(CEngine* engine, CMap* map) : CEntity(engine), IDrawListener(engine), IInputListener(engine), IBox2DListener(engine)
 {
 	this->SetType(Type::CAR);
-	this->currentCheckpoint = -1;
+	this->currentCheckpoint = 31;
 	this->currentLap = 0;
 	this->debugVisible = false;
 
@@ -179,6 +180,7 @@ void CEntityCar::ProcessCheckpoint(CEntityCheckpoint * checkpoint)
 	else if (currentCheckpoint+1 == engine->currentMap->checkpoints && checkpoint->isFinish) {
 		if (currentLap+1 == engine->currentMap->laps) {
 			CDebugLogger::PrintDebug("Race finish here");
+			engine->stateManager->changeState(Win, engine);
 		}
 		else {
 			currentCheckpoint = checkpoint->checkpointIndex;

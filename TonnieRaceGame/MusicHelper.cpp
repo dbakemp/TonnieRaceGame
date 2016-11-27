@@ -34,3 +34,12 @@ void MusicHelper::playTrack(std::string file, bool loop)
 	audioStreams.push_back(streamHandle);
 	BASS_ChannelPlay(streamHandle, FALSE);
 }
+
+void MusicHelper::stopAll()
+{
+	for (HSTREAM stream : audioStreams) {
+		BASS_ChannelStop(stream);
+	}
+	audioStreams.clear();
+}
+
