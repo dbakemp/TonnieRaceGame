@@ -11,6 +11,7 @@
 #include "CDrawManager.h"
 #include "CLevelFactory.h"
 #include "CCollisionHelper.h"
+#include "CEntityLapCounter.h"
 #include "SDL_ttf.h"
 #include <iomanip>
 #include <ctime>
@@ -23,6 +24,9 @@ void CPlayState::init()
 
 void CPlayState::init(CEngine* engine)
 {
+	TTF_Init();
+	TTF_Font* fpsFont = TTF_OpenFont("Resources/Fonts/opensans.ttf", 16);
+
 	b2Vec2 gravity(0, 0);
 
 	engine->world = new b2World(gravity);
@@ -42,6 +46,9 @@ void CPlayState::init(CEngine* engine)
 
 	CEntityCar* car = new CEntityCar(engine, factory->map);
 	camera->SetChild(car);
+
+	CEntityLapCounter* lapCounter = new CEntityLapCounter(engine, fpsFont);
+	lapCounter->SetLapCountable(car);
 
 	engine->musicHelper->playTrack("music\\boerharms.mp3", true);
 }
@@ -114,11 +121,9 @@ void CPlayState::drawFPSCounter(CEngine* engine)
 	dateString.append(to_string(now->tm_hour));
 	dateString.append(":");
 	dateString.append(to_string(now->tm_min));
-	
 
 	const char* titleString = dateString.c_str();
 
-	TTF_Init();
 	TTF_Font* fpsFont = TTF_OpenFont("Resources/Fonts/opensans.ttf", 16);
 	SDL_Color color = { 255, 255, 255 };
 	SDL_Surface* surface = TTF_RenderText_Solid(fpsFont, fileString, color);
@@ -138,10 +143,8 @@ void CPlayState::drawFPSCounter(CEngine* engine)
 	SDL_RenderCopy(engine->renderer, titleTexture, NULL, &titleRect);
 	SDL_RenderPresent(engine->renderer);
 
-	TTF_CloseFont(fpsFont);
 	SDL_DestroyTexture(texture);
 	SDL_FreeSurface(surface);
-	TTF_Quit();
 }
 
 void CPlayState::draw(CEngine* engine)

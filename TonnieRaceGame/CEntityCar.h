@@ -4,6 +4,7 @@
 #include "IDrawListener.h"
 #include "IInputListener.h"
 #include "IBox2DListener.h"
+#include "ILapCountable.h"
 #include "CEntity.h"
 #include "CEngine.h"
 #include "CEntityTire.h"
@@ -13,7 +14,7 @@
 
 class CMap;
 
-class CEntityCar : public CEntity, public IDrawListener, public IInputListener, public IBox2DListener
+class CEntityCar : public CEntity, public IDrawListener, public IInputListener, public IBox2DListener, public ILapCountable
 {
 public:
 	CEntityCar(CEngine* engine, CMap* map);
@@ -31,7 +32,6 @@ public:
 
 	SDL_Texture* spriteSheet;
 	SDL_Rect srcRect;
-	int currentCheckpoint;
 private:
 	CEngine* engine;
 };
