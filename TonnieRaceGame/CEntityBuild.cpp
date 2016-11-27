@@ -1,9 +1,10 @@
 #include "CEntityBuild.h"
+#include "CDrawManager.h"
 #include <iomanip>
 #include <chrono>
 #include <sstream>
 
-CEntityBuild::CEntityBuild(CEngine * engine, TTF_Font * font) : CEntity(engine), IDrawListener(engine), IInputListener(engine)
+CEntityBuild::CEntityBuild(CEngine * engine, TTF_Font * font) : CEntity(engine), IDrawListener(engine, (int)CDrawManager::Layers::UI), IInputListener(engine)
 {
 	visible = false;
 	tm localTime;

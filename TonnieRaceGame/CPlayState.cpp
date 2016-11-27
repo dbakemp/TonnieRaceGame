@@ -40,9 +40,7 @@ void CPlayState::init(CEngine* engine)
 	factory->LoadMap("Resources/Maps/map1.json");
 	engine->currentMap = factory->map;
 
-	camera = new CCamera();
-	camera->windowHeight = 720;
-	camera->windowWidth = 1280;
+	camera = new CCamera(engine);
 
 	engine->camera = camera;
 

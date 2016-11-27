@@ -1,7 +1,8 @@
 #include "CEntityTile.h"
 #include "CCamera.h"
+#include "CDrawManager.h"
 
-CEntityTile::CEntityTile(CEngine* engine, CMap* map, int spriteNumber, int tileNumber) : CEntity(engine), IDrawListener(engine)
+CEntityTile::CEntityTile(CEngine* engine, CMap* map, int spriteNumber, int tileNumber) : CEntity(engine), IDrawListener(engine, (int)CDrawManager::Layers::Tile)
 {
 	this->engine = engine;
 

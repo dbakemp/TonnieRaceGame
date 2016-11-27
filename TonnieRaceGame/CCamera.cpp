@@ -2,13 +2,12 @@
 #include "CEntity.h"
 #include "IDrawListener.h"
 
-CCamera::CCamera()
+CCamera::CCamera(CEngine* engine)
 {
 	posX = -500;
 	posY = -500;
-	windowHeight = 720;
-	windowWidth = 1280;
 	child = nullptr;
+	this->engine = engine;
 }
 
 void CCamera::Update()
@@ -26,8 +25,8 @@ void CCamera::Update()
 
 	if (child != nullptr)
 	{
-		posX += (((aabb.lowerBound.x * 5) - ((windowWidth - ((aabb.upperBound.x - aabb.lowerBound.x) * 5)) / 2) - posX) / 8);
-		posY += (((aabb.lowerBound.y * 5) - ((windowHeight - ((aabb.upperBound.y - aabb.lowerBound.y) * 5)) / 2) - posY) / 8);
+		posX += (((aabb.lowerBound.x * 5) - ((engine->windowWidth - ((aabb.upperBound.x - aabb.lowerBound.x) * 5)) / 2) - posX) / 8);
+		posY += (((aabb.lowerBound.y * 5) - ((engine->windowHeight - ((aabb.upperBound.y - aabb.lowerBound.y) * 5)) / 2) - posY) / 8);
 	}
 }
 

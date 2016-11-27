@@ -1,8 +1,8 @@
 #include "CEntityFpsCounter.h"
 #include "CDeltaHelper.h"
+#include "CDrawManager.h"
 
-
-CEntityFpsCounter::CEntityFpsCounter(CEngine * engine, TTF_Font * font) : CEntity(engine), IDrawListener(engine), IInputListener(engine)
+CEntityFpsCounter::CEntityFpsCounter(CEngine * engine, TTF_Font * font) : CEntity(engine), IDrawListener(engine, (int)CDrawManager::Layers::UI), IInputListener(engine)
 {
 	visible = false;
 	this->engine = engine;

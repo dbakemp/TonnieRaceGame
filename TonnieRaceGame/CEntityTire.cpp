@@ -1,11 +1,12 @@
 #include "CEntityTire.h"
 #include "Box2DUtils.h" 
 #include "CDeltaHelper.h" 
+#include "CDrawManager.h" 
 #include "CMap.h"
 #include <SDL.h>
 #include <iostream>
 
-CEntityTire::CEntityTire(CEngine* engine, CMap* map) : CEntity(engine), IDrawListener(engine), IInputListener(engine), IBox2DListener(engine)
+CEntityTire::CEntityTire(CEngine* engine, CMap* map) : CEntity(engine), IDrawListener(engine, (int)CDrawManager::Layers::Object), IInputListener(engine), IBox2DListener(engine)
 {
 	double xPos = map->spawnX;
 	double yPos = map->spawnY;

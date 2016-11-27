@@ -2,8 +2,9 @@
 #include "CEntityCar.h"
 #include "CDebugLogger.h"
 #include "Box2DUtils.h"
+#include "CDrawManager.h"
 
-CEntityCheckpoint::CEntityCheckpoint(CEngine* engine, b2Vec2* start, b2Vec2* end, int index, bool finish) : CEntity(engine), IDrawListener(engine), IBox2DListener(engine), IInputListener(engine)
+CEntityCheckpoint::CEntityCheckpoint(CEngine* engine, b2Vec2* start, b2Vec2* end, int index, bool finish) : CEntity(engine), IDrawListener(engine, (int)CDrawManager::Layers::Object), IBox2DListener(engine), IInputListener(engine)
 {
 	visible = false;
 	this->SetType(Type::CHECKPOINT);
