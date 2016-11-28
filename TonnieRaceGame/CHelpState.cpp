@@ -50,53 +50,46 @@ void CHelpState::handleEvents(CEngine* engine)
 
 void CHelpState::update(CEngine* engine)
 {
-	SDL_Event event;
-
-	while (SDL_PollEvent(&event) != 0)
-	{
-		if (event.type == SDL_QUIT)
-		{
-			engine->running = false;
-			SDL_Quit();
-		}
-		else if (event.type == SDL_KEYDOWN)
-		{
-			switch (event.key.keysym.sym)
-			{
-			case SDLK_ESCAPE:
-				engine->stateManager->changeState(Menu, engine);
-				break;
-			default:
-				break;
-			}
-		}
-		else if (event.type == SDL_MOUSEBUTTONDOWN)
-		{
-			int mouseX = event.motion.x;
-			int mouseY = event.motion.y;
-			switch (event.button.button)
-			{
-			case SDL_BUTTON_LEFT:
-				if (mouseX > 35 && mouseX < 123 && mouseY > 650 && mouseY < 702)
-				{
-					engine->stateManager->changeState(Menu, engine);
-				}
-
-				break;
-			default:
-				break;
-			}
-			break;
-		}
-		else
-		{
-			engine->inputManager->Tick(&event);
-		}
-	}
 }
 
 void CHelpState::draw(CEngine* engine)
 {
+}
+
+void CHelpState::input(CEngine* engine, SDL_Event * event)
+{
+	if (event->type == SDL_KEYDOWN)
+	{
+		switch (event->key.keysym.sym)
+		{
+		case SDLK_ESCAPE:
+			engine->stateManager->changeState(Menu, engine);
+			break;
+		default:
+			break;
+		}
+	}
+	else if (event->type == SDL_MOUSEBUTTONDOWN)
+	{
+		int mouseX = event->motion.x;
+		int mouseY = event->motion.y;
+		switch (event->button.button)
+		{
+		case SDL_BUTTON_LEFT:
+			if (mouseX > 35 && mouseX < 123 && mouseY > 650 && mouseY < 702)
+			{
+				engine->stateManager->changeState(Menu, engine);
+			}
+
+			break;
+		default:
+			break;
+		}
+	}
+	else
+	{
+		engine->inputManager->Tick(event);
+	}
 }
 
 CHelpState::CHelpState(CEngine* engine)

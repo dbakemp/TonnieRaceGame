@@ -26,7 +26,7 @@ CEngine::CEngine()
 	fpsCounter = 1;
 	showFPSCounter = true;
 
-	AdHelper* adHelper = new AdHelper();
+	//AdHelper* adHelper = new AdHelper();
 	musicHelper = new MusicHelper();
 	collisionHelper = new CCollisionHelper();
 	drawManager = new CDrawManager();
@@ -37,7 +37,7 @@ CEngine::CEngine()
 	deltaHelper = new CDeltaHelper();
 
 	SDL_Init(SDL_INIT_EVERYTHING);
-	window = SDL_CreateWindow("RaceGame", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, windowWidth, windowHeight, SDL_WINDOW_SHOWN);
+	window = SDL_CreateWindow("RaceGame", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, windowWidth, windowHeight, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
 	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 
 	SDL_GameController* controller = NULL;
@@ -75,8 +75,35 @@ void CEngine::Tick()
 	{
 		deltaHelper->SetDelta();
 
+		SDL_Event event;
+		while (SDL_PollEvent(&event) != 0)
+		{
+			if (event.type == SDL_QUIT)
+			{
+				running = false;
+				SDL_Quit();
+			}
+			else if (event.type == SDL_WINDOWEVENT) {
+				switch (event.window.event) {
+					case SDL_WINDOWEVENT_RESIZED:
+						ResizeWindow(event.window.data1, event.window.data2);
+					break;
+				}
+			}
+			else {
+				stateManager->getCurrentState()->input(this, &event);
+			}
+		}
+
 		stateManager->getCurrentState()->update(this);
 
 		SDL_RenderPresent(renderer);
 	}
+}
+
+void CEngine::ResizeWindow(int width, int height)
+{
+	windowHeight = height;
+	windowWidth = width;
+	SDL_SetWindowSize(window, windowWidth, windowHeight);
 }

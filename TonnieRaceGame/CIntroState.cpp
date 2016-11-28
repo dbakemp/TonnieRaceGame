@@ -55,80 +55,73 @@ void CIntroState::handleEvents(CEngine* engine)
 
 void CIntroState::update(CEngine* engine)
 {
-	SDL_Event event;
-
-	while (SDL_PollEvent(&event) != 0)
-	{
-		if (event.type == SDL_QUIT)
-		{
-			engine->running = false;
-			SDL_Quit();
-		}
-		else if (event.type == SDL_KEYDOWN)
-		{
-			switch (event.key.keysym.sym)
-			{
-			case SDLK_SPACE:
-				engine->stateManager->changeState(Playing, engine);
-				break;
-			case SDLK_1:
-				engine->stateManager->changeState(Help, engine);
-				break;
-			case SDLK_2:
-				engine->stateManager->changeState(Credits, engine);
-				break;
-			case SDLK_3:
-				engine->stateManager->changeState(Scores, engine);
-				break;
-			default:
-				break;
-			}
-		}
-		else if (event.type == SDL_MOUSEBUTTONDOWN)
-		{
-			int mouseX = event.motion.x;
-			int mouseY = event.motion.y;
-			switch (event.button.button)
-			{
-			case SDL_BUTTON_LEFT:
-				if (mouseX > 240 && mouseX < 384 && mouseY > 615 && mouseY < 672)
-				{
-					engine->stateManager->changeState(Playing, engine);
-				}
-				else if (mouseX > 451 && mouseX < 597 && mouseY > 615 && mouseY < 672)
-				{
-					engine->stateManager->changeState(Help, engine);
-				}
-				else if (mouseX > 663 && mouseX < 809 && mouseY > 615 && mouseY < 672)
-				{
-					engine->stateManager->changeState(Scores, engine);
-				}
-				else if (mouseX > 896 && mouseX < 1042 && mouseY > 615 && mouseY < 672)
-				{
-					engine->stateManager->changeState(Credits, engine);
-				}
-				break;
-			default:
-				break;
-			}
-			break;
-		}
-		else if (event.type == SDL_CONTROLLERBUTTONDOWN)
-		{
-			if (event.cbutton.button == SDL_CONTROLLER_BUTTON_A)
-			{
-				engine->stateManager->changeState(Playing, engine);
-			}
-		}
-		else
-		{
-			engine->inputManager->Tick(&event);
-		}
-	}
 }
 
 void CIntroState::draw(CEngine* engine)
 {
+}
+
+void CIntroState::input(CEngine* engine, SDL_Event * event)
+{
+	if (event->type == SDL_KEYDOWN)
+	{
+		switch (event->key.keysym.sym)
+		{
+		case SDLK_SPACE:
+			engine->stateManager->changeState(Playing, engine);
+			break;
+		case SDLK_1:
+			engine->stateManager->changeState(Help, engine);
+			break;
+		case SDLK_2:
+			engine->stateManager->changeState(Credits, engine);
+			break;
+		case SDLK_3:
+			engine->stateManager->changeState(Scores, engine);
+			break;
+		default:
+			break;
+		}
+	}
+	else if (event->type == SDL_MOUSEBUTTONDOWN)
+	{
+		int mouseX = event->motion.x;
+		int mouseY = event->motion.y;
+		switch (event->button.button)
+		{
+		case SDL_BUTTON_LEFT:
+			if (mouseX > 240 && mouseX < 384 && mouseY > 615 && mouseY < 672)
+			{
+				engine->stateManager->changeState(Playing, engine);
+			}
+			else if (mouseX > 451 && mouseX < 597 && mouseY > 615 && mouseY < 672)
+			{
+				engine->stateManager->changeState(Help, engine);
+			}
+			else if (mouseX > 663 && mouseX < 809 && mouseY > 615 && mouseY < 672)
+			{
+				engine->stateManager->changeState(Scores, engine);
+			}
+			else if (mouseX > 896 && mouseX < 1042 && mouseY > 615 && mouseY < 672)
+			{
+				engine->stateManager->changeState(Credits, engine);
+			}
+			break;
+		default:
+			break;
+		}
+	}
+	else if (event->type == SDL_CONTROLLERBUTTONDOWN)
+	{
+		if (event->cbutton.button == SDL_CONTROLLER_BUTTON_A)
+		{
+			engine->stateManager->changeState(Playing, engine);
+		}
+	}
+	else
+	{
+		engine->inputManager->Tick(event);
+	}
 }
 
 CIntroState::CIntroState(CEngine* engine)

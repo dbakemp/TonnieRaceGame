@@ -19,6 +19,7 @@ public:
 	void handleEvents(CEngine* engine);
 	void update(CEngine* engine);
 	void draw(CEngine* engine);
+	void input(CEngine* engine, SDL_Event* event);
 
 	CPlayState(CEngine* engine);
 	~CPlayState();

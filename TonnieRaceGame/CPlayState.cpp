@@ -73,21 +73,6 @@ void CPlayState::handleEvents(CEngine* engine)
 
 void CPlayState::update(CEngine* engine)
 {
-	SDL_Event event;
-
-	while (SDL_PollEvent(&event) != 0)
-	{
-		if (event.type == SDL_QUIT)
-		{
-			engine->running = false;
-			SDL_Quit();
-		}
-		else
-		{
-			engine->inputManager->Tick(&event);
-		}
-	}
-
 	SDL_SetRenderDrawColor(engine->renderer, 0, 0, 0, 255);
 	SDL_RenderClear(engine->renderer);
 
@@ -100,6 +85,11 @@ void CPlayState::update(CEngine* engine)
 
 void CPlayState::draw(CEngine* engine)
 {
+}
+
+void CPlayState::input(CEngine* engine, SDL_Event * event)
+{
+	engine->inputManager->Tick(event);
 }
 
 CPlayState::CPlayState(CEngine* engine)

@@ -38,7 +38,7 @@ public:
 	int windowHeight, windowWidth;
 private:
 	void Tick();
-	
+	void ResizeWindow(int width, int height);
 };
 
 #endif

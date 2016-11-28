@@ -19,6 +19,7 @@ public:
 	virtual void handleEvents(CEngine* engine) = 0;
 	virtual void update(CEngine* engine) = 0;
 	virtual void draw(CEngine* engine) = 0;
+	virtual void input(CEngine* engine, SDL_Event* event) = 0;
 private:
 };
 

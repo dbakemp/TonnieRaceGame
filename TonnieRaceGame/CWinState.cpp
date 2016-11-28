@@ -67,6 +67,10 @@ void CWinState::draw(CEngine* engine)
 {
 }
 
+void CWinState::input(CEngine* engine, SDL_Event * event)
+{
+}
+
 CWinState::CWinState(CEngine* engine)
 {
 	init(engine);
