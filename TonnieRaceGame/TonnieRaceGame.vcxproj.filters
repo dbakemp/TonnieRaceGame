@@ -201,6 +201,12 @@
     <ClCompile Include="AdHelper.cpp">
       <Filter>Source Files\Helpers</Filter>
     </ClCompile>
+    <ClCompile Include="CEntityCarAI.cpp">
+      <Filter>Source Files\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="CEntityWaypoint.cpp">
+      <Filter>Source Files\Entities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CEntity.h">
@@ -301,6 +307,12 @@
     </ClInclude>
     <ClInclude Include="AdHelper.h">
       <Filter>Header Files\Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="CEntityCarAI.h">
+      <Filter>Header Files\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="CEntityWaypoint.h">
+      <Filter>Header Files\Entities</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

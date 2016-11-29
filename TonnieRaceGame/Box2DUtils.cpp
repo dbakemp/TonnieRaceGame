@@ -17,25 +17,31 @@ void Box2DUtils::DrawBody(SDL_Renderer* buffer, b2Body* body, CCamera* camera, i
 				//b2Vec2 axis = xf.R.col1;
 				b2Vec2 axis = xf.q.GetXAxis();
 
+				center.x = center.x * 5;
+				center.y = center.y * 5;
+				radius = radius * 5;
+				axis.x = axis.x * 5;
+				axis.y = axis.y * 5;
+
 				//m_debugDraw->DrawSolidCircle(center, radius, axis, color);
 				if (falpha > 0)
 				{
-					filledCircleRGBA(buffer, center.x + camera->posX, center.y + camera->posY, static_cast<int>(radius), fr, fg, fb, falpha);
+					filledCircleRGBA(buffer, center.x - camera->posX, center.y - camera->posY, static_cast<int>(radius), fr, fg, fb, falpha);
 				}
 				if (lalpha > 0)
 				{
 					if (aa)
 					{
-						aacircleRGBA(buffer, center.x + camera->posX, center.y + camera->posY, static_cast<int>(radius), lr, lg, lb, lalpha);
+						aacircleRGBA(buffer, center.x - camera->posX, center.y - camera->posY, static_cast<int>(radius), lr, lg, lb, lalpha);
 					}
 					else
 					{
-						aacircleRGBA(buffer, center.x + camera->posX, center.y + camera->posY, static_cast<int>(radius), lr, lg, lb, lalpha);
+						aacircleRGBA(buffer, center.x - camera->posX, center.y - camera->posY, static_cast<int>(radius), lr, lg, lb, lalpha);
 					}
 				}
 				else if (aa)
 				{
-					aacircleRGBA(buffer, center.x + camera->posX, center.y + camera->posY, static_cast<int>(radius), fr, fg, fb, falpha);
+					aacircleRGBA(buffer, center.x - camera->posX, center.y - camera->posY, static_cast<int>(radius), fr, fg, fb, falpha);
 				}
 			}
 			break;

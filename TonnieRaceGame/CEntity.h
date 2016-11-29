@@ -14,7 +14,7 @@ public:
 	void Update();
 	virtual void CollisionBegin(CEntity* collider);
 	virtual void CollisionEnd(CEntity* collider);
-	enum class Type { CAR, CHECKPOINT };
+	enum class Type { CAR, CHECKPOINT, WAYPOINT };
 	void SetType(Type type);
 	Type GetType();
 	float xPos, yPos;

@@ -4,7 +4,7 @@
 #include "SDL_image.h"
 #include "CPlayState.h"
 #include "CEngine.h"
-#include "CEntityCar.h"
+#include "CEntityCarAI.h"
 #include "CEntitySmallSquare.h"
 #include "CEntityBuild.h"
 #include "CInputManager.h"
@@ -44,7 +44,7 @@ void CPlayState::init(CEngine* engine)
 
 	engine->camera = camera;
 
-	CEntityCar* car = new CEntityCar(engine, factory->map);
+	CEntityCarAI* car = new CEntityCarAI(engine, factory->map);
 	camera->SetChild(car);
 
 	CEntityFpsCounter* fpsCounter = new CEntityFpsCounter(engine, fpsFont);

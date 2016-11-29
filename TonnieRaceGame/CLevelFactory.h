@@ -16,6 +16,7 @@ public:
 	void CreateSpawns(Json::Value* root);
 	void CreateBorder(Json::Value* root);
 	void CreateCheckpoints(Json::Value* root);
+	void CreateWaypoints(Json::Value* root);
 	CMap* map;
 private:
 	CEngine* engine;

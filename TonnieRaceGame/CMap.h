@@ -3,6 +3,7 @@
 
 #include <SDL.h>
 #include <iostream>
+#include "CEntityWaypoint.h"
 
 class CMap
 {
@@ -29,6 +30,8 @@ public:
 
 	int spawnX;
 	int spawnY;
+
+	std::vector<CEntityWaypoint*> waypoints;
 private:
 };
 

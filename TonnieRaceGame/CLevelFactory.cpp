@@ -3,6 +3,7 @@
 #include "CEntityBorder.h"
 #include "CEntityTile.h"
 #include "CEntityCheckpoint.h"
+#include "CEntityWaypoint.h"
 #include "SDL_image.h"
 #include <poly2tri.h>
 #include <vector>
@@ -86,6 +87,10 @@ void CLevelFactory::CreateObjects(Json::Value* root)
 		{
 			CreateCheckpoints(&object);
 		}
+		else if (object["type"].asString() == "waypoints")
+		{
+			CreateWaypoints(&object);
+		}
 	}
 }
 
@@ -152,6 +157,24 @@ void CLevelFactory::CreateCheckpoints(Json::Value * root)
 
 	map->checkpoints++;
 	new CEntityCheckpoint(this->engine, start, end, index, isFinish);
+}
+
+void CLevelFactory::CreateWaypoints(Json::Value * root)
+{
+	CDebugLogger::PrintDebug("Creating Waypoints");
+
+	const double scale = 5;
+	double xPos = (*root).get("x", 0).asDouble();
+	double yPos = (*root).get("y", 0).asDouble();
+
+	int i = 0;
+	for (Json::Value point : (*root)["polyline"])
+	{
+
+		CEntityWaypoint* waypoint = new CEntityWaypoint(engine, (point.get("x", 0).asDouble() + xPos) / scale, (point.get("y", 0).asDouble() + yPos) / scale, i);
+		map->waypoints.push_back(waypoint);
+		i++;
+	}
 }
 
 void CLevelFactory::CreateSpawns(Json::Value* root)

@@ -1,6 +1,7 @@
 #include "CCamera.h"
 #include "CEntity.h"
 #include "IDrawListener.h"
+#include "CDeltaHelper.h"
 
 CCamera::CCamera(CEngine* engine)
 {
@@ -25,8 +26,8 @@ void CCamera::Update()
 
 	if (child != nullptr)
 	{
-		posX += (((aabb.lowerBound.x * 5) - ((engine->windowWidth - ((aabb.upperBound.x - aabb.lowerBound.x) * 5)) / 2) - posX) / 8);
-		posY += (((aabb.lowerBound.y * 5) - ((engine->windowHeight - ((aabb.upperBound.y - aabb.lowerBound.y) * 5)) / 2) - posY) / 8);
+		posX += (((aabb.lowerBound.x * 5) - ((engine->windowWidth - ((aabb.upperBound.x - aabb.lowerBound.x) * 5)) / 2) - posX) / (0.07/engine->deltaHelper->delta));
+		posY += (((aabb.lowerBound.y * 5) - ((engine->windowHeight - ((aabb.upperBound.y - aabb.lowerBound.y) * 5)) / 2) - posY) / (0.07 / engine->deltaHelper->delta));
 	}
 }
 
