@@ -34,6 +34,7 @@ public:
 	CCollisionHelper* collisionHelper;
 	bool running;
 	bool showFPSCounter;
+	bool gameControllerConnected;
 	int fpsCounter;
 	int windowHeight, windowWidth;
 private:

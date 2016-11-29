@@ -18,9 +18,11 @@
 #include "SDL_ttf.h"
 #include "CEntityCar.h"
 #include "AdHelper.h"
+#include "CDebugLogger.h"
 
 CEngine::CEngine()
 {
+	gameControllerConnected = false;
 	windowHeight = 720;
 	windowWidth = 1280;
 	fpsCounter = 1;
@@ -53,6 +55,7 @@ CEngine::CEngine()
 				cout << "Sucesfully opened GameController.\n";
 				SDL_GameControllerAddMappingsFromFile("Recources\\gamecontrollerdb.txt");
 				cout << "Controller mapping DB succesfully loaded.\n";
+				gameControllerConnected = true;
 			}
 			else
 			{
