@@ -45,8 +45,8 @@ void CCreditsState::init(CEngine* engine)
 
 	char const *vlc_argv[] =
 	{
-		"--width=100",
-		"--height=100",
+		"--width=500",
+		"--height=400",
 		"--no-embedded-video", "--no-video-deco",
 	};
 	int vlc_argc = sizeof(vlc_argv) / sizeof(*vlc_argv);
