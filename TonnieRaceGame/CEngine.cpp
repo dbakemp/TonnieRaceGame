@@ -42,6 +42,9 @@ CEngine::CEngine()
 	SDL_Init(SDL_INIT_EVERYTHING);
 	window = SDL_CreateWindow("Tonnie's Grote Racewereld", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, windowWidth, windowHeight, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
 	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+	
+	SDL_Surface* icon = IMG_Load("Resources/Images/favicon.ico");
+	SDL_SetWindowIcon(window, icon);
 
 	SDL_GameController* controller = NULL;
 	
