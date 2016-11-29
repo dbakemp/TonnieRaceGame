@@ -89,6 +89,13 @@ void CEntityTire::OnControllerButton(const SDL_ControllerButtonEvent sdlEvent)
 			std::cout << "LEFT SHOULDER RELEASED\n";
 		}
 	}
+	else if (sdlEvent.button == SDL_CONTROLLER_BUTTON_X)
+	{
+		if (sdlEvent.state == SDL_PRESSED)
+		{
+			engine->musicHelper->playTrack("music\\toot.mp3", false);
+		}
+	}
 	else if (sdlEvent.button == SDL_CONTROLLER_BUTTON_START)
 	{
 		std::cout << "Button: Start\n";
