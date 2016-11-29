@@ -8,7 +8,7 @@ CMap::~CMap()
 {
 }
 
-CEntitySpawn * CMap::GetSpawn()
+CEntitySpawn* CMap::GetSpawn()
 {
 	CEntitySpawn* spawn = availableSpawns.front();
 	availableSpawns.erase(availableSpawns.begin());
