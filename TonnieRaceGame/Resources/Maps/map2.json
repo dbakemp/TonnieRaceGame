@@ -2429,6 +2429,39 @@
                  "width":0,
                  "x":131,
                  "y":1
+                }, 
+                {
+                 "height":36,
+                 "id":149,
+                 "name":"",
+                 "rotation":0,
+                 "type":"powerup",
+                 "visible":true,
+                 "width":36,
+                 "x":412,
+                 "y":1707
+                }, 
+                {
+                 "height":36,
+                 "id":151,
+                 "name":"",
+                 "rotation":0,
+                 "type":"powerup",
+                 "visible":true,
+                 "width":36,
+                 "x":190,
+                 "y":1707
+                }, 
+                {
+                 "height":36,
+                 "id":152,
+                 "name":"",
+                 "rotation":0,
+                 "type":"powerup",
+                 "visible":true,
+                 "width":36,
+                 "x":301,
+                 "y":1707
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -2437,7 +2470,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":146,
+ "nextobjectid":153,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tileheight":128,
@@ -2445,7 +2478,7 @@
         {
          "columns":31,
          "firstgid":1,
-         "image":"..\/..\/..\/..\/..\/..\/Desktop\/Spritesheets\/spritesheet_tiles.png",
+         "image":"..\/..\/..\/..\/..\/..\/Downloads\/racing-pack\/Spritesheets\/spritesheet_tiles_edited.png",
          "imageheight":2048,
          "imagewidth":4096,
          "margin":0,
