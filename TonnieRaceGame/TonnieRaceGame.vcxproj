@@ -235,6 +235,7 @@ copy "$(SolutionDir)TonnieRaceGame\lib\Bass\bass.dll" "$(TargetDir)"
     <ClInclude Include="ILapCountable.h" />
     <ClInclude Include="MusicHelper.h" />
     <ClInclude Include="CScoresState.h" />
+    <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Resources\Maps\map1.json">
@@ -245,6 +246,13 @@ copy "$(SolutionDir)TonnieRaceGame\lib\Bass\bass.dll" "$(TargetDir)"
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Maps\map2.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="TonnieRaceGame.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\..\..\..\..\Downloads\favicon (1).ico" />
+    <Image Include="Resources\Images\favicon.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -326,6 +326,9 @@
     <ClInclude Include="CEntitySpawn.h">
       <Filter>Header Files\Entities</Filter>
     </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Resources\Maps\map1.json">
@@ -348,5 +351,18 @@
     <None Include="Resources\Maps\map2.json">
       <Filter>Resource Files\Maps</Filter>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="TonnieRaceGame.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\..\..\..\..\Downloads\favicon (1).ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\Images\favicon.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>
