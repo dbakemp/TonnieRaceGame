@@ -9,6 +9,7 @@
 #include "CMap.h"
 #include <iostream>
 #include <string>
+#include "CIntegerHelper.h"
 #include <SDL_image.h>
 
 #ifndef DEGTORAD
@@ -143,22 +144,29 @@ void CEntityCarAI::ProcessWaypoint(CEntityWaypoint * waypoint)
 {
 	if (waypoint->index == currentWaypoint) {
 		if (currentWaypoint == engine->currentMap->waypoints.size()-1) {
-			heading = engine->currentMap->waypoints[0];
+			ChangeWaypoint(engine->currentMap->waypoints[0]);
 			currentWaypoint = 0;
 		}
 		else {
-			heading = engine->currentMap->waypoints[currentWaypoint + 1];
+			ChangeWaypoint(engine->currentMap->waypoints[currentWaypoint + 1]);
 			currentWaypoint++;
 		}
 		CDebugLogger::PrintDebug("New Waypoint");
 	}
 }
 
+void CEntityCarAI::ChangeWaypoint(CEntityWaypoint * waypoint)
+{
+	heading = waypoint;
+	biasX = CIntegerHelper::GetRandomIntBetween(-(waypoint->radius / 2), waypoint->radius / 2);
+	biasY = CIntegerHelper::GetRandomIntBetween(-(waypoint->radius / 2), waypoint->radius / 2);
+}
+
 
 void CEntityCarAI::Update()
 {
 	if (heading == nullptr) {
-		heading = engine->currentMap->waypoints[currentWaypoint+1];
+		ChangeWaypoint(engine->currentMap->waypoints[currentWaypoint+1]);
 		currentWaypoint++;
 	}
 
@@ -175,8 +183,8 @@ void CEntityCarAI::Update()
 	b2Vec2 veca = { (aabb.lowerBound.x+aabb.upperBound.x)/2, (aabb.lowerBound.y + aabb.upperBound.y) / 2 };
 	b2Vec2 vecb = heading->body->GetPosition();
 
-	double deltaX = veca.x - vecb.x;
-	double deltaY = veca.y - vecb.y;
+	double deltaX = veca.x - (vecb.x+biasX);
+	double deltaY = veca.y - (vecb.y+biasY);
 
 	double angle = (atan2(deltaY, deltaX) * 180 / M_PI) +90.0f;
 	if (angle < 270 && angle > 180) {
