@@ -80,8 +80,8 @@
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
-      <AdditionalLibraryDirectories>./lib/Box2D;./lib/SDL2;./lib/SDL2_gfx;./lib/LibCurl;../Bass;../Bass/c;./lib/SDL2_ttf;./lib/SDL2_image;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>Box2D.lib;SDL2.lib;SDL2_gfx.lib;SDL2main.lib;bass.lib;SDL2_image.lib;SDL2_ttf.lib;libcurl.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>./lib/Box2D;./lib/SDL2;./lib/SDL2_gfx;./lib/LibCurl;../Bass;../Bass/c;./lib/SDL2_ttf;./lib/SDL2_image;./lib/libvlc;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>Box2D.lib;SDL2.lib;SDL2_gfx.lib;SDL2main.lib;bass.lib;SDL2_image.lib;SDL2_ttf.lib;libcurl.lib;libvlc.lib;libvlccore.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>copy "$(SolutionDir)TonnieRaceGame\lib\SDL2_ttf\SDL2_ttf.dll" "$(TargetDir)"
