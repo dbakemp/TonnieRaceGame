@@ -207,6 +207,9 @@
     <ClCompile Include="CEntityWaypoint.cpp">
       <Filter>Source Files\Entities</Filter>
     </ClCompile>
+    <ClCompile Include="CEntityTireAI.cpp">
+      <Filter>Source Files\Entities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CEntity.h">
@@ -312,6 +315,9 @@
       <Filter>Header Files\Entities</Filter>
     </ClInclude>
     <ClInclude Include="CEntityWaypoint.h">
+      <Filter>Header Files\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="CEntityTireAI.h">
       <Filter>Header Files\Entities</Filter>
     </ClInclude>
   </ItemGroup>

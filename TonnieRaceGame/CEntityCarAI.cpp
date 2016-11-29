@@ -1,5 +1,5 @@
 #include "CEntityCarAI.h"
-#include "CEntityTire.h"
+#include "CEntityTireAI.h"
 #include "CDebugLogger.h"
 #include "CDeltaHelper.h"
 #include "CStateManager.h"
@@ -15,7 +15,7 @@
 #define RADTODEG 57.295779513082320876f
 #endif
 
-CEntityCarAI::CEntityCarAI(CEngine* engine, CMap* map) : CEntity(engine), IDrawListener(engine, (int)CDrawManager::Layers::Object), IBox2DListener(engine), IInputListener(engine)
+CEntityCarAI::CEntityCarAI(CEngine* engine, CMap* map) : CEntity(engine), IDrawListener(engine, (int)CDrawManager::Layers::Object), IBox2DListener(engine)
 {
 	this->SetType(Type::CAR);
 	this->currentCheckpoint = -1;
@@ -54,28 +54,28 @@ CEntityCarAI::CEntityCarAI(CEngine* engine, CMap* map) : CEntity(engine), IDrawL
 	jointDef.upperAngle = 0;
 	jointDef.localAnchorB.SetZero();
 
-	CEntityTire* tire = new CEntityTire(engine, map);
+	CEntityTireAI* tire = new CEntityTireAI(engine, map);
 	tire->ChangeZIndex(zIndex - 1);
 	jointDef.bodyB = tire->body;
 	jointDef.localAnchorA.Set(0.5 + xPos, 1.75f + yPos);
 	engine->world->CreateJoint(&jointDef);
 	tires.push_back(tire);
 
-	tire = new CEntityTire(engine, map);
+	tire = new CEntityTireAI(engine, map);
 	tire->ChangeZIndex(zIndex - 1);
 	jointDef.bodyB = tire->body;
 	jointDef.localAnchorA.Set(7.5 + xPos, 1.75f + yPos);
 	engine->world->CreateJoint(&jointDef);
 	tires.push_back(tire);
 
-	tire = new CEntityTire(engine, map);
+	tire = new CEntityTireAI(engine, map);
 	tire->ChangeZIndex(zIndex - 1);
 	jointDef.bodyB = tire->body;
 	jointDef.localAnchorA.Set(0.5 + xPos, 10.5f + yPos);
 	flJoint = static_cast<b2RevoluteJoint*>(engine->world->CreateJoint(&jointDef));
 	tires.push_back(tire);
 
-	tire = new CEntityTire(engine, map);
+	tire = new CEntityTireAI(engine, map);
 	tire->ChangeZIndex(zIndex - 1);
 	jointDef.bodyB = tire->body;
 	jointDef.localAnchorA.Set(7.5 + xPos, 10.5f + yPos);
@@ -122,10 +122,7 @@ void CEntityCarAI::CollisionEnd(CEntity* collider)
 
 void CEntityCarAI::ProcessCheckpoint(CEntityCheckpoint * checkpoint)
 {
-	if (checkpoint->checkpointIndex == currentCheckpoint + 1) {
-		currentCheckpoint = checkpoint->checkpointIndex;
-	}
-	else if (currentCheckpoint + 1 == engine->currentMap->checkpoints && checkpoint->isFinish) {
+	if (currentCheckpoint + 1 == engine->currentMap->checkpoints && checkpoint->isFinish) {
 		if (currentLap + 1 == engine->currentMap->laps) {
 			CDebugLogger::PrintDebug("Race finish here");
 			engine->stateManager->changeState(Win, engine);
@@ -135,40 +132,10 @@ void CEntityCarAI::ProcessCheckpoint(CEntityCheckpoint * checkpoint)
 			currentLap++;
 		}
 	}
-}
-
-void CEntityCarAI::Input(SDL_Event* event)
-{
-	switch (event->type)
-	{
-	case SDL_KEYDOWN:
-		switch (event->key.keysym.sym)
-		{
-		case SDLK_a: controlState |= InputDirections::LEFT;
-			break;
-		case SDLK_d: controlState |= InputDirections::RIGHT;
-			break;
-		case SDLK_f:
-			debugVisible = !debugVisible;
-			break;
-		}
-		break;
-	case SDL_KEYUP:
-		switch (event->key.keysym.sym)
-		{
-		case SDLK_a: controlState &= ~InputDirections::LEFT;
-			break;
-		case SDLK_d: controlState &= ~InputDirections::RIGHT;
-			break;
-		}
-		break;
-	case SDL_CONTROLLERAXISMOTION:
-		//OnControllerAxis(event->caxis);
-		break;
-		break;
+	else {
+		currentCheckpoint = checkpoint->checkpointIndex;
 	}
 }
-
 
 void CEntityCarAI::ProcessWaypoint(CEntityWaypoint * waypoint)
 {

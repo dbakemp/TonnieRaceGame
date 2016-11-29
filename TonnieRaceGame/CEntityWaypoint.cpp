@@ -60,7 +60,7 @@ void CEntityWaypoint::Input(SDL_Event* event)
 	case SDL_KEYDOWN:
 		switch (event->key.keysym.sym)
 		{
-		case SDLK_f:
+		case SDLK_g:
 			visible = !visible;
 			break;
 		}

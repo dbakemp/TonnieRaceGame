@@ -5,6 +5,7 @@
 #include "CPlayState.h"
 #include "CEngine.h"
 #include "CEntityCarAI.h"
+#include "CEntityCar.h"
 #include "CEntitySmallSquare.h"
 #include "CEntityBuild.h"
 #include "CInputManager.h"
@@ -44,7 +45,7 @@ void CPlayState::init(CEngine* engine)
 
 	engine->camera = camera;
 
-	CEntityCarAI* car = new CEntityCarAI(engine, factory->map);
+	CEntityCar* car = new CEntityCar(engine, factory->map); new CEntityCarAI(engine, factory->map); new CEntityCarAI(engine, factory->map); new CEntityCarAI(engine, factory->map); 
 	camera->SetChild(car);
 
 	CEntityFpsCounter* fpsCounter = new CEntityFpsCounter(engine, fpsFont);

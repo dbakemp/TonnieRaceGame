@@ -167,6 +167,7 @@ copy "$(SolutionDir)TonnieRaceGame\lib\Bass\bass.dll" "$(TargetDir)"
     <ClCompile Include="CEntityManager.cpp" />
     <ClCompile Include="CEntityTile.cpp" />
     <ClCompile Include="CEntityTire.cpp" />
+    <ClCompile Include="CEntityTireAI.cpp" />
     <ClCompile Include="CEntityWaypoint.cpp" />
     <ClCompile Include="CInputManager.cpp" />
     <ClCompile Include="CLevelFactory.cpp" />
@@ -213,6 +214,7 @@ copy "$(SolutionDir)TonnieRaceGame\lib\Bass\bass.dll" "$(TargetDir)"
     <ClInclude Include="CEntityManager.h" />
     <ClInclude Include="CEntityTile.h" />
     <ClInclude Include="CEntityTire.h" />
+    <ClInclude Include="CEntityTireAI.h" />
     <ClInclude Include="CEntityWaypoint.h" />
     <ClInclude Include="CGameState.h" />
     <ClInclude Include="CInputManager.h" />
