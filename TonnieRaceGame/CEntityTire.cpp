@@ -6,10 +6,10 @@
 #include <SDL.h>
 #include <iostream>
 
-CEntityTire::CEntityTire(CEngine* engine, CMap* map) : CEntity(engine), IDrawListener(engine, (int)CDrawManager::Layers::Object), IInputListener(engine), IBox2DListener(engine)
+CEntityTire::CEntityTire(CEngine* engine, CMap* map, int x, int y) : CEntity(engine), IDrawListener(engine, (int)CDrawManager::Layers::Object), IInputListener(engine), IBox2DListener(engine)
 {
-	double xPos = map->spawnX;
-	double yPos = map->spawnY;
+	double xPos = x;
+	double yPos = y;
 
 	bodyDef.type = b2_dynamicBody;
 	bodyDef.position.Set(xPos, yPos);

@@ -2,6 +2,7 @@
 #include "CDebugLogger.h"
 #include "CEntityBorder.h"
 #include "CEntityTile.h"
+#include "CEntitySpawn.h"
 #include "CEntityCheckpoint.h"
 #include "CEntityWaypoint.h"
 #include "SDL_image.h"
@@ -179,8 +180,7 @@ void CLevelFactory::CreateWaypoints(Json::Value * root)
 
 void CLevelFactory::CreateSpawns(Json::Value* root)
 {
-	CDebugLogger::PrintDebug("Creating Spawns");
+	CDebugLogger::PrintDebug("Creating Spawn");
 
-	map->spawnX = (*root).get("x", 0).asInt()/5;
-	map->spawnY = (*root).get("y", 0).asInt()/5;
+	map->availableSpawns.push_back(new CEntitySpawn(engine, (*root).get("x", 0).asInt() / 5, (*root).get("y", 0).asInt() / 5));
 }

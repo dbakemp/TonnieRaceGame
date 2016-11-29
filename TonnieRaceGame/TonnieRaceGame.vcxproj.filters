@@ -210,6 +210,9 @@
     <ClCompile Include="CEntityTireAI.cpp">
       <Filter>Source Files\Entities</Filter>
     </ClCompile>
+    <ClCompile Include="CEntitySpawn.cpp">
+      <Filter>Source Files\Entities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CEntity.h">
@@ -320,6 +323,9 @@
     <ClInclude Include="CEntityTireAI.h">
       <Filter>Header Files\Entities</Filter>
     </ClInclude>
+    <ClInclude Include="CEntitySpawn.h">
+      <Filter>Header Files\Entities</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Resources\Maps\map1.json">
@@ -337,5 +343,10 @@
     <ClInclude Include="CPlayState.h">
       <Filter>Header Files\States</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Maps\map2.json">
+      <Filter>Resource Files\Maps</Filter>
+    </None>
   </ItemGroup>
 </Project>

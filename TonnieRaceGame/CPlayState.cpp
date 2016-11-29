@@ -38,7 +38,7 @@ void CPlayState::init(CEngine* engine)
 	SDL_QueryTexture(backmapTexture, NULL, NULL, &texW, &texH);
 
 	CLevelFactory* factory = new CLevelFactory(engine);
-	factory->LoadMap("Resources/Maps/map1.json");
+	factory->LoadMap("Resources/Maps/map2.json");
 	engine->currentMap = factory->map;
 
 	camera = new CCamera(engine);

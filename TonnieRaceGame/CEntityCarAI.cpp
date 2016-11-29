@@ -2,6 +2,7 @@
 #include "CEntityTireAI.h"
 #include "CDebugLogger.h"
 #include "CDeltaHelper.h"
+#include "CEntitySpawn.h"
 #include "CStateManager.h"
 #include "Box2DUtils.h"
 #include "CDrawManager.h"
@@ -31,8 +32,9 @@ CEntityCarAI::CEntityCarAI(CEngine* engine, CMap* map) : CEntity(engine), IDrawL
 	body = engine->world->CreateBody(&bodyDef);
 	body->SetUserData(this);
 
-	double xPos = map->spawnX;
-	double yPos = map->spawnY;
+	CEntitySpawn* spawn = map->GetSpawn();
+	double xPos = spawn->x;
+	double yPos = spawn->y;
 
 	b2Vec2 vertices[8];
 
@@ -54,28 +56,28 @@ CEntityCarAI::CEntityCarAI(CEngine* engine, CMap* map) : CEntity(engine), IDrawL
 	jointDef.upperAngle = 0;
 	jointDef.localAnchorB.SetZero();
 
-	CEntityTireAI* tire = new CEntityTireAI(engine, map);
+	CEntityTireAI* tire = new CEntityTireAI(engine, map, spawn->x, spawn->y);
 	tire->ChangeZIndex(zIndex - 1);
 	jointDef.bodyB = tire->body;
 	jointDef.localAnchorA.Set(0.5 + xPos, 1.75f + yPos);
 	engine->world->CreateJoint(&jointDef);
 	tires.push_back(tire);
 
-	tire = new CEntityTireAI(engine, map);
+	tire = new CEntityTireAI(engine, map, spawn->x, spawn->y);
 	tire->ChangeZIndex(zIndex - 1);
 	jointDef.bodyB = tire->body;
 	jointDef.localAnchorA.Set(7.5 + xPos, 1.75f + yPos);
 	engine->world->CreateJoint(&jointDef);
 	tires.push_back(tire);
 
-	tire = new CEntityTireAI(engine, map);
+	tire = new CEntityTireAI(engine, map, spawn->x, spawn->y);
 	tire->ChangeZIndex(zIndex - 1);
 	jointDef.bodyB = tire->body;
 	jointDef.localAnchorA.Set(0.5 + xPos, 10.5f + yPos);
 	flJoint = static_cast<b2RevoluteJoint*>(engine->world->CreateJoint(&jointDef));
 	tires.push_back(tire);
 
-	tire = new CEntityTireAI(engine, map);
+	tire = new CEntityTireAI(engine, map, spawn->x, spawn->y);
 	tire->ChangeZIndex(zIndex - 1);
 	jointDef.bodyB = tire->body;
 	jointDef.localAnchorA.Set(7.5 + xPos, 10.5f + yPos);
