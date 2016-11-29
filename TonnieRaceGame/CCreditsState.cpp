@@ -22,6 +22,7 @@ void CCreditsState::init()
 
 void CCreditsState::init(CEngine* engine)
 {
+	bool done = false;
 	//TTF_Init();
 
 	//TTF_Font* fntPricedown = TTF_OpenFont("Resources/Fonts/pricedown.ttf", 48);
@@ -50,7 +51,6 @@ void CCreditsState::init(CEngine* engine)
 		"--no-embedded-video", "--no-video-deco",
 	};
 	int vlc_argc = sizeof(vlc_argv) / sizeof(*vlc_argv);
-
 	CDebugLogger::PrintDebug("Init VLC");
 	/* Load the VLC engine */
 	inst = libvlc_new(vlc_argc, vlc_argv);
@@ -71,6 +71,7 @@ void CCreditsState::init(CEngine* engine)
 	// play the media_player
 	libvlc_media_player_play(mp);
 
+	
 
 
 	//Wait 40 secs, length of the outro video
@@ -86,10 +87,6 @@ void CCreditsState::init(CEngine* engine)
 
 	CDebugLogger::PrintDebug("Release VLC");
 	libvlc_release(inst);
-	
-	CDebugLogger::PrintDebug("Changing state to menu");
-	engine->stateManager->changeState(Menu, engine);
-
 }
 
 void CCreditsState::clean()
@@ -110,6 +107,8 @@ void CCreditsState::handleEvents(CEngine* engine)
 
 void CCreditsState::update(CEngine* engine)
 {
+	CDebugLogger::PrintDebug("Changing state to menu");
+	engine->stateManager->changeState(Menu, engine);
 }
 
 void CCreditsState::draw(CEngine* engine)
