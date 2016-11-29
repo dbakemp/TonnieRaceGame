@@ -158,8 +158,8 @@ void CEntityCarAI::ProcessWaypoint(CEntityWaypoint * waypoint)
 void CEntityCarAI::ChangeWaypoint(CEntityWaypoint * waypoint)
 {
 	heading = waypoint;
-	biasX = CIntegerHelper::GetRandomIntBetween(-(waypoint->radius / 2), waypoint->radius / 2);
-	biasY = CIntegerHelper::GetRandomIntBetween(-(waypoint->radius / 2), waypoint->radius / 2);
+	biasX = CIntegerHelper::GetRandomIntBetween(-(waypoint->radius), waypoint->radius);
+	biasY = CIntegerHelper::GetRandomIntBetween(-(waypoint->radius), waypoint->radius);
 }
 
 
