@@ -17,7 +17,7 @@
 #include "CEntityLapCounter.h"
 #include "CEntityFpsCounter.h"
 #include "SDL_ttf.h"
-
+#include "CDebugLogger.h"
 
 void CPlayState::init()
 {
@@ -38,7 +38,24 @@ void CPlayState::init(CEngine* engine)
 	SDL_QueryTexture(backmapTexture, NULL, NULL, &texW, &texH);
 
 	CLevelFactory* factory = new CLevelFactory(engine);
-	factory->LoadMap("Resources/Maps/map2.json");
+
+	if (engine->level == 1)
+	{
+		CDebugLogger::PrintDebug("Loading LVL 1");
+		factory->LoadMap("Resources/Maps/map1.json");
+		engine->musicHelper->playTrack("music\\beep.mp3", true);
+	}
+	else if (engine->level == 2)
+	{
+		CDebugLogger::PrintDebug("Loading LVL 2");
+		factory->LoadMap("Resources/Maps/map2.json");
+		engine->musicHelper->playTrack("music\\boerharms.mp3", true);
+	}
+	else
+	{
+		CDebugLogger::PrintDebug("Loding error???");
+	}
+	//factory->LoadMap("Resources/Maps/map2.json");
 	engine->currentMap = factory->map;
 
 	camera = new CCamera(engine);
@@ -52,8 +69,6 @@ void CPlayState::init(CEngine* engine)
 	CEntityBuild* build = new CEntityBuild(engine, fpsFont);
 	CEntityLapCounter* lapCounter = new CEntityLapCounter(engine, fpsFont);
 	lapCounter->SetLapCountable(car);
-
-	engine->musicHelper->playTrack("music\\beep.mp3", true);
 }
 
 void CPlayState::clean()

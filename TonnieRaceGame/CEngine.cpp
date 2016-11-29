@@ -26,9 +26,10 @@ CEngine::CEngine()
 	windowHeight = 720;
 	windowWidth = 1280;
 	fpsCounter = 1;
+	level = 1;
 	showFPSCounter = true;
 
-	//AdHelper* adHelper = new AdHelper();
+	AdHelper* adHelper = new AdHelper();
 	musicHelper = new MusicHelper();
 	collisionHelper = new CCollisionHelper();
 	drawManager = new CDrawManager();

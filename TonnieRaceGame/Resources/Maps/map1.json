@@ -1883,6 +1883,61 @@
                  "width":0,
                  "x":832,
                  "y":1860
+                }, 
+                {
+                 "height":0,
+                 "id":78,
+                 "name":"",
+                 "rotation":0,
+                 "type":"spawn",
+                 "visible":true,
+                 "width":0,
+                 "x":953,
+                 "y":1600
+                }, 
+                {
+                 "height":0,
+                 "id":79,
+                 "name":"",
+                 "rotation":0,
+                 "type":"spawn",
+                 "visible":true,
+                 "width":0,
+                 "x":710,
+                 "y":1600
+                }, 
+                {
+                 "height":0,
+                 "id":80,
+                 "name":"",
+                 "rotation":0,
+                 "type":"spawn",
+                 "visible":true,
+                 "width":0,
+                 "x":830,
+                 "y":1473
+                }, 
+                {
+                 "height":0,
+                 "id":81,
+                 "name":"",
+                 "rotation":0,
+                 "type":"spawn",
+                 "visible":true,
+                 "width":0,
+                 "x":949,
+                 "y":1473
+                }, 
+                {
+                 "height":0,
+                 "id":82,
+                 "name":"",
+                 "rotation":0,
+                 "type":"spawn",
+                 "visible":true,
+                 "width":0,
+                 "x":715,
+                 "y":1474
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -1891,7 +1946,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":78,
+ "nextobjectid":83,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tileheight":128,
@@ -1899,7 +1954,7 @@
         {
          "columns":31,
          "firstgid":1,
-         "image":"..\/..\/..\/..\/..\/..\/Desktop\/Spritesheets\/spritesheet_tiles.png",
+         "image":"..\/..\/..\/..\/SDL\/SDL\/Resources\/Spritesheets\/spritesheet_tiles.png",
          "imageheight":2048,
          "imagewidth":4096,
          "margin":0,

@@ -187,7 +187,16 @@ void CEntityCar::ProcessCheckpoint(CEntityCheckpoint * checkpoint)
 	else if (currentCheckpoint+1 == engine->currentMap->checkpoints && checkpoint->isFinish) {
 		if (currentLap+1 == engine->currentMap->laps) {
 			CDebugLogger::PrintDebug("Race finish here");
-			engine->stateManager->changeState(Win, engine);
+			if (engine->level == 1)
+			{
+				engine->level = 2;	
+				engine->musicHelper->stopAll();
+				engine->stateManager->changeState(Playing, engine);
+			}
+			else if (engine->level == 2)
+			{
+				engine->stateManager->changeState(Win, engine);
+			}
 		}
 		else {
 			currentCheckpoint = checkpoint->checkpointIndex;

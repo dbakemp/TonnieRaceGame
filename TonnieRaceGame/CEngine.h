@@ -36,6 +36,7 @@ public:
 	bool showFPSCounter;
 	bool gameControllerConnected;
 	int fpsCounter;
+	int level;
 	int windowHeight, windowWidth;
 private:
 	void Tick();
