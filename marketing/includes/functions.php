@@ -42,7 +42,7 @@ function login($email, $password, $mysqli) {
         // get variables from result.
         $stmt->bind_result($user_id, $username, $db_password);
         $stmt->fetch();
-        
+
 
         if ($stmt->num_rows == 1) {
             // If the user exists we check if the account is locked
