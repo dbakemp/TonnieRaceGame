@@ -8,21 +8,24 @@ if ($result = $mysqli->query($query))
     $char = array();
 
 
-    $arr["book"] = "Alice in Wonderland";
-    $arr["year"] = "1865";
-    $arr["characters"] = "";
-
-
+    $arr["Title"] = "Alice in Wonderland";
+    $arr["Date"] = "1865";
+    $arr["Ads"] = "";
+    $toet = array();
     /* fetch associative array */
     while ($row = $result->fetch_assoc())
     {
-        $arr[$row["ID"]]["Title"] = $row["Title"];
-        $arr[$row["ID"]]["URL"] = $row["URL"];
-        $arr[$row["ID"]]["ImageURL"] = $row["ImageURL"];
-        $arr[$row["ID"]]["Description"] = $row["Description"];
-        $arr[$row["ID"]]["IsActive"] = $row["IsActive"];
-    }
-}
+        $test["Title"] = $row["Title"];
+        $test["URL"] = $row["URL"];
+        $test["ImageURL"] = $row["ImageURL"];
+        $test["Description"] = $row["Description"];
+        $test["IsActive"] = $row["IsActive"];
+        $toet[] = $test;
 
+    }
+
+    $arr["Ads"] = $toet;
+}
+echo json_encode($arr);
 //echo '<pre>';
 //var_dump($arr);

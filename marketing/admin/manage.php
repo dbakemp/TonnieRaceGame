@@ -1,3 +1,5 @@
+<?php ini_set('display_errors', '1');
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -132,9 +134,10 @@
                                 <tbody>
                                 <?php
 
-                                $query = "SELECT * FROM Ads";
+                                $query = "SELECT * FROM ads";
 
-                                if ($result = $mysqli->query($query)) {
+                                if ($result = $mysqli->query($query))
+                                {
 
                                     /* fetch associative array */
                                     while ($row = $result->fetch_assoc()) {

@@ -2,11 +2,29 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Secure Login: Registration Success</title>
-    <link rel="stylesheet" href="styles/main.css" />
+    <title>Tonnie's grote racewereld</title>
+    <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
-<h1>Registration successful!</h1>
-<p>You can now go back to the <a href="index.php">login page</a> and log in</p>
+
+
+<div class="login-form">
+    <h1><img src="images/logo.png" /></h1>
+    <?php
+
+    if (isset($error))
+    {
+        if ($error == 'login')
+        {
+            echo "<span id='alert'>Onbekende gegevens</span><br />&nbsp;";
+        }
+    }
+
+    ?>
+
+    <h2>Succesvol geregistreerd!</h2>
+    <center><p>Klik <a href="index.php">hier</a> om in te loggen</p></center>
+</div>
+
 </body>
 </html>

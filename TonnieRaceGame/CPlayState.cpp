@@ -66,7 +66,10 @@ void CPlayState::init(CEngine* engine)
 
 	engine->camera = camera;
 
-	CEntityCar* car = new CEntityCar(engine, factory->map); new CEntityCarAI(engine, factory->map); new CEntityCarAI(engine, factory->map); new CEntityCarAI(engine, factory->map); 
+	CEntityCar* car = new CEntityCar(engine, factory->map); 
+	//new CEntityCarAI(engine, factory->map); 
+	//new CEntityCarAI(engine, factory->map); 
+	//new CEntityCarAI(engine, factory->map); 
 	camera->SetChild(car);
 
 	CEntityFpsCounter* fpsCounter = new CEntityFpsCounter(engine, fpsFont);
