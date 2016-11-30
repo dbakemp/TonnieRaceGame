@@ -148,6 +148,7 @@ copy "$(SolutionDir)TonnieRaceGame\lib\Bass\bass.dll" "$(TargetDir)"
   <ItemGroup>
     <ClCompile Include="AdHelper.cpp" />
     <ClCompile Include="Box2DUtils.cpp" />
+    <ClCompile Include="CAdManager.cpp" />
     <ClCompile Include="CBox2DManager.cpp" />
     <ClCompile Include="CCamera.cpp" />
     <ClCompile Include="CCollisionHelper.cpp" />
@@ -157,6 +158,7 @@ copy "$(SolutionDir)TonnieRaceGame\lib\Bass\bass.dll" "$(TargetDir)"
     <ClCompile Include="CDrawManager.cpp" />
     <ClCompile Include="CEngine.cpp" />
     <ClCompile Include="CEntity.cpp" />
+    <ClCompile Include="CEntityAd.cpp" />
     <ClCompile Include="CEntityBorder.cpp" />
     <ClCompile Include="CEntityBuild.cpp" />
     <ClCompile Include="CEntityCar.cpp" />
@@ -197,6 +199,7 @@ copy "$(SolutionDir)TonnieRaceGame\lib\Bass\bass.dll" "$(TargetDir)"
   <ItemGroup>
     <ClInclude Include="AdHelper.h" />
     <ClInclude Include="Box2DUtils.h" />
+    <ClInclude Include="CAdManager.h" />
     <ClInclude Include="CBox2DManager.h" />
     <ClInclude Include="CCamera.h" />
     <ClInclude Include="CCollisionHelper.h" />
@@ -206,6 +209,7 @@ copy "$(SolutionDir)TonnieRaceGame\lib\Bass\bass.dll" "$(TargetDir)"
     <ClInclude Include="CDrawManager.h" />
     <ClInclude Include="CEngine.h" />
     <ClInclude Include="CEntity.h" />
+    <ClInclude Include="CEntityAd.h" />
     <ClInclude Include="CEntityBorder.h" />
     <ClInclude Include="CEntityBuild.h" />
     <ClInclude Include="CEntityCar.h" />

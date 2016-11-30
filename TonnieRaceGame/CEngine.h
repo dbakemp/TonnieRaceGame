@@ -13,6 +13,7 @@ class CStateManager;
 class CDeltaHelper;
 class CCollisionHelper;
 class CCamera;
+class CAdManager;
 class CMap;
 
 class CEngine
@@ -25,6 +26,7 @@ public:
 	CBox2DManager* box2DManager;
 	CStateManager* stateManager;
 	CDeltaHelper* deltaHelper;
+	CAdManager* adManager;
 	CMap* currentMap;
 	CCamera* camera;
 	SDL_Window* window;

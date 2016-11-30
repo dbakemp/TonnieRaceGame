@@ -10,6 +10,7 @@
 #include "CEntityBuild.h"
 #include "CInputManager.h"
 #include "CEntityManager.h"
+#include "CAdManager.h"
 #include "CDeltaHelper.h"
 #include "CDrawManager.h"
 #include "CLevelFactory.h"
@@ -40,6 +41,8 @@ void CPlayState::init(CEngine* engine)
 	engine->world->SetContactListener(engine->collisionHelper);
 
 	SDL_QueryTexture(backmapTexture, NULL, NULL, &texW, &texH);
+
+	engine->adManager = new CAdManager(engine);
 
 	CLevelFactory* factory = new CLevelFactory(engine);
 

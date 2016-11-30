@@ -3,6 +3,7 @@
 #include "CEntityBorder.h"
 #include "CEntityTile.h"
 #include "CEntitySpawn.h"
+#include "CEntityAd.h"
 #include "CEntityCheckpoint.h"
 #include "CEntityWaypoint.h"
 #include "SDL_image.h"
@@ -92,6 +93,10 @@ void CLevelFactory::CreateObjects(Json::Value* root)
 		{
 			CreateWaypoints(&object);
 		}
+		else if (object["type"].asString() == "ad")
+		{
+			CreateAd(&object);
+		}
 	}
 }
 
@@ -176,6 +181,14 @@ void CLevelFactory::CreateWaypoints(Json::Value * root)
 		map->waypoints.push_back(waypoint);
 		i++;
 	}
+}
+
+void CLevelFactory::CreateAd(Json::Value * root)
+{
+	CDebugLogger::PrintDebug("Creating Ad");
+	CEntityAd* ad = new CEntityAd(engine, map);
+	ad->tileX = (*root).get("x", 0).asDouble();
+	ad->tileY = (*root).get("y", 0).asDouble();
 }
 
 void CLevelFactory::CreateSpawns(Json::Value* root)
