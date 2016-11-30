@@ -1586,12 +1586,12 @@
                          "y":124
                         }, 
                         {
-                         "x":-68,
-                         "y":834
+                         "x":-6,
+                         "y":1064
                         }, 
                         {
-                         "x":65,
-                         "y":962
+                         "x":209,
+                         "y":1058
                         }, 
                         {
                          "x":314,
@@ -1954,7 +1954,7 @@
         {
          "columns":31,
          "firstgid":1,
-         "image":"..\/..\/..\/..\/SDL\/SDL\/Resources\/Spritesheets\/spritesheet_tiles.png",
+         "image":"..\/Spritesheets\/spritesheet_tiles.png",
          "imageheight":2048,
          "imagewidth":4096,
          "margin":0,

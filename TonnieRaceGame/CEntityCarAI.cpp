@@ -24,6 +24,9 @@ CEntityCarAI::CEntityCarAI(CEngine* engine, CMap* map) : CEntity(engine), IDrawL
 	this->currentLap = 0;
 	this->currentWaypoint = -1;
 	this->debugVisible = false;
+	this->backupTimer = 0;
+	this->backingupTimer = 0;
+	this->shouldBackup = false;
 
 	SDL_Surface* texture = IMG_Load("Resources/Images/spritesheet_vehicles.png");
 	this->spriteSheet = SDL_CreateTextureFromSurface(engine->renderer, texture);
@@ -151,7 +154,6 @@ void CEntityCarAI::ProcessWaypoint(CEntityWaypoint * waypoint)
 			ChangeWaypoint(engine->currentMap->waypoints[currentWaypoint + 1]);
 			currentWaypoint++;
 		}
-		CDebugLogger::PrintDebug("New Waypoint");
 	}
 }
 
@@ -219,12 +221,43 @@ void CEntityCarAI::Update()
 		desiredAngle = lockAngle;
 	}
 
+	if (shouldBackup) {
+		desiredAngle = -desiredAngle;
+	}
+
 	double angleNow = flJoint->GetJointAngle();
 	double angleToTurn = desiredAngle - angleNow;
 	angleToTurn = b2Clamp(angleToTurn, -turnPerTimeStep, turnPerTimeStep);
 	double newAngle = angleNow + (angleToTurn);
 	flJoint->SetLimits(newAngle, newAngle);
 	frJoint->SetLimits(newAngle, newAngle);
+
+	b2Vec2 velocity = body->GetLinearVelocity();
+	if ((int)(velocity.Normalize()) < 1) {
+		backupTimer += engine->deltaHelper->delta;
+	}
+	else {
+		backupTimer = 0;
+	}
+
+	if (backupTimer > 2) {
+		shouldBackup = true;
+	}
+
+
+	if (shouldBackup && backingupTimer < 1) {
+		backingupTimer += engine->deltaHelper->delta;
+		for (CEntityTireAI* tire : tires) {
+			tire->maxForwardSpeed = -65;
+		}
+	}
+	else {
+		shouldBackup = false;
+		backingupTimer = 0;
+		for (CEntityTireAI* tire : tires) {
+			tire->maxForwardSpeed = 500;
+		}
+	}
 }
 
 void CEntityCarAI::Create(b2World* world)
