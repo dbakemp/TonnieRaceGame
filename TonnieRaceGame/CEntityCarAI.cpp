@@ -233,14 +233,14 @@ void CEntityCarAI::Update()
 	frJoint->SetLimits(newAngle, newAngle);
 
 	b2Vec2 velocity = body->GetLinearVelocity();
-	if ((int)(velocity.Normalize()) < 1) {
+	if ((int)(velocity.Normalize()) < 5) {
 		backupTimer += engine->deltaHelper->delta;
 	}
 	else {
 		backupTimer = 0;
 	}
 
-	if (backupTimer > 2) {
+	if (backupTimer > 1.5) {
 		shouldBackup = true;
 	}
 
