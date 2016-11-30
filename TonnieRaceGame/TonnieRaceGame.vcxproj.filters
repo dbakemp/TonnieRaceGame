@@ -216,16 +216,13 @@
     <ClCompile Include="CIntegerHelper.cpp">
       <Filter>Source Files\Helpers</Filter>
     </ClCompile>
-<<<<<<< HEAD
     <ClCompile Include="CEntityAd.cpp">
       <Filter>Source Files\Entities</Filter>
     </ClCompile>
     <ClCompile Include="CAdManager.cpp">
       <Filter>Source Files\Managers</Filter>
-=======
     <ClCompile Include="HighscoresHelper.cpp">
       <Filter>Source Files\Helpers</Filter>
->>>>>>> origin/master
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
