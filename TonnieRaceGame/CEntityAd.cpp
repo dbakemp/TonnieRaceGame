@@ -3,7 +3,7 @@
 #include "CAdManager.h"
 #include "CCamera.h"
 
-CEntityAd::CEntityAd(CEngine * engine, CMap * map) : CEntity(engine), IDrawListener(engine, (int)CDrawManager::Layers::Tile)
+CEntityAd::CEntityAd(CEngine * engine, CMap * map) : CEntity(engine), IDrawListener(engine, ((int)CDrawManager::Layers::Tile)+1)
 {
 	texture = engine->adManager->GetRandomAd();
 
@@ -12,11 +12,8 @@ CEntityAd::CEntityAd(CEngine * engine, CMap * map) : CEntity(engine), IDrawListe
 
 void CEntityAd::Draw(SDL_Renderer * renderer)
 {
-	if ((tileY * this->textureHeight) > engine->camera->posY - this->textureHeight && (tileX * this->textureWidth) > engine->camera->posX - this->textureWidth && (tileY * this->textureHeight) < engine->camera->posY + engine->windowHeight && (tileX * this->textureWidth) < engine->camera->posX + engine->windowWidth)
-	{
-		SDL_Rect dstrect = { -engine->camera->posX + (tileX * this->textureWidth), -engine->camera->posY + (tileY * this->textureHeight), this->textureWidth, this->textureHeight };
-		SDL_RenderCopy(engine->renderer, texture, &srcRect, &dstrect);
-	}
+	SDL_Rect dstrect = { -engine->camera->posX + tileX, -engine->camera->posY + tileY, this->textureWidth, this->textureHeight };
+	SDL_RenderCopy(engine->renderer, texture, NULL, &dstrect);
 }
 
 void CEntityAd::Update()

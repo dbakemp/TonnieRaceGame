@@ -1,52 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="Box2DUtils.cpp" />
-    <ClCompile Include="CAdManager.cpp" />
-    <ClCompile Include="CBox2DManager.cpp" />
     <ClCompile Include="CCamera.cpp" />
-    <ClCompile Include="CCreditsState.cpp" />
-    <ClCompile Include="CDebugDraw.cpp" />
-    <ClCompile Include="CDebugLogger.cpp" />
-    <ClCompile Include="CDrawManager.cpp" />
     <ClCompile Include="CEngine.cpp" />
-    <ClCompile Include="CEntity.cpp" />
-    <ClCompile Include="CEntityAd.cpp" />
-    <ClCompile Include="CEntityBorder.cpp" />
-    <ClCompile Include="CEntityBuild.cpp" />
-    <ClCompile Include="CEntityCar.cpp" />
-    <ClCompile Include="CEntityCarAI.cpp" />
-    <ClCompile Include="CEntityCheckpoint.cpp" />
-    <ClCompile Include="CEntityFpsCounter.cpp" />
-    <ClCompile Include="CEntityLapCounter.cpp" />
-    <ClCompile Include="CEntityManager.cpp" />
-    <ClCompile Include="CEntitySpawn.cpp" />
-    <ClCompile Include="CEntityTile.cpp" />
-    <ClCompile Include="CEntityTire.cpp" />
-    <ClCompile Include="CEntityTireAI.cpp" />
-    <ClCompile Include="CEntityWaypoint.cpp" />
-    <ClCompile Include="CInputManager.cpp" />
-    <ClCompile Include="CLevelFactory.cpp" />
     <ClCompile Include="CMap.cpp" />
-    <ClCompile Include="CIntroState.cpp" />
-    <ClCompile Include="CPlayState.cpp" />
-    <ClCompile Include="CStateManager.cpp" />
-    <ClCompile Include="CHelpState.cpp" />
-    <ClCompile Include="CWinState.cpp" />
-    <ClCompile Include="HighscoresHelper.cpp" />
-    <ClCompile Include="IBox2DListener.cpp" />
-    <ClCompile Include="IDrawListener.cpp" />
-    <ClCompile Include="IEntityListener.cpp" />
-    <ClCompile Include="IInputListener.cpp" />
-    <ClCompile Include="include\common\shapes.cc" />
-    <ClCompile Include="include\sweep\advancing_front.cc" />
-    <ClCompile Include="include\sweep\cdt.cc" />
-    <ClCompile Include="include\sweep\sweep.cc" />
-    <ClCompile Include="include\sweep\sweep_context.cc" />
-    <ClCompile Include="jsoncpp.cpp" />
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="MusicHelper.cpp" />
-    <ClCompile Include="CScoresState.cpp" />
     <ClCompile Include="AdHelper.cpp">
       <Filter>Helpers</Filter>
     </ClCompile>
@@ -59,49 +17,137 @@
     <ClCompile Include="CIntegerHelper.cpp">
       <Filter>Helpers</Filter>
     </ClCompile>
+    <ClCompile Include="CCreditsState.cpp">
+      <Filter>States</Filter>
+    </ClCompile>
+    <ClCompile Include="CWinState.cpp">
+      <Filter>States</Filter>
+    </ClCompile>
+    <ClCompile Include="CScoresState.cpp">
+      <Filter>States</Filter>
+    </ClCompile>
+    <ClCompile Include="CPlayState.cpp">
+      <Filter>States</Filter>
+    </ClCompile>
+    <ClCompile Include="CBox2DManager.cpp">
+      <Filter>Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="CAdManager.cpp">
+      <Filter>Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="CInputManager.cpp">
+      <Filter>Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="CEntityManager.cpp">
+      <Filter>Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="CEntityBorder.cpp">
+      <Filter>Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="CEntityCar.cpp">
+      <Filter>Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="CEntityCarAI.cpp">
+      <Filter>Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="CEntityCheckpoint.cpp">
+      <Filter>Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="CEntitySpawn.cpp">
+      <Filter>Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="CEntityTile.cpp">
+      <Filter>Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="CEntityTire.cpp">
+      <Filter>Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="CEntityTireAI.cpp">
+      <Filter>Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="CEntityWaypoint.cpp">
+      <Filter>Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="CEntity.cpp">
+      <Filter>Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="CEntityAd.cpp">
+      <Filter>Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="CEntityLapCounter.cpp">
+      <Filter>Entities\HUD</Filter>
+    </ClCompile>
+    <ClCompile Include="CEntityFpsCounter.cpp">
+      <Filter>Entities\HUD</Filter>
+    </ClCompile>
+    <ClCompile Include="CEntityBuild.cpp">
+      <Filter>Entities\HUD</Filter>
+    </ClCompile>
+    <ClCompile Include="CDebugDraw.cpp">
+      <Filter>Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="CDebugLogger.cpp">
+      <Filter>Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="CHelpState.cpp">
+      <Filter>States</Filter>
+    </ClCompile>
+    <ClCompile Include="CIntroState.cpp">
+      <Filter>States</Filter>
+    </ClCompile>
+    <ClCompile Include="Box2DUtils.cpp">
+      <Filter>Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="include\common\shapes.cc">
+      <Filter>Algorithms</Filter>
+    </ClCompile>
+    <ClCompile Include="include\sweep\sweep.cc">
+      <Filter>Algorithms</Filter>
+    </ClCompile>
+    <ClCompile Include="include\sweep\sweep_context.cc">
+      <Filter>Algorithms</Filter>
+    </ClCompile>
+    <ClCompile Include="include\sweep\advancing_front.cc">
+      <Filter>Algorithms</Filter>
+    </ClCompile>
+    <ClCompile Include="include\sweep\cdt.cc">
+      <Filter>Algorithms</Filter>
+    </ClCompile>
+    <ClCompile Include="jsoncpp.cpp">
+      <Filter>Libraries</Filter>
+    </ClCompile>
+    <ClCompile Include="MusicHelper.cpp">
+      <Filter>Helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="HighscoresHelper.cpp">
+      <Filter>Helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="CStateManager.cpp">
+      <Filter>Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="CLevelFactory.cpp">
+      <Filter>Factories</Filter>
+    </ClCompile>
+    <ClCompile Include="CDrawManager.cpp">
+      <Filter>Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="IBox2DListener.cpp">
+      <Filter>Interfaces</Filter>
+    </ClCompile>
+    <ClCompile Include="IDrawListener.cpp">
+      <Filter>Interfaces</Filter>
+    </ClCompile>
+    <ClCompile Include="IEntityListener.cpp">
+      <Filter>Interfaces</Filter>
+    </ClCompile>
+    <ClCompile Include="IInputListener.cpp">
+      <Filter>Interfaces</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Box2DUtils.h" />
-    <ClInclude Include="CAdManager.h" />
-    <ClInclude Include="CBox2DManager.h" />
     <ClInclude Include="CCamera.h" />
-    <ClInclude Include="CCreditsState.h" />
-    <ClInclude Include="CDebugDraw.h" />
-    <ClInclude Include="CDebugLogger.h" />
-    <ClInclude Include="CDrawManager.h" />
     <ClInclude Include="CEngine.h" />
-    <ClInclude Include="CEntity.h" />
-    <ClInclude Include="CEntityAd.h" />
-    <ClInclude Include="CEntityBorder.h" />
-    <ClInclude Include="CEntityBuild.h" />
-    <ClInclude Include="CEntityCar.h" />
-    <ClInclude Include="CEntityCarAI.h" />
-    <ClInclude Include="CEntityCheckpoint.h" />
-    <ClInclude Include="CEntityFpsCounter.h" />
-    <ClInclude Include="CEntityLapCounter.h" />
-    <ClInclude Include="CEntityManager.h" />
-    <ClInclude Include="CEntitySpawn.h" />
-    <ClInclude Include="CEntityTile.h" />
-    <ClInclude Include="CEntityTire.h" />
-    <ClInclude Include="CEntityTireAI.h" />
-    <ClInclude Include="CEntityWaypoint.h" />
-    <ClInclude Include="CGameState.h" />
-    <ClInclude Include="CInputManager.h" />
-    <ClInclude Include="CLevelFactory.h" />
     <ClInclude Include="CMap.h" />
-    <ClInclude Include="CIntroState.h" />
-    <ClInclude Include="CPlayState.h" />
-    <ClInclude Include="CStateManager.h" />
-    <ClInclude Include="CHelpState.h" />
-    <ClInclude Include="CWinState.h" />
-    <ClInclude Include="HighscoresHelper.h" />
-    <ClInclude Include="IBox2DListener.h" />
-    <ClInclude Include="IDrawListener.h" />
-    <ClInclude Include="IEntityListener.h" />
-    <ClInclude Include="IInputListener.h" />
-    <ClInclude Include="ILapCountable.h" />
-    <ClInclude Include="MusicHelper.h" />
-    <ClInclude Include="CScoresState.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="AdHelper.h">
       <Filter>Helpers</Filter>
@@ -115,23 +161,178 @@
     <ClInclude Include="CIntegerHelper.h">
       <Filter>Helpers</Filter>
     </ClInclude>
+    <ClInclude Include="CCreditsState.h">
+      <Filter>States</Filter>
+    </ClInclude>
+    <ClInclude Include="CWinState.h">
+      <Filter>States</Filter>
+    </ClInclude>
+    <ClInclude Include="CScoresState.h">
+      <Filter>States</Filter>
+    </ClInclude>
+    <ClInclude Include="CPlayState.h">
+      <Filter>States</Filter>
+    </ClInclude>
+    <ClInclude Include="CBox2DManager.h">
+      <Filter>Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="CAdManager.h">
+      <Filter>Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="CInputManager.h">
+      <Filter>Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="CEntityManager.h">
+      <Filter>Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="CEntityBorder.h">
+      <Filter>Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="CEntityCar.h">
+      <Filter>Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="CEntityCarAI.h">
+      <Filter>Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="CEntityCheckpoint.h">
+      <Filter>Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="CEntitySpawn.h">
+      <Filter>Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="CEntityTile.h">
+      <Filter>Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="CEntityTire.h">
+      <Filter>Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="CEntityTireAI.h">
+      <Filter>Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="CEntityWaypoint.h">
+      <Filter>Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="CEntity.h">
+      <Filter>Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="CEntityAd.h">
+      <Filter>Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="CEntityLapCounter.h">
+      <Filter>Entities\HUD</Filter>
+    </ClInclude>
+    <ClInclude Include="CEntityFpsCounter.h">
+      <Filter>Entities\HUD</Filter>
+    </ClInclude>
+    <ClInclude Include="CEntityBuild.h">
+      <Filter>Entities\HUD</Filter>
+    </ClInclude>
+    <ClInclude Include="CDebugDraw.h">
+      <Filter>Debug</Filter>
+    </ClInclude>
+    <ClInclude Include="CDebugLogger.h">
+      <Filter>Debug</Filter>
+    </ClInclude>
+    <ClInclude Include="CHelpState.h">
+      <Filter>States</Filter>
+    </ClInclude>
+    <ClInclude Include="CGameState.h">
+      <Filter>States</Filter>
+    </ClInclude>
+    <ClInclude Include="CIntroState.h">
+      <Filter>States</Filter>
+    </ClInclude>
+    <ClInclude Include="Box2DUtils.h">
+      <Filter>Debug</Filter>
+    </ClInclude>
+    <ClInclude Include="MusicHelper.h">
+      <Filter>Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="HighscoresHelper.h">
+      <Filter>Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="CStateManager.h">
+      <Filter>Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="CLevelFactory.h">
+      <Filter>Factories</Filter>
+    </ClInclude>
+    <ClInclude Include="CDrawManager.h">
+      <Filter>Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="ILapCountable.h">
+      <Filter>Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="IBox2DListener.h">
+      <Filter>Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="IDrawListener.h">
+      <Filter>Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="IEntityListener.h">
+      <Filter>Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="IInputListener.h">
+      <Filter>Interfaces</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="TonnieRaceGame.rc" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="..\..\..\..\..\Downloads\favicon (1).ico" />
-    <Image Include="Resources\Images\favicon.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Maps\map2.json" />
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="Resources\Maps\map1.json" />
+    <Image Include="..\..\..\..\..\Downloads\favicon (1).ico">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="Resources\Images\favicon.ico">
+      <Filter>Resources</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Helpers">
       <UniqueIdentifier>{98e13b44-76ee-4dc7-89c7-15a52bd31af4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="States">
+      <UniqueIdentifier>{0167aa03-1a60-4c8e-a239-6c0b6a70a94b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Managers">
+      <UniqueIdentifier>{dd82e080-b3b8-4f71-aeae-7d8ddc5564af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entities">
+      <UniqueIdentifier>{3cfd6c65-7912-466c-9ab1-2756beed3b9a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entities\HUD">
+      <UniqueIdentifier>{00b8abae-b88e-4dfd-8a8c-d91f7851ba87}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Debug">
+      <UniqueIdentifier>{f764f9cd-1247-4594-b8f5-8fd6bececf5f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Algorithms">
+      <UniqueIdentifier>{6d087e48-590f-4a44-8752-7c80e6e1dd49}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources">
+      <UniqueIdentifier>{396ef9a5-0526-482d-b241-5e8a2d0e562a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\Maps">
+      <UniqueIdentifier>{8c06c9e3-4658-4842-9dcf-9981ae458f1c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Libraries">
+      <UniqueIdentifier>{5f6313c4-ed97-48fd-8ca7-9815d4b836b4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Factories">
+      <UniqueIdentifier>{2b27769c-2117-4da2-b961-e9ba15251161}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interfaces">
+      <UniqueIdentifier>{f0793bb2-2fec-4e2d-91da-55078674be65}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Resources\Maps\map1.json">
+      <Filter>Resources\Maps</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Maps\map2.json">
+      <Filter>Resources\Maps</Filter>
+    </None>
   </ItemGroup>
 </Project>

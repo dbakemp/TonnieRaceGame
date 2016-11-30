@@ -70,6 +70,10 @@ void CPlayState::init(CEngine* engine)
 	engine->camera = camera;
 
 	CEntityCar* car = new CEntityCar(engine, factory->map);
+	int spawns = factory->map->availableSpawns.size();
+	for (int i = 0; i < spawns; i++) {
+		new CEntityCarAI(engine, factory->map);
+	}
 
 	camera->SetChild(car);
 

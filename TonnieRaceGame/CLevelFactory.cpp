@@ -189,6 +189,8 @@ void CLevelFactory::CreateAd(Json::Value * root)
 	CEntityAd* ad = new CEntityAd(engine, map);
 	ad->tileX = (*root).get("x", 0).asDouble();
 	ad->tileY = (*root).get("y", 0).asDouble();
+	ad->textureHeight = (*root).get("height", 0).asDouble();
+	ad->textureWidth = (*root).get("width", 0).asDouble();
 }
 
 void CLevelFactory::CreateSpawns(Json::Value* root)
