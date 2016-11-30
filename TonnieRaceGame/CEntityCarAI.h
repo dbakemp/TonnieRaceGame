@@ -33,6 +33,9 @@ public:
 
 	int currentWaypoint;
 	int biasX, biasY;
+	double backupTimer;
+	double backingupTimer;
+	bool shouldBackup;
 
 	CEntityWaypoint* heading;
 
