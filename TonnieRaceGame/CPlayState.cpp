@@ -26,6 +26,10 @@ void CPlayState::init()
 
 void CPlayState::init(CEngine* engine)
 {
+	SDL_Renderer* renderer;
+	renderer = SDL_CreateRenderer(engine->window, -1, 0);
+	SDL_RenderClear(renderer);
+
 	TTF_Init();
 	TTF_Font* fpsFont = TTF_OpenFont("Resources/Fonts/opensans.ttf", 16);
 

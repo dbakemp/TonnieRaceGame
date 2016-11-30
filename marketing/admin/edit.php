@@ -8,7 +8,6 @@ $isActive = "";
 
 if (!empty($_GET['id']))
 {
-
     if ($_SERVER['REQUEST_METHOD'] == "POST")
     {
 
@@ -53,7 +52,7 @@ if (!empty($_GET['id']))
                 echo "Sorry, your file is too large.";
                 $uploadOk = 0;
             }
-                // Allow certain file formats
+            // Allow certain file formats
             if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
                 && $imageFileType != "gif" ) {
                 echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
@@ -62,7 +61,7 @@ if (!empty($_GET['id']))
             // Check if $uploadOk is set to 0 by an error
             if ($uploadOk == 0) {
                 echo "Sorry, your file was not uploaded.";
-            // if everything is ok, try to upload file
+                // if everything is ok, try to upload file
             } else {
                 if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
 
@@ -70,7 +69,7 @@ if (!empty($_GET['id']))
 
                     $imageURL = '"'.$mysqli->real_escape_string($fileName).'"';
 
-                    $results = $mysqli->query("UPDATE Ads SET Title=".$title.", URL=".$url.", Description=".$description.", IsActive=".$isActive.", ImageURL=".$imageURL." WHERE ID=".$_GET['id']);
+                    $results = $mysqli->query("UPDATE ads SET Title=".$title.", URL=".$url.", Description=".$description.", IsActive=".$isActive.", ImageURL=".$imageURL." WHERE ID=".$_GET['id']);
 
                     if($results){
                         header("Location: index.php?page=dashboard&sub=manage");
@@ -85,8 +84,8 @@ if (!empty($_GET['id']))
             }
         }
         else
-            {
-            $results = $mysqli->query("UPDATE Ads SET Title=" . $title . ", URL=" . $url . ", Description=" . $description . ", IsActive=" . $isActive . " WHERE ID=" . $_GET['id']);
+        {
+            $results = $mysqli->query("UPDATE ads SET Title=" . $title . ", URL=" . $url . ", Description=" . $description . ", IsActive=" . $isActive . " WHERE ID=" . $_GET['id']);
 
             if ($results) {
                 header("Location: index.php?page=dashboard&sub=manage");
@@ -97,7 +96,7 @@ if (!empty($_GET['id']))
     }
     else
     {
-        $results = $mysqli->query("SELECT title, url, imageurl, description, isactive FROM Ads WHERE id = " . $mysqli->real_escape_string($_GET['id']));
+        $results = $mysqli->query("SELECT title, url, imageurl, description, isactive FROM ads WHERE id = " . $mysqli->real_escape_string($_GET['id']));
         while ($row = $results->fetch_object())
         {
             $title = $row->title;
