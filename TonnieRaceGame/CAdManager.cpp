@@ -27,7 +27,7 @@ SDL_Texture* CAdManager::GetRandomAd()
 
 void CAdManager::AddAd(Json::Value * ad)
 {
-	std::string location = "ads/" + (*ad).get("ImageURL", "").asString();
+	std::string location = "ads/" + (*ad).get("FileName", "").asString();
 	SDL_Surface* texture = IMG_Load(location.c_str());
 	textureMap.insert(std::pair<std::string, SDL_Texture*>((*ad).get("Title", "").asString(), SDL_CreateTextureFromSurface(engine->renderer, texture)));
 	mapIndexes.push_back((*ad).get("Title", "").asString());
