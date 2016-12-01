@@ -86,7 +86,6 @@ void CPlayState::init(CEngine* engine)
 	speedoMeter->SetChild(car);
 	lapCounter->SetLapCountable(car);
 
-	engine->musicHelper->playTrack("music\\beep.mp3", true);
 }
 
 void CPlayState::clean()
