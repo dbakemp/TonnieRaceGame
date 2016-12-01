@@ -144,7 +144,7 @@
       <Filter>Interfaces</Filter>
     </ClCompile>
     <ClCompile Include="CEntityPowerup.cpp">
-      <Filter>Source Files\Entities</Filter>
+      <Filter>Entities</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -279,7 +279,7 @@
       <Filter>Interfaces</Filter>
     </ClInclude>
     <ClInclude Include="CEntityPowerup.h">
-      <Filter>Header Files\Entities</Filter>
+      <Filter>Entities</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

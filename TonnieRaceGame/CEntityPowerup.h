@@ -14,6 +14,7 @@ public:
 	CEntityPowerup(CEngine* engine, CMap* map, double xPos, double yPos);
 	bool devVisible;
 	int xPos, yPos, textureWidth, textureHeight, textureX, textureY;
+	double timer;
 	SDL_Texture* spriteSheet;
 	SDL_Rect srcRect;
 

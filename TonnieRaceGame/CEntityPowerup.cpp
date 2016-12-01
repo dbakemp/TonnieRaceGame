@@ -8,6 +8,7 @@
 #include "SDL_image.h"
 #include "stdlib.h"
 #include "CEntityCar.h"
+#include "CDebugLogger.h"
 
 CEntityPowerup::CEntityPowerup(CEngine * engine, CMap * map, double xPos, double yPos) : CEntity(engine), IDrawListener(engine, (int)CDrawManager::Layers::Object), IBox2DListener(engine), IInputListener(engine)
 {
@@ -16,6 +17,7 @@ CEntityPowerup::CEntityPowerup(CEngine * engine, CMap * map, double xPos, double
 	this->devVisible = false;
 	this->xPos = xPos;
 	this->yPos = yPos;
+	this->timer = 0;
 
 	int count = 2;
 	int rowNumber = 0;
@@ -51,6 +53,14 @@ CEntityPowerup::CEntityPowerup(CEngine * engine, CMap * map, double xPos, double
 
 void CEntityPowerup::Draw(SDL_Renderer * renderer)
 {
+	if (!visible)
+	{
+		timer += engine->deltaHelper->delta;
+		if (timer > 5) {
+			visible = true;
+			timer = 0;
+		}
+	}
 	if (devVisible) 
 	{
 		Box2DUtils::DrawBody(renderer, body, engine->camera, 0, 0, 0, 0, 0, 0, 255, 255, false);
@@ -71,16 +81,15 @@ void CEntityPowerup::CollisionBegin(CEntity * collider)
 	if (visible) 
 	{
 		visible = false;
-		std::cout << "Je hebt een powerup opgepakt!\n";
-	}
-	if (collider->GetType() == Type::CAR) {
-		CEntityCar* car = static_cast<CEntityCar*>(collider);
-
+		if (collider->GetType() == Type::CAR) {
+			CDebugLogger::PrintDebug("Picked up Powerup");
+		}
 	}
 }
 
 void CEntityPowerup::CollisionEnd(CEntity * collider)
 {
+
 }
 
 void CEntityPowerup::Input(SDL_Event * event)
