@@ -20,7 +20,13 @@ public:
 
 private:
 	IBox2DListener* child;
+	SDL_Surface* meter;
+	SDL_Texture* meter_texture;
+	SDL_Surface* meterback;
+	SDL_Texture* meterback_texture;
 	CEngine* engine;
+	int angle;
+	SDL_Point point;
 };
 
 #endif 
