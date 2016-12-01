@@ -54,7 +54,7 @@ void HighscoresHelper::getHighscore(int level)
 		fclose(file);
 	}
 
-	std::string urlString = "http://localhost/marketing/index.php?page=api&sub=highscores&action=read&level=";
+	std::string urlString = "http://timmeehh.xyz/index.php?page=api&sub=highscores&action=read&level=";
 	urlString.append(std::to_string(level));
 
 	char *url = (char*)urlString.c_str();
@@ -72,6 +72,11 @@ void HighscoresHelper::getHighscore(int level)
 		CDebugLogger::PrintDebug("Highscore file succesfully written");
 	}
 }
+
+//void HighscoresHelper::addHighScore(std::string name, std::string score, int level)
+//{ 
+//
+//}
 
 HighscoresHelper::~HighscoresHelper()
 {

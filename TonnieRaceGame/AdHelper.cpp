@@ -57,7 +57,7 @@ void AdHelper::processJSON()
 		//std::cout << std::endl;
 		CDebugLogger::PrintDebug("AD Framework: Fetching with Title: " + characters[i]["Title"].asString() + " and URL: " + characters[i]["ImageURL"].asString());
 
-		fetchAd(characters[i]["Title"].asString(), characters[i]["ImageURL"].asString());
+		//fetchAd(characters[i]["Title"].asString(), characters[i]["ImageURL"].asString());
 	}
 }
 
@@ -95,7 +95,8 @@ void AdHelper::fetchJSON()
 		fclose(file);
 	}
 
-	char *url = "http://www.timvanbeers.nl/ad.json";
+	//char *url = "http://www.timvanbeers.nl/ad.json";
+	char *url = "http://timmeehh.xyz/index.php?page=api&sub=ads";
 	//char outfilename[FILENAME_MAX] = "C:\Users\Tim\Desktop\Desktop\School\bbb.png";
 	curl = curl_easy_init();
 	if (curl) {

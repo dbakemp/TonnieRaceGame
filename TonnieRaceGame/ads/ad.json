@@ -1,17 +1,1 @@
-{
-	"Title": "Advertenties",
-	"Date": "1865",
-	"Ads": [{
-		"Title": "Testadd",
-		"URL": "www.nu.nl",
-		"ImageURL": "20161127181139.png",
-		"Description": "Ik ben een NU.NL Advertentie",
-		"IsActive": "1"
-	}, {
-		"Title": "Tweede advertentie",
-		"URL": "http:\/\/www.tweakers.net",
-		"ImageURL": "20161127221142.png",
-		"Description": "Dit is een tweakers advertentie.",
-		"IsActive": "1"
-	}]
-}
+{"Title":"Advertenties","Ads":[{"Title":"Testadd","URL":"www.nu.nl","ImageURL":"http:\/\/timmeehh.xyz\/uploads\/20161127181139.png","Description":"Ik ben een NU.NL Advertentie","IsActive":"1"},{"Title":"Test","URL":"Testtttt.nl","ImageURL":"http:\/\/timmeehh.xyz\/uploads\/20161130131130.jpg","Description":"test","IsActive":"1"}]}

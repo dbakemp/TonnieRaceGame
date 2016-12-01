@@ -7,6 +7,7 @@
 #include "CDrawManager.h"
 #include "CInputManager.h"
 #include <iostream>
+#include "HighscoresHelper.h"
 
 void CScoresState::init()
 {
@@ -35,6 +36,11 @@ void CScoresState::init(CEngine* engine)
 
 	TTF_CloseFont(fntPricedown);
 	TTF_Quit();
+
+	//Highscores binnentrekkeren
+	HighscoresHelper* highscoresHelper = new HighscoresHelper();
+
+	highscoresHelper->getHighscore(1);
 }
 
 void CScoresState::clean()
