@@ -18,15 +18,18 @@
 #include "SDL_ttf.h"
 #include "CEntityCar.h"
 #include "AdHelper.h"
+#include "CDebugLogger.h"
 
 CEngine::CEngine()
 {
+	gameControllerConnected = false;
 	windowHeight = 720;
 	windowWidth = 1280;
 	fpsCounter = 1;
+	level = 1;
 	showFPSCounter = true;
 
-	//AdHelper* adHelper = new AdHelper();
+	AdHelper* adHelper = new AdHelper();
 	musicHelper = new MusicHelper();
 	collisionHelper = new CCollisionHelper();
 	drawManager = new CDrawManager();
@@ -37,8 +40,11 @@ CEngine::CEngine()
 	deltaHelper = new CDeltaHelper();
 
 	SDL_Init(SDL_INIT_EVERYTHING);
-	window = SDL_CreateWindow("RaceGame", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, windowWidth, windowHeight, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
+	window = SDL_CreateWindow("Tonnie's Grote Racewereld", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, windowWidth, windowHeight, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
 	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+	
+	SDL_Surface* icon = IMG_Load("Resources/Images/favicon.ico");
+	SDL_SetWindowIcon(window, icon);
 
 	SDL_GameController* controller = NULL;
 	
@@ -53,6 +59,7 @@ CEngine::CEngine()
 				cout << "Sucesfully opened GameController.\n";
 				SDL_GameControllerAddMappingsFromFile("Recources\\gamecontrollerdb.txt");
 				cout << "Controller mapping DB succesfully loaded.\n";
+				gameControllerConnected = true;
 			}
 			else
 			{

@@ -4,6 +4,7 @@
 #include <vector>
 #include "SDL.h"
 #include "CGameState.h"
+#include <vlc/vlc.h>
 
 class CCreditsState : public CGameState
 {
@@ -23,5 +24,8 @@ public:
 	CCreditsState(CEngine* engine);
 
 private:
+	libvlc_instance_t *inst;
+	libvlc_media_player_t *mp;
+	libvlc_media_t *m;
 };
 #endif

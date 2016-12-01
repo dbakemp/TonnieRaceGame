@@ -80,8 +80,8 @@
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
-      <AdditionalLibraryDirectories>./lib/Box2D;./lib/SDL2;./lib/SDL2_gfx;./lib/LibCurl;../Bass;../Bass/c;./lib/SDL2_ttf;./lib/SDL2_image;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>Box2D.lib;SDL2.lib;SDL2_gfx.lib;SDL2main.lib;bass.lib;SDL2_image.lib;SDL2_ttf.lib;libcurl.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>./lib/Box2D;./lib/SDL2;./lib/SDL2_gfx;./lib/LibCurl;../Bass;../Bass/c;./lib/SDL2_ttf;./lib/SDL2_image;./lib/libvlc;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>Box2D.lib;SDL2.lib;SDL2_gfx.lib;SDL2main.lib;bass.lib;SDL2_image.lib;SDL2_ttf.lib;libcurl.lib;libvlc.lib;libvlccore.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>copy "$(SolutionDir)TonnieRaceGame\lib\SDL2_ttf\SDL2_ttf.dll" "$(TargetDir)"
@@ -148,6 +148,7 @@ copy "$(SolutionDir)TonnieRaceGame\lib\Bass\bass.dll" "$(TargetDir)"
   <ItemGroup>
     <ClCompile Include="AdHelper.cpp" />
     <ClCompile Include="Box2DUtils.cpp" />
+    <ClCompile Include="CAdManager.cpp" />
     <ClCompile Include="CBox2DManager.cpp" />
     <ClCompile Include="CCamera.cpp" />
     <ClCompile Include="CCollisionHelper.cpp" />
@@ -157,6 +158,7 @@ copy "$(SolutionDir)TonnieRaceGame\lib\Bass\bass.dll" "$(TargetDir)"
     <ClCompile Include="CDrawManager.cpp" />
     <ClCompile Include="CEngine.cpp" />
     <ClCompile Include="CEntity.cpp" />
+    <ClCompile Include="CEntityAd.cpp" />
     <ClCompile Include="CEntityBorder.cpp" />
     <ClCompile Include="CEntityBuild.cpp" />
     <ClCompile Include="CEntityCar.cpp" />
@@ -166,11 +168,13 @@ copy "$(SolutionDir)TonnieRaceGame\lib\Bass\bass.dll" "$(TargetDir)"
     <ClCompile Include="CEntityLapCounter.cpp" />
     <ClCompile Include="CEntityManager.cpp" />
     <ClCompile Include="CEntityPowerup.cpp" />
+    <ClCompile Include="CEntitySpawn.cpp" />
     <ClCompile Include="CEntityTile.cpp" />
     <ClCompile Include="CEntityTire.cpp" />
     <ClCompile Include="CEntityTireAI.cpp" />
     <ClCompile Include="CEntityWaypoint.cpp" />
     <ClCompile Include="CInputManager.cpp" />
+    <ClCompile Include="CIntegerHelper.cpp" />
     <ClCompile Include="CLevelFactory.cpp" />
     <ClCompile Include="CMap.cpp" />
     <ClCompile Include="CIntroState.cpp" />
@@ -179,6 +183,7 @@ copy "$(SolutionDir)TonnieRaceGame\lib\Bass\bass.dll" "$(TargetDir)"
     <ClCompile Include="CHelpState.cpp" />
     <ClCompile Include="CDeltaHelper.cpp" />
     <ClCompile Include="CWinState.cpp" />
+    <ClCompile Include="HighscoresHelper.cpp" />
     <ClCompile Include="IBox2DListener.cpp" />
     <ClCompile Include="IDrawListener.cpp" />
     <ClCompile Include="IEntityListener.cpp" />
@@ -196,6 +201,7 @@ copy "$(SolutionDir)TonnieRaceGame\lib\Bass\bass.dll" "$(TargetDir)"
   <ItemGroup>
     <ClInclude Include="AdHelper.h" />
     <ClInclude Include="Box2DUtils.h" />
+    <ClInclude Include="CAdManager.h" />
     <ClInclude Include="CBox2DManager.h" />
     <ClInclude Include="CCamera.h" />
     <ClInclude Include="CCollisionHelper.h" />
@@ -205,6 +211,7 @@ copy "$(SolutionDir)TonnieRaceGame\lib\Bass\bass.dll" "$(TargetDir)"
     <ClInclude Include="CDrawManager.h" />
     <ClInclude Include="CEngine.h" />
     <ClInclude Include="CEntity.h" />
+    <ClInclude Include="CEntityAd.h" />
     <ClInclude Include="CEntityBorder.h" />
     <ClInclude Include="CEntityBuild.h" />
     <ClInclude Include="CEntityCar.h" />
@@ -214,12 +221,14 @@ copy "$(SolutionDir)TonnieRaceGame\lib\Bass\bass.dll" "$(TargetDir)"
     <ClInclude Include="CEntityLapCounter.h" />
     <ClInclude Include="CEntityManager.h" />
     <ClInclude Include="CEntityPowerup.h" />
+    <ClInclude Include="CEntitySpawn.h" />
     <ClInclude Include="CEntityTile.h" />
     <ClInclude Include="CEntityTire.h" />
     <ClInclude Include="CEntityTireAI.h" />
     <ClInclude Include="CEntityWaypoint.h" />
     <ClInclude Include="CGameState.h" />
     <ClInclude Include="CInputManager.h" />
+    <ClInclude Include="CIntegerHelper.h" />
     <ClInclude Include="CLevelFactory.h" />
     <ClInclude Include="CMap.h" />
     <ClInclude Include="CIntroState.h" />
@@ -228,6 +237,7 @@ copy "$(SolutionDir)TonnieRaceGame\lib\Bass\bass.dll" "$(TargetDir)"
     <ClInclude Include="CHelpState.h" />
     <ClInclude Include="CDeltaHelper.h" />
     <ClInclude Include="CWinState.h" />
+    <ClInclude Include="HighscoresHelper.h" />
     <ClInclude Include="IBox2DListener.h" />
     <ClInclude Include="IDrawListener.h" />
     <ClInclude Include="IEntityListener.h" />
@@ -235,6 +245,7 @@ copy "$(SolutionDir)TonnieRaceGame\lib\Bass\bass.dll" "$(TargetDir)"
     <ClInclude Include="ILapCountable.h" />
     <ClInclude Include="MusicHelper.h" />
     <ClInclude Include="CScoresState.h" />
+    <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Resources\Maps\map1.json">
@@ -242,6 +253,16 @@ copy "$(SolutionDir)TonnieRaceGame\lib\Bass\bass.dll" "$(TargetDir)"
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <FileType>Text</FileType>
     </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Maps\map2.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="TonnieRaceGame.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\..\..\..\..\Downloads\favicon (1).ico" />
+    <Image Include="Resources\Images\favicon.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

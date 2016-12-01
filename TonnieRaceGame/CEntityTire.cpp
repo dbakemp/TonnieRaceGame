@@ -6,10 +6,10 @@
 #include <SDL.h>
 #include <iostream>
 
-CEntityTire::CEntityTire(CEngine* engine, CMap* map) : CEntity(engine), IDrawListener(engine, (int)CDrawManager::Layers::Object), IInputListener(engine), IBox2DListener(engine)
+CEntityTire::CEntityTire(CEngine* engine, CMap* map, int x, int y) : CEntity(engine), IDrawListener(engine, (int)CDrawManager::Layers::Object), IInputListener(engine), IBox2DListener(engine)
 {
-	double xPos = map->spawnX;
-	double yPos = map->spawnY;
+	double xPos = x;
+	double yPos = y;
 
 	bodyDef.type = b2_dynamicBody;
 	bodyDef.position.Set(xPos, yPos);
@@ -87,6 +87,13 @@ void CEntityTire::OnControllerButton(const SDL_ControllerButtonEvent sdlEvent)
 		{
 			controlState &= ~InputDirections::DOWN;
 			std::cout << "LEFT SHOULDER RELEASED\n";
+		}
+	}
+	else if (sdlEvent.button == SDL_CONTROLLER_BUTTON_X)
+	{
+		if (sdlEvent.state == SDL_PRESSED)
+		{
+			engine->musicHelper->playTrack("music\\toot.mp3", false);
 		}
 	}
 	else if (sdlEvent.button == SDL_CONTROLLER_BUTTON_START)

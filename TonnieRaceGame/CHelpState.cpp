@@ -86,6 +86,13 @@ void CHelpState::input(CEngine* engine, SDL_Event * event)
 			break;
 		}
 	}
+	else if (event->type == SDL_CONTROLLERBUTTONDOWN)
+	{
+		if (event->cbutton.button == SDL_CONTROLLER_BUTTON_A || event->cbutton.button == SDL_CONTROLLER_BUTTON_B)
+		{
+			engine->stateManager->changeState(Menu, engine);
+		}
+	}
 	else
 	{
 		engine->inputManager->Tick(event);

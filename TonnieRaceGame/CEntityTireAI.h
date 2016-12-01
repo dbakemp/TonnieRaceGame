@@ -13,7 +13,7 @@ class CMap;
 class CEntityTireAI : public CEntity, public IDrawListener,  public IBox2DListener
 {
 public:
-	CEntityTireAI(CEngine* engine, CMap* map);
+	CEntityTireAI(CEngine* engine, CMap* map, int x, int y);
 	void Draw(SDL_Renderer* renderer);
 	void Update();
 	void Create(b2World* world);
