@@ -143,6 +143,9 @@
     <ClCompile Include="IInputListener.cpp">
       <Filter>Interfaces</Filter>
     </ClCompile>
+    <ClCompile Include="CEntitySpeedoMeter.cpp">
+      <Filter>Source Files\Entities\HUD</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CCamera.h" />
@@ -274,6 +277,9 @@
     </ClInclude>
     <ClInclude Include="IInputListener.h">
       <Filter>Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="CEntitySpeedoMeter.h">
+      <Filter>Header Files\Entities\HUD</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

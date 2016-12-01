@@ -17,6 +17,7 @@
 #include "CCollisionHelper.h"
 #include "CEntityLapCounter.h"
 #include "CEntityFpsCounter.h"
+#include "CEntitySpeedoMeter.h"
 #include "SDL_ttf.h"
 #include "CDebugLogger.h"
 
@@ -81,6 +82,11 @@ void CPlayState::init(CEngine* engine)
 	CEntityBuild* build = new CEntityBuild(engine, fpsFont);
 	CEntityLapCounter* lapCounter = new CEntityLapCounter(engine, fpsFont);
 	lapCounter->SetLapCountable(car);
+
+	CEntitySpeedoMeter* speedoMeter = new CEntitySpeedoMeter(engine, fpsFont);
+	speedoMeter->SetChild(car);
+
+	engine->musicHelper->playTrack("music\\beep.mp3", true);
 }
 
 void CPlayState::clean()
