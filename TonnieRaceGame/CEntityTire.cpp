@@ -22,7 +22,7 @@ CEntityTire::CEntityTire(CEngine* engine, CMap* map, int x, int y) : CEntity(eng
 
 	maxForwardSpeed = 500;
 	maxBackwardsSpeed = -40;
-	maxDriveForce = 550;
+	maxDriveForce = 400;
 
 	this->engine = engine;
 }

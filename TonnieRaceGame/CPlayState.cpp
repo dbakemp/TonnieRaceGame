@@ -63,7 +63,7 @@ void CPlayState::init(CEngine* engine)
 	{
 		CDebugLogger::PrintDebug("Loding error???");
 	}
-	//factory->LoadMap("Resources/Maps/map2.json");
+
 	engine->currentMap = factory->map;
 
 	camera = new CCamera(engine);
@@ -81,10 +81,10 @@ void CPlayState::init(CEngine* engine)
 	CEntityFpsCounter* fpsCounter = new CEntityFpsCounter(engine, fpsFont);
 	CEntityBuild* build = new CEntityBuild(engine, fpsFont);
 	CEntityLapCounter* lapCounter = new CEntityLapCounter(engine, fpsFont);
-	lapCounter->SetLapCountable(car);
-
 	CEntitySpeedoMeter* speedoMeter = new CEntitySpeedoMeter(engine, fpsFont);
+
 	speedoMeter->SetChild(car);
+	lapCounter->SetLapCountable(car);
 
 	engine->musicHelper->playTrack("music\\beep.mp3", true);
 }
@@ -107,18 +107,17 @@ void CPlayState::handleEvents(CEngine* engine)
 
 void CPlayState::update(CEngine* engine)
 {
-	SDL_SetRenderDrawColor(engine->renderer, 0, 0, 0, 255);
-	SDL_RenderClear(engine->renderer);
-
 	engine->entityManager->Tick();
 	engine->world->Step(engine->deltaHelper->delta, 8, 3);
 	camera->Update();
 
-	engine->drawManager->Tick(engine->renderer);
 }
 
 void CPlayState::draw(CEngine* engine)
 {
+	SDL_SetRenderDrawColor(engine->renderer, 0, 0, 0, 255);
+	SDL_RenderClear(engine->renderer);
+	engine->drawManager->Tick(engine->renderer);
 }
 
 void CPlayState::input(CEngine* engine, SDL_Event * event)
