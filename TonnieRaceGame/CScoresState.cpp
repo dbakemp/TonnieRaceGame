@@ -32,7 +32,6 @@ void CScoresState::init(CEngine* engine)
 	SDL_Rect backrect = { 0,0,backW, backH };
 
 	SDL_RenderCopy(engine->renderer, background_texture, NULL, &backrect);
-	SDL_RenderPresent(engine->renderer);
 
 	TTF_CloseFont(fntPricedown);
 	TTF_Quit();

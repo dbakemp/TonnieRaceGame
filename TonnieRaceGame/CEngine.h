@@ -5,6 +5,7 @@
 #include "MusicHelper.h"
 #include <Box2D\Box2D.h>
 
+class AdHelper;
 class CDrawManager;
 class CInputManager;
 class CEntityManager;
@@ -19,7 +20,8 @@ class CMap;
 class CEngine
 {
 public:
-	CEngine();
+	CEngine(); 
+	AdHelper* adHelper;
 	CDrawManager* drawManager;
 	CInputManager* inputManager;
 	CEntityManager* entityManager;

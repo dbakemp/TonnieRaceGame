@@ -25,7 +25,6 @@ void CHelpState::init(CEngine* engine)
 	SDL_Rect backrect = { 0,0,backW, backH };
 
 	SDL_RenderCopy(engine->renderer, background_texture, NULL, &backrect);
-	SDL_RenderPresent(engine->renderer);
 
 	engine->musicHelper->playTrack("music\\plingplongplong.mp3", false);
 
