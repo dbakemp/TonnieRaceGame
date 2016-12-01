@@ -28,8 +28,15 @@ public:
 	void CollisionEnd(CEntity* collider) override;
 	void ProcessCheckpoint(CEntityCheckpoint* checkpoint);
 	void ProcessWaypoint(CEntityWaypoint* waypoint);
+	void ChangeWaypoint(CEntityWaypoint* waypoint);
+
 
 	int currentWaypoint;
+	int biasX, biasY;
+	double backupTimer;
+	double backingupTimer;
+	bool shouldBackup;
+
 	CEntityWaypoint* heading;
 
 	SDL_Texture* spriteSheet;

@@ -10,6 +10,7 @@
 #include "CEntityBuild.h"
 #include "CInputManager.h"
 #include "CEntityManager.h"
+#include "CAdManager.h"
 #include "CDeltaHelper.h"
 #include "CDrawManager.h"
 #include "CLevelFactory.h"
@@ -18,7 +19,7 @@
 #include "CEntityFpsCounter.h"
 #include "CEntitySpeedoMeter.h"
 #include "SDL_ttf.h"
-
+#include "CDebugLogger.h"
 
 void CPlayState::init()
 {
@@ -27,6 +28,10 @@ void CPlayState::init()
 
 void CPlayState::init(CEngine* engine)
 {
+	SDL_Renderer* renderer;
+	renderer = SDL_CreateRenderer(engine->window, -1, 0);
+	SDL_RenderClear(renderer);
+
 	TTF_Init();
 	TTF_Font* fpsFont = TTF_OpenFont("Resources/Fonts/opensans.ttf", 16);
 
@@ -38,15 +43,39 @@ void CPlayState::init(CEngine* engine)
 
 	SDL_QueryTexture(backmapTexture, NULL, NULL, &texW, &texH);
 
+	engine->adManager = new CAdManager(engine);
+
 	CLevelFactory* factory = new CLevelFactory(engine);
-	factory->LoadMap("Resources/Maps/map1.json");
+
+	if (engine->level == 1)
+	{
+		CDebugLogger::PrintDebug("Loading LVL 1");
+		factory->LoadMap("Resources/Maps/map1.json");
+		engine->musicHelper->playTrack("music\\beep.mp3", true);
+	}
+	else if (engine->level == 2)
+	{
+		CDebugLogger::PrintDebug("Loading LVL 2");
+		factory->LoadMap("Resources/Maps/map2.json");
+		engine->musicHelper->playTrack("music\\boerharms.mp3", true);
+	}
+	else
+	{
+		CDebugLogger::PrintDebug("Loding error???");
+	}
+	//factory->LoadMap("Resources/Maps/map2.json");
 	engine->currentMap = factory->map;
 
 	camera = new CCamera(engine);
 
 	engine->camera = camera;
 
-	CEntityCar* car = new CEntityCar(engine, factory->map); new CEntityCarAI(engine, factory->map); new CEntityCarAI(engine, factory->map); new CEntityCarAI(engine, factory->map); 
+	CEntityCar* car = new CEntityCar(engine, factory->map);
+	int spawns = factory->map->availableSpawns.size();
+	for (int i = 0; i < spawns; i++) {
+		new CEntityCarAI(engine, factory->map);
+	}
+
 	camera->SetChild(car);
 
 	CEntityFpsCounter* fpsCounter = new CEntityFpsCounter(engine, fpsFont);

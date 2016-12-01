@@ -60,6 +60,7 @@ function login($email, $password, $mysqli) {
                 // the password_verify function to avoid timing attacks.
 
 
+
                 //if (password_verify($password, $db_password))
                 if ($password == $db_password)
                 {

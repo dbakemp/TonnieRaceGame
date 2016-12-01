@@ -13,7 +13,7 @@ if (login_check($mysqli) == true) {
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Secure Login: Log In</title>
+    <title>Tonnie's grote reacewereld</title>
     <link rel="stylesheet" href="css/style.css" />
     <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css'>
     <script type="text/JavaScript" src="js/index.js"></script>

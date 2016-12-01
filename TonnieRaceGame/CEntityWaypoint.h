@@ -22,6 +22,7 @@ public:
 	void CollisionEnd(CEntity* collider) override;
 	void Input(SDL_Event* event);
 	int index;
+	int radius;
 private:
 	CEngine* engine;
 };

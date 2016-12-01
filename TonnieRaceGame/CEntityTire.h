@@ -13,7 +13,7 @@ class CMap;
 class CEntityTire : public CEntity, public IDrawListener, public IInputListener, public IBox2DListener
 {
 public:
-	CEntityTire(CEngine* engine, CMap* map);
+	CEntityTire(CEngine* engine, CMap* map, int x, int y);
 	void Draw(SDL_Renderer* renderer);
 	void Input(SDL_Event* event);
 	void Update();

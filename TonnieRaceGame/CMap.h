@@ -4,6 +4,7 @@
 #include <SDL.h>
 #include <iostream>
 #include "CEntityWaypoint.h"
+#include "CEntitySpawn.h"
 
 class CMap
 {
@@ -28,10 +29,10 @@ public:
 	int laps;
 	int checkpoints;
 
-	int spawnX;
-	int spawnY;
-
 	std::vector<CEntityWaypoint*> waypoints;
+	std::vector<CEntitySpawn*> availableSpawns;
+	std::vector<CEntitySpawn*> takenSpawns;
+	CEntitySpawn* GetSpawn();
 private:
 };
 

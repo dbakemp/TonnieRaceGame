@@ -1,6 +1,6 @@
 <?php
 include_once 'db_connect.php';
-include_once 'psl-config.php';
+include_once 'config.php';
 
 $error_msg = "";
 
@@ -74,7 +74,8 @@ if (isset($_POST['username'], $_POST['email'], $_POST['p'])) {
         // Create hashed password using the password_hash function.
         // This function salts it with a random salt and can be verified with
         // the password_verify function.
-        $password = password_hash($password, PASSWORD_BCRYPT);
+//        die($password);
+//        $password = password_hash($password, PASSWORD_BCRYPT);
 
         // Insert the new user into the database
         if ($insert_stmt = $mysqli->prepare("INSERT INTO members (username, email, password) VALUES (?, ?, ?)")) {

@@ -2,12 +2,14 @@
 #include "CEntityTireAI.h"
 #include "CDebugLogger.h"
 #include "CDeltaHelper.h"
+#include "CEntitySpawn.h"
 #include "CStateManager.h"
 #include "Box2DUtils.h"
 #include "CDrawManager.h"
 #include "CMap.h"
 #include <iostream>
 #include <string>
+#include "CIntegerHelper.h"
 #include <SDL_image.h>
 
 #ifndef DEGTORAD
@@ -22,6 +24,9 @@ CEntityCarAI::CEntityCarAI(CEngine* engine, CMap* map) : CEntity(engine), IDrawL
 	this->currentLap = 0;
 	this->currentWaypoint = -1;
 	this->debugVisible = false;
+	this->backupTimer = 0;
+	this->backingupTimer = 0;
+	this->shouldBackup = false;
 
 	SDL_Surface* texture = IMG_Load("Resources/Images/spritesheet_vehicles.png");
 	this->spriteSheet = SDL_CreateTextureFromSurface(engine->renderer, texture);
@@ -31,8 +36,9 @@ CEntityCarAI::CEntityCarAI(CEngine* engine, CMap* map) : CEntity(engine), IDrawL
 	body = engine->world->CreateBody(&bodyDef);
 	body->SetUserData(this);
 
-	double xPos = map->spawnX;
-	double yPos = map->spawnY;
+	CEntitySpawn* spawn = map->GetSpawn();
+	double xPos = spawn->x;
+	double yPos = spawn->y;
 
 	b2Vec2 vertices[8];
 
@@ -54,28 +60,28 @@ CEntityCarAI::CEntityCarAI(CEngine* engine, CMap* map) : CEntity(engine), IDrawL
 	jointDef.upperAngle = 0;
 	jointDef.localAnchorB.SetZero();
 
-	CEntityTireAI* tire = new CEntityTireAI(engine, map);
+	CEntityTireAI* tire = new CEntityTireAI(engine, map, spawn->x, spawn->y);
 	tire->ChangeZIndex(zIndex - 1);
 	jointDef.bodyB = tire->body;
 	jointDef.localAnchorA.Set(0.5 + xPos, 1.75f + yPos);
 	engine->world->CreateJoint(&jointDef);
 	tires.push_back(tire);
 
-	tire = new CEntityTireAI(engine, map);
+	tire = new CEntityTireAI(engine, map, spawn->x, spawn->y);
 	tire->ChangeZIndex(zIndex - 1);
 	jointDef.bodyB = tire->body;
 	jointDef.localAnchorA.Set(7.5 + xPos, 1.75f + yPos);
 	engine->world->CreateJoint(&jointDef);
 	tires.push_back(tire);
 
-	tire = new CEntityTireAI(engine, map);
+	tire = new CEntityTireAI(engine, map, spawn->x, spawn->y);
 	tire->ChangeZIndex(zIndex - 1);
 	jointDef.bodyB = tire->body;
 	jointDef.localAnchorA.Set(0.5 + xPos, 10.5f + yPos);
 	flJoint = static_cast<b2RevoluteJoint*>(engine->world->CreateJoint(&jointDef));
 	tires.push_back(tire);
 
-	tire = new CEntityTireAI(engine, map);
+	tire = new CEntityTireAI(engine, map, spawn->x, spawn->y);
 	tire->ChangeZIndex(zIndex - 1);
 	jointDef.bodyB = tire->body;
 	jointDef.localAnchorA.Set(7.5 + xPos, 10.5f + yPos);
@@ -141,22 +147,28 @@ void CEntityCarAI::ProcessWaypoint(CEntityWaypoint * waypoint)
 {
 	if (waypoint->index == currentWaypoint) {
 		if (currentWaypoint == engine->currentMap->waypoints.size()-1) {
-			heading = engine->currentMap->waypoints[0];
+			ChangeWaypoint(engine->currentMap->waypoints[0]);
 			currentWaypoint = 0;
 		}
 		else {
-			heading = engine->currentMap->waypoints[currentWaypoint + 1];
+			ChangeWaypoint(engine->currentMap->waypoints[currentWaypoint + 1]);
 			currentWaypoint++;
 		}
-		CDebugLogger::PrintDebug("New Waypoint");
 	}
+}
+
+void CEntityCarAI::ChangeWaypoint(CEntityWaypoint * waypoint)
+{
+	heading = waypoint;
+	biasX = CIntegerHelper::GetRandomIntBetween(-(waypoint->radius), waypoint->radius);
+	biasY = CIntegerHelper::GetRandomIntBetween(-(waypoint->radius), waypoint->radius);
 }
 
 
 void CEntityCarAI::Update()
 {
 	if (heading == nullptr) {
-		heading = engine->currentMap->waypoints[currentWaypoint+1];
+		ChangeWaypoint(engine->currentMap->waypoints[currentWaypoint+1]);
 		currentWaypoint++;
 	}
 
@@ -173,8 +185,8 @@ void CEntityCarAI::Update()
 	b2Vec2 veca = { (aabb.lowerBound.x+aabb.upperBound.x)/2, (aabb.lowerBound.y + aabb.upperBound.y) / 2 };
 	b2Vec2 vecb = heading->body->GetPosition();
 
-	double deltaX = veca.x - vecb.x;
-	double deltaY = veca.y - vecb.y;
+	double deltaX = veca.x - (vecb.x+biasX);
+	double deltaY = veca.y - (vecb.y+biasY);
 
 	double angle = (atan2(deltaY, deltaX) * 180 / M_PI) +90.0f;
 	if (angle < 270 && angle > 180) {
@@ -209,12 +221,43 @@ void CEntityCarAI::Update()
 		desiredAngle = lockAngle;
 	}
 
+	if (shouldBackup) {
+		desiredAngle = -desiredAngle;
+	}
+
 	double angleNow = flJoint->GetJointAngle();
 	double angleToTurn = desiredAngle - angleNow;
 	angleToTurn = b2Clamp(angleToTurn, -turnPerTimeStep, turnPerTimeStep);
 	double newAngle = angleNow + (angleToTurn);
 	flJoint->SetLimits(newAngle, newAngle);
 	frJoint->SetLimits(newAngle, newAngle);
+
+	b2Vec2 velocity = body->GetLinearVelocity();
+	if ((int)(velocity.Normalize()) < 5) {
+		backupTimer += engine->deltaHelper->delta;
+	}
+	else {
+		backupTimer = 0;
+	}
+
+	if (backupTimer > 1.5) {
+		shouldBackup = true;
+	}
+
+
+	if (shouldBackup && backingupTimer < 1) {
+		backingupTimer += engine->deltaHelper->delta;
+		for (CEntityTireAI* tire : tires) {
+			tire->maxForwardSpeed = -65;
+		}
+	}
+	else {
+		shouldBackup = false;
+		backingupTimer = 0;
+		for (CEntityTireAI* tire : tires) {
+			tire->maxForwardSpeed = 500;
+		}
+	}
 }
 
 void CEntityCarAI::Create(b2World* world)

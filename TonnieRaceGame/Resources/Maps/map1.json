@@ -1586,12 +1586,12 @@
                          "y":124
                         }, 
                         {
-                         "x":-68,
-                         "y":834
+                         "x":-6,
+                         "y":1064
                         }, 
                         {
-                         "x":65,
-                         "y":962
+                         "x":209,
+                         "y":1058
                         }, 
                         {
                          "x":314,
@@ -1883,6 +1883,138 @@
                  "width":0,
                  "x":832,
                  "y":1860
+                }, 
+                {
+                 "height":0,
+                 "id":78,
+                 "name":"",
+                 "rotation":0,
+                 "type":"spawn",
+                 "visible":true,
+                 "width":0,
+                 "x":953,
+                 "y":1600
+                }, 
+                {
+                 "height":0,
+                 "id":79,
+                 "name":"",
+                 "rotation":0,
+                 "type":"spawn",
+                 "visible":true,
+                 "width":0,
+                 "x":710,
+                 "y":1600
+                }, 
+                {
+                 "height":0,
+                 "id":80,
+                 "name":"",
+                 "rotation":0,
+                 "type":"spawn",
+                 "visible":true,
+                 "width":0,
+                 "x":830,
+                 "y":1473
+                }, 
+                {
+                 "height":0,
+                 "id":81,
+                 "name":"",
+                 "rotation":0,
+                 "type":"spawn",
+                 "visible":true,
+                 "width":0,
+                 "x":949,
+                 "y":1473
+                }, 
+                {
+                 "height":0,
+                 "id":82,
+                 "name":"",
+                 "rotation":0,
+                 "type":"spawn",
+                 "visible":true,
+                 "width":0,
+                 "x":715,
+                 "y":1474
+                }, 
+                {
+                 "height":255,
+                 "id":83,
+                 "name":"",
+                 "rotation":0,
+                 "type":"ad",
+                 "visible":true,
+                 "width":124,
+                 "x":1026,
+                 "y":1407
+                }, 
+                {
+                 "height":255,
+                 "id":87,
+                 "name":"",
+                 "rotation":0,
+                 "type":"ad",
+                 "visible":true,
+                 "width":124,
+                 "x":515,
+                 "y":1408.5
+                }, 
+                {
+                 "height":255,
+                 "id":88,
+                 "name":"",
+                 "rotation":0,
+                 "type":"ad",
+                 "visible":true,
+                 "width":124,
+                 "x":516,
+                 "y":1792.5
+                }, 
+                {
+                 "height":255,
+                 "id":89,
+                 "name":"",
+                 "rotation":0,
+                 "type":"ad",
+                 "visible":true,
+                 "width":124,
+                 "x":513,
+                 "y":2177.5
+                }, 
+                {
+                 "height":255,
+                 "id":90,
+                 "name":"",
+                 "rotation":0,
+                 "type":"ad",
+                 "visible":true,
+                 "width":124,
+                 "x":512,
+                 "y":2559.5
+                }, 
+                {
+                 "height":255,
+                 "id":91,
+                 "name":"",
+                 "rotation":0,
+                 "type":"ad",
+                 "visible":true,
+                 "width":124,
+                 "x":519,
+                 "y":1024.5
+                }, 
+                {
+                 "height":255,
+                 "id":92,
+                 "name":"",
+                 "rotation":0,
+                 "type":"ad",
+                 "visible":true,
+                 "width":124,
+                 "x":514,
+                 "y":641.5
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -1891,7 +2023,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":78,
+ "nextobjectid":93,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tileheight":128,
@@ -1899,7 +2031,7 @@
         {
          "columns":31,
          "firstgid":1,
-         "image":"..\/..\/..\/..\/..\/..\/Desktop\/Spritesheets\/spritesheet_tiles.png",
+         "image":"..\/Spritesheets\/spritesheet_tiles.png",
          "imageheight":2048,
          "imagewidth":4096,
          "margin":0,

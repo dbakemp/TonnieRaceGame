@@ -2,6 +2,8 @@
 #include "CDebugLogger.h"
 #include "CEntityBorder.h"
 #include "CEntityTile.h"
+#include "CEntitySpawn.h"
+#include "CEntityAd.h"
 #include "CEntityCheckpoint.h"
 #include "CEntityWaypoint.h"
 #include "SDL_image.h"
@@ -91,6 +93,10 @@ void CLevelFactory::CreateObjects(Json::Value* root)
 		{
 			CreateWaypoints(&object);
 		}
+		else if (object["type"].asString() == "ad")
+		{
+			CreateAd(&object);
+		}
 	}
 }
 
@@ -177,10 +183,19 @@ void CLevelFactory::CreateWaypoints(Json::Value * root)
 	}
 }
 
+void CLevelFactory::CreateAd(Json::Value * root)
+{
+	CDebugLogger::PrintDebug("Creating Ad");
+	CEntityAd* ad = new CEntityAd(engine, map);
+	ad->tileX = (*root).get("x", 0).asDouble();
+	ad->tileY = (*root).get("y", 0).asDouble();
+	ad->textureHeight = (*root).get("height", 0).asDouble();
+	ad->textureWidth = (*root).get("width", 0).asDouble();
+}
+
 void CLevelFactory::CreateSpawns(Json::Value* root)
 {
-	CDebugLogger::PrintDebug("Creating Spawns");
+	CDebugLogger::PrintDebug("Creating Spawn");
 
-	map->spawnX = (*root).get("x", 0).asInt()/5;
-	map->spawnY = (*root).get("y", 0).asInt()/5;
+	map->availableSpawns.push_back(new CEntitySpawn(engine, (*root).get("x", 0).asInt() / 5, (*root).get("y", 0).asInt() / 5));
 }

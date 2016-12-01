@@ -15,7 +15,8 @@ CEntityWaypoint::CEntityWaypoint(CEngine * engine, double x, double y, int index
 
 	b2CircleShape circleShape;
 	circleShape.m_p.Set(0, 0);
-	circleShape.m_radius = 20;
+	radius = 20;
+	circleShape.m_radius = radius;
 
 	b2FixtureDef fixtureDef;
 	fixtureDef.isSensor = true;
