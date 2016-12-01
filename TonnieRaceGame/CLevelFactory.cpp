@@ -176,7 +176,6 @@ void CLevelFactory::CreateWaypoints(Json::Value * root)
 	int i = 0;
 	for (Json::Value point : (*root)["polyline"])
 	{
-
 		CEntityWaypoint* waypoint = new CEntityWaypoint(engine, (point.get("x", 0).asDouble() + xPos) / scale, (point.get("y", 0).asDouble() + yPos) / scale, i);
 		map->waypoints.push_back(waypoint);
 		i++;
@@ -186,7 +185,25 @@ void CLevelFactory::CreateWaypoints(Json::Value * root)
 void CLevelFactory::CreateAd(Json::Value * root)
 {
 	CDebugLogger::PrintDebug("Creating Ad");
-	CEntityAd* ad = new CEntityAd(engine, map);
+
+	std::string direction = (*root).get("properties", "").get("direction", 0).asString();
+
+	CAdManager::AdDirection directionEnum;
+
+	if (direction == "down") {
+		directionEnum = CAdManager::AdDirection::DOWN;
+	}
+	else if (direction == "up") {
+		directionEnum = CAdManager::AdDirection::UP;
+	}
+	else if (direction == "right") {
+		directionEnum = CAdManager::AdDirection::RIGHT;
+	}
+	else {
+		directionEnum = CAdManager::AdDirection::LEFT;
+	}
+
+	CEntityAd* ad = new CEntityAd(engine, map, directionEnum);
 	ad->tileX = (*root).get("x", 0).asDouble();
 	ad->tileY = (*root).get("y", 0).asDouble();
 	ad->textureHeight = (*root).get("height", 0).asDouble();

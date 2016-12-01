@@ -30,7 +30,7 @@ void AdHelper::processJSON()
 
 		size_t lastindex = characters[i]["FileName"].asString().find_last_of(".");
 		std::string rawname = characters[i]["FileName"].asString().substr(0, lastindex);
-		std::string ext = characters[i]["FileName"].asString().substr(lastindex, 4);
+		std::string ext = characters[i]["FileName"].asString().substr(lastindex, characters[i]["FileName"].asString().size() - lastindex);
 		std::string rightName = rawname + "-right" + ext;
 		std::string upName = rawname + "-up" + ext;
 		std::string downName = rawname + "-down" + ext;

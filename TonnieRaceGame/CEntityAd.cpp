@@ -3,9 +3,9 @@
 #include "CAdManager.h"
 #include "CCamera.h"
 
-CEntityAd::CEntityAd(CEngine * engine, CMap * map) : CEntity(engine), IDrawListener(engine, ((int)CDrawManager::Layers::Tile)+1)
+CEntityAd::CEntityAd(CEngine * engine, CMap * map, CAdManager::AdDirection direction) : CEntity(engine), IDrawListener(engine, ((int)CDrawManager::Layers::Tile)+1)
 {
-	texture = engine->adManager->GetRandomAd();
+	texture = engine->adManager->GetRandomAd(direction);
 
 	this->engine = engine;
 }

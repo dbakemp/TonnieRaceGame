@@ -6,11 +6,12 @@
 #include "CEntity.h"
 #include "CMap.h"
 #include "CEngine.h"
+#include "CAdManager.h"
 
 class CEntityAd : public CEntity, public IDrawListener
 {
 public:
-	CEntityAd(CEngine* engine, CMap* map);
+	CEntityAd(CEngine* engine, CMap* map, CAdManager::AdDirection direction);
 	void Draw(SDL_Renderer* renderer);
 	void Update();
 
