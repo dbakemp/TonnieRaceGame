@@ -35,7 +35,7 @@ void CEntitySpeedoMeter::Draw(SDL_Renderer* renderer)
 	SDL_Rect srect;
 	SDL_QueryTexture(texture, NULL, NULL, &srect.w, &srect.h);
 
-	SDL_Rect dstrect = { engine->windowWidth - srect.w - 10, engine->windowHeight - srect.h - 10, srect.w, srect.h };
+	SDL_Rect dstrect = { engine->windowWidth - srect.w - 10, srect.h + 20, srect.w, srect.h };
 	SDL_RenderCopy(engine->renderer, texture, NULL, &dstrect);
 
 	SDL_DestroyTexture(texture);

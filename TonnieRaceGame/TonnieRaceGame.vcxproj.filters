@@ -144,7 +144,7 @@
       <Filter>Interfaces</Filter>
     </ClCompile>
     <ClCompile Include="CEntitySpeedoMeter.cpp">
-      <Filter>Source Files\Entities\HUD</Filter>
+      <Filter>Entities\HUD</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -279,7 +279,7 @@
       <Filter>Interfaces</Filter>
     </ClInclude>
     <ClInclude Include="CEntitySpeedoMeter.h">
-      <Filter>Header Files\Entities\HUD</Filter>
+      <Filter>Entities\HUD</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
