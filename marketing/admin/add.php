@@ -6,7 +6,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST")
 
     $ext = pathinfo($_FILES["fileToUpload"]["name"], PATHINFO_EXTENSION);
 
-    $target_file = $target_dir . date("YmdHms") .".". $ext;
+    $targetFileNameWithoutExt = date("YmdHms");
+    $targetFileName = $targetFileNameWithoutExt .".". $ext;
+    $target_file = $target_dir . $targetFileName;
 
     $uploadOk = 1;
     $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
@@ -45,6 +47,58 @@ if ($_SERVER['REQUEST_METHOD'] == "POST")
         if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
             //echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
 
+            var_dump($targetFileName);
+
+            $filename = 'uploads/'.$targetFileName;
+            $degrees = 90;
+
+            if ($ext == "jpg" || $ext == "JPG" || $ext == "jpeg")
+            {
+                // Load
+                $source = imagecreatefromjpeg($filename);
+            }
+            else if ($ext == "png")
+            {
+                $source = imagecreatefrompng($filename);
+            }
+
+
+
+            //// Rotate
+            $rotate = imagerotate($source, 180, 0);
+            if ($ext == "jpg" || $ext == "JPG" || $ext == "jpeg") {
+                imagejpeg($rotate, 'uploads/'.$targetFileNameWithoutExt.'-right.jpg');
+            }
+            else if ($ext == "png")
+            {
+                imagepng($rotate, 'uploads/'.$targetFileNameWithoutExt.'-right.png');
+            }
+
+            $rotate = imagerotate($source, -90, 0);
+            if ($ext == "jpg" || $ext == "JPG" || $ext == "jpeg") {
+                imagejpeg($rotate, 'uploads/'.$targetFileNameWithoutExt.'-down.jpg');
+            }
+            else if ($ext == "png")
+            {
+                imagepng($rotate, 'uploads/'.$targetFileNameWithoutExt.'-down.png');
+            }
+
+            $test = imagerotate($rotate, -180, 0);
+            if ($ext == "jpg" || $ext == "JPG" || $ext == "jpeg") {
+                imagejpeg($test, 'uploads/'.$targetFileNameWithoutExt.'-up.jpg');
+            }
+            else if ($ext == "png")
+            {
+                imagepng($test, 'uploads/'.$targetFileNameWithoutExt.'-up.png');
+            }
+
+
+
+            // Free the memory
+            imagedestroy($source);
+            imagedestroy($rotate);
+
+
             $fileName = $target_file;
 
             $isActive = 0;
@@ -61,7 +115,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST")
             $imageURL = '"'.$mysqli->real_escape_string($fileName).'"';
 
             //MySqli Insert Query
-            $insert_row = $mysqli->query("INSERT INTO Ads (Title, URL, ImageURL, Description, IsActive) VALUES($title, $url, $imageURL, $description, $isActive)");
+            $insert_row = $mysqli->query("INSERT INTO ads (Title, URL, ImageURL, Description, IsActive) VALUES($title, $url, $imageURL, $description, $isActive)");
 
             if($insert_row){
                 header('Location: index.php?page=dashboard&sub=edit&id=' . $mysqli->insert_id);
