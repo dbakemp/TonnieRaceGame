@@ -97,15 +97,13 @@ void CLevelFactory::CreateObjects(Json::Value* root)
 		{
 			CreateWaypoints(&object);
 		}
-<<<<<<< HEAD
-		else if (object["type"].asString() == "powerup") 
+		else if (object["type"].asString() == "powerup")
 		{
 			CreatePowerups(&object);
-=======
+		}
 		else if (object["type"].asString() == "ad")
 		{
 			CreateAd(&object);
->>>>>>> master
 		}
 	}
 }

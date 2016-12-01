@@ -17,11 +17,8 @@ public:
 	void CreateBorder(Json::Value* root);
 	void CreateCheckpoints(Json::Value* root);
 	void CreateWaypoints(Json::Value* root);
-<<<<<<< HEAD
 	void CreatePowerups(Json::Value* root);
-=======
 	void CreateAd(Json::Value* root);
->>>>>>> master
 	CMap* map;
 private:
 	CEngine* engine;

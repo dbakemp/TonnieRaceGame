@@ -4,11 +4,8 @@
 #include <SDL.h>
 #include <iostream>
 #include "CEntityWaypoint.h"
-<<<<<<< HEAD
 #include "CEntityPowerup.h"
-=======
 #include "CEntitySpawn.h"
->>>>>>> master
 
 class CMap
 {
@@ -35,14 +32,10 @@ public:
 	int checkpoints;
 
 	std::vector<CEntityWaypoint*> waypoints;
-<<<<<<< HEAD
 	std::vector<CEntityPowerup*> powerups;
-
-=======
 	std::vector<CEntitySpawn*> availableSpawns;
 	std::vector<CEntitySpawn*> takenSpawns;
 	CEntitySpawn* GetSpawn();
->>>>>>> master
 private:
 };
 
