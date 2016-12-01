@@ -34,6 +34,7 @@ void CPlayState::init(CEngine* engine)
 
 	TTF_Init();
 	TTF_Font* fpsFont = TTF_OpenFont("Resources/Fonts/opensans.ttf", 16);
+	TTF_Font* kmhFont = TTF_OpenFont("Resources/Fonts/opensans.ttf", 64);
 
 	b2Vec2 gravity(0, 0);
 
@@ -61,7 +62,7 @@ void CPlayState::init(CEngine* engine)
 	}
 	else
 	{
-		CDebugLogger::PrintDebug("Loding error???");
+		CDebugLogger::PrintDebug("Error loading level");
 	}
 
 	engine->currentMap = factory->map;
@@ -79,9 +80,9 @@ void CPlayState::init(CEngine* engine)
 	camera->SetChild(car);
 
 	CEntityFpsCounter* fpsCounter = new CEntityFpsCounter(engine, fpsFont);
-	CEntityBuild* build = new CEntityBuild(engine, fpsFont);
 	CEntityLapCounter* lapCounter = new CEntityLapCounter(engine, fpsFont);
-	CEntitySpeedoMeter* speedoMeter = new CEntitySpeedoMeter(engine, fpsFont);
+	CEntitySpeedoMeter* speedoMeter = new CEntitySpeedoMeter(engine, kmhFont);
+	CEntityBuild* build = new CEntityBuild(engine, fpsFont);
 
 	speedoMeter->SetChild(car);
 	lapCounter->SetLapCountable(car);
