@@ -39,6 +39,7 @@ SDL_Texture* CAdManager::GetRandomAd(AdDirection direction)
 			break;
 	}
 
+
 	return texture;
 }
 
