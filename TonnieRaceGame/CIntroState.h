@@ -4,6 +4,7 @@
 #include <vector>
 #include "SDL.h"
 #include "CGameState.h"
+#include "AdHelper.h"
 
 class CIntroState: public CGameState
 {
@@ -19,7 +20,7 @@ public:
 	void update(CEngine* engine);
 	void draw(CEngine* engine);
 	void input(CEngine* engine, SDL_Event* event);
-
+	//AdHelper* adHelper;
 	
 
 	int selectedItem;

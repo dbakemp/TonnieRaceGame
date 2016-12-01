@@ -2,7 +2,7 @@
 if (!empty($_GET['id']))
 {
     //MySqli Delete Query
-    $results = $mysqli->query("DELETE FROM Ads WHERE ID=".$mysqli->real_escape_string($_GET['id']));
+    $results = $mysqli->query("DELETE FROM ads WHERE ID=".$mysqli->real_escape_string($_GET['id']));
 
     if($results)
     {

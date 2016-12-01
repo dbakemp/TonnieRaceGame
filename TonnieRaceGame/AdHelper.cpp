@@ -25,9 +25,23 @@ void AdHelper::processJSON()
 	reader.parse(ifs, obj);
 	const Json::Value& characters = obj["Ads"]; // array of characters
 	for (int i = 0; i < characters.size(); i++) {
-		CDebugLogger::PrintDebug("AD Framework: Fetching with Title: " + characters[i]["Title"].asString() + " and URL: " + characters[i]["ImageURL"].asString() + " and Filename: " + characters[i]["FileName"].asString());
+		//CDebugLogger::PrintDebug("AD Framework: Fetching with Title: " + characters[i]["Title"].asString() + " and URL: " + characters[i]["ImageURL"].asString() + " and Filename: " + characters[i]["FileName"].asString());
+
+
+		size_t lastindex = characters[i]["FileName"].asString().find_last_of(".");
+		std::string rawname = characters[i]["FileName"].asString().substr(0, lastindex);
+		std::string ext = characters[i]["FileName"].asString().substr(lastindex, 4);
+		std::string rightName = rawname + "-right" + ext;
+		std::string upName = rawname + "-up" + ext;
+		std::string downName = rawname + "-down" + ext;
+		size_t lastUrlIndex = characters[i]["ImageURL"].asString().find_last_of("/");
+		std::string baseURL = characters[i]["ImageURL"].asString().substr(0, lastUrlIndex);
 
 		fetchAd(characters[i]["Title"].asString(), characters[i]["ImageURL"].asString(), characters[i]["FileName"].asString());
+		////Andere richtingen:
+		fetchAd(characters[i]["Title"].asString(), baseURL + "/" + rightName, rightName);
+		fetchAd(characters[i]["Title"].asString(), baseURL + "/" + upName, upName);
+		fetchAd(characters[i]["Title"].asString(), baseURL + "/" + downName, downName);
 	}
 }
 

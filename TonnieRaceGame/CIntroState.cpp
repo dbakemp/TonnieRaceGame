@@ -41,6 +41,8 @@ void CIntroState::init(CEngine* engine)
 
 	TTF_CloseFont(fntPricedown);
 	TTF_Quit();
+
+	//adHelper = new AdHelper();
 }
 
 void CIntroState::clean()
