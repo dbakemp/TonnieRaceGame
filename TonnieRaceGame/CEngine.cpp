@@ -47,6 +47,8 @@ CEngine::CEngine()
 	SDL_SetWindowIcon(window, icon);
 
 	SDL_GameController* controller = NULL;
+
+
 	
 	for (int i = 0; i < SDL_NumJoysticks(); ++i)
 	{

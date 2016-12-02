@@ -45,23 +45,27 @@ SDL_Texture* CAdManager::GetRandomAd(AdDirection direction)
 
 void CAdManager::AddAd(Json::Value * ad)
 {
-	size_t lastindex = (*ad).get("FileName", "").asString().find_last_of(".");
-	std::string rawname = (*ad).get("FileName", "").asString().substr(0, lastindex);
-	std::string ext = (*ad).get("FileName", "").asString().substr(lastindex, (*ad).get("FileName", "").asString().size() - lastindex);
 
-	std::string location = "ads/" + rawname+ ext;
-	std::string locationDown = "ads/" + rawname + "-down" + ext;
-	std::string locationRight = "ads/" + rawname + "-right" + ext;
-	std::string locationUp = "ads/" + rawname + "-up" + ext;
-	SDL_Surface* texture = IMG_Load(location.c_str());
-	SDL_Surface* textureDown = IMG_Load(locationDown.c_str());
-	SDL_Surface* textureRight = IMG_Load(locationRight.c_str());
-	SDL_Surface* textureUp = IMG_Load(locationUp.c_str());
+	if ((*ad).get("IsActive", "").asString() == "1")
+	{
+		size_t lastindex = (*ad).get("FileName", "").asString().find_last_of(".");
+		std::string rawname = (*ad).get("FileName", "").asString().substr(0, lastindex);
+		std::string ext = (*ad).get("FileName", "").asString().substr(lastindex, (*ad).get("FileName", "").asString().size() - lastindex);
 
-	textureMap.insert(std::pair<std::string, SDL_Texture*>((*ad).get("Title", "").asString(), SDL_CreateTextureFromSurface(engine->renderer, texture)));
-	textureMap.insert(std::pair<std::string, SDL_Texture*>((*ad).get("Title", "").asString() + "-down", SDL_CreateTextureFromSurface(engine->renderer, textureDown)));
-	textureMap.insert(std::pair<std::string, SDL_Texture*>((*ad).get("Title", "").asString() + "-right", SDL_CreateTextureFromSurface(engine->renderer, textureRight)));
-	textureMap.insert(std::pair<std::string, SDL_Texture*>((*ad).get("Title", "").asString() + "-up", SDL_CreateTextureFromSurface(engine->renderer, textureUp)));
+		std::string location = "ads/" + rawname + ext;
+		std::string locationDown = "ads/" + rawname + "-down" + ext;
+		std::string locationRight = "ads/" + rawname + "-right" + ext;
+		std::string locationUp = "ads/" + rawname + "-up" + ext;
+		SDL_Surface* texture = IMG_Load(location.c_str());
+		SDL_Surface* textureDown = IMG_Load(locationDown.c_str());
+		SDL_Surface* textureRight = IMG_Load(locationRight.c_str());
+		SDL_Surface* textureUp = IMG_Load(locationUp.c_str());
 
-	mapIndexes.push_back((*ad).get("Title", "").asString());
+		textureMap.insert(std::pair<std::string, SDL_Texture*>((*ad).get("Title", "").asString(), SDL_CreateTextureFromSurface(engine->renderer, texture)));
+		textureMap.insert(std::pair<std::string, SDL_Texture*>((*ad).get("Title", "").asString() + "-down", SDL_CreateTextureFromSurface(engine->renderer, textureDown)));
+		textureMap.insert(std::pair<std::string, SDL_Texture*>((*ad).get("Title", "").asString() + "-right", SDL_CreateTextureFromSurface(engine->renderer, textureRight)));
+		textureMap.insert(std::pair<std::string, SDL_Texture*>((*ad).get("Title", "").asString() + "-up", SDL_CreateTextureFromSurface(engine->renderer, textureUp)));
+
+		mapIndexes.push_back((*ad).get("Title", "").asString());
+	}
 }

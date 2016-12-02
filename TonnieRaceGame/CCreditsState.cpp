@@ -12,6 +12,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include <SDL_syswm.h>
 #include <vlc/vlc.h>
 
 
@@ -46,9 +47,10 @@ void CCreditsState::init(CEngine* engine)
 
 	char const *vlc_argv[] =
 	{
-		/*"--width=500",
-		"--height=400",*/
-		"--fullscreen",
+		//"--width=10",
+		//"--height=400",
+		//"--fullscreen",
+		//t.c_str(),
 		"--no-embedded-video", "--no-video-deco",
 	};
 	int vlc_argc = sizeof(vlc_argv) / sizeof(*vlc_argv);
@@ -64,6 +66,7 @@ void CCreditsState::init(CEngine* engine)
 
 	libvlc_video_set_format(mp, "RV16", 100, 100, 200);
 
+
 	CDebugLogger::PrintDebug("Releasing media file");
 	// no need to keep the media now
 	libvlc_media_release(m);
@@ -71,8 +74,6 @@ void CCreditsState::init(CEngine* engine)
 	CDebugLogger::PrintDebug("Start playing video");
 	// play the media_player
 	libvlc_media_player_play(mp);
-
-	
 
 
 	//Wait 40 secs, length of the outro video
