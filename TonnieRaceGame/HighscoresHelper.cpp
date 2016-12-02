@@ -17,6 +17,9 @@ size_t writeData(void *ptr, size_t size, size_t nmemb, FILE *stream) {
 
 void HighscoresHelper::getHighscore(int level)
 {
+	/* Create ads directory if it does not exist */
+	CreateDirectory("highscores", NULL);
+
 	CDebugLogger::PrintDebug("Getting Highscore!");
 	CURL *curl;
 	FILE *fp;

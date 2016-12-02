@@ -47,6 +47,9 @@ void AdHelper::processJSON()
 
 void AdHelper::fetchJSON()
 {
+	/* Create ads directory if it does not exist */
+	CreateDirectory("ads", NULL);
+
 	CDebugLogger::PrintDebug("AD Framework: Start fetching JSON...");
 	CURL *curl;
 	FILE *fp;
