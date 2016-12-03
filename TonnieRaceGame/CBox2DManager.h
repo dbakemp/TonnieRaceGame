@@ -14,6 +14,7 @@ public:
 	void AddListener(IBox2DListener* box2DListener);
 	void RemoveListener(IBox2DListener* box2DListener);
 	void Tick(b2World* world);
+	void Clear();
 };
 
 

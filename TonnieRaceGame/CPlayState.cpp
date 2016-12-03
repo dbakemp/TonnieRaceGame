@@ -14,17 +14,13 @@
 #include "CDeltaHelper.h"
 #include "CDrawManager.h"
 #include "CLevelFactory.h"
+#include "CBox2DManager.h"
 #include "CCollisionHelper.h"
 #include "CEntityLapCounter.h"
 #include "CEntityFpsCounter.h"
 #include "CEntitySpeedoMeter.h"
 #include "SDL_ttf.h"
 #include "CDebugLogger.h"
-
-void CPlayState::init()
-{
-	return;
-}
 
 void CPlayState::init(CEngine* engine)
 {
@@ -89,8 +85,15 @@ void CPlayState::init(CEngine* engine)
 
 }
 
-void CPlayState::clean()
+void CPlayState::clean(CEngine* engine)
 {
+	engine->drawManager->Clear();
+	engine->inputManager->Clear();
+	engine->box2DManager->Clear();
+	engine->entityManager->Clear();
+
+	delete camera;
+	camera = nullptr;
 }
 
 void CPlayState::pause()
@@ -107,10 +110,9 @@ void CPlayState::handleEvents(CEngine* engine)
 
 void CPlayState::update(CEngine* engine)
 {
+	camera->Update();
 	engine->entityManager->Tick();
 	engine->world->Step(engine->deltaHelper->delta, 8, 3);
-	camera->Update();
-
 }
 
 void CPlayState::draw(CEngine* engine)
@@ -128,9 +130,4 @@ void CPlayState::input(CEngine* engine, SDL_Event * event)
 CPlayState::CPlayState(CEngine* engine)
 {
 	init(engine);
-}
-
-CPlayState::~CPlayState()
-{
-	clean();
 }

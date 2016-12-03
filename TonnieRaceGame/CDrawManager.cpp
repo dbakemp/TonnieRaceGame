@@ -30,3 +30,13 @@ void CDrawManager::ChangeZIndex(IDrawListener* drawListener, int index)
 	listenersIndexed[drawListener->zIndex].erase(std::remove(listenersIndexed[drawListener->zIndex].begin(), listenersIndexed[drawListener->zIndex].end(), drawListener), listenersIndexed[drawListener->zIndex].end());
 	listenersIndexed[index].push_back(drawListener);
 }
+
+void CDrawManager::Clear()
+{
+	int i = 0;
+	for (std::vector<IDrawListener*> listeners : listenersIndexed) {
+		listenersIndexed[i].erase(listenersIndexed[i].begin(), listenersIndexed[i].end());
+		i++;
+	}
+	listeners.clear();
+}

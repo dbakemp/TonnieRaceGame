@@ -9,11 +9,6 @@
 #include <iostream>
 #include "CDebugLogger.h"
 
-void CIntroState::init()
-{
-	return;
-}
-
 void CIntroState::init(CEngine* engine)
 {
 	selectedItem = 0;
@@ -45,7 +40,7 @@ void CIntroState::init(CEngine* engine)
 	//adHelper = new AdHelper();
 }
 
-void CIntroState::clean()
+void CIntroState::clean(CEngine* engine)
 {
 }
 

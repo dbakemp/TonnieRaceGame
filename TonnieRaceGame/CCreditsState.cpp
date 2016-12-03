@@ -15,12 +15,6 @@
 #include <SDL_syswm.h>
 #include <vlc/vlc.h>
 
-
-void CCreditsState::init()
-{
-	return;
-}
-
 void CCreditsState::init(CEngine* engine)
 {
 	bool done = false;
@@ -93,7 +87,7 @@ void CCreditsState::init(CEngine* engine)
 	libvlc_release(inst);
 }
 
-void CCreditsState::clean()
+void CCreditsState::clean(CEngine* engine)
 {
 }
 

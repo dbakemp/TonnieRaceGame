@@ -8,11 +8,6 @@
 #include "CInputManager.h"
 #include <iostream>
 
-void CWinState::init()
-{
-	return;
-}
-
 void CWinState::init(CEngine* engine)
 {
 	font = TTF_OpenFont("Resources/Fonts/opensans.ttf", 120);
@@ -20,7 +15,7 @@ void CWinState::init(CEngine* engine)
 	engine->musicHelper->playTrack("music\\daargaatze.mp3", true);
 }
 
-void CWinState::clean()
+void CWinState::clean(CEngine* engine)
 {
 }
 

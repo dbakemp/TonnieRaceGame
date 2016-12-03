@@ -9,6 +9,10 @@
 
 void CStateManager::changeState(EGameState state, CEngine* engine)
 {
+	if (states.size() > 0) {
+		getCurrentState()->clean(engine);
+	}
+
 	switch (state)
 	{
 	case Start: states.push_back(new CIntroState(engine));

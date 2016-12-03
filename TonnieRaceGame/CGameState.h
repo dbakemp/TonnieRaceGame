@@ -10,8 +10,8 @@ using namespace std;
 class CGameState
 {
 public:
-	virtual void init() = 0;
-	virtual void clean() = 0;
+	virtual void init(CEngine* engine) = 0;
+	virtual void clean(CEngine* engine) = 0;
 
 	virtual void pause() = 0;
 	virtual void resume() = 0;

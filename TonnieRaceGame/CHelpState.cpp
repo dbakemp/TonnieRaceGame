@@ -8,10 +8,6 @@
 #include "CInputManager.h"
 #include <iostream>
 #include <curl/curl.h>
-void CHelpState::init()
-{
-	return;
-}
 
 void CHelpState::init(CEngine* engine)
 {
@@ -31,7 +27,7 @@ void CHelpState::init(CEngine* engine)
 
 }
 
-void CHelpState::clean()
+void CHelpState::clean(CEngine* engine)
 {
 }
 

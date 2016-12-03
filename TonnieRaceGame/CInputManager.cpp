@@ -18,3 +18,8 @@ void CInputManager::Tick(SDL_Event* event)
 		listener->Input(event);
 	}
 }
+
+void CInputManager::Clear()
+{
+	listeners.clear();
+}

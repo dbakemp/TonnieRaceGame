@@ -9,11 +9,6 @@
 #include <iostream>
 #include "HighscoresHelper.h"
 
-void CScoresState::init()
-{
-	return;
-}
-
 void CScoresState::init(CEngine* engine)
 {
 	TTF_Init();
@@ -42,7 +37,7 @@ void CScoresState::init(CEngine* engine)
 	highscoresHelper->getHighscore(1);
 }
 
-void CScoresState::clean()
+void CScoresState::clean(CEngine* engine)
 {
 }
 

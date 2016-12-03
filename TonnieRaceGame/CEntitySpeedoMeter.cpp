@@ -13,7 +13,7 @@ CEntitySpeedoMeter::CEntitySpeedoMeter(CEngine* engine, TTF_Font* font) : CEntit
 	this->engine = engine;
 
 	meter = IMG_Load("Resources/Images/meter.png");
-	meterback = IMG_Load("Resources/Images/playground.png");
+	meterback = IMG_Load("Resources/Images/speedometer.png");
 	meter_texture = SDL_CreateTextureFromSurface(engine->renderer, meter);
 	meterback_texture = SDL_CreateTextureFromSurface(engine->renderer, meterback);
 	angle = 0;

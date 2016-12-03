@@ -17,3 +17,12 @@ void CEntityManager::Tick()
 		listener->Update();
 	}
 }
+
+void CEntityManager::Clear()
+{
+	for (IEntityListener* listener : listeners)
+	{
+		delete listener;
+	}
+	listeners.clear();
+}
