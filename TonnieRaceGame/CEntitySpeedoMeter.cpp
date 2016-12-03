@@ -44,9 +44,9 @@ void CEntitySpeedoMeter::Draw(SDL_Renderer* renderer)
 	int backW = 0;
 	int backH = 0;
 	SDL_QueryTexture(meter_texture, NULL, NULL, 0, 0);
-	SDL_Rect backrect = { 25, 690, 120, 17 };
-	SDL_Rect meterbackrect = { 0, 0, 1280, 720 };
-
+	SDL_Rect backrect = { 25,  engine->windowHeight-30, 120, 17 };
+	
+	SDL_Rect meterbackrect = { 0, engine->windowHeight - 132, 383, 132 };
 	
 	SDL_RenderCopy(engine->renderer, meterback_texture, NULL, &meterbackrect);
 	SDL_RenderCopyEx(engine->renderer, meter_texture, NULL, &backrect, angle, &point, SDL_FLIP_NONE);
@@ -57,7 +57,7 @@ void CEntitySpeedoMeter::Draw(SDL_Renderer* renderer)
 	SDL_Rect srect;
 	SDL_QueryTexture(texture, NULL, NULL, &srect.w, &srect.h);
 
-	SDL_Rect dstrect = { 260,640, srect.w, srect.h };
+	SDL_Rect dstrect = { 260, engine->windowHeight - 80, srect.w, srect.h };
 	//SDL_Rect dstrect = { engine->windowWidth - srect.w - 10, srect.h + 20, srect.w, srect.h };
 	SDL_RenderCopy(engine->renderer, texture, NULL, &dstrect);
 
