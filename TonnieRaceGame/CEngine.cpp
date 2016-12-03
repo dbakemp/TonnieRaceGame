@@ -7,6 +7,7 @@
 #include "CEntitySmallSquare.h"
 #include "CDeltaHelper.h"
 #include "CStateManager.h"
+#include "CSpriteSheetManager.h"
 #include "CCamera.h"
 #include "CDebugLogger.h"
 #include "CLevelFactory.h"
@@ -31,6 +32,7 @@ CEngine::CEngine()
 
 	adHelper = new AdHelper();
 	musicHelper = new MusicHelper();
+	spriteSheetManager = new CSpriteSheetManager(this);
 	collisionHelper = new CCollisionHelper();
 	deltaHelper = new CDeltaHelper();
 	drawManager = new CDrawManager();

@@ -6,6 +6,7 @@
 #include "CEntityAd.h"
 #include "CEntityCheckpoint.h"
 #include "CEntityWaypoint.h"
+#include "CSpriteSheetManager.h"
 #include "SDL_image.h"
 #include <poly2tri.h>
 #include <vector>
@@ -44,17 +45,13 @@ void CLevelFactory::CreateMap(Json::Value* root)
 
 	map->height = root->get("height", 0).asInt();
 	map->width = root->get("width", 0).asInt();
-	map->spriteSheetLocation = (*root)["tilesets"][0].get("properties", "").get("resourcepath", "").asString();
-	map->spriteSheetColumns = (*root)["tilesets"][0].get("columns", 0).asInt();
-	map->spriteSheetSpacing = (*root)["tilesets"][0].get("spacing", 0).asInt();
-	map->spriteSheetTileWidth = (*root)["tilesets"][0].get("tilewidth", 0).asInt();
-	map->spriteSheetTileHeight = (*root)["tilesets"][0].get("tileheight", 0).asInt();
-	map->spriteSheetWidth = (*root)["tilesets"][0].get("imagewidth", 0).asInt();
-	map->spriteSheetHeight = (*root)["tilesets"][0].get("imageheight", 0).asInt();
+	map->tileheight = root->get("tileheight", 0).asInt();
+	map->tilewidth = root->get("tilewidth", 0).asInt();
 
 	CDebugLogger::PrintDebug("Loading Spritesheet");
-	SDL_Surface* texture = IMG_Load(map->spriteSheetLocation.c_str());
-	map->spriteSheet = SDL_CreateTextureFromSurface(engine->renderer, texture);
+	for (Json::Value spriteSheet : (*root)["tilesets"]) {
+		CreateSpriteSheet(&spriteSheet);
+	}
 
 	CDebugLogger::PrintDebug("Itterating Layers");
 	for (Json::Value layer : (*root)["layers"])
@@ -109,7 +106,7 @@ void CLevelFactory::CreateTiles(Json::Value* root)
 	{
 		if (tile.asInt() != 0)
 		{
-			new CEntityTile(this->engine, this->map, tile.asInt(), number);
+			new CEntityTile(this->engine, engine->spriteSheetManager->GetSpriteSheetByTileId(tile.asInt()) , tile.asInt(), number, map->width, map->height, map->tilewidth, map->tileheight);
 		}
 		number++;
 	}
@@ -208,6 +205,55 @@ void CLevelFactory::CreateAd(Json::Value * root)
 	ad->tileY = (*root).get("y", 0).asDouble();
 	ad->textureHeight = (*root).get("height", 0).asDouble();
 	ad->textureWidth = (*root).get("width", 0).asDouble();
+}
+
+void CLevelFactory::CreateSpriteSheet(Json::Value* root)
+{
+
+	if ((*root).get("columns", 0).asInt() != 0) {
+		CSpriteSheetManager::SSpriteSheet* spriteSheet = new CSpriteSheetManager::SSpriteSheet();
+
+		std::string location = (*root).get("properties", "").get("resourcepath", "").asString();
+
+		spriteSheet->columns = (*root).get("columns", 0).asInt();
+		spriteSheet->spacing = (*root).get("spacing", 0).asInt();
+		spriteSheet->tileWidth = (*root).get("tilewidth", 0).asInt();
+		spriteSheet->tileHeight = (*root).get("tileheight", 0).asInt();
+		spriteSheet->width = (*root).get("imagewidth", 0).asInt();
+		spriteSheet->height = (*root).get("imageheight", 0).asInt();
+		spriteSheet->minTileIndex = (*root).get("firstgid", 0).asInt();
+		spriteSheet->maxTileIndex = spriteSheet->minTileIndex+(*root).get("tilecount", 0).asInt()-1;
+
+		SDL_Surface* texture = IMG_Load(location.c_str());
+		spriteSheet->texture = SDL_CreateTextureFromSurface(engine->renderer, texture);
+
+		engine->spriteSheetManager->AddSpriteSheet(spriteSheet);
+	}
+	else {
+		int minIndex = (*root).get("firstgid", 0).asInt();
+		int tileCount = (*root).get("tilecount", 0).asInt();
+		for (int i = 0; i < tileCount; i++) {
+			CSpriteSheetManager::SSpriteSheet* spriteSheet = new CSpriteSheetManager::SSpriteSheet();
+
+			spriteSheet->columns = (*root).get("columns", 0).asInt();
+			spriteSheet->spacing = (*root).get("spacing", 0).asInt();
+
+
+			spriteSheet->minTileIndex = minIndex + i;
+			spriteSheet->maxTileIndex = minIndex + i;
+			std::string location = (*root)["tileproperties"].get(std::to_string(i), 0).get("resourcepath", 0).asString();
+			SDL_Surface* texture = IMG_Load(location.c_str());
+			spriteSheet->texture = SDL_CreateTextureFromSurface(engine->renderer, texture);
+
+			spriteSheet->tileWidth = texture->w;
+			spriteSheet->tileHeight = texture->h;
+			spriteSheet->width = texture->w;
+			spriteSheet->height = texture->h;
+
+			engine->spriteSheetManager->AddSpriteSheet(spriteSheet);
+		}
+	}
+
 }
 
 void CLevelFactory::CreateSpawns(Json::Value* root)

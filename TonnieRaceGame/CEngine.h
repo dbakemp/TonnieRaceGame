@@ -13,6 +13,7 @@ class CBox2DManager;
 class CStateManager;
 class CDeltaHelper;
 class CCollisionHelper;
+class CSpriteSheetManager;
 class CCamera;
 class CAdManager;
 class CMap;
@@ -36,6 +37,7 @@ public:
 	b2World* world;
 	MusicHelper* musicHelper;
 	CCollisionHelper* collisionHelper;
+	CSpriteSheetManager* spriteSheetManager;
 	bool running;
 	bool showFPSCounter;
 	bool gameControllerConnected;

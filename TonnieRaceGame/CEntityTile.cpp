@@ -2,34 +2,42 @@
 #include "CCamera.h"
 #include "CDrawManager.h"
 
-CEntityTile::CEntityTile(CEngine* engine, CMap* map, int spriteNumber, int tileNumber) : CEntity(engine), IDrawListener(engine, (int)CDrawManager::Layers::Tile)
+CEntityTile::CEntityTile(CEngine * engine, CSpriteSheetManager::SSpriteSheet* spriteSheet, int spriteNumber, int tileNumber, int mapWidth, int mapHeight, int mapTileWidth, int mapTileHeight) : CEntity(engine), IDrawListener(engine, (int)CDrawManager::Layers::Tile)
 {
 	this->engine = engine;
 
-	int count = map->spriteSheetWidth / (map->spriteSheetTileWidth + map->spriteSheetSpacing);
+	int count = spriteSheet->width / (spriteSheet->tileWidth + spriteSheet->spacing);
 	int rowNumber = (spriteNumber / count);
 	int columnsNumber = (spriteNumber % count) - 1;
 
-	this->tileY = tileNumber / map->width;
-	this->tileX = tileNumber % map->width;
+	int tileNumberRest = tileNumber % mapWidth;
 
-	this->textureX = columnsNumber * (map->spriteSheetTileWidth + map->spriteSheetSpacing);
-	this->textureY = rowNumber * (map->spriteSheetTileHeight + map->spriteSheetSpacing);
-	this->spriteSheet = map->spriteSheet;
-	this->textureHeight = map->spriteSheetTileHeight;
-	this->textureWidth = map->spriteSheetTileWidth;
+	int yRest = spriteSheet->tileHeight - mapTileHeight;
 
-	srcRect = {this->textureX, this->textureY, this->textureWidth, this->textureHeight};
+	this->tileY = (((tileNumber-tileNumberRest) / mapWidth)*mapTileHeight) - yRest;
+	this->tileX = tileNumberRest*mapTileWidth;
+
+	this->textureX = 0;
+	this->textureY = 0;
+	if (spriteSheet->columns != 0) {
+		this->textureX = columnsNumber * (spriteSheet->tileWidth + spriteSheet->spacing);
+		this->textureY = rowNumber * (spriteSheet->tileHeight + spriteSheet->spacing);
+	}
+	this->textureHeight = spriteSheet->tileHeight;
+	this->textureWidth = spriteSheet->tileWidth;
+
+	this->spriteSheet = spriteSheet;
+
+	srcRect = { this->textureX, this->textureY, this->textureWidth, this->textureHeight };
 }
 
 void CEntityTile::Draw(SDL_Renderer* renderer)
 {
-	
-	if((tileY * this->textureHeight) > engine->camera->posY-this->textureHeight && (tileX * this->textureWidth) > engine->camera->posX-this->textureWidth && (tileY * this->textureHeight) < engine->camera->posY+engine->windowHeight && (tileX * this->textureWidth) < engine->camera->posX + engine->windowWidth)
-	{
-		SDL_Rect dstrect = { -engine->camera->posX + (tileX * this->textureWidth), -engine->camera->posY + (tileY * this->textureHeight), this->textureWidth, this->textureHeight };
-		SDL_RenderCopy(engine->renderer, spriteSheet, &srcRect, &dstrect);
-	}
+	//if((tileY) > engine->camera->posY-this->textureHeight && (tileX) > engine->camera->posX-this->textureWidth && (tileY) < engine->camera->posY+engine->windowHeight && (tileX) < engine->camera->posX + engine->windowWidth)
+	//{
+		SDL_Rect dstrect = { -engine->camera->posX + tileX, -engine->camera->posY + tileY, this->textureWidth, this->textureHeight };
+		SDL_RenderCopy(engine->renderer, spriteSheet->texture, &srcRect, &dstrect);
+	//}
 }
 
 void CEntityTile::Update()

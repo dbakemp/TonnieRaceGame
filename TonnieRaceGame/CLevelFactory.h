@@ -18,6 +18,7 @@ public:
 	void CreateCheckpoints(Json::Value* root);
 	void CreateWaypoints(Json::Value* root);
 	void CreateAd(Json::Value* root);
+	void CreateSpriteSheet(Json::Value* root);
 	CMap* map;
 private:
 	CEngine* engine;
