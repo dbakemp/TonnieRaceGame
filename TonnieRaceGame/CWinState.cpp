@@ -64,6 +64,16 @@ void CWinState::draw(CEngine* engine)
 
 void CWinState::input(CEngine* engine, SDL_Event * event)
 {
+	if (event->type == SDL_KEYDOWN)
+	{
+		switch (event->key.keysym.sym)
+		{
+		case SDLK_SPACE:
+			engine->musicHelper->stopAll();
+			engine->stateManager->changeState(Credits, engine);
+			break;
+		}
+	}
 }
 
 CWinState::CWinState(CEngine* engine)
