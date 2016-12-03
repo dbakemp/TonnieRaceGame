@@ -45,6 +45,7 @@ void CCreditsState::init(CEngine* engine)
 	//TTF_CloseFont(fntPricedown);
 	//TTF_Quit();
 
+
 	char const *vlc_argv[] =
 	{
 		//"--width=10",
@@ -63,7 +64,7 @@ void CCreditsState::init(CEngine* engine)
 
 	// create a media play playing environment
 	mp = libvlc_media_player_new_from_media(m);
-
+	//libvlc_media_player_set_hwnd(mp, engine->window);
 	libvlc_video_set_format(mp, "RV16", 100, 100, 200);
 
 
@@ -75,6 +76,7 @@ void CCreditsState::init(CEngine* engine)
 	// play the media_player
 	libvlc_media_player_play(mp);
 
+	
 
 	//Wait 40 secs, length of the outro video
 	Sleep(40000);
