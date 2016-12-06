@@ -6,6 +6,7 @@
 #include "CEntityAd.h"
 #include "CEntityCheckpoint.h"
 #include "CEntityWaypoint.h"
+#include "CEntityPowerup.h"
 #include "CSpriteSheetManager.h"
 #include "SDL_image.h"
 #include <poly2tri.h>
@@ -48,6 +49,13 @@ void CLevelFactory::CreateMap(Json::Value* root)
 	map->tileheight = root->get("tileheight", 0).asInt();
 	map->tilewidth = root->get("tilewidth", 0).asInt();
 
+	CDebugLogger::PrintDebug("Loading Spritesheets" + (map->spriteSheetLocation));
+	SDL_Surface* texture = IMG_Load(map->spriteSheetLocation.c_str());
+	map->spriteSheet = SDL_CreateTextureFromSurface(engine->renderer, texture);
+
+	SDL_Surface* texturePowerups = IMG_Load("Resources/Spritesheets/spritesheet_powerups.png");
+	map->spriteSheetPowerUps = SDL_CreateTextureFromSurface(engine->renderer, texturePowerups);
+
 	CDebugLogger::PrintDebug("Loading Spritesheet");
 	for (Json::Value spriteSheet : (*root)["tilesets"]) {
 		CreateSpriteSheet(&spriteSheet);
@@ -89,6 +97,10 @@ void CLevelFactory::CreateObjects(Json::Value* root)
 		else if (object["type"].asString() == "waypoints")
 		{
 			CreateWaypoints(&object);
+		}
+		else if (object["type"].asString() == "powerup")
+		{
+			CreatePowerups(&object);
 		}
 		else if (object["type"].asString() == "ad")
 		{
@@ -261,4 +273,11 @@ void CLevelFactory::CreateSpawns(Json::Value* root)
 	CDebugLogger::PrintDebug("Creating Spawn");
 
 	map->availableSpawns.push_back(new CEntitySpawn(engine, (*root).get("x", 0).asInt() / 5, (*root).get("y", 0).asInt() / 5));
+}
+
+void CLevelFactory::CreatePowerups(Json::Value* root) 
+{
+	CDebugLogger::PrintDebug("Creating Powerups");
+	CEntityPowerup* powerup = new CEntityPowerup(engine, map, (*root).get("x", 0).asDouble(), (*root).get("y", 0).asDouble());
+	map->powerups.push_back(powerup);
 }
