@@ -9,11 +9,6 @@
 #include <iostream>
 #include "CDebugLogger.h"
 
-void CIntroState::init()
-{
-	return;
-}
-
 void CIntroState::init(CEngine* engine)
 {
 	selectedItem = 0;
@@ -38,13 +33,14 @@ void CIntroState::init(CEngine* engine)
 	SDL_Rect backrect = {0,0,backW, backH};
 
 	SDL_RenderCopy(engine->renderer, background_texture, NULL, &backrect);
-	SDL_RenderPresent(engine->renderer);
 
 	TTF_CloseFont(fntPricedown);
 	TTF_Quit();
+
+	//adHelper = new AdHelper();
 }
 
-void CIntroState::clean()
+void CIntroState::clean(CEngine* engine)
 {
 }
 
@@ -96,7 +92,6 @@ void CIntroState::update(CEngine* engine)
 			SDL_Rect backrect = { 0,0,backW, backH };
 
 			SDL_RenderCopy(engine->renderer, background_texture, NULL, &backrect);
-			SDL_RenderPresent(engine->renderer);
 		}
 
 		lastState = selectedItem;

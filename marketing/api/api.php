@@ -17,11 +17,14 @@ if (isset($_GET['sub']))
             /* fetch associative array */
             while ($row = $result->fetch_assoc())
             {
+				$pieces = explode("/", $row["ImageURL"]);
+				
                 $test["Title"] = $row["Title"];
                 $test["URL"] = $row["URL"];
                 $test["ImageURL"] = "http://timmeehh.xyz/".$row["ImageURL"];
                 $test["Description"] = $row["Description"];
                 $test["IsActive"] = $row["IsActive"];
+				$test["FileName"] = $pieces[1];
                 $toet[] = $test;
 
             }

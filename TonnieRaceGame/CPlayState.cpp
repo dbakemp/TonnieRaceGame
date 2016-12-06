@@ -14,16 +14,13 @@
 #include "CDeltaHelper.h"
 #include "CDrawManager.h"
 #include "CLevelFactory.h"
+#include "CBox2DManager.h"
 #include "CCollisionHelper.h"
 #include "CEntityLapCounter.h"
 #include "CEntityFpsCounter.h"
+#include "CEntitySpeedoMeter.h"
 #include "SDL_ttf.h"
 #include "CDebugLogger.h"
-
-void CPlayState::init()
-{
-	return;
-}
 
 void CPlayState::init(CEngine* engine)
 {
@@ -33,6 +30,7 @@ void CPlayState::init(CEngine* engine)
 
 	TTF_Init();
 	TTF_Font* fpsFont = TTF_OpenFont("Resources/Fonts/opensans.ttf", 16);
+	TTF_Font* kmhFont = TTF_OpenFont("Resources/Fonts/opensans.ttf", 64);
 
 	b2Vec2 gravity(0, 0);
 
@@ -60,9 +58,9 @@ void CPlayState::init(CEngine* engine)
 	}
 	else
 	{
-		CDebugLogger::PrintDebug("Loding error???");
+		CDebugLogger::PrintDebug("Error loading level");
 	}
-	//factory->LoadMap("Resources/Maps/map2.json");
+
 	engine->currentMap = factory->map;
 
 	camera = new CCamera(engine);
@@ -78,13 +76,24 @@ void CPlayState::init(CEngine* engine)
 	camera->SetChild(car);
 
 	CEntityFpsCounter* fpsCounter = new CEntityFpsCounter(engine, fpsFont);
-	CEntityBuild* build = new CEntityBuild(engine, fpsFont);
 	CEntityLapCounter* lapCounter = new CEntityLapCounter(engine, fpsFont);
+	CEntitySpeedoMeter* speedoMeter = new CEntitySpeedoMeter(engine, kmhFont);
+	CEntityBuild* build = new CEntityBuild(engine, fpsFont);
+
+	speedoMeter->SetChild(car);
 	lapCounter->SetLapCountable(car);
+
 }
 
-void CPlayState::clean()
+void CPlayState::clean(CEngine* engine)
 {
+	engine->drawManager->Clear();
+	engine->inputManager->Clear();
+	engine->box2DManager->Clear();
+	engine->entityManager->Clear();
+
+	delete camera;
+	camera = nullptr;
 }
 
 void CPlayState::pause()
@@ -101,18 +110,16 @@ void CPlayState::handleEvents(CEngine* engine)
 
 void CPlayState::update(CEngine* engine)
 {
-	SDL_SetRenderDrawColor(engine->renderer, 0, 0, 0, 255);
-	SDL_RenderClear(engine->renderer);
-
+	camera->Update();
 	engine->entityManager->Tick();
 	engine->world->Step(engine->deltaHelper->delta, 8, 3);
-	camera->Update();
-
-	engine->drawManager->Tick(engine->renderer);
 }
 
 void CPlayState::draw(CEngine* engine)
 {
+	SDL_SetRenderDrawColor(engine->renderer, 0, 0, 0, 255);
+	SDL_RenderClear(engine->renderer);
+	engine->drawManager->Tick(engine->renderer);
 }
 
 void CPlayState::input(CEngine* engine, SDL_Event * event)
@@ -123,9 +130,4 @@ void CPlayState::input(CEngine* engine, SDL_Event * event)
 CPlayState::CPlayState(CEngine* engine)
 {
 	init(engine);
-}
-
-CPlayState::~CPlayState()
-{
-	clean();
 }

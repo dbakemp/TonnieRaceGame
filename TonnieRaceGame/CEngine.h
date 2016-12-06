@@ -5,6 +5,7 @@
 #include "MusicHelper.h"
 #include <Box2D\Box2D.h>
 
+class AdHelper;
 class CDrawManager;
 class CInputManager;
 class CEntityManager;
@@ -12,6 +13,7 @@ class CBox2DManager;
 class CStateManager;
 class CDeltaHelper;
 class CCollisionHelper;
+class CSpriteSheetManager;
 class CCamera;
 class CAdManager;
 class CMap;
@@ -19,7 +21,8 @@ class CMap;
 class CEngine
 {
 public:
-	CEngine();
+	CEngine(); 
+	AdHelper* adHelper;
 	CDrawManager* drawManager;
 	CInputManager* inputManager;
 	CEntityManager* entityManager;
@@ -34,6 +37,7 @@ public:
 	b2World* world;
 	MusicHelper* musicHelper;
 	CCollisionHelper* collisionHelper;
+	CSpriteSheetManager* spriteSheetManager;
 	bool running;
 	bool showFPSCounter;
 	bool gameControllerConnected;

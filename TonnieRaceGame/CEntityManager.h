@@ -13,6 +13,7 @@ public:
 	void AddListener(IEntityListener* entityListener);
 	void RemoveListener(IEntityListener* entityListener);
 	void Tick();
+	void Clear();
 };
 
 

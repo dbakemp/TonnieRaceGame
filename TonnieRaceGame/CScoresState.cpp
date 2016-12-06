@@ -7,11 +7,7 @@
 #include "CDrawManager.h"
 #include "CInputManager.h"
 #include <iostream>
-
-void CScoresState::init()
-{
-	return;
-}
+#include "HighscoresHelper.h"
 
 void CScoresState::init(CEngine* engine)
 {
@@ -31,13 +27,17 @@ void CScoresState::init(CEngine* engine)
 	SDL_Rect backrect = { 0,0,backW, backH };
 
 	SDL_RenderCopy(engine->renderer, background_texture, NULL, &backrect);
-	SDL_RenderPresent(engine->renderer);
 
 	TTF_CloseFont(fntPricedown);
 	TTF_Quit();
+
+	//Highscores binnentrekkeren
+	HighscoresHelper* highscoresHelper = new HighscoresHelper();
+
+	highscoresHelper->getHighscore(1);
 }
 
-void CScoresState::clean()
+void CScoresState::clean(CEngine* engine)
 {
 }
 

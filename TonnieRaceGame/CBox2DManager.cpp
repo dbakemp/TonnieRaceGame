@@ -18,3 +18,8 @@ void CBox2DManager::Tick(b2World* world)
 		listener->Create(world);
 	}
 }
+
+void CBox2DManager::Clear()
+{
+	listeners.clear();
+}

@@ -7,6 +7,7 @@
 #include "CEntitySmallSquare.h"
 #include "CDeltaHelper.h"
 #include "CStateManager.h"
+#include "CSpriteSheetManager.h"
 #include "CCamera.h"
 #include "CDebugLogger.h"
 #include "CLevelFactory.h"
@@ -29,15 +30,16 @@ CEngine::CEngine()
 	level = 1;
 	showFPSCounter = true;
 
-	AdHelper* adHelper = new AdHelper();
+	adHelper = new AdHelper();
 	musicHelper = new MusicHelper();
+	spriteSheetManager = new CSpriteSheetManager(this);
 	collisionHelper = new CCollisionHelper();
+	deltaHelper = new CDeltaHelper();
 	drawManager = new CDrawManager();
 	inputManager = new CInputManager();
 	entityManager = new CEntityManager();
 	box2DManager = new CBox2DManager();
 	stateManager = new CStateManager();
-	deltaHelper = new CDeltaHelper();
 
 	SDL_Init(SDL_INIT_EVERYTHING);
 	window = SDL_CreateWindow("Tonnie's Grote Racewereld", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, windowWidth, windowHeight, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
@@ -47,6 +49,8 @@ CEngine::CEngine()
 	SDL_SetWindowIcon(window, icon);
 
 	SDL_GameController* controller = NULL;
+
+
 	
 	for (int i = 0; i < SDL_NumJoysticks(); ++i)
 	{
@@ -103,6 +107,7 @@ void CEngine::Tick()
 		}
 
 		stateManager->getCurrentState()->update(this);
+		stateManager->getCurrentState()->draw(this);
 
 		SDL_RenderPresent(renderer);
 	}

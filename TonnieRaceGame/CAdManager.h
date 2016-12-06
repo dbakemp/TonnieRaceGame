@@ -10,8 +10,9 @@
 class CAdManager
 {
 public:
+	enum class AdDirection { UP, DOWN, LEFT, RIGHT };
 	CAdManager(CEngine* engine);
-	SDL_Texture* GetRandomAd();
+	SDL_Texture* GetRandomAd(AdDirection direction);
 	void AddAd(Json::Value* ad);
 
 	Json::Value root;

@@ -8,9 +8,8 @@
 class CHelpState : public CGameState
 {
 public:
-	void init();
 	void init(CEngine* engine);
-	void clean();
+	void clean(CEngine* engine);
 
 	void pause();
 	void resume();

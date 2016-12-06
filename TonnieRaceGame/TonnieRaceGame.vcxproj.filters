@@ -145,6 +145,11 @@
     </ClCompile>
     <ClCompile Include="CEntityPowerup.cpp">
       <Filter>Entities</Filter>
+    <ClCompile Include="CEntitySpeedoMeter.cpp">
+      <Filter>Entities\HUD</Filter>
+    </ClCompile>
+    <ClCompile Include="CSpriteSheetManager.cpp">
+      <Filter>Managers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -280,6 +285,11 @@
     </ClInclude>
     <ClInclude Include="CEntityPowerup.h">
       <Filter>Entities</Filter>
+    <ClInclude Include="CEntitySpeedoMeter.h">
+      <Filter>Entities\HUD</Filter>
+    </ClInclude>
+    <ClInclude Include="CSpriteSheetManager.h">
+      <Filter>Managers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
