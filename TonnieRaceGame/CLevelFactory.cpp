@@ -6,11 +6,8 @@
 #include "CEntityAd.h"
 #include "CEntityCheckpoint.h"
 #include "CEntityWaypoint.h"
-<<<<<<< HEAD
 #include "CEntityPowerup.h"
-=======
 #include "CSpriteSheetManager.h"
->>>>>>> master
 #include "SDL_image.h"
 #include <poly2tri.h>
 #include <vector>
@@ -52,19 +49,17 @@ void CLevelFactory::CreateMap(Json::Value* root)
 	map->tileheight = root->get("tileheight", 0).asInt();
 	map->tilewidth = root->get("tilewidth", 0).asInt();
 
-<<<<<<< HEAD
 	CDebugLogger::PrintDebug("Loading Spritesheets" + (map->spriteSheetLocation));
 	SDL_Surface* texture = IMG_Load(map->spriteSheetLocation.c_str());
 	map->spriteSheet = SDL_CreateTextureFromSurface(engine->renderer, texture);
-=======
+
+	SDL_Surface* texturePowerups = IMG_Load("Resources/Spritesheets/spritesheet_powerups.png");
+	map->spriteSheetPowerUps = SDL_CreateTextureFromSurface(engine->renderer, texturePowerups);
+
 	CDebugLogger::PrintDebug("Loading Spritesheet");
 	for (Json::Value spriteSheet : (*root)["tilesets"]) {
 		CreateSpriteSheet(&spriteSheet);
 	}
->>>>>>> master
-
-	SDL_Surface* texturePowerups = IMG_Load("Resources/Spritesheets/spritesheet_powerups.png");
-	map->spriteSheetPowerUps = SDL_CreateTextureFromSurface(engine->renderer, texturePowerups);
 
 	CDebugLogger::PrintDebug("Itterating Layers");
 	for (Json::Value layer : (*root)["layers"])
