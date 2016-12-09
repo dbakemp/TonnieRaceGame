@@ -10,6 +10,7 @@
 #include <iostream>
 #include <string>
 #include <SDL_image.h>
+#include "CTextureManager.h"
 
 #ifndef DEGTORAD
 #define DEGTORAD 0.0174532925199432957f
@@ -22,9 +23,7 @@ CEntityCar::CEntityCar(CEngine* engine, CMap* map) : CEntity(engine), IDrawListe
 	this->currentCheckpoint = -1;
 	this->currentLap = 0;
 	this->debugVisible = false;
-
-	SDL_Surface* texture = IMG_Load("Resources/Images/spritesheet_vehicles.png");
-	this->spriteSheet = SDL_CreateTextureFromSurface(engine->renderer, texture);
+	this->spriteSheet = engine->textureManager->GetTexture("spritesheet_vehicles.png");
 	srcRect = { 631, 0, 41, 66 };
 
 	bodyDef.type = b2_dynamicBody;

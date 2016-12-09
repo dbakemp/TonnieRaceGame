@@ -9,6 +9,7 @@
 #include "CStateManager.h"
 #include "CFontManager.h"
 #include "CSpriteSheetManager.h"
+#include "CTextureManager.h"
 #include "CCamera.h"
 #include "CDebugLogger.h"
 #include "CLevelFactory.h"
@@ -42,6 +43,7 @@ CEngine::CEngine()
 	entityManager = new CEntityManager();
 	box2DManager = new CBox2DManager();
 	stateManager = new CStateManager();
+	textureManager = new CTextureManager(this);
 
 	SDL_Init(SDL_INIT_EVERYTHING);
 	window = SDL_CreateWindow("Tonnie's Grote Racewereld", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, windowWidth, windowHeight, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);

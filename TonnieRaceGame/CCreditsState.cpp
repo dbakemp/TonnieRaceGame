@@ -18,27 +18,6 @@
 void CCreditsState::init(CEngine* engine)
 {
 	bool done = false;
-	//TTF_Init();
-
-	//TTF_Font* fntPricedown = TTF_OpenFont("Resources/Fonts/pricedown.ttf", 48);
-
-	//SDL_Color color = { 16, 157, 232 };
-
-
-	//SDL_Surface* background = IMG_Load("Resources/Images/credits.jpg");
-	//SDL_Texture* background_texture = SDL_CreateTextureFromSurface(engine->renderer, background);
-
-	//int backW = 0;
-	//int backH = 0;
-	//SDL_QueryTexture(background_texture, NULL, NULL, &backW, &backH);
-	//SDL_Rect backrect = { 0,0,backW, backH };
-
-	//SDL_RenderCopy(engine->renderer, background_texture, NULL, &backrect);
-	//SDL_RenderPresent(engine->renderer);
-
-	//TTF_CloseFont(fntPricedown);
-	//TTF_Quit();
-
 
 	char const *vlc_argv[] =
 	{

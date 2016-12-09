@@ -11,6 +11,7 @@
 #include <string>
 #include "CIntegerHelper.h"
 #include <SDL_image.h>
+#include "CTextureManager.h"
 
 #ifndef DEGTORAD
 #define DEGTORAD 0.0174532925199432957f
@@ -32,8 +33,7 @@ CEntityCarAI::CEntityCarAI(CEngine* engine, CMap* map) : CEntity(engine), IDrawL
 	carGenetics = new CarGenetics();
 	carGenetics->SetBitString("0000001010000101000010010110000111110100000000101000000000110000001111");
 
-	SDL_Surface* texture = IMG_Load("Resources/Images/spritesheet_vehicles.png");
-	this->spriteSheet = SDL_CreateTextureFromSurface(engine->renderer, texture);
+	this->spriteSheet = engine->textureManager->GetTexture("spritesheet_vehicles.png");
 	srcRect = { 590, 0, 41, 66 };
 
 	bodyDef.type = b2_dynamicBody;

@@ -4,6 +4,8 @@
 #include "CMap.h"
 #include "CDebugLogger.h"
 #include <iomanip>
+#include "CTextureManager.h"
+
 
 #include "SDL_image.h"
 
@@ -12,10 +14,8 @@ CEntitySpeedoMeter::CEntitySpeedoMeter(CEngine* engine, TTF_Font* font) : CEntit
 	this->font = font;
 	this->engine = engine;
 
-	meter = IMG_Load("Resources/Images/meter.png");
-	meterback = IMG_Load("Resources/Images/speedometer.png");
-	meter_texture = SDL_CreateTextureFromSurface(engine->renderer, meter);
-	meterback_texture = SDL_CreateTextureFromSurface(engine->renderer, meterback);
+	meter_texture = engine->textureManager->GetTexture("meter.png");
+	meterback_texture = engine->textureManager->GetTexture("speedometer.png");
 	angle = 0;
 	point = { 95, 8 };
 

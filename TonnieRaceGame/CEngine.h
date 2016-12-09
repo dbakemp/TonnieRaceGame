@@ -17,6 +17,7 @@ class CCollisionHelper;
 class CSpriteSheetManager;
 class CCamera;
 class CAdManager;
+class CTextureManager;
 class CMap;
 
 class CEngine
@@ -40,6 +41,7 @@ public:
 	MusicHelper* musicHelper;
 	CCollisionHelper* collisionHelper;
 	CSpriteSheetManager* spriteSheetManager;
+	CTextureManager* textureManager;
 	bool running;
 	bool showFPSCounter;
 	bool gameControllerConnected;

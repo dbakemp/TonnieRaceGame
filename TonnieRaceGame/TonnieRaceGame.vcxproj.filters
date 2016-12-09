@@ -164,6 +164,9 @@
     <ClCompile Include="jsoncpp.cpp">
       <Filter>Etc</Filter>
     </ClCompile>
+    <ClCompile Include="CTextureManager.cpp">
+      <Filter>Managers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CCamera.h" />
@@ -324,6 +327,9 @@
     </ClInclude>
     <ClInclude Include="resource.h">
       <Filter>Etc</Filter>
+    </ClInclude>
+    <ClInclude Include="CTextureManager.h">
+      <Filter>Managers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

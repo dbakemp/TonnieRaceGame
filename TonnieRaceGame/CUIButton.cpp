@@ -2,6 +2,7 @@
 #include "CDrawManager.h"
 #include "EUIAlignment.h"
 #include "SDL_image.h"
+#include "CTextureManager.h"
 
 CUIButton::CUIButton(CEngine * engine) : CEntity(engine), IInputListener(engine), IDrawListener(engine,  (int)CDrawManager::Layers::UI)
 {
@@ -13,9 +14,8 @@ CUIButton::CUIButton(CEngine * engine, std::string font, std::string text, std::
 {
 	this->engine = engine;
 
-	SDL_Surface* surface = IMG_Load(texture.c_str());
-	this->texture = SDL_CreateTextureFromSurface(engine->renderer, surface);
-	SDL_FreeSurface(surface);
+	this->texture = engine->textureManager->GetTexture(texture);
+
 	this->container = { 0, 0, 0, 0 };
 
 	label = new CUILabel(engine);
