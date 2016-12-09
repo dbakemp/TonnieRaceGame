@@ -80,7 +80,7 @@
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
-      <AdditionalLibraryDirectories>./lib/Box2D;./lib/SDL2;./lib/SDL2_gfx;./lib/LibCurl;../Bass;../Bass/c;./lib/SDL2_ttf;./lib/SDL2_image;./lib/libvlc;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>./lib/Box2D/x86;./lib/SDL2;./lib/SDL2_gfx/x86;./lib/LibCurl/x86;../Bass;../Bass/c;./lib/SDL2_ttf;./lib/SDL2_image;./lib/libvlc;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>Box2D.lib;SDL2.lib;SDL2_gfx.lib;SDL2main.lib;bass.lib;SDL2_image.lib;SDL2_ttf.lib;libcurl.lib;libvlc.lib;libvlccore.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
@@ -109,13 +109,13 @@ copy "$(SolutionDir)TonnieRaceGame\lib\Bass\bass.dll" "$(TargetDir)"
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>./include;%(AdditionalIncludeDirectories);./c;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>./include;../Bass/c;../Bass;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <AdditionalLibraryDirectories>./lib/Box2D;./lib/SDL2;./lib/libcurl%(AdditionalLibraryDirectories);./Bass;</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>./lib/Box2D/x64;./lib/SDL2;./lib/SDL2_gfx/x64;./lib/LibCurl/x64;../Bass;../Bass/c;./lib/SDL2_ttf;./lib/SDL2_image;./lib/libvlc;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <Link>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2test.lib;Box2D.lib;libcurl.lib%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2test.lib;Box2D.lib;libcurl.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Console</SubSystem>
     </Link>
   </ItemDefinitionGroup>

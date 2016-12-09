@@ -50,8 +50,41 @@ CEngine::CEngine()
 
 	SDL_GameController* controller = NULL;
 
+	SDL_Joystick* gGameController = NULL;
+	SDL_Haptic* gControllerHaptic = NULL;
+	//Check for joysticks
+	if (SDL_NumJoysticks() < 1)
+	{
+		printf("Warning: No joysticks connected!\n");
+	}
+	else
+	{
+		//Load joystick
+		gGameController = SDL_JoystickOpen(0);
+		if (gGameController == NULL)
+		{
+			printf("Warning: Unable to open game controller! SDL Error: %s\n", SDL_GetError());
+		}
+		else
+		{
+			//Get controller haptic device
+			gControllerHaptic = SDL_HapticOpenFromJoystick(gGameController);
+			if (gControllerHaptic == NULL)
+			{
+				printf("Warning: Controller does not support haptics! SDL Error: %s\n", SDL_GetError());
+			}
+			else
+			{
+				//Get initialize rumble
+				if (SDL_HapticRumbleInit(gControllerHaptic) < 0)
+				{
+					printf("Warning: Unable to initialize rumble! SDL Error: %s\n", SDL_GetError());
+				}
+			}
+		}
+	}
 
-	
+
 	for (int i = 0; i < SDL_NumJoysticks(); ++i)
 	{
 		if (SDL_IsGameController(i))
