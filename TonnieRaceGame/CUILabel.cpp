@@ -13,6 +13,7 @@ CUILabel::CUILabel(CEngine* engine) : CEntity(engine), IInputListener(engine), I
 	this->horizontalAlignment = EUIALignmentHorizontal::LEFT;
 	this->verticalAlignment = EUIALignmentVertical::TOP;
 	this->container = { 0, 0, 0, 0 };
+	this->visible = true;
 }
 
 CUILabel::CUILabel(CEngine* engine, std::string font, std::string text) : CEntity(engine), IInputListener(engine), IDrawListener(engine, (int)CDrawManager::Layers::UI)
@@ -24,6 +25,7 @@ CUILabel::CUILabel(CEngine* engine, std::string font, std::string text) : CEntit
 	this->horizontalAlignment = EUIALignmentHorizontal::LEFT;
 	this->verticalAlignment = EUIALignmentVertical::TOP;
 	this->container = { 0, 0, 0, 0 };
+	this->visible = true;
 
 	SetFont(font);
 	SetText(text);
@@ -31,6 +33,7 @@ CUILabel::CUILabel(CEngine* engine, std::string font, std::string text) : CEntit
 
 void CUILabel::Draw(SDL_Renderer * renderer)
 {
+	if (!visible) { return; }
 	SDL_RenderCopy(engine->renderer, texture, NULL, &dstrect);
 }
 
@@ -93,6 +96,16 @@ void CUILabel::SetFontSize(int fontSize)
 	SetFont(fontName);
 }
 
+void CUILabel::SetVisibility(bool visible)
+{
+	this->visible = visible;
+}
+
+void CUILabel::ToggleVisibility()
+{
+	visible = !visible;
+}
+
 void CUILabel::PreRender()
 {
 
@@ -152,4 +165,9 @@ void CUILabel::PreRender()
 std::string CUILabel::GetText()
 {
 	return text;
+}
+
+bool CUILabel::GetVisibility()
+{
+	return visible;
 }

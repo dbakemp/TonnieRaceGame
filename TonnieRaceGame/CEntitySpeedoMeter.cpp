@@ -5,11 +5,9 @@
 #include "CDebugLogger.h"
 #include <iomanip>
 #include "CTextureManager.h"
-
-
 #include "SDL_image.h"
 
-CEntitySpeedoMeter::CEntitySpeedoMeter(CEngine* engine, TTF_Font* font) : CEntity(engine), IDrawListener(engine, (int)CDrawManager::Layers::UI)
+CEntitySpeedoMeter::CEntitySpeedoMeter(CEngine* engine) : CEntity(engine), IDrawListener(engine, (int)CDrawManager::Layers::UI)
 {
 	this->font = font;
 	this->engine = engine;

@@ -12,7 +12,7 @@
 class CEntitySpeedoMeter : public CEntity, public IDrawListener
 {
 public:
-	CEntitySpeedoMeter(CEngine* engine, TTF_Font* font);
+	CEntitySpeedoMeter(CEngine* engine);
 	~CEntitySpeedoMeter();
 	void Update();
 	void Draw(SDL_Renderer* renderer);

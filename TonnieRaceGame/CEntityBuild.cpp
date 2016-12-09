@@ -4,7 +4,7 @@
 #include <chrono>
 #include <sstream>
 
-CEntityBuild::CEntityBuild(CEngine * engine, TTF_Font * font) : CEntity(engine), IDrawListener(engine, (int)CDrawManager::Layers::UI), IInputListener(engine)
+CEntityBuild::CEntityBuild(CEngine * engine) : CEntity(engine), IDrawListener(engine, (int)CDrawManager::Layers::UI), IInputListener(engine)
 {
 	visible = false;
 	tm localTime;
@@ -23,6 +23,15 @@ CEntityBuild::CEntityBuild(CEngine * engine, TTF_Font * font) : CEntity(engine),
 
 	text = "Development Build: "+buffer.str();
 
+
+	label = new CUILabel(engine, "Bangers", "");
+	label->SetPosition(-10, -10);
+	label->SetFontSize(20);
+	label->SetHorizontalAlignment(EUIALignmentHorizontal::RIGHT);
+	label->SetVerticalAlignment(EUIALignmentVertical::BOTTOM);
+	label->SetVisibility(false);
+	label->SetText(text);
+
 	this->engine = engine;
 	this->font = font;
 }
@@ -37,19 +46,6 @@ void CEntityBuild::Update()
 
 void CEntityBuild::Draw(SDL_Renderer * renderer)
 {
-	if (!visible) { return; }
-
-	SDL_Surface* surface = TTF_RenderText_Solid(font, text.c_str(), { 255, 255, 255 });
-	SDL_Texture* texture = SDL_CreateTextureFromSurface(engine->renderer, surface);
-
-	SDL_Rect srect;
-	SDL_QueryTexture(texture, NULL, NULL, &srect.w, &srect.h);
-
-	SDL_Rect dstrect = { engine->windowWidth - srect.w - 10, engine->windowHeight - srect.h - 10, srect.w, srect.h };
-	SDL_RenderCopy(engine->renderer, texture, NULL, &dstrect);
-
-	SDL_DestroyTexture(texture);
-	SDL_FreeSurface(surface);
 }
 
 void CEntityBuild::Input(SDL_Event * event)
@@ -60,7 +56,7 @@ void CEntityBuild::Input(SDL_Event * event)
 		switch (event->key.keysym.sym)
 		{
 		case SDLK_f:
-			visible = !visible;
+			label->ToggleVisibility();
 			break;
 		}
 	}

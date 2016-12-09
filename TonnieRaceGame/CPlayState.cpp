@@ -28,9 +28,6 @@ void CPlayState::init(CEngine* engine)
 	renderer = SDL_CreateRenderer(engine->window, -1, 0);
 	SDL_RenderClear(renderer);
 
-	TTF_Font* fpsFont = TTF_OpenFont("Resources/Fonts/opensans.ttf", 16);
-	TTF_Font* kmhFont = TTF_OpenFont("Resources/Fonts/opensans.ttf", 64);
-
 	b2Vec2 gravity(0, 0);
 
 	engine->world = new b2World(gravity);
@@ -74,10 +71,10 @@ void CPlayState::init(CEngine* engine)
 
 	camera->SetChild(car);
 
-	CEntityFpsCounter* fpsCounter = new CEntityFpsCounter(engine, fpsFont);
+	CEntityFpsCounter* fpsCounter = new CEntityFpsCounter(engine);
 	CEntityLapCounter* lapCounter = new CEntityLapCounter(engine);
-	CEntitySpeedoMeter* speedoMeter = new CEntitySpeedoMeter(engine, kmhFont);
-	CEntityBuild* build = new CEntityBuild(engine, fpsFont);
+	CEntitySpeedoMeter* speedoMeter = new CEntitySpeedoMeter(engine);
+	CEntityBuild* build = new CEntityBuild(engine);
 
 	speedoMeter->SetChild(car);
 	lapCounter->SetLapCountable(car);

@@ -26,8 +26,12 @@ public:
 	void SetVerticalAlignment(EUIALignmentVertical alignment);
 	void SetContainer(int x, int y, int w, int h);
 	void SetFontSize(int fontSize);
+	void SetVisibility(bool visible);
+
+	void ToggleVisibility();
 
 	std::string GetText();
+	bool GetVisibility();
 private:
 	CEngine* engine;
 	SDL_Rect container;

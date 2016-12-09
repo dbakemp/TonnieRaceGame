@@ -29,10 +29,6 @@ void CGAState::init(CEngine* engine)
 	renderer = SDL_CreateRenderer(engine->window, -1, 0);
 	SDL_RenderClear(renderer);
 
-	TTF_Init();
-	TTF_Font* fpsFont = TTF_OpenFont("Resources/Fonts/opensans.ttf", 16);
-	TTF_Font* kmhFont = TTF_OpenFont("Resources/Fonts/opensans.ttf", 64);
-
 	b2Vec2 gravity(0, 0);
 
 	engine->world = new b2World(gravity);
@@ -57,8 +53,8 @@ void CGAState::init(CEngine* engine)
 	car->SetFinishCallback(std::bind(&CGAState::OnFinish, this, std::placeholders::_1));
 	camera->SetChild(car);
 
-	CEntityFpsCounter* fpsCounter = new CEntityFpsCounter(engine, fpsFont);
-	CEntityBuild* build = new CEntityBuild(engine, fpsFont);
+	CEntityFpsCounter* fpsCounter = new CEntityFpsCounter(engine);
+	CEntityBuild* build = new CEntityBuild(engine);
 
 	this->engine = engine;
 }
