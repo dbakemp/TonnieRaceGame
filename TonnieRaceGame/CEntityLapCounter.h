@@ -5,20 +5,20 @@
 #include "ILapCountable.h"
 #include "CEntity.h"
 #include "CEngine.h"
+#include "CUILabel.h"
 #include "SDL_ttf.h"
 
-class CEntityLapCounter : public CEntity, public IDrawListener
-{
+class CEntityLapCounter : public CEntity {
 public:
-	CEntityLapCounter(CEngine* engine, TTF_Font* font);
+	CEntityLapCounter(CEngine* engine);
 	~CEntityLapCounter();
 	void Update();
-	void Draw(SDL_Renderer* renderer);
 	void SetLapCountable(ILapCountable* lapCountable);
 	ILapCountable* GetLapCountable();
 private:
 	ILapCountable* lapCountable;
 	CEngine* engine;
+	CUILabel* label;
 };
 
 #endif

@@ -149,6 +149,21 @@
     <ClCompile Include="CSpriteSheetManager.cpp">
       <Filter>Managers</Filter>
     </ClCompile>
+    <ClCompile Include="CGAState.cpp">
+      <Filter>States</Filter>
+    </ClCompile>
+    <ClCompile Include="CUILabel.cpp">
+      <Filter>Entities\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="CUIButton.cpp">
+      <Filter>Entities\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="CFontManager.cpp">
+      <Filter>Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="CUIImage.cpp">
+      <Filter>Entities\UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CCamera.h" />
@@ -287,6 +302,27 @@
     <ClInclude Include="CSpriteSheetManager.h">
       <Filter>Managers</Filter>
     </ClInclude>
+    <ClInclude Include="CGAState.h">
+      <Filter>States</Filter>
+    </ClInclude>
+    <ClInclude Include="CUILabel.h">
+      <Filter>Entities\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="CUIButton.h">
+      <Filter>Entities\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="CFontManager.h">
+      <Filter>Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="EUIAlignment.h">
+      <Filter>Entities\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="CUIImage.h">
+      <Filter>Entities\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="EUIStretch.h">
+      <Filter>Entities\UI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="TonnieRaceGame.rc" />
@@ -335,6 +371,9 @@
     </Filter>
     <Filter Include="Interfaces">
       <UniqueIdentifier>{f0793bb2-2fec-4e2d-91da-55078674be65}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entities\UI">
+      <UniqueIdentifier>{02aa4d6a-e304-41a4-a91a-1088f95682a9}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

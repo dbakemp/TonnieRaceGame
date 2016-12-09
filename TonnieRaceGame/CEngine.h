@@ -11,6 +11,7 @@ class CInputManager;
 class CEntityManager;
 class CBox2DManager;
 class CStateManager;
+class CFontManager;
 class CDeltaHelper;
 class CCollisionHelper;
 class CSpriteSheetManager;
@@ -31,6 +32,7 @@ public:
 	CDeltaHelper* deltaHelper;
 	CAdManager* adManager;
 	CMap* currentMap;
+	CFontManager* fontManager;
 	CCamera* camera;
 	SDL_Window* window;
 	SDL_Renderer* renderer;

@@ -28,9 +28,12 @@ public:
 	void CollisionBegin(CEntity* collider) override;
 	void CollisionEnd(CEntity* collider) override;
 	void ProcessCheckpoint(CEntityCheckpoint* checkpoint);
+	void SetFinishCallback(void(*callback));
+	void FinishCallback();
 
 	SDL_Texture* spriteSheet;
 	SDL_Rect srcRect;
+	void *finishCallback;
 private:
 	CEngine* engine;
 };

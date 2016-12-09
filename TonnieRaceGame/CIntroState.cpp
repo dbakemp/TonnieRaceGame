@@ -6,42 +6,66 @@
 #include "CIntroState.h"
 #include "CDrawManager.h"
 #include "CInputManager.h"
+#include "CDeltaHelper.h"
+#include "CEntityManager.h"
+#include "CBox2DManager.h"
+#include "CUILabel.h"
+#include "CUIImage.h"
+#include "CUIButton.h"
 #include <iostream>
 #include "CDebugLogger.h"
+#include "EUIAlignment.h"
+#include <functional>
 
 void CIntroState::init(CEngine* engine)
 {
-	selectedItem = 0;
-	lastState = 0;
+	CUIImage* background = new CUIImage(engine, "Resources/Images/main.png");
+	background->SetHorizontalAlignment(EUIALignmentHorizontal::CENTER);
+	background->SetVerticalAlignment(EUIALignmentVertical::CENTER);
+	background->SetVerticalStretch(EUIStretchVertical::FIT);
 
-	TTF_Init();
+	CUIImage* tonnie = new CUIImage(engine, "Resources/Images/logo.png");
+	tonnie->SetHorizontalAlignment(EUIALignmentHorizontal::CENTER);
+	tonnie->SetVerticalAlignment(EUIALignmentVertical::CENTER);
+	tonnie->SetPosition(0, -100);
 
-	TTF_Font* fntPricedown = TTF_OpenFont("Resources/Fonts/pricedown.ttf", 48);
+	CUIButton* labela = new CUIButton(engine, "Bangers", "Spelen", "Resources/Images/blauw.png");
+	labela->SetHorizontalAlignment(EUIALignmentHorizontal::CENTER);
+	labela->SetVerticalAlignment(EUIALignmentVertical::BOTTOM);
+	labela->SetPosition(-300, -100);
+	labela->SetFontSize(30);
+	labela->SetClickCallback(std::bind(&CIntroState::OnButtonClick, this, std::placeholders::_1));
 
-	SDL_Color color = {16, 157, 232};
+	CUIButton* labelb = new CUIButton(engine, "Bangers", "Help", "Resources/Images/rood.png");
+	labelb->SetHorizontalAlignment(EUIALignmentHorizontal::CENTER);
+	labelb->SetVerticalAlignment(EUIALignmentVertical::BOTTOM);
+	labelb->SetPosition(-100, -100);
+	labelb->SetFontSize(30);
+	labelb->SetClickCallback(std::bind(&CIntroState::OnButtonClick, this, std::placeholders::_1));
 
-	background = IMG_Load("Resources/Images/mainmenu.jpg");
-	if (engine->gameControllerConnected)
-	{
-		background = IMG_Load("Resources/Images/spelen-selected.jpg");
-	}
-	SDL_Texture* background_texture = SDL_CreateTextureFromSurface(engine->renderer, background);
+	CUIButton* labelc = new CUIButton(engine, "Bangers", "Scores", "Resources/Images/groen.png");
+	labelc->SetHorizontalAlignment(EUIALignmentHorizontal::CENTER);
+	labelc->SetVerticalAlignment(EUIALignmentVertical::BOTTOM);
+	labelc->SetPosition(100, -100);
+	labelc->SetFontSize(30);
+	labelc->SetClickCallback(std::bind(&CIntroState::OnButtonClick, this, std::placeholders::_1));
 
-	int backW = 0;
-	int backH = 0;
-	SDL_QueryTexture(background_texture, NULL, NULL, &backW, &backH);
-	SDL_Rect backrect = {0,0,backW, backH};
+	CUIButton* labeld = new CUIButton(engine, "Bangers", "Credits", "Resources/Images/geel.png");
+	labeld->SetHorizontalAlignment(EUIALignmentHorizontal::CENTER);
+	labeld->SetVerticalAlignment(EUIALignmentVertical::BOTTOM);
+	labeld->SetPosition(300, -100);
+	labeld->SetFontSize(30);
+	labeld->SetClickCallback(std::bind(&CIntroState::OnButtonClick, this, std::placeholders::_1));
 
-	SDL_RenderCopy(engine->renderer, background_texture, NULL, &backrect);
-
-	TTF_CloseFont(fntPricedown);
-	TTF_Quit();
-
-	//adHelper = new AdHelper();
+	this->engine = engine;
 }
 
 void CIntroState::clean(CEngine* engine)
 {
+	engine->drawManager->Clear();
+	engine->inputManager->Clear();
+	engine->box2DManager->Clear();
+	engine->entityManager->Clear();
 }
 
 void CIntroState::pause()
@@ -58,207 +82,44 @@ void CIntroState::handleEvents(CEngine* engine)
 
 void CIntroState::update(CEngine* engine)
 {
-	if (engine->gameControllerConnected)
-	{
-		switch (selectedItem)
-		{
-		case 0:
-			if (lastState != selectedItem)
-				background = IMG_Load("Resources/Images/spelen-selected.jpg");
-			break;
-		case 1:
-			if (lastState != selectedItem)
-				background = IMG_Load("Resources/Images/help-selected.jpg");
-			break;
-		case 2:
-			if (lastState != selectedItem)
-				background = IMG_Load("Resources/Images/highscores-selected.jpg");
-			break;
-		case 3:
-			if (lastState != selectedItem)
-				background = IMG_Load("Resources/Images/credits-selected.jpg");
-			break;
-		default:
-			break;
-		}
-
-		if (lastState != selectedItem)
-		{
-			SDL_Texture* background_texture = SDL_CreateTextureFromSurface(engine->renderer, background);
-
-			int backW = 0;
-			int backH = 0;
-			SDL_QueryTexture(background_texture, NULL, NULL, &backW, &backH);
-			SDL_Rect backrect = { 0,0,backW, backH };
-
-			SDL_RenderCopy(engine->renderer, background_texture, NULL, &backrect);
-		}
-
-		lastState = selectedItem;
-	}
+	engine->entityManager->Tick();
+	SDL_Delay((1000.0/60) - engine->deltaHelper->delta);
+	checkSeque();
 }
 
 void CIntroState::draw(CEngine* engine)
 {
-
+	engine->drawManager->Tick(engine->renderer);
 }
 
 void CIntroState::input(CEngine* engine, SDL_Event * event)
 {
-	if (event->type == SDL_KEYDOWN)
-	{
-		switch (event->key.keysym.sym)
-		{
-		case SDLK_SPACE:
-			engine->stateManager->changeState(Playing, engine);
-			break;
-		case SDLK_RIGHT:
-			SelectRight();
-			break;
-		case SDLK_LEFT:
-			SelectLeft();
-			break;
-		case SDLK_KP_ENTER:
-		case 13:
-			SelectOption(engine);
-			break;
-		default:
-			break;
-		}
-	}
-	else if (event->type == SDL_MOUSEMOTION)
-	{
-		int mouseX = event->motion.x;
-		int mouseY = event->motion.y;
-
-		if (mouseX > 240 && mouseX < 384 && mouseY > 615 && mouseY < 672)
-		{
-			selectedItem = 0;
-		}
-		else if (mouseX > 451 && mouseX < 597 && mouseY > 615 && mouseY < 672)
-		{
-			selectedItem = 1;
-		}
-		else if (mouseX > 663 && mouseX < 809 && mouseY > 615 && mouseY < 672)
-		{
-			selectedItem = 2;
-		}
-		else if (mouseX > 896 && mouseX < 1042 && mouseY > 615 && mouseY < 672)
-		{
-			selectedItem = 3;
-		}
-
-	}
-	else if (event->type == SDL_MOUSEBUTTONDOWN)
-	{
-		int mouseX = event->motion.x;
-		int mouseY = event->motion.y;
-		switch (event->button.button)
-		{
-		case SDL_BUTTON_LEFT:
-			if (mouseX > 240 && mouseX < 384 && mouseY > 615 && mouseY < 672)
-			{
-				engine->stateManager->changeState(Playing, engine);
-			}
-			else if (mouseX > 451 && mouseX < 597 && mouseY > 615 && mouseY < 672)
-			{
-				engine->stateManager->changeState(Help, engine);
-			}
-			else if (mouseX > 663 && mouseX < 809 && mouseY > 615 && mouseY < 672)
-			{
-				engine->stateManager->changeState(Scores, engine);
-			}
-			else if (mouseX > 896 && mouseX < 1042 && mouseY > 615 && mouseY < 672)
-			{
-				engine->stateManager->changeState(Credits, engine);
-			}
-			break;
-		default:
-			break;
-		}
-	}
-	else if (event->type == SDL_CONTROLLERBUTTONDOWN)
-	{
-		if (event->cbutton.button == SDL_CONTROLLER_BUTTON_A)
-		{
-			//engine->stateManager->changeState(Playing, engine);
-			SelectOption(engine);
-		}
-		else if (event->cbutton.button == SDL_CONTROLLER_BUTTON_DPAD_LEFT)
-		{
-			SelectLeft();
-		}
-		else if (event->cbutton.button == SDL_CONTROLLER_BUTTON_DPAD_RIGHT)
-		{
-			SelectRight();
-		}
-	}
-	else
-	{
-		engine->inputManager->Tick(event);
-	}
+	engine->inputManager->Tick(event);
 }
 
-void CIntroState::SelectLeft()
+void CIntroState::checkSeque()
 {
-	switch (selectedItem)
-	{
-	case 0:
-		selectedItem = 3;
-		break;
-	case 1:
-		selectedItem = 0;
-		break;
-	case 2:
-		selectedItem = 1;
-		break;
-	case 3:
-		selectedItem = 2;
-		break;
-	default:
-		break;
-	}
+	if (!shouldSeque) { return; }
+
+	engine->stateManager->changeState(stateSeque, engine);
 }
 
-void CIntroState::SelectRight()
+void CIntroState::OnButtonClick(CUIButton* button)
 {
-	switch (selectedItem)
-	{
-	case 0:
-		selectedItem = 1;
-		break;
-	case 1:
-		selectedItem = 2;
-		break;
-	case 2:
-		selectedItem = 3;
-		break;
-	case 3:
-		selectedItem = 0;
-		break;
-	default:
-		break;
+	if (button->GetText() == "Spelen") {
+		shouldSeque = true;
+		stateSeque = EGameState::Playing;
+	} else if (button->GetText() == "Help") {
+		shouldSeque = true;
+		stateSeque = EGameState::Help;
 	}
-}
-
-void CIntroState::SelectOption(CEngine* engine)
-{
-	switch (selectedItem)
-	{
-	case 0:
-		engine->stateManager->changeState(Playing, engine);
-		break;
-	case 1:
-		engine->stateManager->changeState(Help, engine);
-		break;
-	case 2:
-		engine->stateManager->changeState(Scores, engine);
-		break;
-	case 3:
-		engine->stateManager->changeState(Credits, engine);
-		break;
-	default:
-		break;
+	else if (button->GetText() == "Scores") {
+		shouldSeque = true;
+		stateSeque = EGameState::Scores;
+	}
+	else if (button->GetText() == "Credits") {
+		shouldSeque = true;
+		stateSeque = EGameState::Credits;
 	}
 }
 

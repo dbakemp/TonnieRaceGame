@@ -7,6 +7,7 @@
 #include "CEntitySmallSquare.h"
 #include "CDeltaHelper.h"
 #include "CStateManager.h"
+#include "CFontManager.h"
 #include "CSpriteSheetManager.h"
 #include "CCamera.h"
 #include "CDebugLogger.h"
@@ -24,8 +25,8 @@
 CEngine::CEngine()
 {
 	gameControllerConnected = false;
-	windowHeight = 720;
-	windowWidth = 1280;
+	windowHeight = 1080;
+	windowWidth = 1920;
 	fpsCounter = 1;
 	level = 1;
 	showFPSCounter = true;
@@ -36,6 +37,7 @@ CEngine::CEngine()
 	collisionHelper = new CCollisionHelper();
 	deltaHelper = new CDeltaHelper();
 	drawManager = new CDrawManager();
+	fontManager = new CFontManager(this);
 	inputManager = new CInputManager();
 	entityManager = new CEntityManager();
 	box2DManager = new CBox2DManager();
@@ -49,7 +51,6 @@ CEngine::CEngine()
 	SDL_SetWindowIcon(window, icon);
 
 	SDL_GameController* controller = NULL;
-
 
 	
 	for (int i = 0; i < SDL_NumJoysticks(); ++i)
@@ -74,7 +75,7 @@ CEngine::CEngine()
 
 	EGameState state = Start;
 	stateManager->changeState(state, this);
-	musicHelper->playTrack("music\\title.mp3", false);
+	musicHelper->playTrack("Resources/Music/title.mp3", false);
 	Tick();
 }
 
@@ -85,6 +86,8 @@ void CEngine::Tick()
 	while (running)
 	{
 		deltaHelper->SetDelta();
+
+		SDL_RenderClear(renderer);
 
 		SDL_Event event;
 		while (SDL_PollEvent(&event) != 0)
@@ -101,9 +104,7 @@ void CEngine::Tick()
 					break;
 				}
 			}
-			else {
-				stateManager->getCurrentState()->input(this, &event);
-			}
+			stateManager->getCurrentState()->input(this, &event);
 		}
 
 		stateManager->getCurrentState()->update(this);

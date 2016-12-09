@@ -3,8 +3,9 @@
 
 #include <vector>
 #include "SDL.h"
-#include "CGameState.h"
 #include "AdHelper.h"
+#include "CUIButton.h"
+#include "CGameState.h"
 
 class CIntroState: public CGameState
 {
@@ -19,19 +20,14 @@ public:
 	void update(CEngine* engine);
 	void draw(CEngine* engine);
 	void input(CEngine* engine, SDL_Event* event);
-	//AdHelper* adHelper;
+	void checkSeque();
 	
-
-	int selectedItem;
-	
+	bool shouldSeque;
+	EGameState stateSeque;
 
 	CIntroState(CEngine* engine);
-
 private:
-	SDL_Surface* background;
-	int lastState;
-	void SelectLeft();
-	void SelectRight();
-	void SelectOption(CEngine* engine);
+	void OnButtonClick(CUIButton* button);
+	CEngine* engine;
 };
 #endif

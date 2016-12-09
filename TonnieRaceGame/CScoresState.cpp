@@ -5,40 +5,52 @@
 #include "CCamera.h"
 #include "CScoresState.h"
 #include "CDrawManager.h"
+#include "CDeltaHelper.h"
 #include "CInputManager.h"
+#include "CEntityManager.h"
+#include "CBox2DManager.h"
 #include <iostream>
-#include "HighscoresHelper.h"
+#include <curl/curl.h>
+#include "CUILabel.h"
+#include "CUIImage.h"
+#include "CUIButton.h"
+#include "EUIAlignment.h"
 
 void CScoresState::init(CEngine* engine)
 {
-	TTF_Init();
+	CUIImage* background = new CUIImage(engine, "Resources/Images/main.png");
+	background->SetHorizontalAlignment(EUIALignmentHorizontal::CENTER);
+	background->SetVerticalAlignment(EUIALignmentVertical::CENTER);
+	background->SetVerticalStretch(EUIStretchVertical::FIT);
 
-	TTF_Font* fntPricedown = TTF_OpenFont("Resources/Fonts/pricedown.ttf", 48);
+	CUIImage* tonnie = new CUIImage(engine, "Resources/Images/logo.png");
+	tonnie->SetHorizontalAlignment(EUIALignmentHorizontal::CENTER);
+	tonnie->SetVerticalAlignment(EUIALignmentVertical::CENTER);
+	tonnie->SetPosition(0, -100);
 
-	SDL_Color color = { 16, 157, 232 };
+	CUIButton* buttonBack = new CUIButton(engine, "Bangers", "Terug", "Resources/Images/terug.png");
+	buttonBack->SetHorizontalAlignment(EUIALignmentHorizontal::LEFT);
+	buttonBack->SetVerticalAlignment(EUIALignmentVertical::BOTTOM);
+	buttonBack->SetPosition(100, -50);
+	buttonBack->SetFontSize(30);
+	buttonBack->SetClickCallback(std::bind(&CScoresState::OnButtonClick, this, std::placeholders::_1));
 
+	CUILabel* label = new CUILabel(engine, "Bangers", "Hier komen de highscores!");
+	label->SetHorizontalAlignment(EUIALignmentHorizontal::CENTER);
+	label->SetVerticalAlignment(EUIALignmentVertical::BOTTOM);
+	label->SetPosition(0, -200);
+	label->SetFontSize(50);
 
-	SDL_Surface* background = IMG_Load("Resources/Images/highscores.jpg");
-	SDL_Texture* background_texture = SDL_CreateTextureFromSurface(engine->renderer, background);
+	this->engine = engine;
 
-	int backW = 0;
-	int backH = 0;
-	SDL_QueryTexture(background_texture, NULL, NULL, &backW, &backH);
-	SDL_Rect backrect = { 0,0,backW, backH };
-
-	SDL_RenderCopy(engine->renderer, background_texture, NULL, &backrect);
-
-	TTF_CloseFont(fntPricedown);
-	TTF_Quit();
-
-	//Highscores binnentrekkeren
-	HighscoresHelper* highscoresHelper = new HighscoresHelper();
-
-	highscoresHelper->getHighscore(1);
 }
 
 void CScoresState::clean(CEngine* engine)
 {
+	engine->drawManager->Clear();
+	engine->inputManager->Clear();
+	engine->box2DManager->Clear();
+	engine->entityManager->Clear();
 }
 
 void CScoresState::pause()
@@ -55,56 +67,37 @@ void CScoresState::handleEvents(CEngine* engine)
 
 void CScoresState::update(CEngine* engine)
 {
+	engine->entityManager->Tick();
+	SDL_Delay((1000.0 / 60) - engine->deltaHelper->delta);
+	checkSeque();
 }
 
 void CScoresState::draw(CEngine* engine)
 {
+	engine->drawManager->Tick(engine->renderer);
 }
 
 void CScoresState::input(CEngine* engine, SDL_Event * event)
 {
-	if (event->type == SDL_KEYDOWN)
-	{
-		switch (event->key.keysym.sym)
-		{
-		case SDLK_ESCAPE:
-			engine->stateManager->changeState(Menu, engine);
-			break;
-		default:
-			break;
-		}
-	}
-	else if (event->type == SDL_MOUSEBUTTONDOWN)
-	{
-		int mouseX = event->motion.x;
-		int mouseY = event->motion.y;
-		switch (event->button.button)
-		{
-		case SDL_BUTTON_LEFT:
-			if (mouseX > 35 && mouseX < 123 && mouseY > 650 && mouseY < 702)
-			{
-				engine->stateManager->changeState(Menu, engine);
-			}
+	engine->inputManager->Tick(event);
+}
 
-			break;
-		default:
-			break;
-		}
-	}
-	else if (event->type == SDL_CONTROLLERBUTTONDOWN)
-	{
-		if (event->cbutton.button == SDL_CONTROLLER_BUTTON_A || event->cbutton.button == SDL_CONTROLLER_BUTTON_B)
-		{
-			engine->stateManager->changeState(Menu, engine);
-		}
-	}
-	else
-	{
-		engine->inputManager->Tick(event);
-	}
+void CScoresState::checkSeque()
+{
+	if (!shouldSeque) { return; }
+
+	engine->stateManager->changeState(stateSeque, engine);
 }
 
 CScoresState::CScoresState(CEngine* engine)
 {
 	init(engine);
+}
+
+void CScoresState::OnButtonClick(CUIButton* button)
+{
+	if (button->GetText() == "Terug") {
+		shouldSeque = true;
+		stateSeque = EGameState::Menu;
+	}
 }

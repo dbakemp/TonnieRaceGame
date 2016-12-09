@@ -16,7 +16,8 @@ enum EGameState
 	Credits,
 	Win,
 	Help,
-	Scores
+	Scores,
+	GA
 };
 
 class CStateManager

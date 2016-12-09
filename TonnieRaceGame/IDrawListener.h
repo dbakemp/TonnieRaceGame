@@ -17,6 +17,9 @@ public:
 	void ChangeZIndex(int index);
 	TTF_Font* font;
 	std::string text;
+	SDL_Texture* texture;
+	SDL_Rect dstrect;
+	SDL_Rect srcrect;
 	bool visible;
 	bool debugVisible;
 	int zIndex;

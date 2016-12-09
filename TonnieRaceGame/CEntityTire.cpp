@@ -22,7 +22,7 @@ CEntityTire::CEntityTire(CEngine* engine, CMap* map, int x, int y) : CEntity(eng
 
 	maxForwardSpeed = 500;
 	maxBackwardsSpeed = -40;
-	maxDriveForce = 400;
+	maxDriveForce = 500;
 
 	this->engine = engine;
 }
@@ -93,7 +93,7 @@ void CEntityTire::OnControllerButton(const SDL_ControllerButtonEvent sdlEvent)
 	{
 		if (sdlEvent.state == SDL_PRESSED)
 		{
-			engine->musicHelper->playTrack("music\\toot.mp3", false);
+			engine->musicHelper->playTrack("Resources/Music/toot.mp3", false);
 		}
 	}
 	else if (sdlEvent.button == SDL_CONTROLLER_BUTTON_START)

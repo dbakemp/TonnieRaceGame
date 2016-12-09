@@ -1,12 +1,12 @@
-#ifndef CHELPSTATE_H 
-#define CHELPSTATE_H
+#ifndef CGASTATE_H
+#define CGASTATE_H
 
 #include <vector>
 #include "SDL.h"
 #include "CGameState.h"
-#include "CUIButton.h"
+#include "CCamera.h"
 
-class CHelpState : public CGameState
+class CGAState : public CGameState
 {
 public:
 	void init(CEngine* engine);
@@ -19,15 +19,18 @@ public:
 	void update(CEngine* engine);
 	void draw(CEngine* engine);
 	void input(CEngine* engine, SDL_Event* event);
-	void checkSeque();
+	void OnFinish(IBox2DListener* car);
 
-	bool shouldSeque;
-	EGameState stateSeque;
+	CGAState(CEngine* engine);
+	~CGAState();
 
-	CHelpState(CEngine* engine);
-
+	//temp
+	int texW = 0;
+	int texH = 0;
+	int GATicks = 0;
+	SDL_Texture* backmapTexture;
 private:
-	void OnButtonClick(CUIButton* button);
+	CCamera* camera;
 	CEngine* engine;
 };
 #endif

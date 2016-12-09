@@ -17,6 +17,7 @@
 #define RADTODEG 57.295779513082320876f
 #endif
 
+
 CEntityCarAI::CEntityCarAI(CEngine* engine, CMap* map) : CEntity(engine), IDrawListener(engine, (int)CDrawManager::Layers::Object), IBox2DListener(engine)
 {
 	this->SetType(Type::CAR);
@@ -27,6 +28,9 @@ CEntityCarAI::CEntityCarAI(CEngine* engine, CMap* map) : CEntity(engine), IDrawL
 	this->backupTimer = 0;
 	this->backingupTimer = 0;
 	this->shouldBackup = false;
+
+	carGenetics = new CarGenetics();
+	carGenetics->SetBitString("0000001010000101000010010110000111110100000000101000000000110000001111");
 
 	SDL_Surface* texture = IMG_Load("Resources/Images/spritesheet_vehicles.png");
 	this->spriteSheet = SDL_CreateTextureFromSurface(engine->renderer, texture);
@@ -52,7 +56,7 @@ CEntityCarAI::CEntityCarAI(CEngine* engine, CMap* map) : CEntity(engine), IDrawL
 	vertices[7].Set(0 + xPos, 11 + yPos);
 
 	polygon.Set(vertices, 8);
-	b2Fixture* fixture = body->CreateFixture(&polygon, 0.1f);
+	b2Fixture* fixture = body->CreateFixture(&polygon, carGenetics->carDensity);
 	b2RevoluteJointDef jointDef;
 	jointDef.bodyA = body;
 	jointDef.enableLimit = true;
@@ -60,28 +64,28 @@ CEntityCarAI::CEntityCarAI(CEngine* engine, CMap* map) : CEntity(engine), IDrawL
 	jointDef.upperAngle = 0;
 	jointDef.localAnchorB.SetZero();
 
-	CEntityTireAI* tire = new CEntityTireAI(engine, map, spawn->x, spawn->y);
+	CEntityTireAI* tire = new CEntityTireAI(engine, map, spawn->x, spawn->y, carGenetics);
 	tire->ChangeZIndex(zIndex - 1);
 	jointDef.bodyB = tire->body;
 	jointDef.localAnchorA.Set(0.5 + xPos, 1.75f + yPos);
 	engine->world->CreateJoint(&jointDef);
 	tires.push_back(tire);
 
-	tire = new CEntityTireAI(engine, map, spawn->x, spawn->y);
+	tire = new CEntityTireAI(engine, map, spawn->x, spawn->y, carGenetics);
 	tire->ChangeZIndex(zIndex - 1);
 	jointDef.bodyB = tire->body;
 	jointDef.localAnchorA.Set(7.5 + xPos, 1.75f + yPos);
 	engine->world->CreateJoint(&jointDef);
 	tires.push_back(tire);
 
-	tire = new CEntityTireAI(engine, map, spawn->x, spawn->y);
+	tire = new CEntityTireAI(engine, map, spawn->x, spawn->y, carGenetics);
 	tire->ChangeZIndex(zIndex - 1);
 	jointDef.bodyB = tire->body;
 	jointDef.localAnchorA.Set(0.5 + xPos, 10.5f + yPos);
 	flJoint = static_cast<b2RevoluteJoint*>(engine->world->CreateJoint(&jointDef));
 	tires.push_back(tire);
 
-	tire = new CEntityTireAI(engine, map, spawn->x, spawn->y);
+	tire = new CEntityTireAI(engine, map, spawn->x, spawn->y, carGenetics);
 	tire->ChangeZIndex(zIndex - 1);
 	jointDef.bodyB = tire->body;
 	jointDef.localAnchorA.Set(7.5 + xPos, 10.5f + yPos);
@@ -119,6 +123,9 @@ void CEntityCarAI::CollisionBegin(CEntity* collider)
 	if (collider->GetType() == Type::WAYPOINT) {
 		CEntityWaypoint* waypoint = static_cast<CEntityWaypoint*>(collider);
 		ProcessWaypoint(waypoint);
+	} else if (collider->GetType() == Type::CHECKPOINT) {
+		CEntityCheckpoint* checkpoint = static_cast<CEntityCheckpoint*>(collider);
+		ProcessCheckpoint(checkpoint);
 	}
 }
 
@@ -130,8 +137,7 @@ void CEntityCarAI::ProcessCheckpoint(CEntityCheckpoint * checkpoint)
 {
 	if (currentCheckpoint + 1 == engine->currentMap->checkpoints && checkpoint->isFinish) {
 		if (currentLap + 1 == engine->currentMap->laps) {
-			CDebugLogger::PrintDebug("Race finish here");
-			engine->stateManager->changeState(Win, engine);
+			FinishCallback();
 		}
 		else {
 			currentCheckpoint = checkpoint->checkpointIndex;
@@ -162,6 +168,16 @@ void CEntityCarAI::ChangeWaypoint(CEntityWaypoint * waypoint)
 	heading = waypoint;
 	biasX = CIntegerHelper::GetRandomIntBetween(-(waypoint->radius), waypoint->radius);
 	biasY = CIntegerHelper::GetRandomIntBetween(-(waypoint->radius), waypoint->radius);
+}
+
+void CEntityCarAI::SetFinishCallback(std::function<void(IBox2DListener*)> callback)
+{
+	finishCallback = callback;
+}
+
+void CEntityCarAI::FinishCallback()
+{
+	finishCallback(this);
 }
 
 
@@ -245,6 +261,13 @@ void CEntityCarAI::Update()
 	}
 
 
+	b2Vec2 vecc = veca - vecb;
+	float distance = vecc.Normalize();
+
+	if (desiredAngle < 0) {
+		desiredAngle = -desiredAngle;
+	}
+
 	if (shouldBackup && backingupTimer < 1) {
 		backingupTimer += engine->deltaHelper->delta;
 		for (CEntityTireAI* tire : tires) {
@@ -255,7 +278,12 @@ void CEntityCarAI::Update()
 		shouldBackup = false;
 		backingupTimer = 0;
 		for (CEntityTireAI* tire : tires) {
-			tire->maxForwardSpeed = 500;
+			if (distance > (velocity.Normalize()*carGenetics->slowDownBias)) {
+				tire->maxForwardSpeed = carGenetics->maxForwardSpeed - (desiredAngle * carGenetics->maxForwardSpeed);
+			}
+			else {
+				tire->maxForwardSpeed = 0;
+			}
 		}
 	}
 }
@@ -263,3 +291,37 @@ void CEntityCarAI::Update()
 void CEntityCarAI::Create(b2World* world)
 {
 }
+
+void CEntityCarAI::CarGenetics::GetBitString()
+{
+	std::string geneticString;
+	std::string carDensityBinary = std::bitset<10>(carDensity*100).to_string();
+	std::string slowDownBiasBinary = std::bitset<10>(slowDownBias * 100).to_string();
+	std::string maxForwardSpeedBinary = std::bitset<10>(maxForwardSpeed).to_string();
+	std::string maxDriveForceBinary = std::bitset<10>(maxDriveForce).to_string();
+	std::string angularImpulseBiasBinary = std::bitset<10>(angularImpulseBias * 100).to_string();
+	std::string dragForceBiasBinary = std::bitset<10>(dragForceBias).to_string();
+	std::string desiredTorqueBinary = std::bitset<10>(desiredTorque).to_string();
+
+	geneticString += carDensityBinary + slowDownBiasBinary + maxForwardSpeedBinary + maxDriveForceBinary + angularImpulseBiasBinary + dragForceBiasBinary + desiredTorqueBinary;
+}
+
+void CEntityCarAI::CarGenetics::SetBitString(std::string bitString)
+{
+	std::string carDensityBinary = bitString.substr(0, 10);
+	std::string slowDownBiasBinary = bitString.substr(10, 10);
+	std::string maxForwardSpeedBinary = bitString.substr(20, 10);
+	std::string maxDriveForceBinary = bitString.substr(30, 10);
+	std::string angularImpulseBiasBinary = bitString.substr(40, 10);
+	std::string dragForceBiasBinary = bitString.substr(50, 10);
+	std::string desiredTorqueBinary = bitString.substr(60, 10);
+
+	carDensity = ((float)CIntegerHelper::BitStringToInt(carDensityBinary)/100);
+	slowDownBias = ((float)CIntegerHelper::BitStringToInt(slowDownBiasBinary) / 100);
+	maxForwardSpeed = CIntegerHelper::BitStringToInt(maxForwardSpeedBinary);
+	maxDriveForce = CIntegerHelper::BitStringToInt(maxDriveForceBinary);
+	angularImpulseBias = ((float)CIntegerHelper::BitStringToInt(angularImpulseBiasBinary) / 100);
+	dragForceBias = CIntegerHelper::BitStringToInt(dragForceBiasBinary);
+	desiredTorque = CIntegerHelper::BitStringToInt(desiredTorqueBinary);
+}
+

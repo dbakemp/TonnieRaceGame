@@ -18,6 +18,13 @@ CEntitySpeedoMeter::CEntitySpeedoMeter(CEngine* engine, TTF_Font* font) : CEntit
 	meterback_texture = SDL_CreateTextureFromSurface(engine->renderer, meterback);
 	angle = 0;
 	point = { 95, 8 };
+
+	speedLabel = new CUILabel(engine, "Bangers", "");
+	speedLabel->SetPosition(280, -5);
+	speedLabel->SetHorizontalAlignment(EUIALignmentHorizontal::LEFT);
+	speedLabel->SetVerticalAlignment(EUIALignmentVertical::BOTTOM);
+	speedLabel->SetFontSize(50);
+
 }
 
 CEntitySpeedoMeter::~CEntitySpeedoMeter()
@@ -29,14 +36,18 @@ void CEntitySpeedoMeter::Update()
 {
 	float32 speed = GetChild()->body->GetLinearVelocity().Length();
 
+	ticksum -= ticklist[tickindex];
+	ticksum += speed;
+	ticklist[tickindex] = speed;
+	if (++tickindex == 200)
+		tickindex = 0;
+
 	std::stringstream ss;
-	ss << std::fixed << std::setprecision(0) << speed;
+	ss << std::fixed << std::setprecision(0) << ticksum / 200;
 	std::string speedRounded = ss.str();
 
-	//text = "Speed: " + speedRounded + " km/h";
-
-	text = speedRounded;
-	angle = speed;
+	speedLabel->SetText(speedRounded);
+	angle = ticksum / 200;
 }
 
 void CEntitySpeedoMeter::Draw(SDL_Renderer* renderer)
@@ -50,19 +61,6 @@ void CEntitySpeedoMeter::Draw(SDL_Renderer* renderer)
 	
 	SDL_RenderCopy(engine->renderer, meterback_texture, NULL, &meterbackrect);
 	SDL_RenderCopyEx(engine->renderer, meter_texture, NULL, &backrect, angle, &point, SDL_FLIP_NONE);
-
-	SDL_Surface* surface = TTF_RenderText_Solid(font, text.c_str(), { 255, 255, 255 });
-	SDL_Texture* texture = SDL_CreateTextureFromSurface(engine->renderer, surface);
-
-	SDL_Rect srect;
-	SDL_QueryTexture(texture, NULL, NULL, &srect.w, &srect.h);
-
-	SDL_Rect dstrect = { 260, engine->windowHeight - 80, srect.w, srect.h };
-	//SDL_Rect dstrect = { engine->windowWidth - srect.w - 10, srect.h + 20, srect.w, srect.h };
-	SDL_RenderCopy(engine->renderer, texture, NULL, &dstrect);
-
-	SDL_DestroyTexture(texture);
-	SDL_FreeSurface(surface);
 }
 
 void CEntitySpeedoMeter::SetChild(IBox2DListener* child)

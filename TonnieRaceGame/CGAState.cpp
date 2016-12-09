@@ -2,7 +2,7 @@
 #include "SDL.h"
 #include "CStateManager.h"
 #include "SDL_image.h"
-#include "CPlayState.h"
+#include "CGAState.h"
 #include "CEngine.h"
 #include "CEntityCarAI.h"
 #include "CEntityCar.h"
@@ -21,13 +21,15 @@
 #include "CEntitySpeedoMeter.h"
 #include "SDL_ttf.h"
 #include "CDebugLogger.h"
+#include <functional>
 
-void CPlayState::init(CEngine* engine)
+void CGAState::init(CEngine* engine)
 {
 	SDL_Renderer* renderer;
 	renderer = SDL_CreateRenderer(engine->window, -1, 0);
 	SDL_RenderClear(renderer);
 
+	TTF_Init();
 	TTF_Font* fpsFont = TTF_OpenFont("Resources/Fonts/opensans.ttf", 16);
 	TTF_Font* kmhFont = TTF_OpenFont("Resources/Fonts/opensans.ttf", 64);
 
@@ -39,26 +41,10 @@ void CPlayState::init(CEngine* engine)
 
 	SDL_QueryTexture(backmapTexture, NULL, NULL, &texW, &texH);
 
-	engine->adManager = new CAdManager(engine);
-
 	CLevelFactory* factory = new CLevelFactory(engine);
 
-	if (engine->level == 1)
-	{
-		CDebugLogger::PrintDebug("Loading LVL 1");
-		factory->LoadMap("Resources/Maps/map1.json");
-		engine->musicHelper->playTrack("Resources/Music/beep.mp3", true);
-	}
-	else if (engine->level == 2)
-	{
-		CDebugLogger::PrintDebug("Loading LVL 2");
-		factory->LoadMap("Resources/Maps/map2.json");
-		engine->musicHelper->playTrack("Resources/Music/boerharms.mp3", true);
-	}
-	else
-	{
-		CDebugLogger::PrintDebug("Error loading level");
-	}
+	CDebugLogger::PrintDebug("Loading GA");
+	factory->LoadMap("Resources/Maps/mapGA.json");
 
 	engine->currentMap = factory->map;
 
@@ -66,25 +52,18 @@ void CPlayState::init(CEngine* engine)
 
 	engine->camera = camera;
 
-	CEntityCar* car = new CEntityCar(engine, factory->map);
-	int spawns = factory->map->availableSpawns.size();
-	for (int i = 0; i < spawns; i++) {
-		new CEntityCarAI(engine, factory->map);
-	}
+	CEntityCarAI* car = new CEntityCarAI(engine, factory->map);
 
+	car->SetFinishCallback(std::bind(&CGAState::OnFinish, this, std::placeholders::_1));
 	camera->SetChild(car);
 
 	CEntityFpsCounter* fpsCounter = new CEntityFpsCounter(engine, fpsFont);
-	CEntityLapCounter* lapCounter = new CEntityLapCounter(engine);
-	CEntitySpeedoMeter* speedoMeter = new CEntitySpeedoMeter(engine, kmhFont);
 	CEntityBuild* build = new CEntityBuild(engine, fpsFont);
 
-	speedoMeter->SetChild(car);
-	lapCounter->SetLapCountable(car);
-
+	this->engine = engine;
 }
 
-void CPlayState::clean(CEngine* engine)
+void CGAState::clean(CEngine* engine)
 {
 	engine->drawManager->Clear();
 	engine->inputManager->Clear();
@@ -95,38 +74,51 @@ void CPlayState::clean(CEngine* engine)
 	camera = nullptr;
 }
 
-void CPlayState::pause()
+void CGAState::pause()
 {
 }
 
-void CPlayState::resume()
+void CGAState::resume()
 {
 }
 
-void CPlayState::handleEvents(CEngine* engine)
+void CGAState::handleEvents(CEngine* engine)
 {
 }
 
-void CPlayState::update(CEngine* engine)
+void CGAState::update(CEngine* engine)
 {
+	GATicks++;
+	engine->deltaHelper->delta *= 10;
 	camera->Update();
 	engine->entityManager->Tick();
 	engine->world->Step(engine->deltaHelper->delta, 8, 3);
 }
 
-void CPlayState::draw(CEngine* engine)
+void CGAState::draw(CEngine* engine)
 {
 	SDL_SetRenderDrawColor(engine->renderer, 0, 0, 0, 255);
 	SDL_RenderClear(engine->renderer);
 	engine->drawManager->Tick(engine->renderer);
 }
 
-void CPlayState::input(CEngine* engine, SDL_Event * event)
+void CGAState::input(CEngine* engine, SDL_Event * event)
 {
 	engine->inputManager->Tick(event);
 }
 
-CPlayState::CPlayState(CEngine* engine)
+void CGAState::OnFinish(IBox2DListener* call)
+{
+	CDebugLogger::PrintDebug(std::to_string(GATicks));
+	GATicks = 0;
+
+	CEntityCarAI* car = new CEntityCarAI(engine, engine->currentMap);
+
+	car->SetFinishCallback(std::bind(&CGAState::OnFinish, this, std::placeholders::_1));
+	camera->SetChild(car);
+}
+
+CGAState::CGAState(CEngine* engine)
 {
 	init(engine);
 }

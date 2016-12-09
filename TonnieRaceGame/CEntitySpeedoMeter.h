@@ -5,6 +5,7 @@
 #include "CCamera.h"
 #include "CEntity.h"
 #include "CEngine.h"
+#include "CUILabel.h"
 #include "IBox2DListener.h"
 #include "SDL_ttf.h"
 
@@ -27,6 +28,10 @@ private:
 	CEngine* engine;
 	int angle;
 	SDL_Point point;
+	CUILabel* speedLabel;
+	int tickindex = 0;
+	float32 ticksum = 0;
+	float32 ticklist[200];
 };
 
 #endif 
