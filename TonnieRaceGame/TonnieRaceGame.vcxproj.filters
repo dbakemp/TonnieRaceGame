@@ -143,6 +143,8 @@
     <ClCompile Include="IInputListener.cpp">
       <Filter>Interfaces</Filter>
     </ClCompile>
+    <ClCompile Include="CEntityPowerup.cpp">
+      <Filter>Entities</Filter>
     <ClCompile Include="CEntitySpeedoMeter.cpp">
       <Filter>Entities\HUD</Filter>
     </ClCompile>
@@ -296,6 +298,8 @@
     <ClInclude Include="IInputListener.h">
       <Filter>Interfaces</Filter>
     </ClInclude>
+    <ClInclude Include="CEntityPowerup.h">
+      <Filter>Entities</Filter>
     <ClInclude Include="CEntitySpeedoMeter.h">
       <Filter>Entities\HUD</Filter>
     </ClInclude>

@@ -4,6 +4,7 @@
 #include <SDL.h>
 #include <iostream>
 #include "CEntityWaypoint.h"
+#include "CEntityPowerup.h"
 #include "CEntitySpawn.h"
 
 class CMap
@@ -20,6 +21,7 @@ public:
 	int spriteSheetHeight;
 	int spriteSheetTileWidth;
 	int spriteSheetTileHeight;
+	SDL_Texture* spriteSheetPowerUps;
 
 	int width;
 	int height;
@@ -30,6 +32,7 @@ public:
 	int checkpoints;
 
 	std::vector<CEntityWaypoint*> waypoints;
+	std::vector<CEntityPowerup*> powerups;
 	std::vector<CEntitySpawn*> availableSpawns;
 	std::vector<CEntitySpawn*> takenSpawns;
 	CEntitySpawn* GetSpawn();

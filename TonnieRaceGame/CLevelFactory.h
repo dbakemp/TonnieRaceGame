@@ -17,6 +17,7 @@ public:
 	void CreateBorder(Json::Value* root);
 	void CreateCheckpoints(Json::Value* root);
 	void CreateWaypoints(Json::Value* root);
+	void CreatePowerups(Json::Value* root);
 	void CreateAd(Json::Value* root);
 	void CreateSpriteSheet(Json::Value* root);
 	CMap* map;
