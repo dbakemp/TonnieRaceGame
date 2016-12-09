@@ -18,17 +18,17 @@
 
 void CScoresState::init(CEngine* engine)
 {
-	CUIImage* background = new CUIImage(engine, "main.png");
+	CUIImage* background = new CUIImage(engine, "Images/main.png");
 	background->SetHorizontalAlignment(EUIALignmentHorizontal::CENTER);
 	background->SetVerticalAlignment(EUIALignmentVertical::CENTER);
 	background->SetVerticalStretch(EUIStretchVertical::FIT);
 
-	CUIImage* tonnie = new CUIImage(engine, "logo.png");
+	CUIImage* tonnie = new CUIImage(engine, "Images/logo.png");
 	tonnie->SetHorizontalAlignment(EUIALignmentHorizontal::CENTER);
 	tonnie->SetVerticalAlignment(EUIALignmentVertical::CENTER);
 	tonnie->SetPosition(0, -100);
 
-	CUIButton* buttonBack = new CUIButton(engine, "Bangers", "Terug", "terug.png");
+	CUIButton* buttonBack = new CUIButton(engine, "Bangers", "Terug", "Images/terug.png");
 	buttonBack->SetHorizontalAlignment(EUIALignmentHorizontal::LEFT);
 	buttonBack->SetVerticalAlignment(EUIALignmentVertical::BOTTOM);
 	buttonBack->SetPosition(100, -50);

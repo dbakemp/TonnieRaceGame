@@ -19,38 +19,38 @@
 
 void CIntroState::init(CEngine* engine)
 {
-	CUIImage* background = new CUIImage(engine, "main.png");
+	CUIImage* background = new CUIImage(engine, "Images/main.png");
 	background->SetHorizontalAlignment(EUIALignmentHorizontal::CENTER);
 	background->SetVerticalAlignment(EUIALignmentVertical::CENTER);
 	background->SetVerticalStretch(EUIStretchVertical::FIT);
 
-	CUIImage* tonnie = new CUIImage(engine, "logo.png");
+	CUIImage* tonnie = new CUIImage(engine, "Images/logo.png");
 	tonnie->SetHorizontalAlignment(EUIALignmentHorizontal::CENTER);
 	tonnie->SetVerticalAlignment(EUIALignmentVertical::CENTER);
 	tonnie->SetPosition(0, -100);
 
-	CUIButton* labela = new CUIButton(engine, "Bangers", "Spelen", "blauw.png");
+	CUIButton* labela = new CUIButton(engine, "Bangers", "Spelen", "Images/blauw.png");
 	labela->SetHorizontalAlignment(EUIALignmentHorizontal::CENTER);
 	labela->SetVerticalAlignment(EUIALignmentVertical::BOTTOM);
 	labela->SetPosition(-300, -100);
 	labela->SetFontSize(30);
 	labela->SetClickCallback(std::bind(&CIntroState::OnButtonClick, this, std::placeholders::_1));
 
-	CUIButton* labelb = new CUIButton(engine, "Bangers", "Help", "rood.png");
+	CUIButton* labelb = new CUIButton(engine, "Bangers", "Help", "Images/rood.png");
 	labelb->SetHorizontalAlignment(EUIALignmentHorizontal::CENTER);
 	labelb->SetVerticalAlignment(EUIALignmentVertical::BOTTOM);
 	labelb->SetPosition(-100, -100);
 	labelb->SetFontSize(30);
 	labelb->SetClickCallback(std::bind(&CIntroState::OnButtonClick, this, std::placeholders::_1));
 
-	CUIButton* labelc = new CUIButton(engine, "Bangers", "Scores", "groen.png");
+	CUIButton* labelc = new CUIButton(engine, "Bangers", "Scores", "Images/groen.png");
 	labelc->SetHorizontalAlignment(EUIALignmentHorizontal::CENTER);
 	labelc->SetVerticalAlignment(EUIALignmentVertical::BOTTOM);
 	labelc->SetPosition(100, -100);
 	labelc->SetFontSize(30);
 	labelc->SetClickCallback(std::bind(&CIntroState::OnButtonClick, this, std::placeholders::_1));
 
-	CUIButton* labeld = new CUIButton(engine, "Bangers", "Credits", "geel.png");
+	CUIButton* labeld = new CUIButton(engine, "Bangers", "Credits", "Images/geel.png");
 	labeld->SetHorizontalAlignment(EUIALignmentHorizontal::CENTER);
 	labeld->SetVerticalAlignment(EUIALignmentVertical::BOTTOM);
 	labeld->SetPosition(300, -100);

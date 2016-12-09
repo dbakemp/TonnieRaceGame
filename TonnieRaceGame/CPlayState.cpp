@@ -143,6 +143,7 @@ void CPlayState::checkSeque()
 	if (!shouldSeque) { return; }
 
 	engine->stateManager->changeState(stateSeque, engine);
+	engine->musicHelper->stopAll();
 }
 
 CPlayState::CPlayState(CEngine* engine)

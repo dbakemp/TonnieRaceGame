@@ -12,11 +12,11 @@ CEntitySpeedoMeter::CEntitySpeedoMeter(CEngine* engine) : CEntity(engine), IDraw
 	this->font = font;
 	this->engine = engine;
 
-	meter_texture = engine->textureManager->GetTexture("meter.png");
+	meter_texture = engine->textureManager->GetTexture("Images/meter.png");
 	angle = 0;
 	point = { 95, 8 };
 
-	speedometer = new CUIImage(engine, "speedometer.png");
+	speedometer = new CUIImage(engine, "Images/speedometer.png");
 	speedometer->SetHorizontalAlignment(EUIALignmentHorizontal::LEFT);
 	speedometer->SetVerticalAlignment(EUIALignmentVertical::BOTTOM);
 
@@ -60,7 +60,6 @@ void CEntitySpeedoMeter::Update()
 
 void CEntitySpeedoMeter::Draw(SDL_Renderer* renderer)
 {
-	SDL_QueryTexture(meter_texture, NULL, NULL, 0, 0);
 	SDL_Rect backrect = { 25,  engine->windowHeight-30, 120, 17 };
 	
 	SDL_RenderCopyEx(engine->renderer, meter_texture, NULL, &backrect, angle, &point, SDL_FLIP_NONE);

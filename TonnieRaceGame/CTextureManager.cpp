@@ -12,7 +12,7 @@ CTextureManager::~CTextureManager()
 
 SDL_Texture * CTextureManager::AddTexture(std::string textureName)
 {
-	std::string textureLocation = "Resources/Images/" + textureName;
+	std::string textureLocation = "Resources/" + textureName;
 
 
 	SDL_Surface* surface = IMG_Load(textureLocation.c_str());

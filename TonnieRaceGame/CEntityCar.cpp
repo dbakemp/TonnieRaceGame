@@ -23,7 +23,7 @@ CEntityCar::CEntityCar(CEngine* engine, CMap* map) : CEntity(engine), IDrawListe
 	this->currentCheckpoint = -1;
 	this->currentLap = 0;
 	this->debugVisible = false;
-	this->spriteSheet = engine->textureManager->GetTexture("spritesheet_vehicles.png");
+	this->spriteSheet = engine->textureManager->GetTexture("Images/spritesheet_vehicles.png");
 	srcRect = { 631, 0, 41, 66 };
 
 	bodyDef.type = b2_dynamicBody;

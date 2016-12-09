@@ -2627,7 +2627,7 @@
          "name":"spritesheet_tiles",
          "properties":
             {
-             "resourcepath":"Resources\/Spritesheets\/spritesheet_tiles.png"
+             "resourcepath":"Spritesheets\/spritesheet_tiles.png"
             },
          "propertytypes":
             {
@@ -2710,119 +2710,119 @@
             {
              "0":
                 {
-                 "resourcepath":"Resources\/Spritesheets\/objects\/billboard1.png"
+                 "resourcepath":"Spritesheets\/objects\/billboard1.png"
                 },
              "1":
                 {
-                 "resourcepath":"Resources\/Spritesheets\/objects\/billboard2.png"
+                 "resourcepath":"Spritesheets\/objects\/billboard2.png"
                 },
              "10":
                 {
-                 "resourcepath":"Resources\/Spritesheets\/objects\/pionblauw.png"
+                 "resourcepath":"Spritesheets\/objects\/pionblauw.png"
                 },
              "11":
                 {
-                 "resourcepath":"Resources\/Spritesheets\/objects\/pion-rondje.png"
+                 "resourcepath":"Spritesheets\/objects\/pion-rondje.png"
                 },
              "12":
                 {
-                 "resourcepath":"Resources\/Spritesheets\/objects\/pionrood.png"
+                 "resourcepath":"Spritesheets\/objects\/pionrood.png"
                 },
              "13":
                 {
-                 "resourcepath":"Resources\/Spritesheets\/objects\/pionrood2.png"
+                 "resourcepath":"Spritesheets\/objects\/pionrood2.png"
                 },
              "14":
                 {
-                 "resourcepath":"Resources\/Spritesheets\/objects\/pionvierkant.png"
+                 "resourcepath":"Spritesheets\/objects\/pionvierkant.png"
                 },
              "15":
                 {
-                 "resourcepath":"Resources\/Spritesheets\/objects\/pionwit.png"
+                 "resourcepath":"Spritesheets\/objects\/pionwit.png"
                 },
              "16":
                 {
-                 "resourcepath":"Resources\/Spritesheets\/objects\/rechthoek.png"
+                 "resourcepath":"Spritesheets\/objects\/rechthoek.png"
                 },
              "17":
                 {
-                 "resourcepath":"Resources\/Spritesheets\/objects\/rechthoekblauw.png"
+                 "resourcepath":"Spritesheets\/objects\/rechthoekblauw.png"
                 },
              "18":
                 {
-                 "resourcepath":"Resources\/Spritesheets\/objects\/rondje1.png"
+                 "resourcepath":"Spritesheets\/objects\/rondje1.png"
                 },
              "19":
                 {
-                 "resourcepath":"Resources\/Spritesheets\/objects\/steen1.png"
+                 "resourcepath":"Spritesheets\/objects\/steen1.png"
                 },
              "2":
                 {
-                 "resourcepath":"Resources\/Spritesheets\/objects\/billboard3.png"
+                 "resourcepath":"Spritesheets\/objects\/billboard3.png"
                 },
              "20":
                 {
-                 "resourcepath":"Resources\/Spritesheets\/objects\/steen2.png"
+                 "resourcepath":"Spritesheets\/objects\/steen2.png"
                 },
              "21":
                 {
-                 "resourcepath":"Resources\/Spritesheets\/objects\/steen3.png"
+                 "resourcepath":"Spritesheets\/objects\/steen3.png"
                 },
              "22":
                 {
-                 "resourcepath":"Resources\/Spritesheets\/objects\/tent1.png"
+                 "resourcepath":"Spritesheets\/objects\/tent1.png"
                 },
              "23":
                 {
-                 "resourcepath":"Resources\/Spritesheets\/objects\/tent2.png"
+                 "resourcepath":"Spritesheets\/objects\/tent2.png"
                 },
              "24":
                 {
-                 "resourcepath":"Resources\/Spritesheets\/objects\/tentklein1.png"
+                 "resourcepath":"Spritesheets\/objects\/tentklein1.png"
                 },
              "25":
                 {
-                 "resourcepath":"Resources\/Spritesheets\/objects\/tentklein2.png"
+                 "resourcepath":"Spritesheets\/objects\/tentklein2.png"
                 },
              "26":
                 {
-                 "resourcepath":"Resources\/Spritesheets\/objects\/tribune.png"
+                 "resourcepath":"Spritesheets\/objects\/tribune.png"
                 },
              "27":
                 {
-                 "resourcepath":"Resources\/Spritesheets\/objects\/tribune_leeg.png"
+                 "resourcepath":"Spritesheets\/objects\/tribune_leeg.png"
                 },
              "28":
                 {
-                 "resourcepath":"Resources\/Spritesheets\/objects\/vaagding.png"
+                 "resourcepath":"Spritesheets\/objects\/vaagding.png"
                 },
              "3":
                 {
-                 "resourcepath":"Resources\/Spritesheets\/objects\/billboard4.png"
+                 "resourcepath":"Spritesheets\/objects\/billboard4.png"
                 },
              "4":
                 {
-                 "resourcepath":"Resources\/Spritesheets\/objects\/boomgroot.png"
+                 "resourcepath":"Spritesheets\/objects\/boomgroot.png"
                 },
              "5":
                 {
-                 "resourcepath":"Resources\/Spritesheets\/objects\/boomklein.png"
+                 "resourcepath":"Spritesheets\/objects\/boomklein.png"
                 },
              "6":
                 {
-                 "resourcepath":"Resources\/Spritesheets\/objects\/marktkraam.png"
+                 "resourcepath":"Spritesheets\/objects\/marktkraam.png"
                 },
              "7":
                 {
-                 "resourcepath":"Resources\/Spritesheets\/objects\/marktkraam2.png"
+                 "resourcepath":"Spritesheets\/objects\/marktkraam2.png"
                 },
              "8":
                 {
-                 "resourcepath":"Resources\/Spritesheets\/objects\/olie.png"
+                 "resourcepath":"Spritesheets\/objects\/olie.png"
                 },
              "9":
                 {
-                 "resourcepath":"Resources\/Spritesheets\/objects\/pijlen.png"
+                 "resourcepath":"Spritesheets\/objects\/pijlen.png"
                 }
             },
          "tilepropertytypes":

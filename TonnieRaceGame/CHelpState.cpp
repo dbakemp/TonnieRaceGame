@@ -19,12 +19,12 @@
 
 void CHelpState::init(CEngine* engine)
 {
-	CUIImage* background = new CUIImage(engine, "main.png");
+	CUIImage* background = new CUIImage(engine, "Images/main.png");
 	background->SetHorizontalAlignment(EUIALignmentHorizontal::CENTER);
 	background->SetVerticalAlignment(EUIALignmentVertical::CENTER);
 	background->SetVerticalStretch(EUIStretchVertical::FIT);
 
-	CUIButton* buttonBack = new CUIButton(engine, "Bangers", "Terug", "terug.png");
+	CUIButton* buttonBack = new CUIButton(engine, "Bangers", "Terug", "Images/terug.png");
 	buttonBack->SetHorizontalAlignment(EUIALignmentHorizontal::LEFT);
 	buttonBack->SetVerticalAlignment(EUIALignmentVertical::BOTTOM);
 	buttonBack->SetPosition(100, -50);
