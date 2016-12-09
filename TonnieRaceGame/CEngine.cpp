@@ -26,8 +26,8 @@
 CEngine::CEngine()
 {
 	gameControllerConnected = false;
-	windowHeight = 1080;
-	windowWidth = 1920;
+	windowHeight = 720;
+	windowWidth = 1280;
 	fpsCounter = 1;
 	level = 1;
 	showFPSCounter = true;
