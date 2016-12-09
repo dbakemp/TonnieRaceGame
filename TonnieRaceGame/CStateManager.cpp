@@ -7,6 +7,7 @@
 #include "CGAState.h"
 #include "CScoresState.h"
 #include "CCreditsState.h"
+#include "CLevelSelectorState.h"
 
 void CStateManager::changeState(EGameState state, CEngine* engine)
 {
@@ -33,6 +34,8 @@ void CStateManager::changeState(EGameState state, CEngine* engine)
 	case Scores: states.push_back(new CScoresState(engine));
 		break;
 	case GA: states.push_back(new CGAState(engine));
+		break;
+	case LevelSelector: states.push_back(new CLevelSelectorState(engine));
 		break;
 	}
 	return;

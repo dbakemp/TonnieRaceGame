@@ -224,6 +224,7 @@ xcopy "$(SolutionDir)TonnieRaceGame\Resources\*.*" "$(TargetDir)Resources" /Y /I
     <ClCompile Include="CInputManager.cpp" />
     <ClCompile Include="CIntegerHelper.cpp" />
     <ClCompile Include="CLevelFactory.cpp" />
+    <ClCompile Include="CLevelSelectorState.cpp" />
     <ClCompile Include="CMap.cpp" />
     <ClCompile Include="CIntroState.cpp" />
     <ClCompile Include="CPlayState.cpp" />
@@ -233,6 +234,7 @@ xcopy "$(SolutionDir)TonnieRaceGame\Resources\*.*" "$(TargetDir)Resources" /Y /I
     <ClCompile Include="CDeltaHelper.cpp" />
     <ClCompile Include="CTextureManager.cpp" />
     <ClCompile Include="CUIButton.cpp" />
+    <ClCompile Include="CUIContainer.cpp" />
     <ClCompile Include="CUIImage.cpp" />
     <ClCompile Include="CUILabel.cpp" />
     <ClCompile Include="CWinState.cpp" />
@@ -285,6 +287,7 @@ xcopy "$(SolutionDir)TonnieRaceGame\Resources\*.*" "$(TargetDir)Resources" /Y /I
     <ClInclude Include="CInputManager.h" />
     <ClInclude Include="CIntegerHelper.h" />
     <ClInclude Include="CLevelFactory.h" />
+    <ClInclude Include="CLevelSelectorState.h" />
     <ClInclude Include="CMap.h" />
     <ClInclude Include="CIntroState.h" />
     <ClInclude Include="CPlayState.h" />
@@ -294,6 +297,7 @@ xcopy "$(SolutionDir)TonnieRaceGame\Resources\*.*" "$(TargetDir)Resources" /Y /I
     <ClInclude Include="CDeltaHelper.h" />
     <ClInclude Include="CTextureManager.h" />
     <ClInclude Include="CUIButton.h" />
+    <ClInclude Include="CUIContainer.h" />
     <ClInclude Include="CUIImage.h" />
     <ClInclude Include="CUILabel.h" />
     <ClInclude Include="CWinState.h" />
@@ -305,6 +309,7 @@ xcopy "$(SolutionDir)TonnieRaceGame\Resources\*.*" "$(TargetDir)Resources" /Y /I
     <ClInclude Include="IEntityListener.h" />
     <ClInclude Include="IInputListener.h" />
     <ClInclude Include="ILapCountable.h" />
+    <ClInclude Include="IUIEntity.h" />
     <ClInclude Include="MusicHelper.h" />
     <ClInclude Include="CScoresState.h" />
     <ClInclude Include="resource.h" />

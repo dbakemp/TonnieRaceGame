@@ -30,6 +30,9 @@ CUIButton::CUIButton(CEngine * engine, std::string font, std::string text, std::
 void CUIButton::Draw(SDL_Renderer * renderer)
 {
 	SDL_RenderCopy(engine->renderer, texture, NULL, &dstrect);
+
+	if (!debugVisible) { return;  }
+	SDL_RenderDrawRect(engine->renderer, &dstrect);
 }
 
 void CUIButton::Update()
@@ -48,6 +51,15 @@ void CUIButton::Input(SDL_Event* event)
 			case SDL_WINDOWEVENT_RESIZED:
 				PreRender();
 				break;
+		}
+	}
+	else if (event->type == SDL_KEYDOWN) {
+
+		switch (event->key.keysym.sym)
+		{
+		case SDLK_f:
+			debugVisible = !debugVisible;
+			break;
 		}
 	}
 }
@@ -102,25 +114,25 @@ void CUIButton::PreRender()
 
 	switch (horizontalAlignment) {
 	case EUIALignmentHorizontal::LEFT:
-		x = xPos;
+		x = xOffset + xPos;
 		break;
 	case EUIALignmentHorizontal::CENTER:
 		x = (wOffset / 2) - (srcrect.w / 2) + xOffset + xPos;
 		break;
 	case EUIALignmentHorizontal::RIGHT:
-		x = wOffset - srcrect.w + xPos;
+		x = wOffset - srcrect.w + xPos + xOffset;
 		break;
 	}
 
 	switch (verticalAlignment) {
 	case EUIALignmentVertical::TOP:
-		y = yPos;
+		y = yOffset + yPos;
 		break;
 	case EUIALignmentVertical::CENTER:
 		y = (hOffset / 2) - (srcrect.h / 2) + yOffset + yPos;
 		break;
 	case EUIALignmentVertical::BOTTOM:
-		y = hOffset - srcrect.h + yPos;
+		y = hOffset - srcrect.h + yPos + yOffset;
 		break;
 	}
 
@@ -137,6 +149,12 @@ void CUIButton::SetClickCallback(std::function<void(CUIButton*)> callback)
 void CUIButton::SetFontSize(int fontSize)
 {
 	label->SetFontSize(fontSize);
+}
+
+void CUIButton::SetContainer(int x, int y, int w, int h)
+{
+	container = { x, y, w, h };
+	PreRender();
 }
 
 std::string CUIButton::GetText()

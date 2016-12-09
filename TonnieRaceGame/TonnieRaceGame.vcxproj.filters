@@ -167,6 +167,12 @@
     <ClCompile Include="CTextureManager.cpp">
       <Filter>Managers</Filter>
     </ClCompile>
+    <ClCompile Include="CLevelSelectorState.cpp">
+      <Filter>States</Filter>
+    </ClCompile>
+    <ClCompile Include="CUIContainer.cpp">
+      <Filter>Entities\UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CCamera.h" />
@@ -330,6 +336,15 @@
     </ClInclude>
     <ClInclude Include="CTextureManager.h">
       <Filter>Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="CLevelSelectorState.h">
+      <Filter>States</Filter>
+    </ClInclude>
+    <ClInclude Include="CUIContainer.h">
+      <Filter>Entities\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="IUIEntity.h">
+      <Filter>Interfaces</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

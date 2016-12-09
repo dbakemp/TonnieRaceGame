@@ -24,6 +24,8 @@
 
 void CPlayState::init(CEngine* engine)
 {
+	this->engine = engine;
+
 	SDL_Renderer* renderer;
 	renderer = SDL_CreateRenderer(engine->window, -1, 0);
 	SDL_RenderClear(renderer);
@@ -74,6 +76,7 @@ void CPlayState::init(CEngine* engine)
 	CEntityFpsCounter* fpsCounter = new CEntityFpsCounter(engine);
 	CEntityLapCounter* lapCounter = new CEntityLapCounter(engine);
 	CEntitySpeedoMeter* speedoMeter = new CEntitySpeedoMeter(engine);
+	speedoMeter->ChangeZIndex(speedoMeter->zIndex+1);
 	CEntityBuild* build = new CEntityBuild(engine);
 
 	speedoMeter->SetChild(car);
@@ -109,6 +112,7 @@ void CPlayState::update(CEngine* engine)
 	camera->Update();
 	engine->entityManager->Tick();
 	engine->world->Step(engine->deltaHelper->delta, 8, 3);
+	checkSeque();
 }
 
 void CPlayState::draw(CEngine* engine)
@@ -120,7 +124,25 @@ void CPlayState::draw(CEngine* engine)
 
 void CPlayState::input(CEngine* engine, SDL_Event * event)
 {
+	if (event->type == SDL_KEYDOWN) {
+
+		switch (event->key.keysym.sym)
+		{
+		case SDLK_ESCAPE:
+			stateSeque = EGameState::Menu;
+			shouldSeque = true;
+			break;
+		}
+	}
+
 	engine->inputManager->Tick(event);
+}
+
+void CPlayState::checkSeque()
+{
+	if (!shouldSeque) { return; }
+
+	engine->stateManager->changeState(stateSeque, engine);
 }
 
 CPlayState::CPlayState(CEngine* engine)

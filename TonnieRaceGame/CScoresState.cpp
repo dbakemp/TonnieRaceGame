@@ -42,7 +42,6 @@ void CScoresState::init(CEngine* engine)
 	label->SetFontSize(50);
 
 	this->engine = engine;
-
 }
 
 void CScoresState::clean(CEngine* engine)

@@ -8,9 +8,10 @@
 #include "CUILabel.h"
 #include "SDL_ttf.h"
 #include "CEngine.h"
+#include "IUIEntity.h"
 #include <functional>
 
-class CUIButton : public CEntity, public IDrawListener, public IInputListener
+class CUIButton : public CEntity, public IDrawListener, public IInputListener, public IUIEntity
 {
 public:
 	CUIButton(CEngine* engine);
@@ -27,6 +28,7 @@ public:
 	void SetVerticalAlignment(EUIALignmentVertical alignment);
 	void SetClickCallback(std::function<void(CUIButton*)> callback);
 	void SetFontSize(int fontSize);
+	void SetContainer(int x, int y, int w, int h);
 
 	std::string GetText();
 private:

@@ -75,7 +75,7 @@ CEngine::CEngine()
 		}
 	}
 
-	EGameState state = Start;
+	EGameState state = EGameState::Pause;
 	stateManager->changeState(state, this);
 	musicHelper->playTrack("Resources/Music/title.mp3", false);
 	Tick();

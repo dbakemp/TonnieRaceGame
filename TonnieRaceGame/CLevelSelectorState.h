@@ -1,12 +1,16 @@
-#ifndef CPLAYSTATE_H
-#define CPLAYSTATE_H
+#ifndef CLEVELSELECTORSTATE_H
+#define CLEVELSELECTORSTATE_H
 
 #include <vector>
 #include "SDL.h"
+#include "AdHelper.h"
+#include "CUIButton.h"
 #include "CGameState.h"
-#include "CCamera.h"
+#include "CUIButton.h"
+#include "CGameState.h"
+#include "CStateManager.h"
 
-class CPlayState : public CGameState
+class CLevelSelectorState : public CGameState
 {
 public:
 	void init(CEngine* engine);
@@ -24,15 +28,9 @@ public:
 	bool shouldSeque;
 	EGameState stateSeque;
 
-	CPlayState(CEngine* engine);
-	~CPlayState();
-
-	//temp
-	int texW = 0;
-	int texH = 0;
-	SDL_Texture* backmapTexture;
+	CLevelSelectorState(CEngine* engine);
 private:
-	CCamera* camera;
+	void OnButtonClick(CUIButton* button);
 	CEngine* engine;
 };
 #endif

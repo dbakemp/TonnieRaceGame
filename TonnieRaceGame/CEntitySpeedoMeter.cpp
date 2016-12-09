@@ -13,16 +13,26 @@ CEntitySpeedoMeter::CEntitySpeedoMeter(CEngine* engine) : CEntity(engine), IDraw
 	this->engine = engine;
 
 	meter_texture = engine->textureManager->GetTexture("meter.png");
-	meterback_texture = engine->textureManager->GetTexture("speedometer.png");
 	angle = 0;
 	point = { 95, 8 };
 
-	speedLabel = new CUILabel(engine, "Bangers", "");
-	speedLabel->SetPosition(280, -5);
-	speedLabel->SetHorizontalAlignment(EUIALignmentHorizontal::LEFT);
-	speedLabel->SetVerticalAlignment(EUIALignmentVertical::BOTTOM);
-	speedLabel->SetFontSize(50);
+	speedometer = new CUIImage(engine, "speedometer.png");
+	speedometer->SetHorizontalAlignment(EUIALignmentHorizontal::LEFT);
+	speedometer->SetVerticalAlignment(EUIALignmentVertical::BOTTOM);
 
+	speedLabel = new CUILabel(engine, "Bangers", "");
+	speedLabel->SetHorizontalAlignment(EUIALignmentHorizontal::CENTER);
+	speedLabel->SetVerticalAlignment(EUIALignmentVertical::CENTER);
+	speedLabel->SetFontSize(50);
+	speedLabel->SetPosition(0, 2);
+
+	labelContainer = new CUIContainer(engine);
+	labelContainer->SetHorizontalAlignment(EUIALignmentHorizontal::LEFT);
+	labelContainer->SetVerticalAlignment(EUIALignmentVertical::BOTTOM);
+	labelContainer->SetWidth(141);
+	labelContainer->SetHeight(73);
+	labelContainer->SetPosition(243, 0);
+	labelContainer->AddUIElement(speedLabel);
 }
 
 CEntitySpeedoMeter::~CEntitySpeedoMeter()
@@ -50,14 +60,9 @@ void CEntitySpeedoMeter::Update()
 
 void CEntitySpeedoMeter::Draw(SDL_Renderer* renderer)
 {
-	int backW = 0;
-	int backH = 0;
 	SDL_QueryTexture(meter_texture, NULL, NULL, 0, 0);
 	SDL_Rect backrect = { 25,  engine->windowHeight-30, 120, 17 };
 	
-	SDL_Rect meterbackrect = { 0, engine->windowHeight - 132, 383, 132 };
-	
-	SDL_RenderCopy(engine->renderer, meterback_texture, NULL, &meterbackrect);
 	SDL_RenderCopyEx(engine->renderer, meter_texture, NULL, &backrect, angle, &point, SDL_FLIP_NONE);
 }
 

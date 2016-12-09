@@ -6,6 +6,8 @@
 #include "CEntity.h"
 #include "CEngine.h"
 #include "CUILabel.h"
+#include "CUIContainer.h"
+#include "CUIImage.h"
 #include "IBox2DListener.h"
 #include "SDL_ttf.h"
 
@@ -29,6 +31,8 @@ private:
 	int angle;
 	SDL_Point point;
 	CUILabel* speedLabel;
+	CUIContainer* labelContainer;
+	CUIImage* speedometer;
 	int tickindex = 0;
 	float32 ticksum = 0;
 	float32 ticklist[200];

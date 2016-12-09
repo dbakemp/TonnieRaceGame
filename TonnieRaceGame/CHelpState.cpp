@@ -12,6 +12,7 @@
 #include <iostream>
 #include <curl/curl.h>
 #include "CUILabel.h"
+#include "CUIContainer.h"
 #include "CUIImage.h"
 #include "CUIButton.h"
 #include "EUIAlignment.h"
@@ -23,11 +24,6 @@ void CHelpState::init(CEngine* engine)
 	background->SetVerticalAlignment(EUIALignmentVertical::CENTER);
 	background->SetVerticalStretch(EUIStretchVertical::FIT);
 
-	CUIImage* tonnie = new CUIImage(engine, "logo.png");
-	tonnie->SetHorizontalAlignment(EUIALignmentHorizontal::CENTER);
-	tonnie->SetVerticalAlignment(EUIALignmentVertical::CENTER);
-	tonnie->SetPosition(0, -100);
-
 	CUIButton* buttonBack = new CUIButton(engine, "Bangers", "Terug", "terug.png");
 	buttonBack->SetHorizontalAlignment(EUIALignmentHorizontal::LEFT);
 	buttonBack->SetVerticalAlignment(EUIALignmentVertical::BOTTOM);
@@ -35,11 +31,73 @@ void CHelpState::init(CEngine* engine)
 	buttonBack->SetFontSize(30);
 	buttonBack->SetClickCallback(std::bind(&CHelpState::OnButtonClick, this, std::placeholders::_1));
 
-	CUILabel* label = new CUILabel(engine, "Bangers", "Hier komt de help!");
-	label->SetHorizontalAlignment(EUIALignmentHorizontal::CENTER);
-	label->SetVerticalAlignment(EUIALignmentVertical::BOTTOM);
-	label->SetPosition(0, -200);
-	label->SetFontSize(50);
+	CUILabel* labell = new CUILabel(engine, "Bangers", "Toetsenbord Besturing");
+	labell->SetFontSize(30);
+	labell->SetHorizontalAlignment(EUIALignmentHorizontal::CENTER);
+	labell->SetVerticalAlignment(EUIALignmentVertical::TOP);
+
+	CUILabel* labelr = new CUILabel(engine, "Bangers", "Controller Besturing");
+	labelr->SetFontSize(30);
+	labelr->SetHorizontalAlignment(EUIALignmentHorizontal::CENTER);
+	labelr->SetVerticalAlignment(EUIALignmentVertical::TOP);
+
+	CUILabel* labelrra = new CUILabel(engine, "Bangers", "Gas Geven");
+	labelrra->SetFontSize(20);
+	labelrra->SetHorizontalAlignment(EUIALignmentHorizontal::LEFT);
+	labelrra->SetVerticalAlignment(EUIALignmentVertical::TOP);
+	labelrra->SetPosition(10, 0);
+
+	CUILabel* labelrrb = new CUILabel(engine, "Bangers", "Remmen");
+	labelrrb->SetFontSize(20);
+	labelrrb->SetHorizontalAlignment(EUIALignmentHorizontal::LEFT);
+	labelrrb->SetVerticalAlignment(EUIALignmentVertical::TOP);
+	labelrrb->SetPosition(10, 0 + labelrra->GetRectangle().y + labelrra->GetRectangle().h + 5);
+
+	CUILabel* labelrrc = new CUILabel(engine, "Bangers", "Toeteren");
+	labelrrc->SetFontSize(20);
+	labelrrc->SetHorizontalAlignment(EUIALignmentHorizontal::LEFT);
+	labelrrc->SetVerticalAlignment(EUIALignmentVertical::TOP);
+	labelrrc->SetPosition(10, 0 + labelrrb->GetRectangle().y + labelrrb->GetRectangle().h + 5);
+
+	CUIContainer* containerlc = new CUIContainer(engine);
+	containerlc->SetHorizontalAlignment(EUIALignmentHorizontal::CENTER);
+	containerlc->SetVerticalAlignment(EUIALignmentVertical::BOTTOM);
+	containerlc->SetHeight(200 - labelr->GetRectangle().h - 5);
+	containerlc->SetWidth(300);
+
+	CUIContainer* containerrl = new CUIContainer(engine);
+	containerrl->SetHorizontalAlignment(EUIALignmentHorizontal::LEFT);
+	containerrl->SetVerticalAlignment(EUIALignmentVertical::BOTTOM);
+	containerrl->SetHeight(200 - labelr->GetRectangle().h - 5);
+	containerrl->SetWidth(150);
+
+	CUIContainer* containerrr = new CUIContainer(engine);
+	containerrr->SetHorizontalAlignment(EUIALignmentHorizontal::RIGHT);
+	containerrr->SetVerticalAlignment(EUIALignmentVertical::BOTTOM);
+	containerrr->SetHeight(200- labelr->GetRectangle().h - 5);
+	containerrr->SetWidth(150);
+	containerrr->AddUIElement(labelrra);
+	containerrr->AddUIElement(labelrrb);
+	containerrr->AddUIElement(labelrrc);
+
+	CUIContainer* containerl = new CUIContainer(engine);
+	containerl->SetHorizontalAlignment(EUIALignmentHorizontal::CENTER);
+	containerl->SetVerticalAlignment(EUIALignmentVertical::CENTER);
+	containerl->SetHeight(200);
+	containerl->SetWidth(300);
+	containerl->SetPosition(-300, 0);
+	containerl->AddUIElement(labell);
+	containerl->AddUIElement(containerlc);
+
+	CUIContainer* containerr = new CUIContainer(engine);
+	containerr->SetHorizontalAlignment(EUIALignmentHorizontal::CENTER);
+	containerr->SetVerticalAlignment(EUIALignmentVertical::CENTER);
+	containerr->SetHeight(200);
+	containerr->SetWidth(300);
+	containerr->SetPosition(300, 0);
+	containerr->AddUIElement(labelr);
+	containerr->AddUIElement(containerrr);
+	containerr->AddUIElement(containerrl);
 
 	engine->musicHelper->playTrack("Resources/Music/plingplongplong.mp3", false);
 

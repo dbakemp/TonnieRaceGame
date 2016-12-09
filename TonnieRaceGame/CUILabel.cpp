@@ -35,6 +35,9 @@ void CUILabel::Draw(SDL_Renderer * renderer)
 {
 	if (!visible) { return; }
 	SDL_RenderCopy(engine->renderer, texture, NULL, &dstrect);
+
+	if (!debugVisible) { return; }
+	SDL_RenderDrawRect(engine->renderer, &dstrect);
 }
 
 void CUILabel::Update()
@@ -47,6 +50,15 @@ void CUILabel::Input(SDL_Event * event)
 		switch (event->window.event) {
 		case SDL_WINDOWEVENT_RESIZED:
 			PreRender();
+			break;
+		}
+	}
+	else if (event->type == SDL_KEYDOWN) {
+
+		switch (event->key.keysym.sym)
+		{
+		case SDLK_f:
+			debugVisible = !debugVisible;
 			break;
 		}
 	}
@@ -101,6 +113,11 @@ void CUILabel::SetVisibility(bool visible)
 	this->visible = visible;
 }
 
+SDL_Rect CUILabel::GetRectangle()
+{
+	return dstrect;
+}
+
 void CUILabel::ToggleVisibility()
 {
 	visible = !visible;
@@ -135,25 +152,25 @@ void CUILabel::PreRender()
 
 	switch (horizontalAlignment) {
 	case EUIALignmentHorizontal::LEFT:
-		x = xPos;
+		x = xOffset + xPos;
 		break;
 	case EUIALignmentHorizontal::CENTER:
 		x = (wOffset / 2) - (srcrect.w / 2) + xOffset + xPos;
 		break;
 	case EUIALignmentHorizontal::RIGHT:
-		x = wOffset - srcrect.w + xPos;
+		x = wOffset - srcrect.w + xPos + xOffset;
 		break;
 	}
 
 	switch (verticalAlignment) {
 	case EUIALignmentVertical::TOP:
-		y = yPos;
+		y = yOffset + yPos;
 		break;
 	case EUIALignmentVertical::CENTER:
 		y = (hOffset / 2) - (srcrect.h / 2) + yOffset + yPos;
 		break;
 	case EUIALignmentVertical::BOTTOM:
-		y = hOffset - srcrect.h + yPos;
+		y = hOffset - srcrect.h + yPos + yOffset;
 		break;
 	}
 

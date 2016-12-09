@@ -1,5 +1,5 @@
-#ifndef CUIIMAGE_H
-#define CUIIMAGE_H
+#ifndef CUICONTAINER_H
+#define CUICONTAINER_H
 
 #include "IDrawListener.h"
 #include "IBox2DListener.h"
@@ -8,15 +8,13 @@
 #include "CUILabel.h"
 #include "SDL_ttf.h"
 #include "CEngine.h"
-#include "EUIStretch.h"
 #include "IUIEntity.h"
 #include <functional>
 
-class CUIImage : public CEntity, public IDrawListener, public IInputListener, public IUIEntity
+class CUIContainer : public CEntity, public IDrawListener, public IInputListener, public IUIEntity
 {
 public:
-	CUIImage(CEngine* engine);
-	CUIImage(CEngine* engine, std::string texture);
+	CUIContainer(CEngine* engine);
 
 	void Draw(SDL_Renderer* renderer);
 	void Update();
@@ -25,17 +23,20 @@ public:
 	void SetPosition(int x, int y);
 	void SetHorizontalAlignment(EUIALignmentHorizontal alignment);
 	void SetVerticalAlignment(EUIALignmentVertical alignment);
-	void SetHorizontalStretch(EUIStretchHorizontal stretch);
-	void SetVerticalStretch(EUIStretchVertical stretch);
 	void SetContainer(int x, int y, int w, int h);
+	void SetWidth(int width);
+	void SetHeight(int height);
+	void AddUIElement(IUIEntity* element);
 private:
 	CEngine* engine;
 	SDL_Rect container;
 	EUIALignmentHorizontal horizontalAlignment;
 	EUIALignmentVertical verticalAlignment;
-	EUIStretchHorizontal horizontalStretch;
-	EUIStretchVertical verticalStretch;
 
+	SDL_Rect dstrect;
+	SDL_Rect srcrect;
+	std::vector<IUIEntity*> uiElements;
+	
 	void PreRender();
 };
 

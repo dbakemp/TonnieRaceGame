@@ -8,8 +8,9 @@
 #include "SDL_ttf.h"
 #include "CEngine.h"
 #include "EUIAlignment.h"
+#include "IUIEntity.h"
 
-class CUILabel : public CEntity, public IDrawListener, public IInputListener
+class CUILabel : public CEntity, public IDrawListener, public IInputListener, public IUIEntity
 {
 public:
 	CUILabel(CEngine* engine);
@@ -27,6 +28,7 @@ public:
 	void SetContainer(int x, int y, int w, int h);
 	void SetFontSize(int fontSize);
 	void SetVisibility(bool visible);
+	SDL_Rect GetRectangle();
 
 	void ToggleVisibility();
 
