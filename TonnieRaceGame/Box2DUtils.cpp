@@ -17,8 +17,8 @@ void Box2DUtils::DrawBody(SDL_Renderer* buffer, b2Body* body, CCamera* camera, i
 				//b2Vec2 axis = xf.R.col1;
 				b2Vec2 axis = xf.q.GetXAxis();
 
-				center.x = (center.x * 5) - camera->posX;
-				center.y = (center.y * 5) - camera->posY;
+				center.x = (center.x * 5) - camera->GetXPos();
+				center.y = (center.y * 5) - camera->GetYPos();
 				radius = radius * 5;
 				axis.x = axis.x * 5;
 				axis.y = axis.y * 5;
@@ -61,8 +61,8 @@ void Box2DUtils::DrawBody(SDL_Renderer* buffer, b2Body* body, CCamera* camera, i
 				for (int32 i = 0; i < vertexCount; ++i)
 				{
 					vertices[i] = b2Mul(xf, poly->m_vertices[i]);
-					xv[i] = static_cast<int>((vertices[i].x * 5) - camera->posX);
-					yv[i] = static_cast<int>((vertices[i].y * 5) - camera->posY);
+					xv[i] = static_cast<int>((vertices[i].x * 5) - camera->GetXPos());
+					yv[i] = static_cast<int>((vertices[i].y * 5) - camera->GetYPos());
 				}
 				if (falpha > 0)
 				{

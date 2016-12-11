@@ -37,7 +37,7 @@ CEntityTile::~CEntityTile()
 
 void CEntityTile::Draw(SDL_Renderer* renderer)
 {
-	SDL_Rect dstrect = { -engine->camera->posX + tileX, -engine->camera->posY + tileY, this->textureWidth, this->textureHeight };
+	SDL_Rect dstrect = { -engine->camera->GetXPos() + tileX, -engine->camera->GetYPos() + tileY, this->textureWidth, this->textureHeight };
 	SDL_RenderCopy(engine->renderer, spriteSheet->texture, &srcRect, &dstrect);
 }
 

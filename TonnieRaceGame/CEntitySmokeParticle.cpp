@@ -30,7 +30,7 @@ void CEntitySmokeParticle::Draw(SDL_Renderer * renderer)
 
 void CEntitySmokeParticle::Update()
 {
-	dstrect = {(int)xPos - engine->camera->posX, (int)yPos - engine->camera->posY, srcrect.w, srcrect.h};
+	dstrect = {(int)xPos - engine->camera->GetXPos(), (int)yPos - engine->camera->GetYPos(), srcrect.w, srcrect.h};
 	angle += angulatVelocity;
 
 	timer += engine->deltaHelper->delta;

@@ -12,11 +12,12 @@ public:
 	void Update();
 	void SetChild(IBox2DListener* child);
 	IBox2DListener* GetChild();
-	int posX, posY;
-	int windowHeight, windowWidth;
+	int GetXPos();
+	int GetYPos();
 private:
 	IBox2DListener* child; 
 	CEngine* engine;
+	int posX, posY;
 };
 
 #endif 

@@ -118,7 +118,7 @@ void CEntityCarAI::Draw(SDL_Renderer* renderer)
 	double angle = body->GetAngle() * (180.0 / M_PI);
 	SDL_Point center = { 20.5, 33 };
 
-	SDL_Rect dstrect = { ((aabb.upperBound.x + aabb.lowerBound.x) / 2 * 5) - engine->camera->posX - (srcRect.w / 2), ((aabb.upperBound.y + aabb.lowerBound.y) / 2 * 5) - engine->camera->posY - (srcRect.h / 2), 41, 66 };
+	SDL_Rect dstrect = { ((aabb.upperBound.x + aabb.lowerBound.x) / 2 * 5) - engine->camera->GetXPos() - (srcRect.w / 2), ((aabb.upperBound.y + aabb.lowerBound.y) / 2 * 5) - engine->camera->GetYPos() - (srcRect.h / 2), 41, 66 };
 
 	SDL_RenderCopyEx(engine->renderer, spriteSheet, &srcRect, &dstrect, angle, &center, SDL_FLIP_VERTICAL);
 

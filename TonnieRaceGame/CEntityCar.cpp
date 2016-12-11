@@ -34,8 +34,8 @@ CEntityCar::CEntityCar(CEngine* engine, CMap* map) : CEntity(engine), IDrawListe
 	double xPos = spawn->x;
 	double yPos = spawn->y;
 
-	//emitter = new CEntityParticleEmitter(engine);
-	//emitter->SetPosition(xPos * 5, yPos * 5);
+	emitter = new CEntityParticleEmitter(engine);
+	emitter->SetPosition(xPos * 5, yPos * 5);
 
 	b2Vec2 vertices[8];
 
@@ -107,7 +107,7 @@ void CEntityCar::Draw(SDL_Renderer* renderer)
 	double angle = body->GetAngle() * (180.0 / M_PI);
 	SDL_Point center = { 20.5, 33 };
 
-	SDL_Rect dstrect = { ((aabb.upperBound.x + aabb.lowerBound.x)/2 * 5)-engine->camera->posX-(srcRect.w/2), ((aabb.upperBound.y + aabb.lowerBound.y) / 2 * 5) - engine->camera->posY - (srcRect.h / 2), 41, 66 };
+	SDL_Rect dstrect = { ((aabb.upperBound.x + aabb.lowerBound.x)/2 * 5)-engine->camera->GetXPos() -(srcRect.w/2), ((aabb.upperBound.y + aabb.lowerBound.y) / 2 * 5) - engine->camera->GetYPos() - (srcRect.h / 2), 41, 66 };
 
 	SDL_RenderCopyEx(engine->renderer, spriteSheet, &srcRect, &dstrect, angle, &center, SDL_FLIP_VERTICAL);
 	
@@ -238,7 +238,7 @@ void CEntityCar::Update()
 	flJoint->SetLimits(newAngle, newAngle);
 	frJoint->SetLimits(newAngle, newAngle);
 
-	//emitter->SetPosition(((aabb.upperBound.x + aabb.lowerBound.x) / 2 * 5), ((aabb.upperBound.y + aabb.lowerBound.y) / 2 * 5));
+	emitter->SetPosition(((aabb.upperBound.x + aabb.lowerBound.x) / 2 * 5), ((aabb.upperBound.y + aabb.lowerBound.y) / 2 * 5));
 }
 
 void CEntityCar::Create(b2World* world)
