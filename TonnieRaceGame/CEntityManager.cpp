@@ -25,9 +25,19 @@ void CEntityManager::Tick()
 
 void CEntityManager::Clear()
 {
+	IEntityListener* entityListener = nullptr;
 	int count = listeners.size();
 	for (int i = count-1; i >= 0; i--) {
-		delete listeners[i];
+		entityListener = listeners[i];
+		delete entityListener;
+		entityListener = nullptr;
 	}
-	listeners.clear();
+	if (count != 0) {
+		listeners.clear();
+	}
+}
+
+CEntityManager::~CEntityManager()
+{
+	Clear();
 }

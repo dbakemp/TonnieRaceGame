@@ -14,6 +14,7 @@ public:
 	void RemoveListener(IEntityListener* entityListener);
 	void Tick();
 	void Clear();
+	~CEntityManager();
 };
 
 

@@ -100,6 +100,7 @@ CEntityCarAI::CEntityCarAI(CEngine* engine, CMap* map) : CEntity(engine), IDrawL
 
 CEntityCarAI::~CEntityCarAI()
 {
+	delete carGenetics;
 }
 
 void CEntityCarAI::Draw(SDL_Renderer* renderer)

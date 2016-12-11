@@ -21,6 +21,7 @@
 #include "CEntitySpeedoMeter.h"
 #include "SDL_ttf.h"
 #include "CDebugLogger.h"
+#include <functional>
 
 void CPlayState::init(CEngine* engine)
 {
@@ -35,8 +36,6 @@ void CPlayState::init(CEngine* engine)
 	engine->world = new b2World(gravity);
 
 	engine->world->SetContactListener(engine->collisionHelper);
-
-	SDL_QueryTexture(backmapTexture, NULL, NULL, &texW, &texH);
 
 	engine->adManager = new CAdManager(engine);
 
@@ -61,9 +60,7 @@ void CPlayState::init(CEngine* engine)
 
 	engine->currentMap = factory->map;
 
-	camera = new CCamera(engine);
-
-	engine->camera = camera;
+	engine->camera = new CCamera(engine);
 
 	CEntityCar* car = new CEntityCar(engine, factory->map);
 	int spawns = factory->map->availableSpawns.size();
@@ -71,7 +68,8 @@ void CPlayState::init(CEngine* engine)
 		new CEntityCarAI(engine, factory->map);
 	}
 
-	camera->SetChild(car);
+	car->SetFinishCallback(std::bind(&CPlayState::OnFinish, this, std::placeholders::_1));
+	engine->camera->SetChild(car);
 
 	CEntityFpsCounter* fpsCounter = new CEntityFpsCounter(engine);
 	CEntityLapCounter* lapCounter = new CEntityLapCounter(engine);
@@ -82,14 +80,30 @@ void CPlayState::init(CEngine* engine)
 	speedoMeter->SetChild(car);
 	lapCounter->SetLapCountable(car);
 
+	delete factory;
 }
 
 void CPlayState::clean(CEngine* engine)
 {
 	engine->entityManager->Clear();
 
-	delete camera;
-	camera = nullptr;
+	int count = engine->world->GetBodyCount();
+	b2Body* body = engine->world->GetBodyList();
+	for (int i = 0; i < count; i++) {
+		b2Body* nextBody = body->GetNext();
+		engine->world->DestroyBody(body);
+		body = nullptr;
+		body = nextBody;
+	}
+
+	delete engine->adManager;
+	engine->adManager = nullptr;
+	delete engine->camera;
+	engine->camera = nullptr;
+	delete engine->world;
+	engine->world = nullptr;
+	delete engine->currentMap;
+	engine->currentMap = nullptr;
 }
 
 void CPlayState::pause()
@@ -106,7 +120,7 @@ void CPlayState::handleEvents(CEngine* engine)
 
 void CPlayState::update(CEngine* engine)
 {
-	camera->Update();
+	engine->camera->Update();
 	engine->entityManager->Tick();
 	engine->world->Step(engine->deltaHelper->delta, 8, 3);
 	checkSeque();
@@ -143,7 +157,27 @@ void CPlayState::checkSeque()
 	engine->musicHelper->stopAll();
 }
 
+void CPlayState::OnFinish(IBox2DListener * car)
+{
+	if (engine->level == 1)
+	{
+		engine->level = 2;
+		stateSeque = EGameState::Playing;
+		shouldSeque = true;
+	}
+	else if (engine->level == 2)
+	{
+		stateSeque = EGameState::Win;
+		shouldSeque = true;
+	}
+}
+
 CPlayState::CPlayState(CEngine* engine)
 {
 	init(engine);
 }
+
+CPlayState::~CPlayState()
+{
+}
+

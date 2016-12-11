@@ -33,6 +33,8 @@ CUILabel::CUILabel(CEngine* engine, std::string font, std::string text) : CEntit
 
 CUILabel::~CUILabel()
 {
+	text.clear();
+	engine = nullptr;
 }
 
 void CUILabel::Draw(SDL_Renderer * renderer)

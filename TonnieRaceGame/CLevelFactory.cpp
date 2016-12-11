@@ -151,6 +151,19 @@ void CLevelFactory::CreateBorder(Json::Value* root)
 	{
 		new CEntityBorder(this->engine, triangle);
 	}
+	delete cdt;
+
+	for (p2t::Triangle* triangle : triangles)
+	{
+		triangle = nullptr;
+	}
+	for (p2t::Point* point : polyline)
+	{
+		delete point;
+		point = nullptr;
+	}
+	polyline.clear();
+	triangles.clear();
 }
 
 void CLevelFactory::CreateCheckpoints(Json::Value * root)
@@ -173,6 +186,8 @@ void CLevelFactory::CreateCheckpoints(Json::Value * root)
 
 	map->checkpoints++;
 	new CEntityCheckpoint(this->engine, start, end, index, isFinish);
+	delete start;
+	delete end;
 }
 
 void CLevelFactory::CreateWaypoints(Json::Value * root)

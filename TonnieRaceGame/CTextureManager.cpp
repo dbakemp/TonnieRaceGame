@@ -8,12 +8,16 @@ CTextureManager::CTextureManager(CEngine * engine)
 
 CTextureManager::~CTextureManager()
 {
+	for (std::pair<std::string, SDL_Texture*> pair : textureMap) {
+		SDL_DestroyTexture(pair.second);
+		pair.second = nullptr;
+	}
+	textureMap.clear();
 }
 
 SDL_Texture * CTextureManager::AddTexture(std::string textureName)
 {
 	std::string textureLocation = "Resources/" + textureName;
-
 
 	SDL_Surface* surface = IMG_Load(textureLocation.c_str());
 	SDL_Texture* texture = SDL_CreateTextureFromSurface(engine->renderer, surface);

@@ -10,6 +10,12 @@ CFontManager::CFontManager(CEngine* engine)
 
 CFontManager::~CFontManager()
 {
+	for (std::pair<std::string, TTF_Font*> pair : fontMap) {
+		TTF_CloseFont(pair.second);
+		pair.second = nullptr;
+	}
+	fontMap.clear();
+
 	TTF_Quit();
 }
 

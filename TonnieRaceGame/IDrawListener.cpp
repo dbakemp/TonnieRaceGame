@@ -12,6 +12,9 @@ IDrawListener::IDrawListener(CEngine* engine, int zIndex)
 IDrawListener::~IDrawListener()
 {
 	engine->drawManager->RemoveListener(this);
+	font = nullptr;
+	texture = nullptr;
+	engine = nullptr;
 }
 
 void IDrawListener::ChangeZIndex(int index)

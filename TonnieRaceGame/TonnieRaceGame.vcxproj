@@ -76,12 +76,12 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>./include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>./include;./include/VLD;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
-      <AdditionalLibraryDirectories>./lib/Box2D/$(Platform)/$(Configuration);./lib/SDL2/$(Platform)/$(Configuration);./lib/SDL2_gfx/$(Platform)/$(Configuration);./lib/LibCurl/$(Platform)/$(Configuration);./lib/Bass/$(Platform)/$(Configuration);./lib/Bass/c/$(Platform)/$(Configuration);./lib/SDL2_ttf/$(Platform)/$(Configuration);./lib/SDL2_image/$(Platform)/$(Configuration);./lib/libvlc/$(Platform)/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>Box2D.lib;SDL2.lib;SDL2_gfx.lib;SDL2main.lib;bass.lib;SDL2_image.lib;SDL2_ttf.lib;libcurl_debug.lib;libvlc.lib;libvlccore.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>./lib/Box2D/$(Platform)/$(Configuration);./lib/SDL2/$(Platform)/$(Configuration);./lib/SDL2_gfx/$(Platform)/$(Configuration);./lib/LibCurl/$(Platform)/$(Configuration);./lib/Bass/$(Platform)/$(Configuration);./lib/Bass/c/$(Platform)/$(Configuration);./lib/SDL2_ttf/$(Platform)/$(Configuration);./lib/SDL2_image/$(Platform)/$(Configuration);./lib/libvlc/$(Platform)/$(Configuration);./lib/VLD/$(Platform)/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>Box2D.lib;SDL2.lib;SDL2_gfx.lib;SDL2main.lib;bass.lib;SDL2_image.lib;SDL2_ttf.lib;libcurl_debug.lib;libvlc.lib;libvlccore.lib;vld.lib;vld_x86.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>copy "$(SolutionDir)TonnieRaceGame\lib\SDL2_ttf\$(Platform)\$(Configuration)\SDL2_ttf.dll" "$(TargetDir)"
@@ -111,6 +111,10 @@ copy "$(SolutionDir)TonnieRaceGame\lib\libvlc\$(Platform)\$(Configuration)\libvl
 copy "$(SolutionDir)TonnieRaceGame\lib\SDL2_gfx\$(Platform)\$(Configuration)\SDL2_gfx.dll" "$(TargetDir)"
 
 copy "$(SolutionDir)TonnieRaceGame\lib\LibCurl\$(Platform)\$(Configuration)\libcurl_debug.dll" "$(TargetDir)"
+
+copy "$(SolutionDir)TonnieRaceGame\lib\VLD\$(Platform)\$(Configuration)\vld_x86.dll" "$(TargetDir)"
+copy "$(SolutionDir)TonnieRaceGame\lib\VLD\$(Platform)\$(Configuration)\Microsoft.DTfW.DHL.manifest" "$(TargetDir)"
+copy "$(SolutionDir)TonnieRaceGame\lib\VLD\$(Platform)\$(Configuration)\dbghelp.dll" "$(TargetDir)"
 
 xcopy "$(SolutionDir)TonnieRaceGame\lib\libvlc\$(Platform)\$(Configuration)\plugins\*.*" "$(TargetDir)plugins" /Y /I /E
 
@@ -127,8 +131,8 @@ xcopy "$(SolutionDir)TonnieRaceGame\Resources\*.*" "$(TargetDir)Resources" /Y /I
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
-      <AdditionalLibraryDirectories>./lib/Box2D/$(Platform)/$(Configuration);./lib/SDL2/$(Platform)/$(Configuration);./lib/SDL2_gfx/$(Platform)/$(Configuration);./lib/LibCurl/$(Platform)/$(Configuration);./lib/Bass/$(Platform)/$(Configuration);./lib/Bass/c/$(Platform)/$(Configuration);./lib/SDL2_ttf/$(Platform)/$(Configuration);./lib/SDL2_image/$(Platform)/$(Configuration);./lib/libvlc/$(Platform)/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>Box2D.lib;SDL2.lib;SDL2_gfx.lib;SDL2main.lib;bass.lib;SDL2_image.lib;SDL2_ttf.lib;libcurl_debug.lib;libvlc.lib;libvlccore.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>./lib/Box2D/$(Platform)/$(Configuration);./lib/SDL2/$(Platform)/$(Configuration);./lib/SDL2_gfx/$(Platform)/$(Configuration);./lib/LibCurl/$(Platform)/$(Configuration);./lib/Bass/$(Platform)/$(Configuration);./lib/Bass/c/$(Platform)/$(Configuration);./lib/SDL2_ttf/$(Platform)/$(Configuration);./lib/SDL2_image/$(Platform)/$(Configuration);./lib/libvlc/$(Platform)/$(Configuration);./lib/VLD/$(Platform)/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>Box2D.lib;SDL2.lib;SDL2_gfx.lib;SDL2main.lib;bass.lib;SDL2_image.lib;SDL2_ttf.lib;libcurl_debug.lib;libvlc.lib;libvlccore.lib;vld.lib;vld_x64.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>copy "$(SolutionDir)TonnieRaceGame\lib\SDL2_ttf\$(Platform)\$(Configuration)\SDL2_ttf.dll" "$(TargetDir)"
@@ -158,6 +162,10 @@ copy "$(SolutionDir)TonnieRaceGame\lib\libvlc\$(Platform)\$(Configuration)\libvl
 copy "$(SolutionDir)TonnieRaceGame\lib\SDL2_gfx\$(Platform)\$(Configuration)\SDL2_gfx.dll" "$(TargetDir)"
 
 copy "$(SolutionDir)TonnieRaceGame\lib\LibCurl\$(Platform)\$(Configuration)\libcurl_debug.dll" "$(TargetDir)"
+
+copy "$(SolutionDir)TonnieRaceGame\lib\VLD\$(Platform)\$(Configuration)\vld_x64.dll" "$(TargetDir)"
+copy "$(SolutionDir)TonnieRaceGame\lib\VLD\$(Platform)\$(Configuration)\Microsoft.DTfW.DHL.manifest" "$(TargetDir)"
+copy "$(SolutionDir)TonnieRaceGame\lib\VLD\$(Platform)\$(Configuration)\dbghelp.dll" "$(TargetDir)"
 
 xcopy "$(SolutionDir)TonnieRaceGame\lib\libvlc\$(Platform)\$(Configuration)\plugins\*.*" "$(TargetDir)plugins" /Y /I /E
 

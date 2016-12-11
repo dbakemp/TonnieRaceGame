@@ -124,3 +124,7 @@ CIntroState::CIntroState(CEngine* engine)
 {
 	init(engine);
 }
+
+CIntroState::~CIntroState()
+{
+}

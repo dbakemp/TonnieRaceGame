@@ -34,8 +34,8 @@ CEntityCar::CEntityCar(CEngine* engine, CMap* map) : CEntity(engine), IDrawListe
 	double xPos = spawn->x;
 	double yPos = spawn->y;
 
-	emitter = new CEntityParticleEmitter(engine);
-	emitter->SetPosition(xPos * 5, yPos * 5);
+	//emitter = new CEntityParticleEmitter(engine);
+	//emitter->SetPosition(xPos * 5, yPos * 5);
 
 	b2Vec2 vertices[8];
 
@@ -85,6 +85,7 @@ CEntityCar::CEntityCar(CEngine* engine, CMap* map) : CEntity(engine), IDrawListe
 	frJoint = static_cast<b2RevoluteJoint*>(engine->world->CreateJoint(&jointDef));
 	tires.push_back(tire);
 
+	this->finishCallback = nullptr;
 	this->engine = engine;
 }
 
@@ -192,21 +193,24 @@ void CEntityCar::ProcessCheckpoint(CEntityCheckpoint * checkpoint)
 	else if (currentCheckpoint+1 == engine->currentMap->checkpoints && checkpoint->isFinish) {
 		if (currentLap+1 == engine->currentMap->laps) {
 			CDebugLogger::PrintDebug("Race finish here");
-			if (engine->level == 1)
-			{
-				engine->level = 2;	
-				engine->musicHelper->stopAll();
-				engine->stateManager->changeState(Playing, engine);
-			}
-			else if (engine->level == 2)
-			{
-				engine->stateManager->changeState(Win, engine);
-			}
+			FinishCallback();
 		}
 		else {
 			currentCheckpoint = checkpoint->checkpointIndex;
 			currentLap++;
 		}
+	}
+}
+
+void CEntityCar::SetFinishCallback(std::function<void(IBox2DListener*)> callback)
+{
+	finishCallback = callback;
+}
+
+void CEntityCar::FinishCallback()
+{
+	if (finishCallback != nullptr) {
+		finishCallback(this);
 	}
 }
 
@@ -234,7 +238,7 @@ void CEntityCar::Update()
 	flJoint->SetLimits(newAngle, newAngle);
 	frJoint->SetLimits(newAngle, newAngle);
 
-	emitter->SetPosition(((aabb.upperBound.x + aabb.lowerBound.x) / 2 * 5), ((aabb.upperBound.y + aabb.lowerBound.y) / 2 * 5));
+	//emitter->SetPosition(((aabb.upperBound.x + aabb.lowerBound.x) / 2 * 5), ((aabb.upperBound.y + aabb.lowerBound.y) / 2 * 5));
 }
 
 void CEntityCar::Create(b2World* world)

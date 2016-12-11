@@ -14,6 +14,8 @@ public:
 	void RemoveListener(IInputListener* inputListener);
 	void Tick(SDL_Event* event);
 	void Clear();
+
+	~CInputManager();
 };
 
 

@@ -23,5 +23,15 @@ void CInputManager::Tick(SDL_Event* event)
 
 void CInputManager::Clear()
 {
-	listeners.clear();
+	int count = listeners.size();
+	for (int i = count - 1; i >= 0; i--) {
+		//delete listeners[i];
+	}
+	if (count != 0) {
+		listeners.clear();
+	}
+}
+
+CInputManager::~CInputManager()
+{
 }

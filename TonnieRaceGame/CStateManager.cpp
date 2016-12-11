@@ -9,6 +9,22 @@
 #include "CCreditsState.h"
 #include "CLevelSelectorState.h"
 
+CStateManager::CStateManager(CEngine * engine)
+{
+	this->engine = engine;
+}
+
+CStateManager::~CStateManager()
+{
+	getCurrentState()->clean(engine);
+
+	for (CGameState* state : states) {
+		delete state;
+		state = nullptr;
+	}
+	states.clear();
+}
+
 void CStateManager::changeState(EGameState state, CEngine* engine)
 {
 	if (states.size() > 0) {

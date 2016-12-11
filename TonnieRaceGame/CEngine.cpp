@@ -41,8 +41,8 @@ CEngine::CEngine()
 	fontManager = new CFontManager(this);
 	inputManager = new CInputManager();
 	entityManager = new CEntityManager();
-	box2DManager = new CBox2DManager();
-	stateManager = new CStateManager();
+	box2DManager = new CBox2DManager(this);
+	stateManager = new CStateManager(this);
 	textureManager = new CTextureManager(this);
 
 	SDL_Init(SDL_INIT_EVERYTHING);
@@ -79,6 +79,28 @@ CEngine::CEngine()
 	stateManager->changeState(state, this);
 	musicHelper->playTrack("Resources/Music/title.mp3", false);
 	Tick();
+}
+
+CEngine::~CEngine()
+{
+	delete entityManager;
+	delete adHelper;
+	delete drawManager;
+	delete inputManager;
+	delete box2DManager;
+	delete stateManager;
+	delete deltaHelper;
+	delete currentMap;
+	delete fontManager;
+	delete camera;
+	delete world;
+	delete musicHelper;
+	delete collisionHelper;
+	delete spriteSheetManager;
+	delete textureManager;
+
+	SDL_DestroyRenderer(renderer);
+	SDL_Quit();
 }
 
 void CEngine::Tick()

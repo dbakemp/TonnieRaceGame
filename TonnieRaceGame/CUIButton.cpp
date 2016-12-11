@@ -29,6 +29,8 @@ CUIButton::CUIButton(CEngine * engine, std::string font, std::string text, std::
 
 CUIButton::~CUIButton()
 {
+	engine = nullptr;
+	label = nullptr;
 }
 
 void CUIButton::Draw(SDL_Renderer * renderer)

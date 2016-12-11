@@ -12,6 +12,7 @@
 #include "CEntityCheckpoint.h"
 #include <vector>
 #include <Box2D\Box2D.h>
+#include <functional>
 
 class CMap;
 
@@ -30,16 +31,16 @@ public:
 	void CollisionBegin(CEntity* collider) override;
 	void CollisionEnd(CEntity* collider) override;
 	void ProcessCheckpoint(CEntityCheckpoint* checkpoint);
-	void SetFinishCallback(void(*callback));
+	void SetFinishCallback(std::function<void(IBox2DListener*)> callback);
 	void FinishCallback();
 
 	SDL_Texture* spriteSheet;
 	SDL_Rect srcRect;
-	void *finishCallback;
 private:
 	CEngine* engine; 
 	CEntityParticleEmitter* emitter;
 	b2AABB aabb;
+	std::function<void(IBox2DListener*)> finishCallback;
 };
 
 #endif

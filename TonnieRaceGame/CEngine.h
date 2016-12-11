@@ -23,7 +23,8 @@ class CMap;
 class CEngine
 {
 public:
-	CEngine(); 
+	CEngine();
+	~CEngine();
 	AdHelper* adHelper;
 	CDrawManager* drawManager;
 	CInputManager* inputManager;

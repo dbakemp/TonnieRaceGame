@@ -18,6 +18,8 @@ public:
 	void Tick(SDL_Renderer* renderer);
 	void ChangeZIndex(IDrawListener* drawListener, int index);
 	void Clear();
+
+	~CDrawManager();
 };
 
 

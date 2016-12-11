@@ -42,3 +42,7 @@ void CDrawManager::Clear()
 	}
 	listeners.clear();
 }
+
+CDrawManager::~CDrawManager()
+{
+}

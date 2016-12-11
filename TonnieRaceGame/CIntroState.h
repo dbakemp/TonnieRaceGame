@@ -5,6 +5,7 @@
 #include "SDL.h"
 #include "AdHelper.h"
 #include "CUIButton.h"
+#include "CUIImage.h"
 #include "CGameState.h"
 
 class CIntroState: public CGameState
@@ -12,6 +13,7 @@ class CIntroState: public CGameState
 public:
 	void init(CEngine* engine);
 	void clean(CEngine* engine);
+	
 
 	void pause();
 	void resume();
@@ -26,6 +28,7 @@ public:
 	EGameState stateSeque;
 
 	CIntroState(CEngine* engine);
+	~CIntroState();
 private:
 	void OnButtonClick(CUIButton* button);
 	CEngine* engine;

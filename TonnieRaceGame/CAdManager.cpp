@@ -20,6 +20,15 @@ CAdManager::CAdManager(CEngine* engine)
 	}
 }
 
+CAdManager::~CAdManager()
+{
+	for (std::pair<std::string, SDL_Texture*> pair : textureMap) {
+		pair.second = nullptr;
+	}
+	textureMap.clear();
+	mapIndexes.clear();
+}
+
 SDL_Texture* CAdManager::GetRandomAd(AdDirection direction)
 {
 	std::string index = mapIndexes[CIntegerHelper::GetRandomIntBetween(0, mapIndexes.size()-1)];
@@ -40,13 +49,11 @@ SDL_Texture* CAdManager::GetRandomAd(AdDirection direction)
 			break;
 	}
 
-
-	return texture;
+	return nullptr;
 }
 
 void CAdManager::AddAd(Json::Value * ad)
 {
-
 	if ((*ad).get("IsActive", "").asString() == "1")
 	{
 		size_t lastindex = (*ad).get("FileName", "").asString().find_last_of(".");

@@ -90,6 +90,12 @@ CScoresState::CScoresState(CEngine* engine)
 	init(engine);
 }
 
+CScoresState::~CScoresState()
+{
+	delete background;
+	background = nullptr;
+}
+
 void CScoresState::OnButtonClick(CUIButton* button)
 {
 	if (button->GetText() == "Terug") {
