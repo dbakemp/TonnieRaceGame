@@ -62,9 +62,6 @@ void CIntroState::init(CEngine* engine)
 
 void CIntroState::clean(CEngine* engine)
 {
-	engine->drawManager->Clear();
-	engine->inputManager->Clear();
-	engine->box2DManager->Clear();
 	engine->entityManager->Clear();
 }
 

@@ -27,6 +27,10 @@ CUIButton::CUIButton(CEngine * engine, std::string font, std::string text, std::
 	label->SetPosition(0, -2);
 }
 
+CUIButton::~CUIButton()
+{
+}
+
 void CUIButton::Draw(SDL_Renderer * renderer)
 {
 	SDL_RenderCopy(engine->renderer, texture, NULL, &dstrect);

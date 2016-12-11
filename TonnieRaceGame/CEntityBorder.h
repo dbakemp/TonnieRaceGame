@@ -15,6 +15,7 @@ class CEntityBorder : public CEntity, public IDrawListener, public IBox2DListene
 {
 public:
 	CEntityBorder(CEngine* engine, p2t::Triangle* triangle);
+	~CEntityBorder();
 	void Draw(SDL_Renderer* renderer);
 	void Update();
 	void Create(b2World* world);

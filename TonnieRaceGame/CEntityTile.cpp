@@ -31,6 +31,10 @@ CEntityTile::CEntityTile(CEngine * engine, CSpriteSheetManager::SSpriteSheet* sp
 	srcRect = { this->textureX, this->textureY, this->textureWidth, this->textureHeight };
 }
 
+CEntityTile::~CEntityTile()
+{
+}
+
 void CEntityTile::Draw(SDL_Renderer* renderer)
 {
 	SDL_Rect dstrect = { -engine->camera->posX + tileX, -engine->camera->posY + tileY, this->textureWidth, this->textureHeight };

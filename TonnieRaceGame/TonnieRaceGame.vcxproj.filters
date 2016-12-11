@@ -50,9 +50,6 @@
     <ClCompile Include="CEntityCheckpoint.cpp">
       <Filter>Entities</Filter>
     </ClCompile>
-    <ClCompile Include="CEntityManager.cpp">
-      <Filter>Entities</Filter>
-    </ClCompile>
     <ClCompile Include="CEntityPowerup.cpp">
       <Filter>Entities</Filter>
     </ClCompile>
@@ -173,6 +170,15 @@
     <ClCompile Include="CUIContainer.cpp">
       <Filter>Entities\UI</Filter>
     </ClCompile>
+    <ClCompile Include="CEntitySmokeParticle.cpp">
+      <Filter>Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="CEntityParticleEmitter.cpp">
+      <Filter>Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="CEntityManager.cpp">
+      <Filter>Managers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CCamera.h" />
@@ -224,9 +230,6 @@
       <Filter>Entities</Filter>
     </ClInclude>
     <ClInclude Include="CEntityCheckpoint.h">
-      <Filter>Entities</Filter>
-    </ClInclude>
-    <ClInclude Include="CEntityManager.h">
       <Filter>Entities</Filter>
     </ClInclude>
     <ClInclude Include="CEntityPowerup.h">
@@ -345,6 +348,15 @@
     </ClInclude>
     <ClInclude Include="IUIEntity.h">
       <Filter>Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="CEntitySmokeParticle.h">
+      <Filter>Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="CEntityParticleEmitter.h">
+      <Filter>Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="CEntityManager.h">
+      <Filter>Managers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -10,6 +10,10 @@ CEntityAd::CEntityAd(CEngine * engine, CMap * map, CAdManager::AdDirection direc
 	this->engine = engine;
 }
 
+CEntityAd::~CEntityAd()
+{
+}
+
 void CEntityAd::Draw(SDL_Renderer * renderer)
 {
 	SDL_Rect dstrect = { -engine->camera->posX + tileX, -engine->camera->posY + tileY, this->textureWidth, this->textureHeight };

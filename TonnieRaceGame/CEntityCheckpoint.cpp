@@ -31,6 +31,10 @@ CEntityCheckpoint::CEntityCheckpoint(CEngine* engine, b2Vec2* start, b2Vec2* end
 	this->engine = engine;
 }
 
+CEntityCheckpoint::~CEntityCheckpoint()
+{
+}
+
 void CEntityCheckpoint::Draw(SDL_Renderer * renderer)
 {
 	if (!visible) { return; }

@@ -15,6 +15,7 @@ class CUIContainer : public CEntity, public IDrawListener, public IInputListener
 {
 public:
 	CUIContainer(CEngine* engine);
+	~CUIContainer();
 
 	void Draw(SDL_Renderer* renderer);
 	void Update();

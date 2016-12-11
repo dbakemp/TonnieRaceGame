@@ -11,7 +11,8 @@ void CDrawManager::AddListener(IDrawListener* drawListener, int index)
 
 void CDrawManager::RemoveListener(IDrawListener* drawListener)
 {
-
+	listenersIndexed[drawListener->zIndex].erase(std::remove(listenersIndexed[drawListener->zIndex].begin(), listenersIndexed[drawListener->zIndex].end(), drawListener), listenersIndexed[drawListener->zIndex].end());
+	listeners.erase(std::remove(listeners.begin(), listeners.end(), drawListener), listeners.end());
 }
 
 void CDrawManager::Tick(SDL_Renderer* renderer)
@@ -29,6 +30,7 @@ void CDrawManager::ChangeZIndex(IDrawListener* drawListener, int index)
 {
 	listenersIndexed[drawListener->zIndex].erase(std::remove(listenersIndexed[drawListener->zIndex].begin(), listenersIndexed[drawListener->zIndex].end(), drawListener), listenersIndexed[drawListener->zIndex].end());
 	listenersIndexed[index].push_back(drawListener);
+	drawListener->zIndex = index;
 }
 
 void CDrawManager::Clear()

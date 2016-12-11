@@ -10,7 +10,7 @@ class IInputListener
 public:
 	virtual void Input(SDL_Event* event) = 0;
 	IInputListener(CEngine* engine);
-	~IInputListener();
+	virtual ~IInputListener();
 
 	int controlState;
 

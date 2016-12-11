@@ -16,6 +16,7 @@ class CUIButton : public CEntity, public IDrawListener, public IInputListener, p
 public:
 	CUIButton(CEngine* engine);
 	CUIButton(CEngine* engine, std::string font, std::string text, std::string texture);
+	~CUIButton();
 
 	void Draw(SDL_Renderer* renderer);
 	void Update();

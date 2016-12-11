@@ -7,6 +7,7 @@
 #include "ILapCountable.h"
 #include "CEntity.h"
 #include "CEngine.h"
+#include "CEntityParticleEmitter.h"
 #include "CEntityTire.h"
 #include "CEntityCheckpoint.h"
 #include <vector>
@@ -18,6 +19,7 @@ class CEntityCar : public CEntity, public IDrawListener, public IInputListener, 
 {
 public:
 	CEntityCar(CEngine* engine, CMap* map);
+	~CEntityCar();
 	void Draw(SDL_Renderer* renderer);
 	void Input(SDL_Event* event);
 	void Update();
@@ -35,7 +37,9 @@ public:
 	SDL_Rect srcRect;
 	void *finishCallback;
 private:
-	CEngine* engine;
+	CEngine* engine; 
+	CEntityParticleEmitter* emitter;
+	b2AABB aabb;
 };
 
 #endif

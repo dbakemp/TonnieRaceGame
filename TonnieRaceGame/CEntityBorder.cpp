@@ -19,6 +19,10 @@ CEntityBorder::CEntityBorder(CEngine* engine, p2t::Triangle* triangle) : CEntity
 	this->engine = engine;
 }
 
+CEntityBorder::~CEntityBorder()
+{
+}
+
 void CEntityBorder::Draw(SDL_Renderer* renderer)
 {
 	if (!visible) { return; }

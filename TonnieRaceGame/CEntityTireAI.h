@@ -16,6 +16,7 @@ class CEntityTireAI : public CEntity, public IDrawListener, public IBox2DListene
 {
 public:
 	CEntityTireAI(CEngine* engine, CMap* map, int x, int y, CEntityCarAI::CarGenetics* carGenetics);
+	~CEntityTireAI();
 	void Draw(SDL_Renderer* renderer);
 	void Update();
 	void Create(b2World* world);

@@ -13,7 +13,7 @@ class IDrawListener
 public:
 	virtual void Draw(SDL_Renderer* renderer) = 0;
 	IDrawListener(CEngine* engine, int zIndex);
-	~IDrawListener();
+	virtual ~IDrawListener();
 	void ChangeZIndex(int index);
 	TTF_Font* font;
 	std::string text;

@@ -7,7 +7,7 @@ CEntityFpsCounter::CEntityFpsCounter(CEngine * engine) : CEntity(engine), IDrawL
 	label = new CUILabel(engine, "Bangers", "");
 	label->SetPosition(10, 10);
 	label->SetFontSize(30);
-	label->SetVisibility(false);
+	label->SetVisibility(true);
 	this->engine = engine;
 }
 
@@ -20,10 +20,10 @@ void CEntityFpsCounter::Update()
 	ticksum -= ticklist[tickindex];  /* subtract value falling off */
 	ticksum += 1.0/engine->deltaHelper->delta;              /* add new value */
 	ticklist[tickindex] = 1.0 / engine->deltaHelper->delta;   /* save new value so it can be subtracted later */
-	if (++tickindex == 1000)    /* inc buffer index */
+	if (++tickindex == 500)    /* inc buffer index */
 		tickindex = 0;
 
-	label->SetText("FPS: " + std::to_string(ticksum / 1000));
+	label->SetText("FPS: " + std::to_string(ticksum / 500));
 }
 
 void CEntityFpsCounter::Draw(SDL_Renderer * renderer)
@@ -32,7 +32,7 @@ void CEntityFpsCounter::Draw(SDL_Renderer * renderer)
 
 void CEntityFpsCounter::Input(SDL_Event * event)
 {
-	switch (event->type)
+	/*switch (event->type)
 	{
 	case SDL_KEYDOWN:
 		switch (event->key.keysym.sym)
@@ -41,5 +41,5 @@ void CEntityFpsCounter::Input(SDL_Event * event)
 			label->ToggleVisibility();
 			break;
 		}
-	}
+	}*/
 }

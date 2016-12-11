@@ -1,6 +1,7 @@
 #include "SDL.h"
 #include "CInputManager.h"
 #include "IInputListener.h"
+#include <algorithm>
 
 void CInputManager::AddListener(IInputListener* inputListener)
 {
@@ -9,6 +10,7 @@ void CInputManager::AddListener(IInputListener* inputListener)
 
 void CInputManager::RemoveListener(IInputListener* inputListener)
 {
+	listeners.erase(std::remove(listeners.begin(), listeners.end(), inputListener), listeners.end());
 }
 
 void CInputManager::Tick(SDL_Event* event)

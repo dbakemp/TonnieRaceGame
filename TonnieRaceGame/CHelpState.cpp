@@ -107,9 +107,6 @@ void CHelpState::init(CEngine* engine)
 
 void CHelpState::clean(CEngine* engine)
 {
-	engine->drawManager->Clear();
-	engine->inputManager->Clear();
-	engine->box2DManager->Clear();
 	engine->entityManager->Clear();
 }
 

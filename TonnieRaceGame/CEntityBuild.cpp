@@ -4,24 +4,15 @@
 #include <chrono>
 #include <sstream>
 
+#define _MAJOR 0
+#define _MINOR 1
+#define _BUILD 37
+
 CEntityBuild::CEntityBuild(CEngine * engine) : CEntity(engine), IDrawListener(engine, (int)CDrawManager::Layers::UI), IInputListener(engine)
 {
 	visible = false;
-	tm localTime;
-	std::chrono::system_clock::time_point t = std::chrono::system_clock::now();
-	time_t now = std::chrono::system_clock::to_time_t(t);
-	localtime_s(&localTime, &now);
 
-	std::stringstream buffer;
-	buffer << "["
-		<< std::setfill('0') << std::setw(2) << localTime.tm_mday << '-'
-		<< std::setfill('0') << std::setw(2) << localTime.tm_mon+1 << '-'
-		<< std::setfill('0') << std::setw(2) << localTime.tm_year + 1900 << ' '
-		<< std::setfill('0') << std::setw(2) << localTime.tm_hour << ':'
-		<< std::setfill('0') << std::setw(2) << localTime.tm_min << ':'
-		<< std::setfill('0') << std::setw(2) << localTime.tm_sec << "] ";
-
-	text = "Development Build: "+buffer.str();
+	text = "Development Build: ["+std::to_string(_MAJOR)+"."+ std::to_string(_MINOR) +"."+ std::to_string(_BUILD)+"]";
 
 
 	label = new CUILabel(engine, "Bangers", "");

@@ -20,7 +20,7 @@ private:
 	CEngine* engine; 
 	int tickindex = 0;
 	int ticksum = 0;
-	int ticklist[1000];
+	int ticklist[500];
 	CUILabel* label;
 };
 

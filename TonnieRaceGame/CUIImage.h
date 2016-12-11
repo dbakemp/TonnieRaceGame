@@ -17,6 +17,7 @@ class CUIImage : public CEntity, public IDrawListener, public IInputListener, pu
 public:
 	CUIImage(CEngine* engine);
 	CUIImage(CEngine* engine, std::string texture);
+	virtual ~CUIImage();
 
 	void Draw(SDL_Renderer* renderer);
 	void Update();

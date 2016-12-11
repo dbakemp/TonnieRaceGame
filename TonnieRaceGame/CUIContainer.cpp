@@ -7,6 +7,10 @@ CUIContainer::CUIContainer(CEngine * engine) : CEntity(engine), IInputListener(e
 	this->engine = engine;
 }
 
+CUIContainer::~CUIContainer()
+{
+}
+
 void CUIContainer::Draw(SDL_Renderer * renderer)
 {
 	if (!debugVisible) { return; }

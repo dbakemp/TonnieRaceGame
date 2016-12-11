@@ -15,6 +15,7 @@ class CUILabel : public CEntity, public IDrawListener, public IInputListener, pu
 public:
 	CUILabel(CEngine* engine);
 	CUILabel(CEngine* engine, std::string font, std::string text);
+	~CUILabel();
 
 	void Draw(SDL_Renderer* renderer);
 	void Update();

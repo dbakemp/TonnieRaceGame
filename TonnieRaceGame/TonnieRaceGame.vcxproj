@@ -212,7 +212,9 @@ xcopy "$(SolutionDir)TonnieRaceGame\Resources\*.*" "$(TargetDir)Resources" /Y /I
     <ClCompile Include="CEntityFpsCounter.cpp" />
     <ClCompile Include="CEntityLapCounter.cpp" />
     <ClCompile Include="CEntityManager.cpp" />
+    <ClCompile Include="CEntityParticleEmitter.cpp" />
     <ClCompile Include="CEntityPowerup.cpp" />
+    <ClCompile Include="CEntitySmokeParticle.cpp" />
     <ClCompile Include="CEntitySpeedoMeter.cpp" />
     <ClCompile Include="CEntitySpawn.cpp" />
     <ClCompile Include="CEntityTile.cpp" />
@@ -274,7 +276,9 @@ xcopy "$(SolutionDir)TonnieRaceGame\Resources\*.*" "$(TargetDir)Resources" /Y /I
     <ClInclude Include="CEntityFpsCounter.h" />
     <ClInclude Include="CEntityLapCounter.h" />
     <ClInclude Include="CEntityManager.h" />
+    <ClInclude Include="CEntityParticleEmitter.h" />
     <ClInclude Include="CEntityPowerup.h" />
+    <ClInclude Include="CEntitySmokeParticle.h" />
     <ClInclude Include="CEntitySpeedoMeter.h" />
     <ClInclude Include="CEntitySpawn.h" />
     <ClInclude Include="CEntityTile.h" />

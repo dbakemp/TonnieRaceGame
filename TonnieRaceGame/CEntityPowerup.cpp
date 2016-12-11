@@ -51,6 +51,10 @@ CEntityPowerup::CEntityPowerup(CEngine * engine, CMap * map, double xPos, double
 	this->engine = engine;
 }
 
+CEntityPowerup::~CEntityPowerup()
+{
+}
+
 void CEntityPowerup::Draw(SDL_Renderer * renderer)
 {
 	if (!visible)

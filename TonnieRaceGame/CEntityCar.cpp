@@ -34,6 +34,9 @@ CEntityCar::CEntityCar(CEngine* engine, CMap* map) : CEntity(engine), IDrawListe
 	double xPos = spawn->x;
 	double yPos = spawn->y;
 
+	emitter = new CEntityParticleEmitter(engine);
+	emitter->SetPosition(xPos * 5, yPos * 5);
+
 	b2Vec2 vertices[8];
 
 	vertices[0].Set(0 + xPos, 2 + yPos);
@@ -85,9 +88,12 @@ CEntityCar::CEntityCar(CEngine* engine, CMap* map) : CEntity(engine), IDrawListe
 	this->engine = engine;
 }
 
+CEntityCar::~CEntityCar()
+{
+}
+
 void CEntityCar::Draw(SDL_Renderer* renderer)
 {
-	b2AABB aabb;
 	aabb.lowerBound = b2Vec2(FLT_MAX, FLT_MAX);
 	aabb.upperBound = b2Vec2(-FLT_MAX, -FLT_MAX);
 	b2Fixture* fixture = body->GetFixtureList();
@@ -227,6 +233,8 @@ void CEntityCar::Update()
 	double newAngle = angleNow + (angleToTurn);
 	flJoint->SetLimits(newAngle, newAngle);
 	frJoint->SetLimits(newAngle, newAngle);
+
+	emitter->SetPosition(((aabb.upperBound.x + aabb.lowerBound.x) / 2 * 5), ((aabb.upperBound.y + aabb.lowerBound.y) / 2 * 5));
 }
 
 void CEntityCar::Create(b2World* world)

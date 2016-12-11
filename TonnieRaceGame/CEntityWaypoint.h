@@ -15,6 +15,7 @@ class CEntityWaypoint : public CEntity, public IDrawListener, public IBox2DListe
 {
 public:
 	CEntityWaypoint(CEngine* engine, double x, double y, int index);
+	~CEntityWaypoint();
 	void Draw(SDL_Renderer* renderer);
 	void Update();
 	void Create(b2World* world);

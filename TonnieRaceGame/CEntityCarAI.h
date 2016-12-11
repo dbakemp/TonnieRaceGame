@@ -36,6 +36,7 @@ public:
 	};
 
 	CEntityCarAI(CEngine* engine, CMap* map);
+	~CEntityCarAI();
 	void Draw(SDL_Renderer* renderer);
 	void Update();
 	void Create(b2World* world);

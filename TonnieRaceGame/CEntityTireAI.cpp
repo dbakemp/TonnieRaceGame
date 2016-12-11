@@ -28,6 +28,10 @@ CEntityTireAI::CEntityTireAI(CEngine* engine, CMap* map, int x, int y, CEntityCa
 	this->engine = engine;
 }
 
+CEntityTireAI::~CEntityTireAI()
+{
+}
+
 void CEntityTireAI::Draw(SDL_Renderer* renderer)
 {
 	Box2DUtils::DrawBody(renderer, body, engine->camera, 0, 0, 0, 255, 0, 0, 0, 255, false);

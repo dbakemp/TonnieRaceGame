@@ -14,6 +14,7 @@ class CEntityTire : public CEntity, public IDrawListener, public IInputListener,
 {
 public:
 	CEntityTire(CEngine* engine, CMap* map, int x, int y);
+	~CEntityTire();
 	void Draw(SDL_Renderer* renderer);
 	void Input(SDL_Event* event);
 	void Update();

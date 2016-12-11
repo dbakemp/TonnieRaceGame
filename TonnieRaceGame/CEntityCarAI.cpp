@@ -10,6 +10,7 @@
 #include <iostream>
 #include <string>
 #include "CIntegerHelper.h"
+#include "CEntityParticleEmitter.h"
 #include <SDL_image.h>
 #include "CTextureManager.h"
 
@@ -43,6 +44,7 @@ CEntityCarAI::CEntityCarAI(CEngine* engine, CMap* map) : CEntity(engine), IDrawL
 	CEntitySpawn* spawn = map->GetSpawn();
 	double xPos = spawn->x;
 	double yPos = spawn->y;
+
 
 	b2Vec2 vertices[8];
 
@@ -92,7 +94,12 @@ CEntityCarAI::CEntityCarAI(CEngine* engine, CMap* map) : CEntity(engine), IDrawL
 	frJoint = static_cast<b2RevoluteJoint*>(engine->world->CreateJoint(&jointDef));
 	tires.push_back(tire);
 
+	this->finishCallback = nullptr;
 	this->engine = engine;
+}
+
+CEntityCarAI::~CEntityCarAI()
+{
 }
 
 void CEntityCarAI::Draw(SDL_Renderer* renderer)
@@ -177,7 +184,9 @@ void CEntityCarAI::SetFinishCallback(std::function<void(IBox2DListener*)> callba
 
 void CEntityCarAI::FinishCallback()
 {
-	finishCallback(this);
+	if (finishCallback != nullptr) {
+		finishCallback(this);
+	}
 }
 
 

@@ -46,9 +46,6 @@ void CScoresState::init(CEngine* engine)
 
 void CScoresState::clean(CEngine* engine)
 {
-	engine->drawManager->Clear();
-	engine->inputManager->Clear();
-	engine->box2DManager->Clear();
 	engine->entityManager->Clear();
 }
 

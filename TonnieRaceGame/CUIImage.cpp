@@ -29,6 +29,10 @@ CUIImage::CUIImage(CEngine * engine, std::string texture) : CEntity(engine), IIn
 	verticalStretch = EUIStretchVertical::NONE;
 }
 
+CUIImage::~CUIImage()
+{
+}
+
 void CUIImage::Draw(SDL_Renderer * renderer)
 {
 	SDL_RenderCopy(engine->renderer, texture, NULL, &dstrect);

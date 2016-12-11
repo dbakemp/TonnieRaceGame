@@ -15,6 +15,7 @@ class CEntityCheckpoint : public CEntity, public IDrawListener, public IBox2DLis
 {
 public:
 	CEntityCheckpoint(CEngine* engine, b2Vec2* start, b2Vec2* end, int index, bool finish);
+	~CEntityCheckpoint();
 	void Draw(SDL_Renderer* renderer);
 	void Update();
 	void Create(b2World* world);

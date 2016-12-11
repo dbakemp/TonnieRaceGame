@@ -86,9 +86,6 @@ void CPlayState::init(CEngine* engine)
 
 void CPlayState::clean(CEngine* engine)
 {
-	engine->drawManager->Clear();
-	engine->inputManager->Clear();
-	engine->box2DManager->Clear();
 	engine->entityManager->Clear();
 
 	delete camera;

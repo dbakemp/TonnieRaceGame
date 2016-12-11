@@ -29,6 +29,10 @@ CEntityWaypoint::CEntityWaypoint(CEngine * engine, double x, double y, int index
 	this->engine = engine;
 }
 
+CEntityWaypoint::~CEntityWaypoint()
+{
+}
+
 void CEntityWaypoint::Draw(SDL_Renderer * renderer)
 {
 	if (!visible) { return; }
