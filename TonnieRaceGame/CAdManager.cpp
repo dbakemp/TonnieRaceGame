@@ -49,7 +49,7 @@ SDL_Texture* CAdManager::GetRandomAd(AdDirection direction)
 			break;
 	}
 
-	return nullptr;
+	return texture;
 }
 
 void CAdManager::AddAd(Json::Value * ad)
