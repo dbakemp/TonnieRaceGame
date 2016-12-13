@@ -10,6 +10,7 @@
 #include <iostream>
 #include <string>
 #include <SDL_image.h>
+#include "CEntityPowerup.h"
 
 #ifndef DEGTORAD
 #define DEGTORAD 0.0174532925199432957f
@@ -22,6 +23,9 @@ CEntityCar::CEntityCar(CEngine* engine, CMap* map) : CEntity(engine), IDrawListe
 	this->currentCheckpoint = -1;
 	this->currentLap = 0;
 	this->debugVisible = false;
+	this->powerupActive = false;
+	this->activePowerup = nullptr;
+	this->powerupTimer = 0;
 
 	SDL_Surface* texture = IMG_Load("Resources/Images/spritesheet_vehicles.png");
 	this->spriteSheet = SDL_CreateTextureFromSurface(engine->renderer, texture);
@@ -123,6 +127,16 @@ void CEntityCar::Input(SDL_Event* event)
 		case SDLK_f: 
 			debugVisible = !debugVisible;
 			break;
+		case SDLK_SPACE:
+			if (activePowerup != nullptr && !powerupActive) {
+				powerupActive = true;
+				for (CEntityTire* tire : tires) {
+					tire->powerupActive = true;
+					tire->type = static_cast<int>(activePowerup->type);
+				}
+				CDebugLogger::PrintDebug("Powerup geactiveerd");
+			}
+			break;
 		}
 		break;
 	case SDL_KEYUP:
@@ -207,8 +221,8 @@ void CEntityCar::ProcessCheckpoint(CEntityCheckpoint * checkpoint)
 
 void CEntityCar::ActivatePowerup(CEntityPowerup * powerup)
 {
-	activePowerup = powerup;
-	CDebugLogger::PrintDebug(to_string(static_cast<int>(powerup->type));
+	this->activePowerup = powerup;
+	CDebugLogger::PrintDebug("Powerup opgepakt");
 }
 
 
@@ -228,12 +242,29 @@ void CEntityCar::Update()
 		break;
 	}
 
+	if (powerupActive && activePowerup != nullptr && static_cast<int>(this->activePowerup->type) == 1) {
+		desiredAngle = 0 - desiredAngle;
+	}
+
 	double angleNow = flJoint->GetJointAngle();
 	double angleToTurn = desiredAngle - angleNow;
 	angleToTurn = b2Clamp(angleToTurn, -turnPerTimeStep, turnPerTimeStep);
 	double newAngle = angleNow + (angleToTurn);
 	flJoint->SetLimits(newAngle, newAngle);
 	frJoint->SetLimits(newAngle, newAngle);
+
+	if (powerupActive) {
+		powerupTimer += engine->deltaHelper->delta;
+		if (powerupTimer > (rand() % (10 - 5 + 1) + 5)) {
+			CDebugLogger::PrintDebug("Powerup verlopen");
+			powerupTimer = 0;
+			powerupActive = false;
+			activePowerup = nullptr;
+			for (CEntityTire* tire : tires) {
+				tire->powerupActive = false;
+			}
+		}
+	}
 }
 
 void CEntityCar::Create(b2World* world)

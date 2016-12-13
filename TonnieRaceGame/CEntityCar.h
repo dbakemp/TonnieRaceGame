@@ -30,6 +30,8 @@ public:
 	void CollisionEnd(CEntity* collider) override;
 	void ProcessCheckpoint(CEntityCheckpoint* checkpoint);
 	void ActivatePowerup(CEntityPowerup* powerup);
+	double powerupTimer;
+	bool powerupActive;
 
 	SDL_Texture* spriteSheet;
 	SDL_Rect srcRect;

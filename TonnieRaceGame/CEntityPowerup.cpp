@@ -89,10 +89,6 @@ void CEntityPowerup::CollisionBegin(CEntity * collider)
 			if (car != NULL) {
 				car->ActivatePowerup(this);
 			}
-			CEntityCarAI* carai = dynamic_cast<CEntityCarAI*>(collider);
-			if (carai != NULL) {
-				carai->ActivatePowerup(this);
-			}
 		}
 	}
 }

@@ -5,6 +5,7 @@
 #include "CMap.h"
 #include <SDL.h>
 #include <iostream>
+#include "CDebugLogger.h"
 
 CEntityTire::CEntityTire(CEngine* engine, CMap* map, int x, int y) : CEntity(engine), IDrawListener(engine, (int)CDrawManager::Layers::Object), IInputListener(engine), IBox2DListener(engine)
 {
@@ -131,6 +132,13 @@ void CEntityTire::UpdateFriction()
 
 void CEntityTire::UpdateDrive()
 {
+	if (powerupActive && type == 0) {
+		maxDriveForce = 500;
+	}
+	else {
+		maxDriveForce = 400;
+	}
+
 	float desiredSpeed = 0;
 	switch (controlState)
 	{
