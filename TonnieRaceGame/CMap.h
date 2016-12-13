@@ -32,7 +32,6 @@ public:
 	int checkpoints;
 
 	std::vector<CEntityWaypoint*> waypoints;
-	std::vector<CEntityPowerup*> powerups;
 	std::vector<CEntitySpawn*> availableSpawns;
 	std::vector<CEntitySpawn*> takenSpawns;
 	CEntitySpawn* GetSpawn();

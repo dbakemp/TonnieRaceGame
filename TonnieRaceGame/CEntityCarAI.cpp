@@ -164,6 +164,11 @@ void CEntityCarAI::ChangeWaypoint(CEntityWaypoint * waypoint)
 	biasY = CIntegerHelper::GetRandomIntBetween(-(waypoint->radius), waypoint->radius);
 }
 
+void CEntityCarAI::ActivatePowerup(CEntityPowerup * powerup)
+{
+	activePowerup = powerup;
+}
+
 
 void CEntityCarAI::Update()
 {

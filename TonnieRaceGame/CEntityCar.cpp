@@ -205,6 +205,12 @@ void CEntityCar::ProcessCheckpoint(CEntityCheckpoint * checkpoint)
 	}
 }
 
+void CEntityCar::ActivatePowerup(CEntityPowerup * powerup)
+{
+	activePowerup = powerup;
+	CDebugLogger::PrintDebug(to_string(static_cast<int>(powerup->type));
+}
+
 
 void CEntityCar::Update()
 {

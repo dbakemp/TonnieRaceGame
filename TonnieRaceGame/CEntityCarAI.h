@@ -10,6 +10,7 @@
 #include "CEntityTireAI.h"
 #include "CEntityWaypoint.h"
 #include "CEntityCheckpoint.h"
+#include "CEntityPowerup.h"
 #include <vector>
 #include <Box2D\Box2D.h>
 
@@ -29,13 +30,14 @@ public:
 	void ProcessCheckpoint(CEntityCheckpoint* checkpoint);
 	void ProcessWaypoint(CEntityWaypoint* waypoint);
 	void ChangeWaypoint(CEntityWaypoint* waypoint);
-
+	void ActivatePowerup(CEntityPowerup* powerup);
 
 	int currentWaypoint;
 	int biasX, biasY;
 	double backupTimer;
 	double backingupTimer;
 	bool shouldBackup;
+	CEntityPowerup* activePowerup;
 
 	CEntityWaypoint* heading;
 

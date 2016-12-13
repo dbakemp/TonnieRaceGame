@@ -8,6 +8,7 @@
 #include "SDL_image.h"
 #include "stdlib.h"
 #include "CEntityCar.h"
+#include "CEntityCarAI.h"
 #include "CDebugLogger.h"
 
 CEntityPowerup::CEntityPowerup(CEngine * engine, CMap * map, double xPos, double yPos) : CEntity(engine), IDrawListener(engine, (int)CDrawManager::Layers::Object), IBox2DListener(engine), IInputListener(engine)
@@ -20,8 +21,9 @@ CEntityPowerup::CEntityPowerup(CEngine * engine, CMap * map, double xPos, double
 	this->timer = 0;
 
 	int count = 2;
+	PowerupType type = static_cast<PowerupType>(rand() % 2);
 	int rowNumber = 0;
-	int columnNumber = rand() % 2;
+	int columnNumber = static_cast<int>(type);
 	int size = 36;
 
 	this->textureX = columnNumber * size;
@@ -29,6 +31,7 @@ CEntityPowerup::CEntityPowerup(CEngine * engine, CMap * map, double xPos, double
 	this->spriteSheet = map->spriteSheetPowerUps;
 	this->textureHeight = size;
 	this->textureWidth = size;
+	this->type = type;
 
 	srcRect = { this->textureX, this->textureY, this->textureWidth, this->textureHeight };
 
@@ -82,7 +85,14 @@ void CEntityPowerup::CollisionBegin(CEntity * collider)
 	{
 		visible = false;
 		if (collider->GetType() == Type::CAR) {
-			CDebugLogger::PrintDebug("Picked up Powerup");
+			CEntityCar* car = dynamic_cast<CEntityCar*>(collider);
+			if (car != NULL) {
+				car->ActivatePowerup(this);
+			}
+			CEntityCarAI* carai = dynamic_cast<CEntityCarAI*>(collider);
+			if (carai != NULL) {
+				carai->ActivatePowerup(this);
+			}
 		}
 	}
 }

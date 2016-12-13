@@ -9,6 +9,7 @@
 #include "CEngine.h"
 #include "CEntityTire.h"
 #include "CEntityCheckpoint.h"
+#include "CEntityPowerup.h"
 #include <vector>
 #include <Box2D\Box2D.h>
 
@@ -28,9 +29,11 @@ public:
 	void CollisionBegin(CEntity* collider) override;
 	void CollisionEnd(CEntity* collider) override;
 	void ProcessCheckpoint(CEntityCheckpoint* checkpoint);
+	void ActivatePowerup(CEntityPowerup* powerup);
 
 	SDL_Texture* spriteSheet;
 	SDL_Rect srcRect;
+	CEntityPowerup* activePowerup;
 private:
 	CEngine* engine;
 };
