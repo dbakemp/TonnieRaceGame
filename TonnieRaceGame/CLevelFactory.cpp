@@ -219,7 +219,7 @@ void CLevelFactory::CreateAd(Json::Value * root)
 		directionEnum = CAdManager::AdDirection::DOWN;
 	}
 	else if (direction == "up") {
-		directionEnum = CAdManager::AdDirection::UP;
+		directionEnum = CAdManager::AdDirection::DOWN;
 	}
 	else if (direction == "right") {
 		directionEnum = CAdManager::AdDirection::RIGHT;
