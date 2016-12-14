@@ -80,7 +80,7 @@ void CUIImage::Update()
 void CUIImage::Input(SDL_Event * event)
 {
 	if (event->type == SDL_MOUSEBUTTONDOWN) {
-		if ((event->motion.x > dstrect.x && event->motion.x < dstrect.x + dstrect.w) && (event->motion.y > dstrect.y && event->motion.y < dstrect.y + dstrect.h)) {
+		if ((event->motion.x > dstrect.x && event->motion.x < dstrect.x + dstrect.w) && (event->motion.y > dstrect.y && event->motion.y < dstrect.y + dstrect.h) && dstrect.x + dstrect.w > container.x && dstrect.x < container.w + container.x) {
 			mouseDown = true;
 		}
 	}

@@ -31,7 +31,7 @@ void CLevelSelectorState::init(CEngine * engine)
 	scrollView = new CUIHorizontalScrollView(engine);
 	scrollView->SetHorizontalAlignment(EUIALignmentHorizontal::CENTER);
 	scrollView->SetVerticalAlignment(EUIALignmentVertical::CENTER);
-	scrollView->SetWidth(500);
+	scrollView->SetWidth(600);
 	scrollView->SetHeight(300);
 
 	CUIButton* buttonBack = new CUIButton(engine, "Bangers", "Terug", "Images/terug.png");
