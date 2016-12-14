@@ -181,7 +181,7 @@ void CEntityCarAI::ChangeWaypoint(CEntityWaypoint * waypoint)
 void CEntityCarAI::ActivatePowerup(CEntityPowerup * powerup)
 {
 	activePowerup = powerup;
-]
+}
 
 void CEntityCarAI::SetFinishCallback(std::function<void(IBox2DListener*)> callback)
 {
