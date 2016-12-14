@@ -1,0 +1,20 @@
+{
+"maps":[
+  {
+    "mapname":"map1.json",
+    "mapicon":"map1.png"
+  },
+  {
+    "mapname":"map2.json",
+    "mapicon":"map2.png"
+  },
+  {
+    "mapname":"map3.json",
+    "mapicon":"map3.png"
+  },
+  {
+    "mapname":"map4.json",
+    "mapicon":"map4.png"
+  }
+]
+}

@@ -41,28 +41,8 @@ void CPlayState::init(CEngine* engine)
 
 	CLevelFactory* factory = new CLevelFactory(engine);
 
-	if (engine->level == 1)
-	{
-		CDebugLogger::PrintDebug("Loading LVL 1");
-		factory->LoadMap("Resources/Maps/map1.json");
-		engine->musicHelper->playTrack("Resources/Music/beep.mp3", true);
-	}
-	else if (engine->level == 2)
-	{
-		CDebugLogger::PrintDebug("Loading LVL 2");
-		factory->LoadMap("Resources/Maps/map2.json");
-		engine->musicHelper->playTrack("Resources/Music/boerharms.mp3", true);
-	}
-	else if (engine->level == 3)
-	{
-		CDebugLogger::PrintDebug("Loading LVL 3");
-		factory->LoadMap("Resources/Maps/map4.json");
-		engine->musicHelper->playTrack("Resources/Music/boerharms.mp3", true);
-	}
-	else
-	{
-		CDebugLogger::PrintDebug("Error loading level");
-	}
+	factory->LoadMap("Resources/Maps/"+engine->level);
+	engine->musicHelper->playTrack("Resources/Music/beep.mp3", true);
 
 	engine->currentMap = factory->map;
 
@@ -165,23 +145,6 @@ void CPlayState::checkSeque()
 
 void CPlayState::OnFinish(IBox2DListener * car)
 {
-	if (engine->level == 1)
-	{
-		engine->level = 2;
-		stateSeque = EGameState::Playing;
-		shouldSeque = true;
-	}
-	else if (engine->level == 2)
-	{
-		engine->level = 3;
-		stateSeque = EGameState::Playing;
-		shouldSeque = true;
-	}
-	else if (engine->level == 3)
-	{
-		stateSeque = EGameState::Win;
-		shouldSeque = true;
-	}
 }
 
 CPlayState::CPlayState(CEngine* engine)

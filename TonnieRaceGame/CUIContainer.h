@@ -28,6 +28,8 @@ public:
 	void SetWidth(int width);
 	void SetHeight(int height);
 	void AddUIElement(IUIEntity* element);
+	void SetTag(std::string tag);
+	std::string GetTag();
 private:
 	CEngine* engine;
 	SDL_Rect container;

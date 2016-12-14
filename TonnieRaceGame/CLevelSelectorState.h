@@ -8,13 +8,22 @@
 #include "CGameState.h"
 #include "CUIButton.h"
 #include "CGameState.h"
+#include "CUIHorizontalScrollView.h"
 #include "CStateManager.h"
+#include <json\json.h>
 
 class CLevelSelectorState : public CGameState
 {
 public:
+	CLevelSelectorState(CEngine* engine);
+	~CLevelSelectorState();
+
 	void init(CEngine* engine);
 	void clean(CEngine* engine);
+	
+	void addLevel(std::string image, std::string map);
+
+	void SelectLevel(IUIEntity* entity);
 
 	void pause();
 	void resume();
@@ -25,12 +34,15 @@ public:
 	void input(CEngine* engine, SDL_Event* event);
 	void checkSeque();
 
+	void ScrollLeft();
+	void ScrollRight();
+
 	bool shouldSeque;
 	EGameState stateSeque;
 
-	CLevelSelectorState(CEngine* engine);
 private:
 	void OnButtonClick(CUIButton* button);
 	CEngine* engine;
+	CUIHorizontalScrollView* scrollView;
 };
 #endif

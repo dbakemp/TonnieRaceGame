@@ -1,49 +1,49 @@
-#ifndef CUILABEL_H
-#define CUILABEL_H
+#ifndef CUIHORIZONTALSCROLLVIEW_H
+#define CUIHORIZONTALSCROLLVIEW_H
 
 #include "IDrawListener.h"
 #include "IBox2DListener.h"
 #include "IInputListener.h"
 #include "CEntity.h"
+#include "CUILabel.h"
+#include "CUIContainer.h"
 #include "SDL_ttf.h"
 #include "CEngine.h"
-#include "EUIAlignment.h"
+#include "EUIStretch.h"
 #include "IUIEntity.h"
+#include "CEngine.h"
 
-class CUILabel : public CEntity, public IDrawListener, public IInputListener, public IUIEntity
+class CUIHorizontalScrollView : public CEntity, public IDrawListener, public IInputListener, public IUIEntity
 {
 public:
-	CUILabel(CEngine* engine);
-	CUILabel(CEngine* engine, std::string font, std::string text);
-	~CUILabel();
+	CUIHorizontalScrollView(CEngine* engine);
+	virtual ~CUIHorizontalScrollView();
 
 	void Draw(SDL_Renderer* renderer);
 	void Update();
 	void Input(SDL_Event* event);
 
 	void SetPosition(int x, int y);
-	void SetText(std::string text);
-	void SetFont(std::string font);
 	void SetHorizontalAlignment(EUIALignmentHorizontal alignment);
 	void SetVerticalAlignment(EUIALignmentVertical alignment);
 	void SetContainer(int x, int y, int w, int h);
-	void SetFontSize(int fontSize);
-	void SetVisibility(bool visible);
+	void SetWidth(int width);
+	void SetHeight(int height);
+	void Scroll(int scroll);
 	SDL_Rect GetRectangle();
 	void SetTag(std::string tag);
 	std::string GetTag();
 
-	void ToggleVisibility();
-
-	std::string GetText();
-	bool GetVisibility();
+	void AddUIElement(IUIEntity* element);
 private:
 	CEngine* engine;
 	SDL_Rect container;
 	EUIALignmentHorizontal horizontalAlignment;
 	EUIALignmentVertical verticalAlignment;
-	int fontSize;
-	std::string fontName;
+	CUIContainer* elementContainer;
+	std::vector<IUIEntity*> containerElements;
+	int scrollAmount;
+
 	void PreRender();
 };
 

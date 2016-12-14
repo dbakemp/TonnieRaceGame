@@ -282,6 +282,7 @@ xcopy "$(SolutionDir)TonnieRaceGame\Resources\*.*" "$(TargetDir)Resources" /Y /I
     <ClCompile Include="CTextureManager.cpp" />
     <ClCompile Include="CUIButton.cpp" />
     <ClCompile Include="CUIContainer.cpp" />
+    <ClCompile Include="CUIHorizontalScrollView.cpp" />
     <ClCompile Include="CUIImage.cpp" />
     <ClCompile Include="CUILabel.cpp" />
     <ClCompile Include="CWinState.cpp" />
@@ -347,6 +348,7 @@ xcopy "$(SolutionDir)TonnieRaceGame\Resources\*.*" "$(TargetDir)Resources" /Y /I
     <ClInclude Include="CTextureManager.h" />
     <ClInclude Include="CUIButton.h" />
     <ClInclude Include="CUIContainer.h" />
+    <ClInclude Include="CUIHorizontalScrollView.h" />
     <ClInclude Include="CUIImage.h" />
     <ClInclude Include="CUILabel.h" />
     <ClInclude Include="CWinState.h" />

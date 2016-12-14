@@ -179,6 +179,9 @@
     <ClCompile Include="CEntityManager.cpp">
       <Filter>Managers</Filter>
     </ClCompile>
+    <ClCompile Include="CUIHorizontalScrollView.cpp">
+      <Filter>Entities\UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CCamera.h" />
@@ -357,6 +360,9 @@
     </ClInclude>
     <ClInclude Include="CEntityManager.h">
       <Filter>Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="CUIHorizontalScrollView.h">
+      <Filter>Entities\UI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -28,8 +28,12 @@ public:
 	void SetHorizontalAlignment(EUIALignmentHorizontal alignment);
 	void SetVerticalAlignment(EUIALignmentVertical alignment);
 	void SetClickCallback(std::function<void(CUIButton*)> callback);
+	void SetClickHoldCallback(std::function<void(CUIButton*)> callback);
 	void SetFontSize(int fontSize);
 	void SetContainer(int x, int y, int w, int h);
+	SDL_Rect GetRectangle();
+	void SetTag(std::string tag);
+	std::string GetTag();
 
 	std::string GetText();
 private:
@@ -39,6 +43,9 @@ private:
 	EUIALignmentHorizontal horizontalAlignment;
 	EUIALignmentVertical verticalAlignment;
 	std::function<void(CUIButton*)> clickCallback;
+	std::function<void(CUIButton*)> clickCallHoldback;
+
+	bool mouseDown;
 
 	void PreRender();
 };

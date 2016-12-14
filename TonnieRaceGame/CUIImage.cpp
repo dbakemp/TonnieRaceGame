@@ -8,6 +8,8 @@ CUIImage::CUIImage(CEngine * engine) : CEntity(engine), IInputListener(engine), 
 {
 	this->engine = engine;
 	this->container = { 0, 0, 0, 0 };
+	this->clickCallback = nullptr;
+	this->clickCallHoldback = nullptr;
 
 	horizontalAlignment = EUIALignmentHorizontal::LEFT;
 	verticalAlignment = EUIALignmentVertical::TOP;
@@ -22,6 +24,8 @@ CUIImage::CUIImage(CEngine * engine, std::string texture) : CEntity(engine), IIn
 	this->texture = engine->textureManager->GetTexture(texture);
 
 	this->container = { 0, 0, 0, 0 };
+	this->clickCallback = nullptr;
+	this->clickCallHoldback = nullptr;
 
 	horizontalAlignment = EUIALignmentHorizontal::LEFT;
 	verticalAlignment = EUIALignmentVertical::TOP;
@@ -35,7 +39,32 @@ CUIImage::~CUIImage()
 
 void CUIImage::Draw(SDL_Renderer * renderer)
 {
-	SDL_RenderCopy(engine->renderer, texture, NULL, &dstrect);
+	if (container.x == 0 && container.y == 0 && container.w == 0 && container.h == 0) {
+		SDL_RenderCopy(engine->renderer, texture, NULL, &dstrect);
+	}
+	else {
+		SDL_QueryTexture(texture, NULL, NULL, &srcrect.w, &srcrect.h);
+		int originalWidth = srcrect.w;
+		int totalWidthRight = container.w + container.x - dstrect.x;
+		int totalWidthLeft = container.x - dstrect.x;
+
+		if (totalWidthRight > 0 && totalWidthRight <= dstrect.w) {
+			srcrect.w = totalWidthRight;
+			dstrect.w = srcrect.w;
+
+			SDL_RenderCopy(engine->renderer, texture, &srcrect, &dstrect);
+		}
+		else if (totalWidthLeft > 0 && totalWidthLeft <= dstrect.w) {
+			srcrect.x = totalWidthLeft;
+			dstrect.x = dstrect.x + totalWidthLeft;
+			dstrect.w = srcrect.w - totalWidthLeft;
+
+			SDL_RenderCopy(engine->renderer, texture, &srcrect, &dstrect);
+		}
+		else if (dstrect.x + originalWidth > container.x && dstrect.x < container.w + container.x) {
+			SDL_RenderCopy(engine->renderer, texture, &srcrect, &dstrect);
+		}
+	}
 
 	if (!debugVisible) { return; }
 	SDL_RenderDrawRect(engine->renderer, &dstrect);
@@ -43,11 +72,24 @@ void CUIImage::Draw(SDL_Renderer * renderer)
 
 void CUIImage::Update()
 {
+	if (mouseDown) {
+		if (clickCallHoldback != nullptr) { clickCallHoldback(this); }
+	}
 }
 
 void CUIImage::Input(SDL_Event * event)
 {
-	if (event->type == SDL_WINDOWEVENT) {
+	if (event->type == SDL_MOUSEBUTTONDOWN) {
+		if ((event->motion.x > dstrect.x && event->motion.x < dstrect.x + dstrect.w) && (event->motion.y > dstrect.y && event->motion.y < dstrect.y + dstrect.h)) {
+			mouseDown = true;
+		}
+	}
+	else if (event->type == SDL_MOUSEBUTTONUP) {
+		if (mouseDown) {
+			if (clickCallback != nullptr) { clickCallback(this); }
+			mouseDown = false;
+		}
+	} else if (event->type == SDL_WINDOWEVENT) {
 		switch (event->window.event) {
 		case SDL_WINDOWEVENT_RESIZED:
 			PreRender();
@@ -69,6 +111,8 @@ void CUIImage::SetPosition(int x, int y)
 {
 	this->xPos = x;
 	this->yPos = y;
+	this->UIXPos = this->xPos;
+	this->UIYPos = this->yPos;
 	PreRender();
 }
 
@@ -100,6 +144,26 @@ void CUIImage::SetContainer(int x, int y, int w, int h)
 {
 	container = { x, y, w, h };
 	PreRender();
+}
+
+void CUIImage::SetTag(std::string tag)
+{
+	this->tag = tag;
+}
+
+void CUIImage::SetClickCallback(std::function<void(IUIEntity*)> callback)
+{
+	this->clickCallback = callback;
+}
+
+void CUIImage::SetClickHoldCallback(std::function<void(IUIEntity*)> callback)
+{
+	this->clickCallHoldback = callback;
+}
+
+std::string CUIImage::GetTag()
+{
+	return tag;
 }
 
 void CUIImage::PreRender()
@@ -162,4 +226,5 @@ void CUIImage::PreRender()
 	}
 
 	dstrect = { x, y, srcrect.w, srcrect.h };
+	UIdstrect = dstrect;
 }

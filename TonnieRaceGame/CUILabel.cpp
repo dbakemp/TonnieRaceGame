@@ -74,6 +74,8 @@ void CUILabel::SetPosition(int x, int y)
 {
 	this->xPos = x;
 	this->yPos = y;
+	this->UIXPos = this->xPos;
+	this->UIYPos = this->yPos;
 	PreRender();
 }
 
@@ -122,6 +124,15 @@ void CUILabel::SetVisibility(bool visible)
 SDL_Rect CUILabel::GetRectangle()
 {
 	return dstrect;
+}
+
+void CUILabel::SetTag(std::string tag)
+{
+}
+
+std::string CUILabel::GetTag()
+{
+	return std::string();
 }
 
 void CUILabel::ToggleVisibility()
@@ -181,6 +192,7 @@ void CUILabel::PreRender()
 	}
 
 	dstrect = { x, y, srcrect.w, srcrect.h };
+	UIdstrect = dstrect;
 
 	SDL_FreeSurface(surface);
 }

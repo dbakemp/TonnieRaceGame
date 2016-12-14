@@ -45,6 +45,8 @@ void CUIContainer::SetPosition(int x, int y)
 {
 	this->xPos = x;
 	this->yPos = y;
+	this->UIXPos = this->xPos;
+	this->UIYPos = this->yPos;
 	PreRender();
 }
 
@@ -82,6 +84,16 @@ void CUIContainer::AddUIElement(IUIEntity * element)
 {
 	uiElements.push_back(element);
 	element->SetContainer(dstrect.x, dstrect.y, dstrect.w, dstrect.h);
+	PreRender();
+}
+
+void CUIContainer::SetTag(std::string tag)
+{
+}
+
+std::string CUIContainer::GetTag()
+{
+	return std::string();
 }
 
 void CUIContainer::PreRender()
@@ -126,6 +138,7 @@ void CUIContainer::PreRender()
 	}
 
 	dstrect = { x, y, srcrect.w, srcrect.h };
+	UIdstrect = dstrect;
 
 	for (IUIEntity* element : uiElements) {
 		element->SetContainer(dstrect.x, dstrect.y, dstrect.w, dstrect.h);

@@ -47,7 +47,7 @@ public:
 	bool showFPSCounter;
 	bool gameControllerConnected;
 	int fpsCounter;
-	int level;
+	std::string level;
 	int windowHeight, windowWidth;
 private:
 	void Tick();

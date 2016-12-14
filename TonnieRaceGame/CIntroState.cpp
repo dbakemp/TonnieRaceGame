@@ -105,7 +105,7 @@ void CIntroState::OnButtonClick(CUIButton* button)
 {
 	if (button->GetText() == "Spelen") {
 		shouldSeque = true;
-		stateSeque = EGameState::Playing;
+		stateSeque = EGameState::LevelSelector;
 	} else if (button->GetText() == "Help") {
 		shouldSeque = true;
 		stateSeque = EGameState::Help;

@@ -8,6 +8,9 @@ CUIButton::CUIButton(CEngine * engine) : CEntity(engine), IInputListener(engine)
 {
 	this->engine = engine;
 	this->container = { 0, 0, 0, 0 };
+	this->mouseDown = false;
+	this->clickCallback = nullptr;
+	this->clickCallHoldback = nullptr;
 }
 
 CUIButton::CUIButton(CEngine * engine, std::string font, std::string text, std::string texture) : CEntity(engine), IInputListener(engine), IDrawListener(engine, (int)CDrawManager::Layers::UI)
@@ -25,6 +28,7 @@ CUIButton::CUIButton(CEngine * engine, std::string font, std::string text, std::
 	label->SetVerticalAlignment(EUIALignmentVertical::CENTER);
 	label->ChangeZIndex(zIndex + 1);
 	label->SetPosition(0, -2);
+	this->mouseDown = false;
 }
 
 CUIButton::~CUIButton()
@@ -43,13 +47,22 @@ void CUIButton::Draw(SDL_Renderer * renderer)
 
 void CUIButton::Update()
 {
+	if (mouseDown) {
+		if (clickCallHoldback != nullptr) { clickCallHoldback(this); }
+	}
 }
 
 void CUIButton::Input(SDL_Event* event)
 {
 	if (event->type == SDL_MOUSEBUTTONDOWN) {
 		if ((event->motion.x > dstrect.x && event->motion.x < dstrect.x + dstrect.w) && (event->motion.y > dstrect.y && event->motion.y < dstrect.y + dstrect.h)) {
-			clickCallback(this);
+			mouseDown = true;
+		}
+	}
+	else if (event->type == SDL_MOUSEBUTTONUP) {
+		if (mouseDown) {
+			if (clickCallback != nullptr) { clickCallback(this); }
+			mouseDown = false;
 		}
 	}
 	else if (event->type == SDL_WINDOWEVENT) {
@@ -74,6 +87,8 @@ void CUIButton::SetPosition(int x, int y)
 {
 	this->xPos = x;
 	this->yPos = y;
+	this->UIXPos = this->xPos;
+	this->UIYPos = this->yPos;
 	PreRender();
 }
 
@@ -143,6 +158,7 @@ void CUIButton::PreRender()
 	}
 
 	dstrect = { x, y, srcrect.w, srcrect.h };
+	UIdstrect = dstrect;
 
 	label->SetContainer(dstrect.x, dstrect.y, dstrect.w, dstrect.h);
 }
@@ -150,6 +166,11 @@ void CUIButton::PreRender()
 void CUIButton::SetClickCallback(std::function<void(CUIButton*)> callback)
 {
 	this->clickCallback = callback;
+}
+
+void CUIButton::SetClickHoldCallback(std::function<void(CUIButton*)> callback)
+{
+	this->clickCallHoldback = callback;
 }
 
 void CUIButton::SetFontSize(int fontSize)
@@ -161,6 +182,20 @@ void CUIButton::SetContainer(int x, int y, int w, int h)
 {
 	container = { x, y, w, h };
 	PreRender();
+}
+
+SDL_Rect CUIButton::GetRectangle()
+{
+	return dstrect;
+}
+
+void CUIButton::SetTag(std::string tag)
+{
+}
+
+std::string CUIButton::GetTag()
+{
+	return std::string();
 }
 
 std::string CUIButton::GetText()

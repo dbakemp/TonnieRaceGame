@@ -29,6 +29,10 @@ public:
 	void SetHorizontalStretch(EUIStretchHorizontal stretch);
 	void SetVerticalStretch(EUIStretchVertical stretch);
 	void SetContainer(int x, int y, int w, int h);
+	void SetTag(std::string tag);
+	void SetClickCallback(std::function<void(IUIEntity*)> callback);
+	void SetClickHoldCallback(std::function<void(IUIEntity*)> callback);
+	std::string GetTag();
 private:
 	CEngine* engine;
 	SDL_Rect container;
@@ -36,6 +40,10 @@ private:
 	EUIALignmentVertical verticalAlignment;
 	EUIStretchHorizontal horizontalStretch;
 	EUIStretchVertical verticalStretch;
+	std::function<void(IUIEntity*)> clickCallback;
+	std::function<void(IUIEntity*)> clickCallHoldback;
+
+	bool mouseDown;
 
 	void PreRender();
 };
