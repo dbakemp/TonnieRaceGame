@@ -15,6 +15,7 @@ class CEntitySpawn : public CEntity
 {
 public:
 	CEntitySpawn(CEngine* engine, int x, int y);
+	~CEntitySpawn();
 	void Update();
 	int x, y;
 private:

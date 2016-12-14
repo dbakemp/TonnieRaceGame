@@ -13,6 +13,7 @@ class CEntityTile : public CEntity, public IDrawListener
 {
 public:
 	CEntityTile(CEngine* engine, CSpriteSheetManager::SSpriteSheet* spriteSheet, int spriteNumber, int tileNumber, int mapWidth, int mapHeight, int mapTileWidth, int mapTileHeight);
+	~CEntityTile();
 	void Draw(SDL_Renderer* renderer);
 	void Update();
 

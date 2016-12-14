@@ -40,3 +40,13 @@ IBox2DListener* CCamera::GetChild()
 {
 	return child;
 }
+
+int CCamera::GetXPos()
+{
+	return posX;
+}
+
+int CCamera::GetYPos()
+{
+	return posY;
+}

@@ -16,19 +16,24 @@ enum EGameState
 	Credits,
 	Win,
 	Help,
-	Scores
+	Scores,
+	GA,
+	LevelSelector
 };
 
 class CStateManager
 {
 public:
+	CStateManager(CEngine* engine);
+	~CStateManager();
 	void changeState(EGameState state, CEngine* engine);
 	void pushState(CGameState* state);
 	void popState();
 
 	CGameState* getCurrentState();
 private:
-	vector<CGameState*> states;
+	vector<CGameState*> states; 
+	CEngine* engine;
 };
 
 #endif

@@ -7,6 +7,10 @@ CEntitySpawn::CEntitySpawn(CEngine * engine, int x, int y) : CEntity(engine)
 	this->engine = engine;
 }
 
+CEntitySpawn::~CEntitySpawn()
+{
+}
+
 void CEntitySpawn::Update()
 {
 }

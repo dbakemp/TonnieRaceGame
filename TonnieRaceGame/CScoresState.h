@@ -4,6 +4,8 @@
 #include <vector>
 #include "SDL.h"
 #include "CGameState.h"
+#include "CUIImage.h"
+#include "CUIButton.h"
 
 class CScoresState : public CGameState
 {
@@ -18,9 +20,17 @@ public:
 	void update(CEngine* engine);
 	void draw(CEngine* engine);
 	void input(CEngine* engine, SDL_Event* event);
+	void checkSeque();
+
+	bool shouldSeque;
+	EGameState stateSeque;
 
 	CScoresState(CEngine* engine);
+	~CScoresState();
 
 private:
+	void OnButtonClick(CUIButton* button);
+	CEngine* engine;
+	CUIImage* background;
 };
 #endif

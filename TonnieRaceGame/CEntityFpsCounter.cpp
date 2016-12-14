@@ -2,11 +2,13 @@
 #include "CDeltaHelper.h"
 #include "CDrawManager.h"
 
-CEntityFpsCounter::CEntityFpsCounter(CEngine * engine, TTF_Font * font) : CEntity(engine), IDrawListener(engine, (int)CDrawManager::Layers::UI), IInputListener(engine)
+CEntityFpsCounter::CEntityFpsCounter(CEngine * engine) : CEntity(engine), IDrawListener(engine, (int)CDrawManager::Layers::UI), IInputListener(engine)
 {
-	visible = false;
+	label = new CUILabel(engine, "Bangers", "");
+	label->SetPosition(10, 10);
+	label->SetFontSize(30);
+	label->SetVisibility(true);
 	this->engine = engine;
-	this->font = font;
 }
 
 CEntityFpsCounter::~CEntityFpsCounter()
@@ -18,39 +20,26 @@ void CEntityFpsCounter::Update()
 	ticksum -= ticklist[tickindex];  /* subtract value falling off */
 	ticksum += 1.0/engine->deltaHelper->delta;              /* add new value */
 	ticklist[tickindex] = 1.0 / engine->deltaHelper->delta;   /* save new value so it can be subtracted later */
-	if (++tickindex == 1000)    /* inc buffer index */
+	if (++tickindex == 500)    /* inc buffer index */
 		tickindex = 0;
 
-	text = "FPS: "+std::to_string(ticksum / 1000);
+	label->SetText("FPS: " + std::to_string(ticksum / 500));
 }
 
 void CEntityFpsCounter::Draw(SDL_Renderer * renderer)
 {
-	if (!visible) { return; }
-
-	SDL_Surface* surface = TTF_RenderText_Solid(font, text.c_str(), { 255, 255, 255 });
-	SDL_Texture* texture = SDL_CreateTextureFromSurface(engine->renderer, surface);
-
-	SDL_Rect srect;
-	SDL_QueryTexture(texture, NULL, NULL, &srect.w, &srect.h);
-
-	SDL_Rect dstrect = { 10, 10, srect.w, srect.h };
-	SDL_RenderCopy(engine->renderer, texture, NULL, &dstrect);
-
-	SDL_DestroyTexture(texture);
-	SDL_FreeSurface(surface);
 }
 
 void CEntityFpsCounter::Input(SDL_Event * event)
 {
-	switch (event->type)
+	/*switch (event->type)
 	{
 	case SDL_KEYDOWN:
 		switch (event->key.keysym.sym)
 		{
 		case SDLK_f:
-			visible = !visible;
+			label->ToggleVisibility();
 			break;
 		}
-	}
+	}*/
 }

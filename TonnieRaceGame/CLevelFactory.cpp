@@ -8,7 +8,9 @@
 #include "CEntityWaypoint.h"
 #include "CEntityPowerup.h"
 #include "CSpriteSheetManager.h"
+#include "CTextureManager.h"
 #include "SDL_image.h"
+#include "SDL.h"
 #include <poly2tri.h>
 #include <vector>
 #include <iostream>
@@ -53,8 +55,7 @@ void CLevelFactory::CreateMap(Json::Value* root)
 	SDL_Surface* texture = IMG_Load(map->spriteSheetLocation.c_str());
 	map->spriteSheet = SDL_CreateTextureFromSurface(engine->renderer, texture);
 
-	SDL_Surface* texturePowerups = IMG_Load("Resources/Spritesheets/spritesheet_powerups.png");
-	map->spriteSheetPowerUps = SDL_CreateTextureFromSurface(engine->renderer, texturePowerups);
+	map->spriteSheetPowerUps = engine->textureManager->GetTexture("Spritesheets/spritesheet_powerups.png");
 
 	CDebugLogger::PrintDebug("Loading Spritesheet");
 	for (Json::Value spriteSheet : (*root)["tilesets"]) {
@@ -150,6 +151,19 @@ void CLevelFactory::CreateBorder(Json::Value* root)
 	{
 		new CEntityBorder(this->engine, triangle);
 	}
+	delete cdt;
+
+	for (p2t::Triangle* triangle : triangles)
+	{
+		triangle = nullptr;
+	}
+	for (p2t::Point* point : polyline)
+	{
+		delete point;
+		point = nullptr;
+	}
+	polyline.clear();
+	triangles.clear();
 }
 
 void CLevelFactory::CreateCheckpoints(Json::Value * root)
@@ -172,6 +186,8 @@ void CLevelFactory::CreateCheckpoints(Json::Value * root)
 
 	map->checkpoints++;
 	new CEntityCheckpoint(this->engine, start, end, index, isFinish);
+	delete start;
+	delete end;
 }
 
 void CLevelFactory::CreateWaypoints(Json::Value * root)
@@ -203,7 +219,7 @@ void CLevelFactory::CreateAd(Json::Value * root)
 		directionEnum = CAdManager::AdDirection::DOWN;
 	}
 	else if (direction == "up") {
-		directionEnum = CAdManager::AdDirection::UP;
+		directionEnum = CAdManager::AdDirection::DOWN;
 	}
 	else if (direction == "right") {
 		directionEnum = CAdManager::AdDirection::RIGHT;
@@ -236,8 +252,7 @@ void CLevelFactory::CreateSpriteSheet(Json::Value* root)
 		spriteSheet->minTileIndex = (*root).get("firstgid", 0).asInt();
 		spriteSheet->maxTileIndex = spriteSheet->minTileIndex+(*root).get("tilecount", 0).asInt()-1;
 
-		SDL_Surface* texture = IMG_Load(location.c_str());
-		spriteSheet->texture = SDL_CreateTextureFromSurface(engine->renderer, texture);
+		spriteSheet->texture = engine->textureManager->GetTexture(location);
 
 		engine->spriteSheetManager->AddSpriteSheet(spriteSheet);
 	}
@@ -254,13 +269,13 @@ void CLevelFactory::CreateSpriteSheet(Json::Value* root)
 			spriteSheet->minTileIndex = minIndex + i;
 			spriteSheet->maxTileIndex = minIndex + i;
 			std::string location = (*root)["tileproperties"].get(std::to_string(i), 0).get("resourcepath", 0).asString();
-			SDL_Surface* texture = IMG_Load(location.c_str());
-			spriteSheet->texture = SDL_CreateTextureFromSurface(engine->renderer, texture);
 
-			spriteSheet->tileWidth = texture->w;
-			spriteSheet->tileHeight = texture->h;
-			spriteSheet->width = texture->w;
-			spriteSheet->height = texture->h;
+			spriteSheet->texture = engine->textureManager->GetTexture(location);
+
+			SDL_QueryTexture(spriteSheet->texture, NULL, NULL, &spriteSheet->tileWidth, &spriteSheet->tileHeight);
+
+			spriteSheet->width = spriteSheet->tileWidth;
+			spriteSheet->height = spriteSheet->tileHeight;
 
 			engine->spriteSheetManager->AddSpriteSheet(spriteSheet);
 		}

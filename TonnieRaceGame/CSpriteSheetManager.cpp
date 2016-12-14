@@ -5,6 +5,14 @@ CSpriteSheetManager::CSpriteSheetManager(CEngine* engine)
 	this->engine = engine;
 }
 
+CSpriteSheetManager::~CSpriteSheetManager()
+{
+	for (SSpriteSheet* spriteSheet : spriteSheets) {
+		delete spriteSheet;
+	}
+	spriteSheets.clear();
+}
+
 void CSpriteSheetManager::AddSpriteSheet(SSpriteSheet * spriteSheet)
 {
 	spriteSheets.push_back(spriteSheet);

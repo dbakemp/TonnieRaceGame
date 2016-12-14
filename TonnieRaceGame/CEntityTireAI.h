@@ -5,15 +5,18 @@
 #include "IInputListener.h"
 #include "IBox2DListener.h"
 #include "CEntity.h"
+#include "CEntityCarAI.h"
 #include "CEngine.h"
 #include <Box2D\Box2D.h>
 
 class CMap;
+class CEntityCarAI;
 
-class CEntityTireAI : public CEntity, public IDrawListener,  public IBox2DListener
+class CEntityTireAI : public CEntity, public IDrawListener, public IBox2DListener
 {
 public:
-	CEntityTireAI(CEngine* engine, CMap* map, int x, int y);
+	CEntityTireAI(CEngine* engine, CMap* map, int x, int y, CEntityCarAI::CarGenetics* carGenetics);
+	~CEntityTireAI();
 	void Draw(SDL_Renderer* renderer);
 	void Update();
 	void Create(b2World* world);
@@ -28,6 +31,8 @@ public:
 	float maxForwardSpeed;
 	float maxBackwardsSpeed;
 	float maxDriveForce;
+
+	CEntityCarAI::CarGenetics* carGenetics;
 private:
 	CEngine* engine;
 };

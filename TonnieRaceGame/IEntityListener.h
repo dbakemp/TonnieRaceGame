@@ -10,7 +10,8 @@ class IEntityListener
 public:
 	virtual void Update() = 0;
 	IEntityListener(CEngine* engine);
-	~IEntityListener();
+	virtual ~IEntityListener();
+	bool shouldDelete = false;
 private:
 	CEngine* engine;
 };

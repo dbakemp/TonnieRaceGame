@@ -7,7 +7,9 @@
 #include "CEntitySmallSquare.h"
 #include "CDeltaHelper.h"
 #include "CStateManager.h"
+#include "CFontManager.h"
 #include "CSpriteSheetManager.h"
+#include "CTextureManager.h"
 #include "CCamera.h"
 #include "CDebugLogger.h"
 #include "CLevelFactory.h"
@@ -36,10 +38,12 @@ CEngine::CEngine()
 	collisionHelper = new CCollisionHelper();
 	deltaHelper = new CDeltaHelper();
 	drawManager = new CDrawManager();
+	fontManager = new CFontManager(this);
 	inputManager = new CInputManager();
 	entityManager = new CEntityManager();
-	box2DManager = new CBox2DManager();
-	stateManager = new CStateManager();
+	box2DManager = new CBox2DManager(this);
+	stateManager = new CStateManager(this);
+	textureManager = new CTextureManager(this);
 
 	SDL_Init(SDL_INIT_EVERYTHING);
 	window = SDL_CreateWindow("Tonnie's Grote Racewereld", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, windowWidth, windowHeight, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
@@ -49,7 +53,6 @@ CEngine::CEngine()
 	SDL_SetWindowIcon(window, icon);
 
 	SDL_GameController* controller = NULL;
-
 
 	
 	for (int i = 0; i < SDL_NumJoysticks(); ++i)
@@ -72,10 +75,32 @@ CEngine::CEngine()
 		}
 	}
 
-	EGameState state = Start;
+	EGameState state = EGameState::Pause;
 	stateManager->changeState(state, this);
-	musicHelper->playTrack("music\\title.mp3", false);
+	musicHelper->playTrack("Resources/Music/title.mp3", false);
 	Tick();
+}
+
+CEngine::~CEngine()
+{
+	delete entityManager;
+	delete adHelper;
+	delete drawManager;
+	delete inputManager;
+	delete box2DManager;
+	delete stateManager;
+	delete deltaHelper;
+	delete currentMap;
+	delete fontManager;
+	delete camera;
+	delete world;
+	delete musicHelper;
+	delete collisionHelper;
+	delete spriteSheetManager;
+	delete textureManager;
+
+	SDL_DestroyRenderer(renderer);
+	SDL_Quit();
 }
 
 void CEngine::Tick()
@@ -85,6 +110,8 @@ void CEngine::Tick()
 	while (running)
 	{
 		deltaHelper->SetDelta();
+
+		SDL_RenderClear(renderer);
 
 		SDL_Event event;
 		while (SDL_PollEvent(&event) != 0)
@@ -101,9 +128,7 @@ void CEngine::Tick()
 					break;
 				}
 			}
-			else {
-				stateManager->getCurrentState()->input(this, &event);
-			}
+			stateManager->getCurrentState()->input(this, &event);
 		}
 
 		stateManager->getCurrentState()->update(this);

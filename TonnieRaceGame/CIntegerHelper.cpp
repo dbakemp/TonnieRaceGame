@@ -11,3 +11,14 @@ int CIntegerHelper::GetRandomIntBetween(int min, int max) {
     
     return uni(rng);
 }
+
+int CIntegerHelper::BitStringToInt(std::string bitString)
+{
+	static const std::size_t MaxSize = CHAR_BIT*sizeof(unsigned long);
+	if (bitString.size() > MaxSize) return 0; // handle error or just truncate?
+
+	std::bitset<MaxSize> bits;
+	std::istringstream is(bitString);
+	is >> bits;
+	return bits.to_ulong();
+}

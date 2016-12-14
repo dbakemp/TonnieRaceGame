@@ -12,7 +12,7 @@ void CWinState::init(CEngine* engine)
 {
 	font = TTF_OpenFont("Resources/Fonts/opensans.ttf", 120);
 	engine->musicHelper->stopAll();
-	engine->musicHelper->playTrack("music\\daargaatze.mp3", true);
+	engine->musicHelper->playTrack("Resources/Music/daargaatze.mp3", true);
 }
 
 void CWinState::clean(CEngine* engine)

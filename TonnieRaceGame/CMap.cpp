@@ -6,6 +6,14 @@ CMap::CMap()
 
 CMap::~CMap()
 {
+	for (CEntitySpawn* spawn : availableSpawns) {
+		spawn = nullptr;
+	}
+	for (CEntitySpawn* spawn : takenSpawns) {
+		spawn = nullptr;
+	}
+	availableSpawns.clear();
+	takenSpawns.clear();
 }
 
 CEntitySpawn* CMap::GetSpawn()

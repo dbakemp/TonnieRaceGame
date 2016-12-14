@@ -12,6 +12,7 @@ class CEntityAd : public CEntity, public IDrawListener
 {
 public:
 	CEntityAd(CEngine* engine, CMap* map, CAdManager::AdDirection direction);
+	~CEntityAd();
 	void Draw(SDL_Renderer* renderer);
 	void Update();
 

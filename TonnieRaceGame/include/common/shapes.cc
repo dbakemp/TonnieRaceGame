@@ -127,9 +127,12 @@ namespace p2t
 
 	Point* Triangle::OppositePoint(Triangle& t, Point& p)
 	{
-		Point* cw = t.PointCW(p);
-		double x = cw->x;
-		double y = cw->y;
+		Point* cw = nullptr;
+		cw = t.PointCW(p);
+		double x = 0;
+		x = cw->x;
+		double y = 0;
+		y = cw->y;
 		x = p.x;
 		y = p.y;
 		return PointCW(*cw);

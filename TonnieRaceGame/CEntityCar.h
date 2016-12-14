@@ -7,11 +7,13 @@
 #include "ILapCountable.h"
 #include "CEntity.h"
 #include "CEngine.h"
+#include "CEntityParticleEmitter.h"
 #include "CEntityTire.h"
 #include "CEntityCheckpoint.h"
 #include "CEntityPowerup.h"
 #include <vector>
 #include <Box2D\Box2D.h>
+#include <functional>
 
 class CMap;
 
@@ -19,6 +21,7 @@ class CEntityCar : public CEntity, public IDrawListener, public IInputListener, 
 {
 public:
 	CEntityCar(CEngine* engine, CMap* map);
+	~CEntityCar();
 	void Draw(SDL_Renderer* renderer);
 	void Input(SDL_Event* event);
 	void Update();
@@ -32,12 +35,17 @@ public:
 	void ActivatePowerup(CEntityPowerup* powerup);
 	double powerupTimer;
 	bool powerupActive;
+	void SetFinishCallback(std::function<void(IBox2DListener*)> callback);
+	void FinishCallback();
 
 	SDL_Texture* spriteSheet;
 	SDL_Rect srcRect;
 	CEntityPowerup* activePowerup;
 private:
-	CEngine* engine;
+	CEngine* engine; 
+	CEntityParticleEmitter* emitter;
+	b2AABB aabb;
+	std::function<void(IBox2DListener*)> finishCallback;
 };
 
 #endif

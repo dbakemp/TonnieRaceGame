@@ -11,6 +11,7 @@
 #include <string>
 #include <SDL_image.h>
 #include "CEntityPowerup.h"
+#include "CTextureManager.h"
 
 #ifndef DEGTORAD
 #define DEGTORAD 0.0174532925199432957f
@@ -28,7 +29,7 @@ CEntityCar::CEntityCar(CEngine* engine, CMap* map) : CEntity(engine), IDrawListe
 	this->powerupTimer = 0;
 
 	SDL_Surface* texture = IMG_Load("Resources/Images/spritesheet_vehicles.png");
-	this->spriteSheet = SDL_CreateTextureFromSurface(engine->renderer, texture);
+	this->spriteSheet = engine->textureManager->GetTexture("Images/spritesheet_vehicles.png");
 	srcRect = { 631, 0, 41, 66 };
 
 	bodyDef.type = b2_dynamicBody;
@@ -38,6 +39,9 @@ CEntityCar::CEntityCar(CEngine* engine, CMap* map) : CEntity(engine), IDrawListe
 	CEntitySpawn* spawn = map->GetSpawn();
 	double xPos = spawn->x;
 	double yPos = spawn->y;
+
+	emitter = new CEntityParticleEmitter(engine);
+	emitter->SetPosition(xPos * 5, yPos * 5);
 
 	b2Vec2 vertices[8];
 
@@ -87,12 +91,16 @@ CEntityCar::CEntityCar(CEngine* engine, CMap* map) : CEntity(engine), IDrawListe
 	frJoint = static_cast<b2RevoluteJoint*>(engine->world->CreateJoint(&jointDef));
 	tires.push_back(tire);
 
+	this->finishCallback = nullptr;
 	this->engine = engine;
+}
+
+CEntityCar::~CEntityCar()
+{
 }
 
 void CEntityCar::Draw(SDL_Renderer* renderer)
 {
-	b2AABB aabb;
 	aabb.lowerBound = b2Vec2(FLT_MAX, FLT_MAX);
 	aabb.upperBound = b2Vec2(-FLT_MAX, -FLT_MAX);
 	b2Fixture* fixture = body->GetFixtureList();
@@ -105,7 +113,7 @@ void CEntityCar::Draw(SDL_Renderer* renderer)
 	double angle = body->GetAngle() * (180.0 / M_PI);
 	SDL_Point center = { 20.5, 33 };
 
-	SDL_Rect dstrect = { ((aabb.upperBound.x + aabb.lowerBound.x)/2 * 5)-engine->camera->posX-(srcRect.w/2), ((aabb.upperBound.y + aabb.lowerBound.y) / 2 * 5) - engine->camera->posY - (srcRect.h / 2), 41, 66 };
+	SDL_Rect dstrect = { ((aabb.upperBound.x + aabb.lowerBound.x)/2 * 5)-engine->camera->GetXPos() -(srcRect.w/2), ((aabb.upperBound.y + aabb.lowerBound.y) / 2 * 5) - engine->camera->GetYPos() - (srcRect.h / 2), 41, 66 };
 
 	SDL_RenderCopyEx(engine->renderer, spriteSheet, &srcRect, &dstrect, angle, &center, SDL_FLIP_VERTICAL);
 	
@@ -201,16 +209,7 @@ void CEntityCar::ProcessCheckpoint(CEntityCheckpoint * checkpoint)
 	else if (currentCheckpoint+1 == engine->currentMap->checkpoints && checkpoint->isFinish) {
 		if (currentLap+1 == engine->currentMap->laps) {
 			CDebugLogger::PrintDebug("Race finish here");
-			if (engine->level == 1)
-			{
-				engine->level = 2;	
-				engine->musicHelper->stopAll();
-				engine->stateManager->changeState(Playing, engine);
-			}
-			else if (engine->level == 2)
-			{
-				engine->stateManager->changeState(Win, engine);
-			}
+			FinishCallback();
 		}
 		else {
 			currentCheckpoint = checkpoint->checkpointIndex;
@@ -223,6 +222,18 @@ void CEntityCar::ActivatePowerup(CEntityPowerup * powerup)
 {
 	this->activePowerup = powerup;
 	CDebugLogger::PrintDebug("Powerup opgepakt");
+}
+
+void CEntityCar::SetFinishCallback(std::function<void(IBox2DListener*)> callback)
+{
+	finishCallback = callback;
+}
+
+void CEntityCar::FinishCallback()
+{
+	if (finishCallback != nullptr) {
+		finishCallback(this);
+	}
 }
 
 
@@ -265,6 +276,7 @@ void CEntityCar::Update()
 			}
 		}
 	}
+	emitter->SetPosition(((aabb.upperBound.x + aabb.lowerBound.x) / 2 * 5), ((aabb.upperBound.y + aabb.lowerBound.y) / 2 * 5));
 }
 
 void CEntityCar::Create(b2World* world)

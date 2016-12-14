@@ -11,17 +11,20 @@ class CInputManager;
 class CEntityManager;
 class CBox2DManager;
 class CStateManager;
+class CFontManager;
 class CDeltaHelper;
 class CCollisionHelper;
 class CSpriteSheetManager;
 class CCamera;
 class CAdManager;
+class CTextureManager;
 class CMap;
 
 class CEngine
 {
 public:
-	CEngine(); 
+	CEngine();
+	~CEngine();
 	AdHelper* adHelper;
 	CDrawManager* drawManager;
 	CInputManager* inputManager;
@@ -31,6 +34,7 @@ public:
 	CDeltaHelper* deltaHelper;
 	CAdManager* adManager;
 	CMap* currentMap;
+	CFontManager* fontManager;
 	CCamera* camera;
 	SDL_Window* window;
 	SDL_Renderer* renderer;
@@ -38,6 +42,7 @@ public:
 	MusicHelper* musicHelper;
 	CCollisionHelper* collisionHelper;
 	CSpriteSheetManager* spriteSheetManager;
+	CTextureManager* textureManager;
 	bool running;
 	bool showFPSCounter;
 	bool gameControllerConnected;

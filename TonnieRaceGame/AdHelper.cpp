@@ -19,7 +19,7 @@ AdHelper::AdHelper()
 
 void AdHelper::processJSON()
 {
-	std::ifstream ifs("ads\\ad.json");
+	std::ifstream ifs("Resources/Ads/ad.json");
 	Json::Reader reader;
 	Json::Value obj;
 	reader.parse(ifs, obj);
@@ -48,7 +48,7 @@ void AdHelper::processJSON()
 void AdHelper::fetchJSON()
 {
 	/* Create ads directory if it does not exist */
-	CreateDirectory("ads", NULL);
+	CreateDirectory("Resources/Ads", NULL);
 
 	CDebugLogger::PrintDebug("AD Framework: Start fetching JSON...");
 	CURL *curl;
@@ -57,7 +57,7 @@ void AdHelper::fetchJSON()
 
 	FILE *file;
 	int file_exists;
-	const char * filename = "ads\\ad.json";
+	const char * filename = "Resources/Ads/ad.json";
 
 	/*first check if the file exists...*/
 	file = fopen(filename, "r");
@@ -106,7 +106,7 @@ void AdHelper::fetchAd(std::string adTitle, std::string adURL, std::string filen
 
 	FILE *file;
 	int file_exists;
-	std::string test = "ads\\" + filename;
+	std::string test = "Resources/Ads/" + filename;
 	const char * filenm = test.c_str();
 
 	/*first check if the file exists...*/

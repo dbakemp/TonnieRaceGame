@@ -24,6 +24,7 @@ public:
 	};
 
 	CSpriteSheetManager(CEngine* engine);
+	~CSpriteSheetManager();
 	void AddSpriteSheet(SSpriteSheet* spriteSheet);
 	SSpriteSheet* GetSpriteSheetByTileId(int tileId);
 	std::vector<SSpriteSheet*> spriteSheets;

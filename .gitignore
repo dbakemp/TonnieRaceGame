@@ -3,6 +3,11 @@
 
 /TonnieRaceGame/ads/
 /TonnieRaceGame/highscores/
+/x64/
+/Debug/
+/TonnieRaceGame/x64/
+/TonnieRaceGame/Debug/
+/TonnieRaceGame/Release/
 
 # User-specific files
 *.suo
@@ -14,12 +19,8 @@
 *.userprefs
 
 # Build results
-[Dd]ebug/
 [Dd]ebugPublic/
-[Rr]elease/
 [Rr]eleases/
-x64/
-x86/
 bld/
 [Bb]in/
 [Oo]bj/
@@ -306,3 +307,4 @@ $RECYCLE.BIN/
 *.lnk
 
 TonnieRaceGame/Resources/Maps/map2.json
+TonnieRaceGame/plugins/plugins.dat

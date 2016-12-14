@@ -5,13 +5,16 @@
 #include "CCamera.h"
 #include "CEntity.h"
 #include "CEngine.h"
+#include "CUILabel.h"
+#include "CUIContainer.h"
+#include "CUIImage.h"
 #include "IBox2DListener.h"
 #include "SDL_ttf.h"
 
 class CEntitySpeedoMeter : public CEntity, public IDrawListener
 {
 public:
-	CEntitySpeedoMeter(CEngine* engine, TTF_Font* font);
+	CEntitySpeedoMeter(CEngine* engine);
 	~CEntitySpeedoMeter();
 	void Update();
 	void Draw(SDL_Renderer* renderer);
@@ -27,6 +30,12 @@ private:
 	CEngine* engine;
 	int angle;
 	SDL_Point point;
+	CUILabel* speedLabel;
+	CUIContainer* labelContainer;
+	CUIImage* speedometer;
+	int tickindex = 0;
+	float32 ticksum = 0;
+	float32 ticklist[200];
 };
 
 #endif 

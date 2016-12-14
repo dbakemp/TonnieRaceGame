@@ -54,6 +54,10 @@ CEntityPowerup::CEntityPowerup(CEngine * engine, CMap * map, double xPos, double
 	this->engine = engine;
 }
 
+CEntityPowerup::~CEntityPowerup()
+{
+}
+
 void CEntityPowerup::Draw(SDL_Renderer * renderer)
 {
 	if (!visible)
@@ -68,9 +72,9 @@ void CEntityPowerup::Draw(SDL_Renderer * renderer)
 	{
 		Box2DUtils::DrawBody(renderer, body, engine->camera, 0, 0, 0, 0, 0, 0, 255, 255, false);
 	}
-	if (visible && yPos > engine->camera->posY - this->textureHeight && xPos > engine->camera->posX - this->textureWidth && yPos < engine->camera->posY + engine->windowHeight && xPos < engine->camera->posX + engine->windowWidth)
+	if (visible && yPos > engine->camera->GetYPos() - this->textureHeight && xPos > engine->camera->GetXPos() - this->textureWidth && yPos < engine->camera->GetYPos() + engine->windowHeight && xPos < engine->camera->GetXPos() + engine->windowWidth)
 	{
-		SDL_Rect dstrect = { -engine->camera->posX + (xPos), -engine->camera->posY + (yPos), this->textureWidth, this->textureHeight };
+		SDL_Rect dstrect = { -engine->camera->GetXPos() + (xPos), -engine->camera->GetYPos() + (yPos), this->textureWidth, this->textureHeight };
 		SDL_RenderCopy(engine->renderer, spriteSheet, &srcRect, &dstrect);
 	}
 }

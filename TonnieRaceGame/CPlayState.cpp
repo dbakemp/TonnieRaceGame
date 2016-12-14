@@ -21,24 +21,21 @@
 #include "CEntitySpeedoMeter.h"
 #include "SDL_ttf.h"
 #include "CDebugLogger.h"
+#include <functional>
 
 void CPlayState::init(CEngine* engine)
 {
+	this->engine = engine;
+
 	SDL_Renderer* renderer;
 	renderer = SDL_CreateRenderer(engine->window, -1, 0);
 	SDL_RenderClear(renderer);
-
-	TTF_Init();
-	TTF_Font* fpsFont = TTF_OpenFont("Resources/Fonts/opensans.ttf", 16);
-	TTF_Font* kmhFont = TTF_OpenFont("Resources/Fonts/opensans.ttf", 64);
 
 	b2Vec2 gravity(0, 0);
 
 	engine->world = new b2World(gravity);
 
 	engine->world->SetContactListener(engine->collisionHelper);
-
-	SDL_QueryTexture(backmapTexture, NULL, NULL, &texW, &texH);
 
 	engine->adManager = new CAdManager(engine);
 
@@ -48,13 +45,19 @@ void CPlayState::init(CEngine* engine)
 	{
 		CDebugLogger::PrintDebug("Loading LVL 1");
 		factory->LoadMap("Resources/Maps/map1.json");
-		engine->musicHelper->playTrack("music\\beep.mp3", true);
+		engine->musicHelper->playTrack("Resources/Music/beep.mp3", true);
 	}
 	else if (engine->level == 2)
 	{
 		CDebugLogger::PrintDebug("Loading LVL 2");
 		factory->LoadMap("Resources/Maps/map2.json");
-		engine->musicHelper->playTrack("music\\boerharms.mp3", true);
+		engine->musicHelper->playTrack("Resources/Music/boerharms.mp3", true);
+	}
+	else if (engine->level == 3)
+	{
+		CDebugLogger::PrintDebug("Loading LVL 3");
+		factory->LoadMap("Resources/Maps/map4.json");
+		engine->musicHelper->playTrack("Resources/Music/boerharms.mp3", true);
 	}
 	else
 	{
@@ -63,9 +66,7 @@ void CPlayState::init(CEngine* engine)
 
 	engine->currentMap = factory->map;
 
-	camera = new CCamera(engine);
-
-	engine->camera = camera;
+	engine->camera = new CCamera(engine);
 
 	CEntityCar* car = new CEntityCar(engine, factory->map);
 	int spawns = factory->map->availableSpawns.size();
@@ -73,27 +74,42 @@ void CPlayState::init(CEngine* engine)
 		new CEntityCarAI(engine, factory->map);
 	}
 
-	camera->SetChild(car);
+	car->SetFinishCallback(std::bind(&CPlayState::OnFinish, this, std::placeholders::_1));
+	engine->camera->SetChild(car);
 
-	CEntityFpsCounter* fpsCounter = new CEntityFpsCounter(engine, fpsFont);
-	CEntityLapCounter* lapCounter = new CEntityLapCounter(engine, fpsFont);
-	CEntitySpeedoMeter* speedoMeter = new CEntitySpeedoMeter(engine, kmhFont);
-	CEntityBuild* build = new CEntityBuild(engine, fpsFont);
+	CEntityFpsCounter* fpsCounter = new CEntityFpsCounter(engine);
+	CEntityLapCounter* lapCounter = new CEntityLapCounter(engine);
+	CEntitySpeedoMeter* speedoMeter = new CEntitySpeedoMeter(engine);
+	speedoMeter->ChangeZIndex(speedoMeter->zIndex+1);
+	CEntityBuild* build = new CEntityBuild(engine);
 
 	speedoMeter->SetChild(car);
 	lapCounter->SetLapCountable(car);
 
+	delete factory;
 }
 
 void CPlayState::clean(CEngine* engine)
 {
-	engine->drawManager->Clear();
-	engine->inputManager->Clear();
-	engine->box2DManager->Clear();
 	engine->entityManager->Clear();
 
-	delete camera;
-	camera = nullptr;
+	int count = engine->world->GetBodyCount();
+	b2Body* body = engine->world->GetBodyList();
+	for (int i = 0; i < count; i++) {
+		b2Body* nextBody = body->GetNext();
+		engine->world->DestroyBody(body);
+		body = nullptr;
+		body = nextBody;
+	}
+
+	delete engine->adManager;
+	engine->adManager = nullptr;
+	delete engine->camera;
+	engine->camera = nullptr;
+	delete engine->world;
+	engine->world = nullptr;
+	delete engine->currentMap;
+	engine->currentMap = nullptr;
 }
 
 void CPlayState::pause()
@@ -110,9 +126,10 @@ void CPlayState::handleEvents(CEngine* engine)
 
 void CPlayState::update(CEngine* engine)
 {
-	camera->Update();
+	engine->camera->Update();
 	engine->entityManager->Tick();
 	engine->world->Step(engine->deltaHelper->delta, 8, 3);
+	checkSeque();
 }
 
 void CPlayState::draw(CEngine* engine)
@@ -124,10 +141,55 @@ void CPlayState::draw(CEngine* engine)
 
 void CPlayState::input(CEngine* engine, SDL_Event * event)
 {
+	if (event->type == SDL_KEYDOWN) {
+
+		switch (event->key.keysym.sym)
+		{
+		case SDLK_ESCAPE:
+			stateSeque = EGameState::Menu;
+			shouldSeque = true;
+			break;
+		}
+	}
+
 	engine->inputManager->Tick(event);
+}
+
+void CPlayState::checkSeque()
+{
+	if (!shouldSeque) { return; }
+
+	engine->stateManager->changeState(stateSeque, engine);
+	engine->musicHelper->stopAll();
+}
+
+void CPlayState::OnFinish(IBox2DListener * car)
+{
+	if (engine->level == 1)
+	{
+		engine->level = 2;
+		stateSeque = EGameState::Playing;
+		shouldSeque = true;
+	}
+	else if (engine->level == 2)
+	{
+		engine->level = 3;
+		stateSeque = EGameState::Playing;
+		shouldSeque = true;
+	}
+	else if (engine->level == 3)
+	{
+		stateSeque = EGameState::Win;
+		shouldSeque = true;
+	}
 }
 
 CPlayState::CPlayState(CEngine* engine)
 {
 	init(engine);
 }
+
+CPlayState::~CPlayState()
+{
+}
+

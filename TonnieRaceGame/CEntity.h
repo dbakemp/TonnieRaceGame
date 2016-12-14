@@ -11,6 +11,7 @@ class CEntity: public IEntityListener
 public:
 
 	CEntity(CEngine* engine);
+	~CEntity();
 	void Update();
 	virtual void CollisionBegin(CEntity* collider);
 	virtual void CollisionEnd(CEntity* collider);

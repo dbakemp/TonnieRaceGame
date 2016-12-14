@@ -5,13 +5,13 @@
       <Configuration>Debug</Configuration>
       <Platform>Win32</Platform>
     </ProjectConfiguration>
-    <ProjectConfiguration Include="Release|Win32">
-      <Configuration>Release</Configuration>
-      <Platform>Win32</Platform>
-    </ProjectConfiguration>
     <ProjectConfiguration Include="Debug|x64">
       <Configuration>Debug</Configuration>
       <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
     </ProjectConfiguration>
     <ProjectConfiguration Include="Release|x64">
       <Configuration>Release</Configuration>
@@ -31,17 +31,17 @@
     <PlatformToolset>v140</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
-    <CharacterSet>MultiByte</CharacterSet>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
-    <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
@@ -59,48 +59,66 @@
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
-  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-  </ImportGroup>
-  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" />
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>./include;../Bass/c;../Bass;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>./include;./include/VLD;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
-      <AdditionalLibraryDirectories>./lib/Box2D;./lib/SDL2;./lib/SDL2_gfx;./lib/LibCurl;../Bass;../Bass/c;./lib/SDL2_ttf;./lib/SDL2_image;./lib/libvlc;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>Box2D.lib;SDL2.lib;SDL2_gfx.lib;SDL2main.lib;bass.lib;SDL2_image.lib;SDL2_ttf.lib;libcurl.lib;libvlc.lib;libvlccore.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>./lib/Box2D/$(Platform)/$(Configuration);./lib/SDL2/$(Platform)/$(Configuration);./lib/SDL2_gfx/$(Platform)/$(Configuration);./lib/LibCurl/$(Platform)/$(Configuration);./lib/Bass/$(Platform)/$(Configuration);./lib/Bass/c/$(Platform)/$(Configuration);./lib/SDL2_ttf/$(Platform)/$(Configuration);./lib/SDL2_image/$(Platform)/$(Configuration);./lib/libvlc/$(Platform)/$(Configuration);./lib/VLD/$(Platform)/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>Box2D.lib;SDL2.lib;SDL2_gfx.lib;SDL2main.lib;bass.lib;SDL2_image.lib;SDL2_ttf.lib;libcurl_debug.lib;libvlc.lib;libvlccore.lib;vld.lib;vld_x86.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>copy "$(SolutionDir)TonnieRaceGame\lib\SDL2_ttf\SDL2_ttf.dll" "$(TargetDir)"
+      <Command>copy "$(SolutionDir)TonnieRaceGame\lib\SDL2_ttf\$(Platform)\$(Configuration)\SDL2_ttf.dll" "$(TargetDir)"
 
-copy "$(SolutionDir)TonnieRaceGame\lib\SDL2_ttf\libfreetype-6.dll" "$(TargetDir)"
+copy "$(SolutionDir)TonnieRaceGame\lib\SDL2_ttf\$(Platform)\$(Configuration)\libfreetype-6.dll" "$(TargetDir)"
 
-copy "$(SolutionDir)TonnieRaceGame\lib\SDL2_ttf\zlib1.dll" "$(TargetDir)"
+copy "$(SolutionDir)TonnieRaceGame\lib\SDL2_ttf\$(Platform)\$(Configuration)\zlib1.dll" "$(TargetDir)"
 
-copy "$(SolutionDir)TonnieRaceGame\lib\SDL2_image\libjpeg-9.dll" "$(TargetDir)"
+copy "$(SolutionDir)TonnieRaceGame\lib\SDL2_image\$(Platform)\$(Configuration)\libjpeg-9.dll" "$(TargetDir)"
 
-copy "$(SolutionDir)TonnieRaceGame\lib\SDL2_image\libpng16-16.dll" "$(TargetDir)"
+copy "$(SolutionDir)TonnieRaceGame\lib\SDL2_image\$(Platform)\$(Configuration)\libpng16-16.dll" "$(TargetDir)"
 
-copy "$(SolutionDir)TonnieRaceGame\lib\SDL2_image\libtiff-5.dll" "$(TargetDir)"
+copy "$(SolutionDir)TonnieRaceGame\lib\SDL2_image\$(Platform)\$(Configuration)\libtiff-5.dll" "$(TargetDir)"
 
-copy "$(SolutionDir)TonnieRaceGame\lib\SDL2_image\libwebp-4.dll" "$(TargetDir)"
+copy "$(SolutionDir)TonnieRaceGame\lib\SDL2_image\$(Platform)\$(Configuration)\libwebp-4.dll" "$(TargetDir)"
 
-copy "$(SolutionDir)TonnieRaceGame\lib\SDL2_image\SDL2_image.dll" "$(TargetDir)"
+copy "$(SolutionDir)TonnieRaceGame\lib\SDL2_image\$(Platform)\$(Configuration)\SDL2_image.dll" "$(TargetDir)"
 
-copy "$(SolutionDir)TonnieRaceGame\lib\Bass\bass.dll" "$(TargetDir)"
+copy "$(SolutionDir)TonnieRaceGame\lib\Bass\$(Platform)\$(Configuration)\bass.dll" "$(TargetDir)"
+
+copy "$(SolutionDir)TonnieRaceGame\lib\SDL2\$(Platform)\$(Configuration)\SDL2.dll" "$(TargetDir)"
+
+copy "$(SolutionDir)TonnieRaceGame\lib\libvlc\$(Platform)\$(Configuration)\libvlc.dll" "$(TargetDir)"
+
+copy "$(SolutionDir)TonnieRaceGame\lib\libvlc\$(Platform)\$(Configuration)\libvlccore.dll" "$(TargetDir)"
+
+copy "$(SolutionDir)TonnieRaceGame\lib\SDL2_gfx\$(Platform)\$(Configuration)\SDL2_gfx.dll" "$(TargetDir)"
+
+copy "$(SolutionDir)TonnieRaceGame\lib\LibCurl\$(Platform)\$(Configuration)\libcurl_debug.dll" "$(TargetDir)"
+
+copy "$(SolutionDir)TonnieRaceGame\lib\VLD\$(Platform)\$(Configuration)\vld_x86.dll" "$(TargetDir)"
+copy "$(SolutionDir)TonnieRaceGame\lib\VLD\$(Platform)\$(Configuration)\Microsoft.DTfW.DHL.manifest" "$(TargetDir)"
+copy "$(SolutionDir)TonnieRaceGame\lib\VLD\$(Platform)\$(Configuration)\dbghelp.dll" "$(TargetDir)"
+
+xcopy "$(SolutionDir)TonnieRaceGame\lib\libvlc\$(Platform)\$(Configuration)\plugins\*.*" "$(TargetDir)plugins" /Y /I /E
+
+xcopy "$(SolutionDir)TonnieRaceGame\Resources\*.*" "$(TargetDir)Resources" /Y /I /E
 </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -109,15 +127,51 @@ copy "$(SolutionDir)TonnieRaceGame\lib\Bass\bass.dll" "$(TargetDir)"
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>./include;%(AdditionalIncludeDirectories);./c;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>./include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <AdditionalLibraryDirectories>./lib/Box2D;./lib/SDL2;./lib/libcurl%(AdditionalLibraryDirectories);./Bass;</AdditionalLibraryDirectories>
-    </Link>
-    <Link>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2test.lib;Box2D.lib;libcurl.lib%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Console</SubSystem>
+      <AdditionalLibraryDirectories>./lib/Box2D/$(Platform)/$(Configuration);./lib/SDL2/$(Platform)/$(Configuration);./lib/SDL2_gfx/$(Platform)/$(Configuration);./lib/LibCurl/$(Platform)/$(Configuration);./lib/Bass/$(Platform)/$(Configuration);./lib/Bass/c/$(Platform)/$(Configuration);./lib/SDL2_ttf/$(Platform)/$(Configuration);./lib/SDL2_image/$(Platform)/$(Configuration);./lib/libvlc/$(Platform)/$(Configuration);./lib/VLD/$(Platform)/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>Box2D.lib;SDL2.lib;SDL2_gfx.lib;SDL2main.lib;bass.lib;SDL2_image.lib;SDL2_ttf.lib;libcurl_debug.lib;libvlc.lib;libvlccore.lib;vld.lib;vld_x64.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>copy "$(SolutionDir)TonnieRaceGame\lib\SDL2_ttf\$(Platform)\$(Configuration)\SDL2_ttf.dll" "$(TargetDir)"
+
+copy "$(SolutionDir)TonnieRaceGame\lib\SDL2_ttf\$(Platform)\$(Configuration)\libfreetype-6.dll" "$(TargetDir)"
+
+copy "$(SolutionDir)TonnieRaceGame\lib\SDL2_ttf\$(Platform)\$(Configuration)\zlib1.dll" "$(TargetDir)"
+
+copy "$(SolutionDir)TonnieRaceGame\lib\SDL2_image\$(Platform)\$(Configuration)\libjpeg-9.dll" "$(TargetDir)"
+
+copy "$(SolutionDir)TonnieRaceGame\lib\SDL2_image\$(Platform)\$(Configuration)\libpng16-16.dll" "$(TargetDir)"
+
+copy "$(SolutionDir)TonnieRaceGame\lib\SDL2_image\$(Platform)\$(Configuration)\libtiff-5.dll" "$(TargetDir)"
+
+copy "$(SolutionDir)TonnieRaceGame\lib\SDL2_image\$(Platform)\$(Configuration)\libwebp-4.dll" "$(TargetDir)"
+
+copy "$(SolutionDir)TonnieRaceGame\lib\SDL2_image\$(Platform)\$(Configuration)\SDL2_image.dll" "$(TargetDir)"
+
+copy "$(SolutionDir)TonnieRaceGame\lib\Bass\$(Platform)\$(Configuration)\bass.dll" "$(TargetDir)"
+
+copy "$(SolutionDir)TonnieRaceGame\lib\SDL2\$(Platform)\$(Configuration)\SDL2.dll" "$(TargetDir)"
+
+copy "$(SolutionDir)TonnieRaceGame\lib\libvlc\$(Platform)\$(Configuration)\libvlc.dll" "$(TargetDir)"
+
+copy "$(SolutionDir)TonnieRaceGame\lib\libvlc\$(Platform)\$(Configuration)\libvlccore.dll" "$(TargetDir)"
+
+copy "$(SolutionDir)TonnieRaceGame\lib\SDL2_gfx\$(Platform)\$(Configuration)\SDL2_gfx.dll" "$(TargetDir)"
+
+copy "$(SolutionDir)TonnieRaceGame\lib\LibCurl\$(Platform)\$(Configuration)\libcurl_debug.dll" "$(TargetDir)"
+
+copy "$(SolutionDir)TonnieRaceGame\lib\VLD\$(Platform)\$(Configuration)\vld_x64.dll" "$(TargetDir)"
+copy "$(SolutionDir)TonnieRaceGame\lib\VLD\$(Platform)\$(Configuration)\Microsoft.DTfW.DHL.manifest" "$(TargetDir)"
+copy "$(SolutionDir)TonnieRaceGame\lib\VLD\$(Platform)\$(Configuration)\dbghelp.dll" "$(TargetDir)"
+
+xcopy "$(SolutionDir)TonnieRaceGame\lib\libvlc\$(Platform)\$(Configuration)\plugins\*.*" "$(TargetDir)plugins" /Y /I /E
+
+xcopy "$(SolutionDir)TonnieRaceGame\Resources\*.*" "$(TargetDir)Resources" /Y /I /E
+</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -139,11 +193,48 @@ copy "$(SolutionDir)TonnieRaceGame\lib\Bass\bass.dll" "$(TargetDir)"
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>./include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalLibraryDirectories>./lib/Box2D/$(Platform)/$(Configuration);./lib/SDL2/$(Platform)/$(Configuration);./lib/SDL2_gfx/$(Platform)/$(Configuration);./lib/LibCurl/$(Platform)/$(Configuration);./lib/Bass/$(Platform)/$(Configuration);./lib/Bass/c/$(Platform)/$(Configuration);./lib/SDL2_ttf/$(Platform)/$(Configuration);./lib/SDL2_image/$(Platform)/$(Configuration);./lib/libvlc/$(Platform)/$(Configuration);./lib/VLD/$(Platform)/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <SubSystem>Windows</SubSystem>
+      <AdditionalDependencies>Box2D.lib;SDL2.lib;SDL2_gfx.lib;SDL2main.lib;bass.lib;SDL2_image.lib;SDL2_ttf.lib;libcurl_debug.lib;libvlc.lib;libvlccore.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>copy "$(SolutionDir)TonnieRaceGame\lib\SDL2_ttf\$(Platform)\$(Configuration)\SDL2_ttf.dll" "$(TargetDir)"
+
+copy "$(SolutionDir)TonnieRaceGame\lib\SDL2_ttf\$(Platform)\$(Configuration)\libfreetype-6.dll" "$(TargetDir)"
+
+copy "$(SolutionDir)TonnieRaceGame\lib\SDL2_ttf\$(Platform)\$(Configuration)\zlib1.dll" "$(TargetDir)"
+
+copy "$(SolutionDir)TonnieRaceGame\lib\SDL2_image\$(Platform)\$(Configuration)\libjpeg-9.dll" "$(TargetDir)"
+
+copy "$(SolutionDir)TonnieRaceGame\lib\SDL2_image\$(Platform)\$(Configuration)\libpng16-16.dll" "$(TargetDir)"
+
+copy "$(SolutionDir)TonnieRaceGame\lib\SDL2_image\$(Platform)\$(Configuration)\libtiff-5.dll" "$(TargetDir)"
+
+copy "$(SolutionDir)TonnieRaceGame\lib\SDL2_image\$(Platform)\$(Configuration)\libwebp-4.dll" "$(TargetDir)"
+
+copy "$(SolutionDir)TonnieRaceGame\lib\SDL2_image\$(Platform)\$(Configuration)\SDL2_image.dll" "$(TargetDir)"
+
+copy "$(SolutionDir)TonnieRaceGame\lib\Bass\$(Platform)\$(Configuration)\bass.dll" "$(TargetDir)"
+
+copy "$(SolutionDir)TonnieRaceGame\lib\SDL2\$(Platform)\$(Configuration)\SDL2.dll" "$(TargetDir)"
+
+copy "$(SolutionDir)TonnieRaceGame\lib\libvlc\$(Platform)\$(Configuration)\libvlc.dll" "$(TargetDir)"
+
+copy "$(SolutionDir)TonnieRaceGame\lib\libvlc\$(Platform)\$(Configuration)\libvlccore.dll" "$(TargetDir)"
+
+copy "$(SolutionDir)TonnieRaceGame\lib\SDL2_gfx\$(Platform)\$(Configuration)\SDL2_gfx.dll" "$(TargetDir)"
+
+copy "$(SolutionDir)TonnieRaceGame\lib\LibCurl\$(Platform)\$(Configuration)\libcurl_debug.dll" "$(TargetDir)"
+
+xcopy "$(SolutionDir)TonnieRaceGame\lib\libvlc\$(Platform)\$(Configuration)\plugins\*.*" "$(TargetDir)plugins" /Y /I /E
+
+xcopy "$(SolutionDir)TonnieRaceGame\Resources\*.*" "$(TargetDir)Resources" /Y /I /E</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AdHelper.cpp" />
@@ -153,7 +244,6 @@ copy "$(SolutionDir)TonnieRaceGame\lib\Bass\bass.dll" "$(TargetDir)"
     <ClCompile Include="CCamera.cpp" />
     <ClCompile Include="CCollisionHelper.cpp" />
     <ClCompile Include="CCreditsState.cpp" />
-    <ClCompile Include="CDebugDraw.cpp" />
     <ClCompile Include="CDebugLogger.cpp" />
     <ClCompile Include="CDrawManager.cpp" />
     <ClCompile Include="CEngine.cpp" />
@@ -167,16 +257,21 @@ copy "$(SolutionDir)TonnieRaceGame\lib\Bass\bass.dll" "$(TargetDir)"
     <ClCompile Include="CEntityFpsCounter.cpp" />
     <ClCompile Include="CEntityLapCounter.cpp" />
     <ClCompile Include="CEntityManager.cpp" />
+    <ClCompile Include="CEntityParticleEmitter.cpp" />
     <ClCompile Include="CEntityPowerup.cpp" />
+    <ClCompile Include="CEntitySmokeParticle.cpp" />
     <ClCompile Include="CEntitySpeedoMeter.cpp" />
     <ClCompile Include="CEntitySpawn.cpp" />
     <ClCompile Include="CEntityTile.cpp" />
     <ClCompile Include="CEntityTire.cpp" />
     <ClCompile Include="CEntityTireAI.cpp" />
     <ClCompile Include="CEntityWaypoint.cpp" />
+    <ClCompile Include="CFontManager.cpp" />
+    <ClCompile Include="CGAState.cpp" />
     <ClCompile Include="CInputManager.cpp" />
     <ClCompile Include="CIntegerHelper.cpp" />
     <ClCompile Include="CLevelFactory.cpp" />
+    <ClCompile Include="CLevelSelectorState.cpp" />
     <ClCompile Include="CMap.cpp" />
     <ClCompile Include="CIntroState.cpp" />
     <ClCompile Include="CPlayState.cpp" />
@@ -184,6 +279,11 @@ copy "$(SolutionDir)TonnieRaceGame\lib\Bass\bass.dll" "$(TargetDir)"
     <ClCompile Include="CStateManager.cpp" />
     <ClCompile Include="CHelpState.cpp" />
     <ClCompile Include="CDeltaHelper.cpp" />
+    <ClCompile Include="CTextureManager.cpp" />
+    <ClCompile Include="CUIButton.cpp" />
+    <ClCompile Include="CUIContainer.cpp" />
+    <ClCompile Include="CUIImage.cpp" />
+    <ClCompile Include="CUILabel.cpp" />
     <ClCompile Include="CWinState.cpp" />
     <ClCompile Include="HighscoresHelper.cpp" />
     <ClCompile Include="IBox2DListener.cpp" />
@@ -208,7 +308,6 @@ copy "$(SolutionDir)TonnieRaceGame\lib\Bass\bass.dll" "$(TargetDir)"
     <ClInclude Include="CCamera.h" />
     <ClInclude Include="CCollisionHelper.h" />
     <ClInclude Include="CCreditsState.h" />
-    <ClInclude Include="CDebugDraw.h" />
     <ClInclude Include="CDebugLogger.h" />
     <ClInclude Include="CDrawManager.h" />
     <ClInclude Include="CEngine.h" />
@@ -222,17 +321,22 @@ copy "$(SolutionDir)TonnieRaceGame\lib\Bass\bass.dll" "$(TargetDir)"
     <ClInclude Include="CEntityFpsCounter.h" />
     <ClInclude Include="CEntityLapCounter.h" />
     <ClInclude Include="CEntityManager.h" />
+    <ClInclude Include="CEntityParticleEmitter.h" />
     <ClInclude Include="CEntityPowerup.h" />
+    <ClInclude Include="CEntitySmokeParticle.h" />
     <ClInclude Include="CEntitySpeedoMeter.h" />
     <ClInclude Include="CEntitySpawn.h" />
     <ClInclude Include="CEntityTile.h" />
     <ClInclude Include="CEntityTire.h" />
     <ClInclude Include="CEntityTireAI.h" />
     <ClInclude Include="CEntityWaypoint.h" />
+    <ClInclude Include="CFontManager.h" />
     <ClInclude Include="CGameState.h" />
+    <ClInclude Include="CGAState.h" />
     <ClInclude Include="CInputManager.h" />
     <ClInclude Include="CIntegerHelper.h" />
     <ClInclude Include="CLevelFactory.h" />
+    <ClInclude Include="CLevelSelectorState.h" />
     <ClInclude Include="CMap.h" />
     <ClInclude Include="CIntroState.h" />
     <ClInclude Include="CPlayState.h" />
@@ -240,13 +344,21 @@ copy "$(SolutionDir)TonnieRaceGame\lib\Bass\bass.dll" "$(TargetDir)"
     <ClInclude Include="CStateManager.h" />
     <ClInclude Include="CHelpState.h" />
     <ClInclude Include="CDeltaHelper.h" />
+    <ClInclude Include="CTextureManager.h" />
+    <ClInclude Include="CUIButton.h" />
+    <ClInclude Include="CUIContainer.h" />
+    <ClInclude Include="CUIImage.h" />
+    <ClInclude Include="CUILabel.h" />
     <ClInclude Include="CWinState.h" />
+    <ClInclude Include="EUIAlignment.h" />
+    <ClInclude Include="EUIStretch.h" />
     <ClInclude Include="HighscoresHelper.h" />
     <ClInclude Include="IBox2DListener.h" />
     <ClInclude Include="IDrawListener.h" />
     <ClInclude Include="IEntityListener.h" />
     <ClInclude Include="IInputListener.h" />
     <ClInclude Include="ILapCountable.h" />
+    <ClInclude Include="IUIEntity.h" />
     <ClInclude Include="MusicHelper.h" />
     <ClInclude Include="CScoresState.h" />
     <ClInclude Include="resource.h" />
@@ -255,6 +367,7 @@ copy "$(SolutionDir)TonnieRaceGame\lib\Bass\bass.dll" "$(TargetDir)"
     <Text Include="Resources\Maps\map1.json">
       <DeploymentContent>true</DeploymentContent>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
       <FileType>Text</FileType>
     </Text>
   </ItemGroup>

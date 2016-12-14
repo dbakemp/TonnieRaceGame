@@ -6,7 +6,7 @@
 #include <SDL.h>
 #include <iostream>
 
-CEntityTireAI::CEntityTireAI(CEngine* engine, CMap* map, int x, int y) : CEntity(engine), IDrawListener(engine, (int)CDrawManager::Layers::Object), IBox2DListener(engine)
+CEntityTireAI::CEntityTireAI(CEngine* engine, CMap* map, int x, int y, CEntityCarAI::CarGenetics* carGenetics) : CEntity(engine), IDrawListener(engine, (int)CDrawManager::Layers::Object), IBox2DListener(engine)
 {
 	double xPos = x;
 	double yPos = y;
@@ -22,9 +22,14 @@ CEntityTireAI::CEntityTireAI(CEngine* engine, CMap* map, int x, int y) : CEntity
 
 	maxForwardSpeed = 150;
 	maxBackwardsSpeed = -40;
-	maxDriveForce = 250;
+	maxDriveForce = carGenetics->maxDriveForce;
 
+	this->carGenetics = carGenetics;
 	this->engine = engine;
+}
+
+CEntityTireAI::~CEntityTireAI()
+{
 }
 
 void CEntityTireAI::Draw(SDL_Renderer* renderer)
@@ -51,11 +56,11 @@ void CEntityTireAI::UpdateFriction()
 		impulse *= maxLateralImpulse / impulse.Length();
 	body->ApplyLinearImpulse(impulse, body->GetWorldCenter(), true);
 
-	body->ApplyAngularImpulse(0.1f * body->GetInertia() * -body->GetAngularVelocity(), true);
+	body->ApplyAngularImpulse(carGenetics->angularImpulseBias * body->GetInertia() * -body->GetAngularVelocity(), true);
 
 	b2Vec2 currentForwardNormal = GetForwardVelocity();
 	float currentForwardSpeed = currentForwardNormal.Normalize();
-	float dragForceMagnitude = -3 * currentForwardSpeed;
+	float dragForceMagnitude = -carGenetics->dragForceBias * currentForwardSpeed;
 	body->ApplyForce(dragForceMagnitude * currentForwardNormal, body->GetWorldCenter(), true);
 }
 
@@ -86,10 +91,7 @@ void CEntityTireAI::UpdateDrive()
 
 void CEntityTireAI::UpdateTurn()
 {
-	float desiredTorque = 0;
-	desiredTorque = 15;
-
-	body->ApplyTorque(desiredTorque, true);
+	body->ApplyTorque(carGenetics->desiredTorque, true);
 }
 
 b2Vec2 CEntityTireAI::GetLateralVelocity()

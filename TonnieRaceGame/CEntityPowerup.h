@@ -12,6 +12,7 @@ class CEntityPowerup : public CEntity, public IDrawListener, public IBox2DListen
 {
 public:
 	CEntityPowerup(CEngine* engine, CMap* map, double xPos, double yPos);
+	~CEntityPowerup();
 	bool devVisible;
 	int xPos, yPos, textureWidth, textureHeight, textureX, textureY;
 	double timer;

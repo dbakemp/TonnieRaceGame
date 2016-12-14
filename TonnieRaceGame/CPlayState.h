@@ -19,15 +19,16 @@ public:
 	void update(CEngine* engine);
 	void draw(CEngine* engine);
 	void input(CEngine* engine, SDL_Event* event);
+	void checkSeque();
+	void OnFinish(IBox2DListener* car);
+
+	bool shouldSeque;
+	EGameState stateSeque;
 
 	CPlayState(CEngine* engine);
 	~CPlayState();
 
-	//temp
-	int texW = 0;
-	int texH = 0;
-	SDL_Texture* backmapTexture;
 private:
-	CCamera* camera;
+	CEngine* engine;
 };
 #endif

@@ -5,30 +5,109 @@
 #include "CCamera.h"
 #include "CHelpState.h"
 #include "CDrawManager.h"
+#include "CDeltaHelper.h"
 #include "CInputManager.h"
+#include "CEntityManager.h"
+#include "CBox2DManager.h"
 #include <iostream>
 #include <curl/curl.h>
+#include "CUILabel.h"
+#include "CUIContainer.h"
+#include "CUIImage.h"
+#include "CUIButton.h"
+#include "EUIAlignment.h"
 
 void CHelpState::init(CEngine* engine)
 {
-	SDL_Surface* background = IMG_Load("Resources/Images/help.jpg");
-	SDL_Texture* background_texture = SDL_CreateTextureFromSurface(engine->renderer, background);
+	CUIImage* background = new CUIImage(engine, "Images/main.png");
+	background->SetHorizontalAlignment(EUIALignmentHorizontal::CENTER);
+	background->SetVerticalAlignment(EUIALignmentVertical::CENTER);
+	background->SetVerticalStretch(EUIStretchVertical::FIT);
 
+	CUIButton* buttonBack = new CUIButton(engine, "Bangers", "Terug", "Images/terug.png");
+	buttonBack->SetHorizontalAlignment(EUIALignmentHorizontal::LEFT);
+	buttonBack->SetVerticalAlignment(EUIALignmentVertical::BOTTOM);
+	buttonBack->SetPosition(100, -50);
+	buttonBack->SetFontSize(30);
+	buttonBack->SetClickCallback(std::bind(&CHelpState::OnButtonClick, this, std::placeholders::_1));
 
-	int backW = 0;
-	int backH = 0;
-	SDL_QueryTexture(background_texture, NULL, NULL, &backW, &backH);
-	SDL_Rect backrect = { 0,0,backW, backH };
+	CUILabel* labell = new CUILabel(engine, "Bangers", "Toetsenbord Besturing");
+	labell->SetFontSize(30);
+	labell->SetHorizontalAlignment(EUIALignmentHorizontal::CENTER);
+	labell->SetVerticalAlignment(EUIALignmentVertical::TOP);
 
-	SDL_RenderCopy(engine->renderer, background_texture, NULL, &backrect);
+	CUILabel* labelr = new CUILabel(engine, "Bangers", "Controller Besturing");
+	labelr->SetFontSize(30);
+	labelr->SetHorizontalAlignment(EUIALignmentHorizontal::CENTER);
+	labelr->SetVerticalAlignment(EUIALignmentVertical::TOP);
 
-	engine->musicHelper->playTrack("music\\plingplongplong.mp3", false);
+	CUILabel* labelrra = new CUILabel(engine, "Bangers", "Gas Geven");
+	labelrra->SetFontSize(20);
+	labelrra->SetHorizontalAlignment(EUIALignmentHorizontal::LEFT);
+	labelrra->SetVerticalAlignment(EUIALignmentVertical::TOP);
+	labelrra->SetPosition(10, 0);
 
+	CUILabel* labelrrb = new CUILabel(engine, "Bangers", "Remmen");
+	labelrrb->SetFontSize(20);
+	labelrrb->SetHorizontalAlignment(EUIALignmentHorizontal::LEFT);
+	labelrrb->SetVerticalAlignment(EUIALignmentVertical::TOP);
+	labelrrb->SetPosition(10, 0 + labelrra->GetRectangle().y + labelrra->GetRectangle().h + 5);
 
+	CUILabel* labelrrc = new CUILabel(engine, "Bangers", "Toeteren");
+	labelrrc->SetFontSize(20);
+	labelrrc->SetHorizontalAlignment(EUIALignmentHorizontal::LEFT);
+	labelrrc->SetVerticalAlignment(EUIALignmentVertical::TOP);
+	labelrrc->SetPosition(10, 0 + labelrrb->GetRectangle().y + labelrrb->GetRectangle().h + 5);
+
+	CUIContainer* containerlc = new CUIContainer(engine);
+	containerlc->SetHorizontalAlignment(EUIALignmentHorizontal::CENTER);
+	containerlc->SetVerticalAlignment(EUIALignmentVertical::BOTTOM);
+	containerlc->SetHeight(200 - labelr->GetRectangle().h - 5);
+	containerlc->SetWidth(300);
+
+	CUIContainer* containerrl = new CUIContainer(engine);
+	containerrl->SetHorizontalAlignment(EUIALignmentHorizontal::LEFT);
+	containerrl->SetVerticalAlignment(EUIALignmentVertical::BOTTOM);
+	containerrl->SetHeight(200 - labelr->GetRectangle().h - 5);
+	containerrl->SetWidth(150);
+
+	CUIContainer* containerrr = new CUIContainer(engine);
+	containerrr->SetHorizontalAlignment(EUIALignmentHorizontal::RIGHT);
+	containerrr->SetVerticalAlignment(EUIALignmentVertical::BOTTOM);
+	containerrr->SetHeight(200- labelr->GetRectangle().h - 5);
+	containerrr->SetWidth(150);
+	containerrr->AddUIElement(labelrra);
+	containerrr->AddUIElement(labelrrb);
+	containerrr->AddUIElement(labelrrc);
+
+	CUIContainer* containerl = new CUIContainer(engine);
+	containerl->SetHorizontalAlignment(EUIALignmentHorizontal::CENTER);
+	containerl->SetVerticalAlignment(EUIALignmentVertical::CENTER);
+	containerl->SetHeight(200);
+	containerl->SetWidth(300);
+	containerl->SetPosition(-300, 0);
+	containerl->AddUIElement(labell);
+	containerl->AddUIElement(containerlc);
+
+	CUIContainer* containerr = new CUIContainer(engine);
+	containerr->SetHorizontalAlignment(EUIALignmentHorizontal::CENTER);
+	containerr->SetVerticalAlignment(EUIALignmentVertical::CENTER);
+	containerr->SetHeight(200);
+	containerr->SetWidth(300);
+	containerr->SetPosition(300, 0);
+	containerr->AddUIElement(labelr);
+	containerr->AddUIElement(containerrr);
+	containerr->AddUIElement(containerrl);
+
+	engine->musicHelper->playTrack("Resources/Music/plingplongplong.mp3", false);
+
+	this->engine = engine;
+	
 }
 
 void CHelpState::clean(CEngine* engine)
 {
+	engine->entityManager->Clear();
 }
 
 void CHelpState::pause()
@@ -45,56 +124,37 @@ void CHelpState::handleEvents(CEngine* engine)
 
 void CHelpState::update(CEngine* engine)
 {
+	engine->entityManager->Tick();
+	SDL_Delay((1000.0 / 60) - engine->deltaHelper->delta);
+	checkSeque();
 }
 
 void CHelpState::draw(CEngine* engine)
 {
+	engine->drawManager->Tick(engine->renderer);
 }
 
 void CHelpState::input(CEngine* engine, SDL_Event * event)
 {
-	if (event->type == SDL_KEYDOWN)
-	{
-		switch (event->key.keysym.sym)
-		{
-		case SDLK_ESCAPE:
-			engine->stateManager->changeState(Menu, engine);
-			break;
-		default:
-			break;
-		}
-	}
-	else if (event->type == SDL_MOUSEBUTTONDOWN)
-	{
-		int mouseX = event->motion.x;
-		int mouseY = event->motion.y;
-		switch (event->button.button)
-		{
-		case SDL_BUTTON_LEFT:
-			if (mouseX > 35 && mouseX < 123 && mouseY > 650 && mouseY < 702)
-			{
-				engine->stateManager->changeState(Menu, engine);
-			}
+	engine->inputManager->Tick(event);
+}
 
-			break;
-		default:
-			break;
-		}
-	}
-	else if (event->type == SDL_CONTROLLERBUTTONDOWN)
-	{
-		if (event->cbutton.button == SDL_CONTROLLER_BUTTON_A || event->cbutton.button == SDL_CONTROLLER_BUTTON_B)
-		{
-			engine->stateManager->changeState(Menu, engine);
-		}
-	}
-	else
-	{
-		engine->inputManager->Tick(event);
-	}
+void CHelpState::checkSeque()
+{
+	if (!shouldSeque) { return; }
+
+	engine->stateManager->changeState(stateSeque, engine);
 }
 
 CHelpState::CHelpState(CEngine* engine)
 {
 	init(engine);
+}
+
+void CHelpState::OnButtonClick(CUIButton* button)
+{
+	if (button->GetText() == "Terug") {
+		shouldSeque = true;
+		stateSeque = EGameState::Menu;
+	}
 }

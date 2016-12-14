@@ -11,7 +11,7 @@ class IBox2DListener
 public:
 	virtual void Create(b2World* world) = 0;
 	IBox2DListener(CEngine* engine);
-	~IBox2DListener();
+	virtual ~IBox2DListener();
 
 	b2BodyDef bodyDef;
 	b2Body* body;

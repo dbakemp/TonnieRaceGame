@@ -5,6 +5,10 @@ CEntity::CEntity(CEngine* engine): IEntityListener(engine)
 {
 }
 
+CEntity::~CEntity()
+{
+}
+
 void CEntity::Update()
 {
 }
