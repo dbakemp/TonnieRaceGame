@@ -294,5 +294,4 @@ void CLevelFactory::CreatePowerups(Json::Value* root)
 {
 	CDebugLogger::PrintDebug("Creating Powerups");
 	CEntityPowerup* powerup = new CEntityPowerup(engine, map, (*root).get("x", 0).asDouble(), (*root).get("y", 0).asDouble());
-	map->powerups.push_back(powerup);
 }

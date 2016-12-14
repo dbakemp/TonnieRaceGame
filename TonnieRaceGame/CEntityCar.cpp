@@ -10,6 +10,7 @@
 #include <iostream>
 #include <string>
 #include <SDL_image.h>
+#include "CEntityPowerup.h"
 #include "CTextureManager.h"
 
 #ifndef DEGTORAD
@@ -23,6 +24,11 @@ CEntityCar::CEntityCar(CEngine* engine, CMap* map) : CEntity(engine), IDrawListe
 	this->currentCheckpoint = -1;
 	this->currentLap = 0;
 	this->debugVisible = false;
+	this->powerupActive = false;
+	this->activePowerup = nullptr;
+	this->powerupTimer = 0;
+
+	SDL_Surface* texture = IMG_Load("Resources/Images/spritesheet_vehicles.png");
 	this->spriteSheet = engine->textureManager->GetTexture("Images/spritesheet_vehicles.png");
 	srcRect = { 631, 0, 41, 66 };
 
@@ -129,6 +135,16 @@ void CEntityCar::Input(SDL_Event* event)
 		case SDLK_f: 
 			debugVisible = !debugVisible;
 			break;
+		case SDLK_SPACE:
+			if (activePowerup != nullptr && !powerupActive) {
+				powerupActive = true;
+				for (CEntityTire* tire : tires) {
+					tire->powerupActive = true;
+					tire->type = static_cast<int>(activePowerup->type);
+				}
+				CDebugLogger::PrintDebug("Powerup geactiveerd");
+			}
+			break;
 		}
 		break;
 	case SDL_KEYUP:
@@ -202,6 +218,12 @@ void CEntityCar::ProcessCheckpoint(CEntityCheckpoint * checkpoint)
 	}
 }
 
+void CEntityCar::ActivatePowerup(CEntityPowerup * powerup)
+{
+	this->activePowerup = powerup;
+	CDebugLogger::PrintDebug("Powerup opgepakt");
+}
+
 void CEntityCar::SetFinishCallback(std::function<void(IBox2DListener*)> callback)
 {
 	finishCallback = callback;
@@ -231,6 +253,10 @@ void CEntityCar::Update()
 		break;
 	}
 
+	if (powerupActive && activePowerup != nullptr && static_cast<int>(this->activePowerup->type) == 1) {
+		desiredAngle = 0 - desiredAngle;
+	}
+
 	double angleNow = flJoint->GetJointAngle();
 	double angleToTurn = desiredAngle - angleNow;
 	angleToTurn = b2Clamp(angleToTurn, -turnPerTimeStep, turnPerTimeStep);
@@ -238,6 +264,18 @@ void CEntityCar::Update()
 	flJoint->SetLimits(newAngle, newAngle);
 	frJoint->SetLimits(newAngle, newAngle);
 
+	if (powerupActive) {
+		powerupTimer += engine->deltaHelper->delta;
+		if (powerupTimer > (rand() % (10 - 5 + 1) + 5)) {
+			CDebugLogger::PrintDebug("Powerup verlopen");
+			powerupTimer = 0;
+			powerupActive = false;
+			activePowerup = nullptr;
+			for (CEntityTire* tire : tires) {
+				tire->powerupActive = false;
+			}
+		}
+	}
 	emitter->SetPosition(((aabb.upperBound.x + aabb.lowerBound.x) / 2 * 5), ((aabb.upperBound.y + aabb.lowerBound.y) / 2 * 5));
 }
 

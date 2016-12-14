@@ -10,6 +10,7 @@
 #include "CEntityParticleEmitter.h"
 #include "CEntityTire.h"
 #include "CEntityCheckpoint.h"
+#include "CEntityPowerup.h"
 #include <vector>
 #include <Box2D\Box2D.h>
 #include <functional>
@@ -31,11 +32,15 @@ public:
 	void CollisionBegin(CEntity* collider) override;
 	void CollisionEnd(CEntity* collider) override;
 	void ProcessCheckpoint(CEntityCheckpoint* checkpoint);
+	void ActivatePowerup(CEntityPowerup* powerup);
+	double powerupTimer;
+	bool powerupActive;
 	void SetFinishCallback(std::function<void(IBox2DListener*)> callback);
 	void FinishCallback();
 
 	SDL_Texture* spriteSheet;
 	SDL_Rect srcRect;
+	CEntityPowerup* activePowerup;
 private:
 	CEngine* engine; 
 	CEntityParticleEmitter* emitter;

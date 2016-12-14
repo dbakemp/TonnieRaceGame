@@ -31,6 +31,9 @@ public:
 	float maxForwardSpeed;
 	float maxBackwardsSpeed;
 	float maxDriveForce;
+	bool powerupActive;
+	int type;
+
 private:
 	CEngine* engine;
 };
