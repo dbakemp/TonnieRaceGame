@@ -32,23 +32,30 @@ void CIntroState::init(CEngine* engine)
 	CUIButton* labela = new CUIButton(engine, "Bangers", "Spelen", "Images/blauw.png");
 	labela->SetHorizontalAlignment(EUIALignmentHorizontal::CENTER);
 	labela->SetVerticalAlignment(EUIALignmentVertical::BOTTOM);
-	labela->SetPosition(-200, -100);
+	labela->SetPosition(-300, -100);
 	labela->SetFontSize(30);
 	labela->SetClickCallback(std::bind(&CIntroState::OnButtonClick, this, std::placeholders::_1));
 
 	CUIButton* labelb = new CUIButton(engine, "Bangers", "Help", "Images/rood.png");
 	labelb->SetHorizontalAlignment(EUIALignmentHorizontal::CENTER);
 	labelb->SetVerticalAlignment(EUIALignmentVertical::BOTTOM);
-	labelb->SetPosition(0, -100);
+	labelb->SetPosition(-100, -100);
 	labelb->SetFontSize(30);
 	labelb->SetClickCallback(std::bind(&CIntroState::OnButtonClick, this, std::placeholders::_1));
 
 	CUIButton* labelc = new CUIButton(engine, "Bangers", "Scores", "Images/groen.png");
 	labelc->SetHorizontalAlignment(EUIALignmentHorizontal::CENTER);
 	labelc->SetVerticalAlignment(EUIALignmentVertical::BOTTOM);
-	labelc->SetPosition(200, -100);
+	labelc->SetPosition(100, -100);
 	labelc->SetFontSize(30);
 	labelc->SetClickCallback(std::bind(&CIntroState::OnButtonClick, this, std::placeholders::_1));
+
+	CUIButton* labeld = new CUIButton(engine, "Bangers", "Credits", "Images/geel.png");
+	labeld->SetHorizontalAlignment(EUIALignmentHorizontal::CENTER);
+	labeld->SetVerticalAlignment(EUIALignmentVertical::BOTTOM);
+	labeld->SetPosition(300, -100);
+	labeld->SetFontSize(30);
+	labeld->SetClickCallback(std::bind(&CIntroState::OnButtonClick, this, std::placeholders::_1));
 
 	this->engine = engine;
 }
