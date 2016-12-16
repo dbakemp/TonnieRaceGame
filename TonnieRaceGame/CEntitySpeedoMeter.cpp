@@ -1,11 +1,8 @@
 #include "CEntitySpeedoMeter.h"
 #include "CDrawManager.h"
-#include <string.h>
 #include "CMap.h"
-#include "CDebugLogger.h"
 #include <iomanip>
 #include "CTextureManager.h"
-#include "SDL_image.h"
 
 CEntitySpeedoMeter::CEntitySpeedoMeter(CEngine* engine) : CEntity(engine), IDrawListener(engine, (int)CDrawManager::Layers::UI)
 {
@@ -14,7 +11,7 @@ CEntitySpeedoMeter::CEntitySpeedoMeter(CEngine* engine) : CEntity(engine), IDraw
 
 	meter_texture = engine->textureManager->GetTexture("Images/meter.png");
 	angle = 0;
-	point = { 95, 8 };
+	point = {95, 8};
 
 	speedometer = new CUIImage(engine, "Images/speedometer.png");
 	speedometer->SetHorizontalAlignment(EUIALignmentHorizontal::LEFT);
@@ -37,7 +34,6 @@ CEntitySpeedoMeter::CEntitySpeedoMeter(CEngine* engine) : CEntity(engine), IDraw
 
 CEntitySpeedoMeter::~CEntitySpeedoMeter()
 {
-
 }
 
 void CEntitySpeedoMeter::Update()
@@ -60,8 +56,8 @@ void CEntitySpeedoMeter::Update()
 
 void CEntitySpeedoMeter::Draw(SDL_Renderer* renderer)
 {
-	SDL_Rect backrect = { 25,  engine->windowHeight-30, 120, 17 };
-	
+	SDL_Rect backrect = {25, engine->windowHeight - 30, 120, 17};
+
 	SDL_RenderCopyEx(engine->renderer, meter_texture, NULL, &backrect, angle, &point, SDL_FLIP_NONE);
 }
 

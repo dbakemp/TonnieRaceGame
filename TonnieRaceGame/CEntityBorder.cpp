@@ -37,7 +37,7 @@ void CEntityBorder::Create(b2World* world)
 {
 }
 
-void CEntityBorder::Input(SDL_Event * event)
+void CEntityBorder::Input(SDL_Event* event)
 {
 	switch (event->type)
 	{

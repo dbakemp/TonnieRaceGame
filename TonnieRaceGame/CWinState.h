@@ -1,7 +1,6 @@
-#ifndef CWINSTATE_H 
+#ifndef CWINSTATE_H
 #define CWINSTATE_H
 
-#include <vector>
 #include "SDL.h"
 #include "CGameState.h"
 

@@ -7,11 +7,8 @@
 #include "CEntity.h"
 #include "CUILabel.h"
 #include "CUIContainer.h"
-#include "SDL_ttf.h"
 #include "CEngine.h"
-#include "EUIStretch.h"
 #include "IUIEntity.h"
-#include "CEngine.h"
 
 class CUIHorizontalScrollView : public CEntity, public IDrawListener, public IInputListener, public IUIEntity
 {
@@ -34,15 +31,21 @@ public:
 	void SetTag(std::string tag);
 	std::string GetTag();
 
+	void ScrollToNext();
+	void ScrollToPrevious();
+
 	void AddUIElement(IUIEntity* element);
 private:
 	CEngine* engine;
 	SDL_Rect container;
+	IUIEntity* currentSelectedEntity;
+	int currentSelectedEntityIndex;
 	EUIALignmentHorizontal horizontalAlignment;
 	EUIALignmentVertical verticalAlignment;
 	CUIContainer* elementContainer;
 	std::vector<IUIEntity*> containerElements;
 	int scrollAmount;
+	int toScrollAmount;
 
 	void PreRender();
 };

@@ -3,7 +3,7 @@
 #include "CAdManager.h"
 #include "CCamera.h"
 
-CEntityAd::CEntityAd(CEngine * engine, CMap * map, CAdManager::AdDirection direction) : CEntity(engine), IDrawListener(engine, ((int)CDrawManager::Layers::Tile)+1)
+CEntityAd::CEntityAd(CEngine* engine, CMap* map, CAdManager::AdDirection direction) : CEntity(engine), IDrawListener(engine, ((int)CDrawManager::Layers::Tile) + 1)
 {
 	texture = engine->adManager->GetRandomAd(direction);
 
@@ -14,9 +14,9 @@ CEntityAd::~CEntityAd()
 {
 }
 
-void CEntityAd::Draw(SDL_Renderer * renderer)
+void CEntityAd::Draw(SDL_Renderer* renderer)
 {
-	SDL_Rect dstrect = { -engine->camera->GetXPos() + tileX, -engine->camera->GetYPos() + tileY, this->textureWidth, this->textureHeight };
+	SDL_Rect dstrect = {-engine->camera->GetXPos() + tileX, -engine->camera->GetYPos() + tileY, this->textureWidth, this->textureHeight};
 	SDL_RenderCopy(engine->renderer, texture, NULL, &dstrect);
 }
 

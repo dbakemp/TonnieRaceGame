@@ -1,21 +1,22 @@
 #include "CTextureManager.h"
 #include "SDL_image.h"
 
-CTextureManager::CTextureManager(CEngine * engine)
+CTextureManager::CTextureManager(CEngine* engine)
 {
 	this->engine = engine;
 }
 
 CTextureManager::~CTextureManager()
 {
-	for (std::pair<std::string, SDL_Texture*> pair : textureMap) {
+	for (std::pair<std::string, SDL_Texture*> pair : textureMap)
+	{
 		SDL_DestroyTexture(pair.second);
 		pair.second = nullptr;
 	}
 	textureMap.clear();
 }
 
-SDL_Texture * CTextureManager::AddTexture(std::string textureName)
+SDL_Texture* CTextureManager::AddTexture(std::string textureName)
 {
 	std::string textureLocation = "Resources/" + textureName;
 
@@ -32,10 +33,12 @@ SDL_Texture* CTextureManager::GetTexture(std::string textureName)
 {
 	SDL_Texture* texture;
 
-	if (textureMap.find(textureName) == textureMap.end()) {
+	if (textureMap.find(textureName) == textureMap.end())
+	{
 		texture = AddTexture(textureName);
 	}
-	else {
+	else
+	{
 		texture = textureMap.at(textureName);
 	}
 

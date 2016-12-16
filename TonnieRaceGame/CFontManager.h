@@ -1,7 +1,6 @@
 #ifndef CFONTMANAGER_H
 #define CFONTMANAGER_H
-#include "SDL.h"
-#include "CIntegerHelper.h"
+
 #include "CEngine.h"
 #include "SDL_ttf.h"
 #include <map>
@@ -18,4 +17,4 @@ private:
 	CEngine* engine;
 };
 
-#endif 
+#endif

@@ -39,7 +39,7 @@ private:
 	SDL_Rect dstrect;
 	SDL_Rect srcrect;
 	std::vector<IUIEntity*> uiElements;
-	
+
 	void PreRender();
 };
 

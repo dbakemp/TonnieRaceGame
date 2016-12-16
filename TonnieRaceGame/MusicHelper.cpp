@@ -37,9 +37,9 @@ void MusicHelper::playTrack(std::string file, bool loop)
 
 void MusicHelper::stopAll()
 {
-	for (HSTREAM stream : audioStreams) {
+	for (HSTREAM stream : audioStreams)
+	{
 		BASS_ChannelStop(stream);
 	}
 	audioStreams.clear();
 }
-

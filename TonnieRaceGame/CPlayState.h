@@ -1,7 +1,6 @@
 #ifndef CPLAYSTATE_H
 #define CPLAYSTATE_H
 
-#include <vector>
 #include "SDL.h"
 #include "CGameState.h"
 #include "CCamera.h"

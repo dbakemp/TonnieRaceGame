@@ -1,7 +1,7 @@
 #include "CEntityTire.h"
-#include "Box2DUtils.h" 
-#include "CDeltaHelper.h" 
-#include "CDrawManager.h" 
+#include "Box2DUtils.h"
+#include "CDeltaHelper.h"
+#include "CDrawManager.h"
 #include "CMap.h"
 #include <SDL.h>
 #include <iostream>
@@ -11,7 +11,7 @@
 #include "CEntityCarAI.h"
 #include "CDebugLogger.h"
 
-CEntityPowerup::CEntityPowerup(CEngine * engine, CMap * map, double xPos, double yPos) : CEntity(engine), IDrawListener(engine, (int)CDrawManager::Layers::Object), IBox2DListener(engine), IInputListener(engine)
+CEntityPowerup::CEntityPowerup(CEngine* engine, CMap* map, double xPos, double yPos) : CEntity(engine), IDrawListener(engine, (int)CDrawManager::Layers::Object), IBox2DListener(engine), IInputListener(engine)
 {
 	this->SetType(Type::POWERUP);
 	this->visible = true;
@@ -33,14 +33,14 @@ CEntityPowerup::CEntityPowerup(CEngine * engine, CMap * map, double xPos, double
 	this->textureWidth = size;
 	this->type = type;
 
-	srcRect = { this->textureX, this->textureY, this->textureWidth, this->textureHeight };
+	srcRect = {this->textureX, this->textureY, this->textureWidth, this->textureHeight};
 
 	// Box2D 
 	bodyDef.type = b2_staticBody;
 	bodyDef.position.Set(xPos / 5, yPos / 5);
 
 	b2CircleShape circleShape;
-	circleShape.m_p.Set(3.5,3.5);
+	circleShape.m_p.Set(3.5, 3.5);
 	circleShape.m_radius = 3.5;
 
 	b2FixtureDef fixtureDef;
@@ -58,23 +58,24 @@ CEntityPowerup::~CEntityPowerup()
 {
 }
 
-void CEntityPowerup::Draw(SDL_Renderer * renderer)
+void CEntityPowerup::Draw(SDL_Renderer* renderer)
 {
 	if (!visible)
 	{
 		timer += engine->deltaHelper->delta;
-		if (timer > 5) {
+		if (timer > 5)
+		{
 			visible = true;
 			timer = 0;
 		}
 	}
-	if (devVisible) 
+	if (devVisible)
 	{
 		Box2DUtils::DrawBody(renderer, body, engine->camera, 0, 0, 0, 0, 0, 0, 255, 255, false);
 	}
 	if (visible && yPos > engine->camera->GetYPos() - this->textureHeight && xPos > engine->camera->GetXPos() - this->textureWidth && yPos < engine->camera->GetYPos() + engine->windowHeight && xPos < engine->camera->GetXPos() + engine->windowWidth)
 	{
-		SDL_Rect dstrect = { -engine->camera->GetXPos() + (xPos), -engine->camera->GetYPos() + (yPos), this->textureWidth, this->textureHeight };
+		SDL_Rect dstrect = {-engine->camera->GetXPos() + (xPos), -engine->camera->GetYPos() + (yPos), this->textureWidth, this->textureHeight};
 		SDL_RenderCopy(engine->renderer, spriteSheet, &srcRect, &dstrect);
 	}
 }
@@ -83,26 +84,27 @@ void CEntityPowerup::Update()
 {
 }
 
-void CEntityPowerup::CollisionBegin(CEntity * collider)
+void CEntityPowerup::CollisionBegin(CEntity* collider)
 {
-	if (visible) 
+	if (visible)
 	{
 		visible = false;
-		if (collider->GetType() == Type::CAR) {
+		if (collider->GetType() == Type::CAR)
+		{
 			CEntityCar* car = dynamic_cast<CEntityCar*>(collider);
-			if (car != NULL) {
+			if (car != NULL)
+			{
 				car->ActivatePowerup(this);
 			}
 		}
 	}
 }
 
-void CEntityPowerup::CollisionEnd(CEntity * collider)
+void CEntityPowerup::CollisionEnd(CEntity* collider)
 {
-
 }
 
-void CEntityPowerup::Input(SDL_Event * event)
+void CEntityPowerup::Input(SDL_Event* event)
 {
 	switch (event->type)
 	{
@@ -116,6 +118,6 @@ void CEntityPowerup::Input(SDL_Event * event)
 	}
 }
 
-void CEntityPowerup::Create(b2World * world)
+void CEntityPowerup::Create(b2World* world)
 {
 }

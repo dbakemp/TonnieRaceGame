@@ -15,9 +15,11 @@ void CEntityManager::RemoveListener(IEntityListener* entityListener)
 void CEntityManager::Tick()
 {
 	int count = listeners.size();
-	for (int i = count - 1; i >= 0; i--) {
+	for (int i = count - 1; i >= 0; i--)
+	{
 		listeners[i]->Update();
-		if (listeners[i]->shouldDelete) {
+		if (listeners[i]->shouldDelete)
+		{
 			delete listeners[i];
 		}
 	}
@@ -27,12 +29,14 @@ void CEntityManager::Clear()
 {
 	IEntityListener* entityListener = nullptr;
 	int count = listeners.size();
-	for (int i = count-1; i >= 0; i--) {
+	for (int i = count - 1; i >= 0; i--)
+	{
 		entityListener = listeners[i];
 		delete entityListener;
 		entityListener = nullptr;
 	}
-	if (count != 0) {
+	if (count != 0)
+	{
 		listeners.clear();
 	}
 }

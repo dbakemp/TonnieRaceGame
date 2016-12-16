@@ -2,7 +2,7 @@
 #include "CCamera.h"
 #include "CDrawManager.h"
 
-CEntityTile::CEntityTile(CEngine * engine, CSpriteSheetManager::SSpriteSheet* spriteSheet, int spriteNumber, int tileNumber, int mapWidth, int mapHeight, int mapTileWidth, int mapTileHeight) : CEntity(engine), IDrawListener(engine, (int)CDrawManager::Layers::Tile)
+CEntityTile::CEntityTile(CEngine* engine, CSpriteSheetManager::SSpriteSheet* spriteSheet, int spriteNumber, int tileNumber, int mapWidth, int mapHeight, int mapTileWidth, int mapTileHeight) : CEntity(engine), IDrawListener(engine, (int)CDrawManager::Layers::Tile)
 {
 	this->engine = engine;
 
@@ -14,12 +14,13 @@ CEntityTile::CEntityTile(CEngine * engine, CSpriteSheetManager::SSpriteSheet* sp
 
 	int yRest = spriteSheet->tileHeight - mapTileHeight;
 
-	this->tileY = (((tileNumber-tileNumberRest) / mapWidth)*mapTileHeight) - yRest;
-	this->tileX = tileNumberRest*mapTileWidth;
+	this->tileY = (((tileNumber - tileNumberRest) / mapWidth) * mapTileHeight) - yRest;
+	this->tileX = tileNumberRest * mapTileWidth;
 
 	this->textureX = 0;
 	this->textureY = 0;
-	if (spriteSheet->columns != 0) {
+	if (spriteSheet->columns != 0)
+	{
 		this->textureX = columnsNumber * (spriteSheet->tileWidth + spriteSheet->spacing);
 		this->textureY = rowNumber * (spriteSheet->tileHeight + spriteSheet->spacing);
 	}
@@ -28,7 +29,7 @@ CEntityTile::CEntityTile(CEngine * engine, CSpriteSheetManager::SSpriteSheet* sp
 
 	this->spriteSheet = spriteSheet;
 
-	srcRect = { this->textureX, this->textureY, this->textureWidth, this->textureHeight };
+	srcRect = {this->textureX, this->textureY, this->textureWidth, this->textureHeight};
 }
 
 CEntityTile::~CEntityTile()
@@ -37,7 +38,7 @@ CEntityTile::~CEntityTile()
 
 void CEntityTile::Draw(SDL_Renderer* renderer)
 {
-	SDL_Rect dstrect = { -engine->camera->GetXPos() + tileX, -engine->camera->GetYPos() + tileY, this->textureWidth, this->textureHeight };
+	SDL_Rect dstrect = {-engine->camera->GetXPos() + tileX, -engine->camera->GetYPos() + tileY, this->textureWidth, this->textureHeight};
 	SDL_RenderCopy(engine->renderer, spriteSheet->texture, &srcRect, &dstrect);
 }
 

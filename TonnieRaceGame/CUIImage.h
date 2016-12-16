@@ -6,7 +6,6 @@
 #include "IInputListener.h"
 #include "CEntity.h"
 #include "CUILabel.h"
-#include "SDL_ttf.h"
 #include "CEngine.h"
 #include "EUIStretch.h"
 #include "IUIEntity.h"

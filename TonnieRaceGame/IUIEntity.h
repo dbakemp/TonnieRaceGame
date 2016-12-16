@@ -1,4 +1,4 @@
-#ifndef IUIEntity_H 
+#ifndef IUIEntity_H
 #define IUIEntity_H
 
 #include "SDL.h"

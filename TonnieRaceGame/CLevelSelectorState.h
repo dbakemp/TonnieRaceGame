@@ -1,16 +1,11 @@
 #ifndef CLEVELSELECTORSTATE_H
 #define CLEVELSELECTORSTATE_H
 
-#include <vector>
 #include "SDL.h"
-#include "AdHelper.h"
-#include "CUIButton.h"
-#include "CGameState.h"
 #include "CUIButton.h"
 #include "CGameState.h"
 #include "CUIHorizontalScrollView.h"
 #include "CStateManager.h"
-#include <json\json.h>
 
 class CLevelSelectorState : public CGameState
 {
@@ -20,7 +15,7 @@ public:
 
 	void init(CEngine* engine);
 	void clean(CEngine* engine);
-	
+
 	void addLevel(std::string image, std::string map);
 
 	void SelectLevel(IUIEntity* entity);

@@ -116,7 +116,7 @@ namespace p2t
 			return;
 		}
 
-		Point* p1 = nullptr; 
+		Point* p1 = nullptr;
 		p1 = triangle->PointCCW(point);
 		Orientation o1 = Orient2d(eq, *p1, ep);
 		if (o1 == COLLINEAR)

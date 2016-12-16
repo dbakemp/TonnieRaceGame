@@ -6,10 +6,7 @@
 #include "IInputListener.h"
 #include "CEntity.h"
 #include "CEngine.h"
-#include <json\json.h>
-#include <vector>
 #include <Box2D\Box2D.h>
-#include <poly2tri.h>
 
 class CEntityWaypoint : public CEntity, public IDrawListener, public IBox2DListener, public IInputListener
 {

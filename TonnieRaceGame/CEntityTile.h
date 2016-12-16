@@ -3,10 +3,8 @@
 
 #include "IDrawListener.h"
 #include "IInputListener.h"
-#include "IBox2DListener.h"
 #include "CSpriteSheetManager.h"
 #include "CEntity.h"
-#include "CMap.h"
 #include "CEngine.h"
 
 class CEntityTile : public CEntity, public IDrawListener

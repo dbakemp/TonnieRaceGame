@@ -7,9 +7,10 @@
 #include <sstream>
 #include <climits>
 
-class CIntegerHelper {
+class CIntegerHelper
+{
 public:
-    static int GetRandomIntBetween(int min, int max);
+	static int GetRandomIntBetween(int min, int max);
 	static int BitStringToInt(std::string bits);
 private:
 };

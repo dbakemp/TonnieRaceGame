@@ -3,7 +3,7 @@
 #include "IBox2DListener.h"
 #include <algorithm>
 
-CBox2DManager::CBox2DManager(CEngine * engine)
+CBox2DManager::CBox2DManager(CEngine* engine)
 {
 }
 

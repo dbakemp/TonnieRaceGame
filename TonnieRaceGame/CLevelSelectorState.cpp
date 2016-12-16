@@ -1,6 +1,4 @@
 #include "SDL.h"
-#include "SDL_image.h"
-#include "SDL_ttf.h"
 #include "CStateManager.h"
 #include "CCamera.h"
 #include "CLevelSelectorState.h"
@@ -8,18 +6,15 @@
 #include "CDeltaHelper.h"
 #include "CInputManager.h"
 #include "CEntityManager.h"
-#include "CBox2DManager.h"
-#include <iostream>
 #include <curl/curl.h>
-#include "CUILabel.h"
 #include "CUIHorizontalScrollView.h"
 #include "CUIImage.h"
 #include "CUIButton.h"
 #include "EUIAlignment.h"
-#include <iostream>
 #include <fstream>
+#include <json/json.h>
 
-void CLevelSelectorState::init(CEngine * engine)
+void CLevelSelectorState::init(CEngine* engine)
 {
 	this->engine = engine;
 
@@ -44,29 +39,30 @@ void CLevelSelectorState::init(CEngine * engine)
 	CUIButton* buttonScrollLeft = new CUIButton(engine, "Bangers", "", "Images/scrollleft.png");
 	buttonScrollLeft->SetHorizontalAlignment(EUIALignmentHorizontal::CENTER);
 	buttonScrollLeft->SetVerticalAlignment(EUIALignmentVertical::CENTER);
-	buttonScrollLeft->SetPosition(0 - (scrollView->GetRectangle().w / 2) - (buttonScrollLeft->GetRectangle().w/2), 0);
-	buttonScrollLeft->SetClickHoldCallback(std::bind(&CLevelSelectorState::ScrollLeft, this));
+	buttonScrollLeft->SetPosition(0 - (scrollView->GetRectangle().w / 2) - (buttonScrollLeft->GetRectangle().w / 2), 0);
+	buttonScrollLeft->SetClickCallback(std::bind(&CLevelSelectorState::ScrollLeft, this));
 
 	CUIButton* buttonScrollRight = new CUIButton(engine, "Bangers", "", "Images/scrollright.png");
 	buttonScrollRight->SetHorizontalAlignment(EUIALignmentHorizontal::CENTER);
 	buttonScrollRight->SetVerticalAlignment(EUIALignmentVertical::CENTER);
 	buttonScrollRight->SetPosition(0 + (scrollView->GetRectangle().w / 2) + (buttonScrollRight->GetRectangle().w / 2), 0);
-	buttonScrollRight->SetClickHoldCallback(std::bind(&CLevelSelectorState::ScrollRight, this));
+	buttonScrollRight->SetClickCallback(std::bind(&CLevelSelectorState::ScrollRight, this));
 
 
 	Json::Value root;
 	Json::Reader reader;
 
 	std::ifstream stream("Resources/Maps/maps.json", std::ifstream::binary);
-	if (reader.parse(stream, root, false)) {
+	if (reader.parse(stream, root, false))
+	{
 		for (Json::Value map : root["maps"])
 		{
-			addLevel("Maps/"+map.get("mapicon", "").asString(), map.get("mapname", "").asString());
+			addLevel("Maps/" + map.get("mapicon", "").asString(), map.get("mapname", "").asString());
 		}
 	}
-} 
+}
 
-void CLevelSelectorState::clean(CEngine * engine)
+void CLevelSelectorState::clean(CEngine* engine)
 {
 	engine->entityManager->Clear();
 }
@@ -82,7 +78,7 @@ void CLevelSelectorState::addLevel(std::string image, std::string map)
 	scrollView->AddUIElement(level);
 }
 
-void CLevelSelectorState::SelectLevel(IUIEntity * entity)
+void CLevelSelectorState::SelectLevel(IUIEntity* entity)
 {
 	std::string map = entity->GetTag();
 	engine->level = map;
@@ -98,23 +94,23 @@ void CLevelSelectorState::resume()
 {
 }
 
-void CLevelSelectorState::handleEvents(CEngine * engine)
+void CLevelSelectorState::handleEvents(CEngine* engine)
 {
 }
 
-void CLevelSelectorState::update(CEngine * engine)
+void CLevelSelectorState::update(CEngine* engine)
 {
 	engine->entityManager->Tick();
 	SDL_Delay((1000.0 / 120) - engine->deltaHelper->delta);
 	checkSeque();
 }
 
-void CLevelSelectorState::draw(CEngine * engine)
+void CLevelSelectorState::draw(CEngine* engine)
 {
 	engine->drawManager->Tick(engine->renderer);
 }
 
-void CLevelSelectorState::input(CEngine * engine, SDL_Event * event)
+void CLevelSelectorState::input(CEngine* engine, SDL_Event* event)
 {
 	engine->inputManager->Tick(event);
 }
@@ -128,15 +124,15 @@ void CLevelSelectorState::checkSeque()
 
 void CLevelSelectorState::ScrollLeft()
 {
-	scrollView->Scroll(4);
+	scrollView->ScrollToPrevious();
 }
 
 void CLevelSelectorState::ScrollRight()
 {
-	scrollView->Scroll(-4);
+	scrollView->ScrollToNext();
 }
 
-CLevelSelectorState::CLevelSelectorState(CEngine * engine)
+CLevelSelectorState::CLevelSelectorState(CEngine* engine)
 {
 	init(engine);
 }
@@ -145,9 +141,10 @@ CLevelSelectorState::~CLevelSelectorState()
 {
 }
 
-void CLevelSelectorState::OnButtonClick(CUIButton * button)
+void CLevelSelectorState::OnButtonClick(CUIButton* button)
 {
-	if (button->GetText() == "Terug") {
+	if (button->GetText() == "Terug")
+	{
 		shouldSeque = true;
 		stateSeque = EGameState::Menu;
 	}

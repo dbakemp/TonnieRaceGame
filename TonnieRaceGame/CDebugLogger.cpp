@@ -1,6 +1,7 @@
 #include "CDebugLogger.h"
 #include <chrono>
 #include <iomanip>
+#include <iostream>
 
 void CDebugLogger::PrintDebug(std::string log)
 {

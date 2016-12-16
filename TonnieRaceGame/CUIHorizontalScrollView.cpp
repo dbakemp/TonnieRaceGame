@@ -1,12 +1,14 @@
 #include "CUIHorizontalScrollView.h"
 #include "CDrawManager.h"
 
-CUIHorizontalScrollView::CUIHorizontalScrollView(CEngine * engine) : CEntity(engine), IInputListener(engine), IDrawListener(engine, (int)CDrawManager::Layers::UI)
+CUIHorizontalScrollView::CUIHorizontalScrollView(CEngine* engine) : CEntity(engine), IInputListener(engine), IDrawListener(engine, (int)CDrawManager::Layers::UI)
 {
 	elementContainer = new CUIContainer(engine);
 	elementContainer->SetContainer(dstrect.x, dstrect.y, dstrect.w, dstrect.h);
 
-	this->container = { 0, 0, 0, 0 };
+	this->currentSelectedEntity = nullptr;
+	this->currentSelectedEntityIndex = 0;
+	this->container = {0, 0, 0, 0};
 	this->engine = engine;
 	this->scrollAmount = 0;
 }
@@ -17,7 +19,7 @@ CUIHorizontalScrollView::~CUIHorizontalScrollView()
 	containerElements.clear();
 }
 
-void CUIHorizontalScrollView::Draw(SDL_Renderer * renderer)
+void CUIHorizontalScrollView::Draw(SDL_Renderer* renderer)
 {
 	if (!debugVisible) { return; }
 	SDL_RenderDrawRect(engine->renderer, &dstrect);
@@ -25,19 +27,41 @@ void CUIHorizontalScrollView::Draw(SDL_Renderer * renderer)
 
 void CUIHorizontalScrollView::Update()
 {
+	if(scrollAmount != toScrollAmount)
+	{
+		if(scrollAmount < toScrollAmount)
+		{
+			int scroll = 6;
+			if(toScrollAmount - scrollAmount < scroll)
+			{
+				scroll = toScrollAmount - scrollAmount;
+			}
+			Scroll(-scroll);
+		} else
+		{
+			int scroll = 6;
+			if (scrollAmount - toScrollAmount < scroll)
+			{
+				scroll =  toScrollAmount - toScrollAmount;
+			}
+			Scroll(scroll);
+		}
+	}
 }
 
-void CUIHorizontalScrollView::Input(SDL_Event * event)
+void CUIHorizontalScrollView::Input(SDL_Event* event)
 {
-	if (event->type == SDL_WINDOWEVENT) {
-		switch (event->window.event) {
+	if (event->type == SDL_WINDOWEVENT)
+	{
+		switch (event->window.event)
+		{
 		case SDL_WINDOWEVENT_RESIZED:
 			PreRender();
 			break;
 		}
 	}
-	else if (event->type == SDL_KEYDOWN) {
-
+	else if (event->type == SDL_KEYDOWN)
+	{
 		switch (event->key.keysym.sym)
 		{
 		case SDLK_f:
@@ -70,7 +94,7 @@ void CUIHorizontalScrollView::SetVerticalAlignment(EUIALignmentVertical alignmen
 
 void CUIHorizontalScrollView::SetContainer(int x, int y, int w, int h)
 {
-	container = { x, y, w, h };
+	container = {x, y, w, h};
 	PreRender();
 }
 
@@ -92,22 +116,9 @@ void CUIHorizontalScrollView::Scroll(int scroll)
 {
 	scrollAmount -= scroll;
 
-	int maxScroll = 0;
-
-	for (IUIEntity* element : containerElements) {
-		maxScroll += element->UIdstrect.w + 15;
-	}
-
-	if (scrollAmount < 0) {
-		scrollAmount = 0;
-	}
-	else if (scrollAmount > maxScroll) {
-		scrollAmount = maxScroll;
-	}
-	else {
-		for (IUIEntity* element : containerElements) {
-			element->SetPosition(element->UIXPos += scroll, element->UIYPos);
-		}
+	for (IUIEntity* element : containerElements)
+	{
+		element->SetPosition(element->UIXPos += scroll, element->UIYPos);
 	}
 }
 
@@ -125,10 +136,46 @@ std::string CUIHorizontalScrollView::GetTag()
 	return std::string();
 }
 
-void CUIHorizontalScrollView::AddUIElement(IUIEntity * element)
+void CUIHorizontalScrollView::ScrollToNext()
 {
+	if (currentSelectedEntityIndex >= containerElements.size() - 1) { return; }
+
+	IUIEntity* entity = containerElements.at(currentSelectedEntityIndex+1);
+	int realX = entity->UIdstrect.x + entity->UIdstrect.w / 2;
+
+	realX -= currentSelectedEntity->UIdstrect.x + currentSelectedEntity->UIdstrect.w / 2;
+
+	toScrollAmount += realX;
+
+	currentSelectedEntity = entity;
+	currentSelectedEntityIndex++;
+}
+
+void CUIHorizontalScrollView::ScrollToPrevious()
+{
+	if (currentSelectedEntityIndex <= 0) { return; }
+
+	IUIEntity* entity = containerElements.at(currentSelectedEntityIndex - 1);
+	int realX = entity->UIdstrect.x + entity->UIdstrect.w / 2;
+
+	realX -= currentSelectedEntity->UIdstrect.x + currentSelectedEntity->UIdstrect.w / 2;
+
+	toScrollAmount += realX;
+
+	currentSelectedEntity = entity;
+	currentSelectedEntityIndex--;
+}
+
+void CUIHorizontalScrollView::AddUIElement(IUIEntity* element)
+{
+	if (currentSelectedEntity == nullptr)
+	{
+		currentSelectedEntity = element;
+	}
+
 	int xOffset = element->UIXPos;
-	for (IUIEntity* element : containerElements) {
+	for (IUIEntity* element : containerElements)
+	{
 		xOffset += element->UIdstrect.w + 20;
 	}
 	element->SetPosition(xOffset, element->UIYPos);
@@ -148,14 +195,16 @@ void CUIHorizontalScrollView::PreRender()
 	int xOffset = 0;
 	int yOffset = 0;
 
-	if (container.w != 0 || container.h != 0 || container.x != 0 || container.y != 0) {
+	if (container.w != 0 || container.h != 0 || container.x != 0 || container.y != 0)
+	{
 		wOffset = container.w;
 		hOffset = container.h;
 		xOffset = container.x;
 		yOffset = container.y;
 	}
 
-	switch (horizontalAlignment) {
+	switch (horizontalAlignment)
+	{
 	case EUIALignmentHorizontal::LEFT:
 		x = xOffset + xPos;
 		break;
@@ -167,7 +216,8 @@ void CUIHorizontalScrollView::PreRender()
 		break;
 	}
 
-	switch (verticalAlignment) {
+	switch (verticalAlignment)
+	{
 	case EUIALignmentVertical::TOP:
 		y = yOffset + yPos;
 		break;
@@ -179,7 +229,7 @@ void CUIHorizontalScrollView::PreRender()
 		break;
 	}
 
-	dstrect = { x, y, srcrect.w, srcrect.h };
+	dstrect = {x, y, srcrect.w, srcrect.h};
 	UIdstrect = dstrect;
 
 	elementContainer->SetContainer(dstrect.x, dstrect.y, dstrect.w, dstrect.h);

@@ -7,21 +7,24 @@ CSpriteSheetManager::CSpriteSheetManager(CEngine* engine)
 
 CSpriteSheetManager::~CSpriteSheetManager()
 {
-	for (SSpriteSheet* spriteSheet : spriteSheets) {
+	for (SSpriteSheet* spriteSheet : spriteSheets)
+	{
 		delete spriteSheet;
 	}
 	spriteSheets.clear();
 }
 
-void CSpriteSheetManager::AddSpriteSheet(SSpriteSheet * spriteSheet)
+void CSpriteSheetManager::AddSpriteSheet(SSpriteSheet* spriteSheet)
 {
 	spriteSheets.push_back(spriteSheet);
 }
 
 CSpriteSheetManager::SSpriteSheet* CSpriteSheetManager::GetSpriteSheetByTileId(int tileId)
 {
-	for (SSpriteSheet* spriteSheet : spriteSheets) {
-		if (tileId >= spriteSheet->minTileIndex && spriteSheet->maxTileIndex >= tileId) {
+	for (SSpriteSheet* spriteSheet : spriteSheets)
+	{
+		if (tileId >= spriteSheet->minTileIndex && spriteSheet->maxTileIndex >= tileId)
+		{
 			return spriteSheet;
 		}
 	}

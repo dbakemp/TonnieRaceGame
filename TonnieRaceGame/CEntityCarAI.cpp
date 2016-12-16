@@ -35,7 +35,7 @@ CEntityCarAI::CEntityCarAI(CEngine* engine, CMap* map) : CEntity(engine), IDrawL
 	carGenetics->SetBitString("0000001010000101000010010110000111110100000000101000000000110000001111");
 
 	this->spriteSheet = engine->textureManager->GetTexture("Images/spritesheet_vehicles.png");
-	srcRect = { 590, 0, 41, 66 };
+	srcRect = {590, 0, 41, 66};
 
 	bodyDef.type = b2_dynamicBody;
 	body = engine->world->CreateBody(&bodyDef);
@@ -116,9 +116,9 @@ void CEntityCarAI::Draw(SDL_Renderer* renderer)
 	}
 
 	double angle = body->GetAngle() * (180.0 / M_PI);
-	SDL_Point center = { 20.5, 33 };
+	SDL_Point center = {20.5, 33};
 
-	SDL_Rect dstrect = { ((aabb.upperBound.x + aabb.lowerBound.x) / 2 * 5) - engine->camera->GetXPos() - (srcRect.w / 2), ((aabb.upperBound.y + aabb.lowerBound.y) / 2 * 5) - engine->camera->GetYPos() - (srcRect.h / 2), 41, 66 };
+	SDL_Rect dstrect = {((aabb.upperBound.x + aabb.lowerBound.x) / 2 * 5) - engine->camera->GetXPos() - (srcRect.w / 2), ((aabb.upperBound.y + aabb.lowerBound.y) / 2 * 5) - engine->camera->GetYPos() - (srcRect.h / 2), 41, 66};
 
 	SDL_RenderCopyEx(engine->renderer, spriteSheet, &srcRect, &dstrect, angle, &center, SDL_FLIP_VERTICAL);
 
@@ -128,10 +128,13 @@ void CEntityCarAI::Draw(SDL_Renderer* renderer)
 
 void CEntityCarAI::CollisionBegin(CEntity* collider)
 {
-	if (collider->GetType() == Type::WAYPOINT) {
+	if (collider->GetType() == Type::WAYPOINT)
+	{
 		CEntityWaypoint* waypoint = static_cast<CEntityWaypoint*>(collider);
 		ProcessWaypoint(waypoint);
-	} else if (collider->GetType() == Type::CHECKPOINT) {
+	}
+	else if (collider->GetType() == Type::CHECKPOINT)
+	{
 		CEntityCheckpoint* checkpoint = static_cast<CEntityCheckpoint*>(collider);
 		ProcessCheckpoint(checkpoint);
 	}
@@ -141,44 +144,51 @@ void CEntityCarAI::CollisionEnd(CEntity* collider)
 {
 }
 
-void CEntityCarAI::ProcessCheckpoint(CEntityCheckpoint * checkpoint)
+void CEntityCarAI::ProcessCheckpoint(CEntityCheckpoint* checkpoint)
 {
-	if (currentCheckpoint + 1 == engine->currentMap->checkpoints && checkpoint->isFinish) {
-		if (currentLap + 1 == engine->currentMap->laps) {
+	if (currentCheckpoint + 1 == engine->currentMap->checkpoints && checkpoint->isFinish)
+	{
+		if (currentLap + 1 == engine->currentMap->laps)
+		{
 			FinishCallback();
 		}
-		else {
+		else
+		{
 			currentCheckpoint = checkpoint->checkpointIndex;
 			currentLap++;
 		}
 	}
-	else {
+	else
+	{
 		currentCheckpoint = checkpoint->checkpointIndex;
 	}
 }
 
-void CEntityCarAI::ProcessWaypoint(CEntityWaypoint * waypoint)
+void CEntityCarAI::ProcessWaypoint(CEntityWaypoint* waypoint)
 {
-	if (waypoint->index == currentWaypoint) {
-		if (currentWaypoint == engine->currentMap->waypoints.size()-1) {
+	if (waypoint->index == currentWaypoint)
+	{
+		if (currentWaypoint == engine->currentMap->waypoints.size() - 1)
+		{
 			ChangeWaypoint(engine->currentMap->waypoints[0]);
 			currentWaypoint = 0;
 		}
-		else {
+		else
+		{
 			ChangeWaypoint(engine->currentMap->waypoints[currentWaypoint + 1]);
 			currentWaypoint++;
 		}
 	}
 }
 
-void CEntityCarAI::ChangeWaypoint(CEntityWaypoint * waypoint)
+void CEntityCarAI::ChangeWaypoint(CEntityWaypoint* waypoint)
 {
 	heading = waypoint;
 	biasX = CIntegerHelper::GetRandomIntBetween(-(waypoint->radius), waypoint->radius);
 	biasY = CIntegerHelper::GetRandomIntBetween(-(waypoint->radius), waypoint->radius);
 }
 
-void CEntityCarAI::ActivatePowerup(CEntityPowerup * powerup)
+void CEntityCarAI::ActivatePowerup(CEntityPowerup* powerup)
 {
 	activePowerup = powerup;
 }
@@ -190,7 +200,8 @@ void CEntityCarAI::SetFinishCallback(std::function<void(IBox2DListener*)> callba
 
 void CEntityCarAI::FinishCallback()
 {
-	if (finishCallback != nullptr) {
+	if (finishCallback != nullptr)
+	{
 		finishCallback(this);
 	}
 }
@@ -198,8 +209,9 @@ void CEntityCarAI::FinishCallback()
 
 void CEntityCarAI::Update()
 {
-	if (heading == nullptr) {
-		ChangeWaypoint(engine->currentMap->waypoints[currentWaypoint+1]);
+	if (heading == nullptr)
+	{
+		ChangeWaypoint(engine->currentMap->waypoints[currentWaypoint + 1]);
 		currentWaypoint++;
 	}
 
@@ -213,30 +225,36 @@ void CEntityCarAI::Update()
 		fixture = fixture->GetNext();
 	}
 
-	b2Vec2 veca = { (aabb.lowerBound.x+aabb.upperBound.x)/2, (aabb.lowerBound.y + aabb.upperBound.y) / 2 };
+	b2Vec2 veca = {(aabb.lowerBound.x + aabb.upperBound.x) / 2, (aabb.lowerBound.y + aabb.upperBound.y) / 2};
 	b2Vec2 vecb = heading->body->GetPosition();
 
-	double deltaX = veca.x - (vecb.x+biasX);
-	double deltaY = veca.y - (vecb.y+biasY);
+	double deltaX = veca.x - (vecb.x + biasX);
+	double deltaY = veca.y - (vecb.y + biasY);
 
-	double angle = (atan2(deltaY, deltaX) * 180 / M_PI) +90.0f;
-	if (angle < 270 && angle > 180) {
+	double angle = (atan2(deltaY, deltaX) * 180 / M_PI) + 90.0f;
+	if (angle < 270 && angle > 180)
+	{
 		angle = angle - 360;
 	}
-	
+
 	double carAngle = body->GetAngle() * 180 / M_PI;
-	while (carAngle <= -180) {
+	while (carAngle <= -180)
+	{
 		carAngle += 360;
 	}
-	while (carAngle > 180) {
+	while (carAngle > 180)
+	{
 		carAngle -= 360;
 	}
 
 	double headingAngle;
 	headingAngle = carAngle - angle;
-	if (headingAngle < -180) {
+	if (headingAngle < -180)
+	{
 		headingAngle += 360;
-	} else if (headingAngle > 180) {
+	}
+	else if (headingAngle > 180)
+	{
 		headingAngle -= 360;
 	}
 
@@ -245,14 +263,17 @@ void CEntityCarAI::Update()
 	double turnSpeedPerSec = 250 * DEGTORAD;
 	double turnPerTimeStep = turnSpeedPerSec / (1.0 / engine->deltaHelper->delta);
 	double desiredAngle = -headingAngle * DEGTORAD;
-	if (desiredAngle < -lockAngle) {
+	if (desiredAngle < -lockAngle)
+	{
 		desiredAngle = -lockAngle;
 	}
-	else if(desiredAngle > lockAngle) {
+	else if (desiredAngle > lockAngle)
+	{
 		desiredAngle = lockAngle;
 	}
 
-	if (shouldBackup) {
+	if (shouldBackup)
+	{
 		desiredAngle = -desiredAngle;
 	}
 
@@ -264,14 +285,17 @@ void CEntityCarAI::Update()
 	frJoint->SetLimits(newAngle, newAngle);
 
 	b2Vec2 velocity = body->GetLinearVelocity();
-	if ((int)(velocity.Normalize()) < 5) {
+	if ((int)(velocity.Normalize()) < 5)
+	{
 		backupTimer += engine->deltaHelper->delta;
 	}
-	else {
+	else
+	{
 		backupTimer = 0;
 	}
 
-	if (backupTimer > 1.5) {
+	if (backupTimer > 1.5)
+	{
 		shouldBackup = true;
 	}
 
@@ -279,24 +303,31 @@ void CEntityCarAI::Update()
 	b2Vec2 vecc = veca - vecb;
 	float distance = vecc.Normalize();
 
-	if (desiredAngle < 0) {
+	if (desiredAngle < 0)
+	{
 		desiredAngle = -desiredAngle;
 	}
 
-	if (shouldBackup && backingupTimer < 1) {
+	if (shouldBackup && backingupTimer < 1)
+	{
 		backingupTimer += engine->deltaHelper->delta;
-		for (CEntityTireAI* tire : tires) {
+		for (CEntityTireAI* tire : tires)
+		{
 			tire->maxForwardSpeed = -65;
 		}
 	}
-	else {
+	else
+	{
 		shouldBackup = false;
 		backingupTimer = 0;
-		for (CEntityTireAI* tire : tires) {
-			if (distance > (velocity.Normalize()*carGenetics->slowDownBias)) {
+		for (CEntityTireAI* tire : tires)
+		{
+			if (distance > (velocity.Normalize() * carGenetics->slowDownBias))
+			{
 				tire->maxForwardSpeed = carGenetics->maxForwardSpeed - (desiredAngle * carGenetics->maxForwardSpeed);
 			}
-			else {
+			else
+			{
 				tire->maxForwardSpeed = 0;
 			}
 		}
@@ -310,7 +341,7 @@ void CEntityCarAI::Create(b2World* world)
 void CEntityCarAI::CarGenetics::GetBitString()
 {
 	std::string geneticString;
-	std::string carDensityBinary = std::bitset<10>(carDensity*100).to_string();
+	std::string carDensityBinary = std::bitset<10>(carDensity * 100).to_string();
 	std::string slowDownBiasBinary = std::bitset<10>(slowDownBias * 100).to_string();
 	std::string maxForwardSpeedBinary = std::bitset<10>(maxForwardSpeed).to_string();
 	std::string maxDriveForceBinary = std::bitset<10>(maxDriveForce).to_string();
@@ -331,7 +362,7 @@ void CEntityCarAI::CarGenetics::SetBitString(std::string bitString)
 	std::string dragForceBiasBinary = bitString.substr(50, 10);
 	std::string desiredTorqueBinary = bitString.substr(60, 10);
 
-	carDensity = ((float)CIntegerHelper::BitStringToInt(carDensityBinary)/100);
+	carDensity = ((float)CIntegerHelper::BitStringToInt(carDensityBinary) / 100);
 	slowDownBias = ((float)CIntegerHelper::BitStringToInt(slowDownBiasBinary) / 100);
 	maxForwardSpeed = CIntegerHelper::BitStringToInt(maxForwardSpeedBinary);
 	maxDriveForce = CIntegerHelper::BitStringToInt(maxDriveForceBinary);
@@ -339,4 +370,3 @@ void CEntityCarAI::CarGenetics::SetBitString(std::string bitString)
 	dragForceBias = CIntegerHelper::BitStringToInt(dragForceBiasBinary);
 	desiredTorque = CIntegerHelper::BitStringToInt(desiredTorqueBinary);
 }
-

@@ -11,4 +11,4 @@ public:
 	static void Box2DUtils::DrawBody(SDL_Renderer* buffer, b2Body* body, CCamera* camera, int fr, int fg, int fb, int falpha, int lr, int lg, int lb, int lalpha, bool aa);
 };
 
-#endif 
+#endif

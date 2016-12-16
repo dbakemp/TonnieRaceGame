@@ -22,7 +22,8 @@ CAdManager::CAdManager(CEngine* engine)
 
 CAdManager::~CAdManager()
 {
-	for (std::pair<std::string, SDL_Texture*> pair : textureMap) {
+	for (std::pair<std::string, SDL_Texture*> pair : textureMap)
+	{
 		pair.second = nullptr;
 	}
 	textureMap.clear();
@@ -31,28 +32,29 @@ CAdManager::~CAdManager()
 
 SDL_Texture* CAdManager::GetRandomAd(AdDirection direction)
 {
-	std::string index = mapIndexes[CIntegerHelper::GetRandomIntBetween(0, mapIndexes.size()-1)];
+	std::string index = mapIndexes[CIntegerHelper::GetRandomIntBetween(0, mapIndexes.size() - 1)];
 	SDL_Texture* texture = nullptr;
 
-	switch (direction) {
-		case AdDirection::DOWN:
-			texture = textureMap.at(index + "-down");
-			break;
-		case AdDirection::UP:
-			texture = textureMap.at(index + "-up");
-			break;
-		case AdDirection::RIGHT:
-			texture = textureMap.at(index + "-right");
-			break;
-		case AdDirection::LEFT:
-			texture = textureMap.at(index);
-			break;
+	switch (direction)
+	{
+	case AdDirection::DOWN:
+		texture = textureMap.at(index + "-down");
+		break;
+	case AdDirection::UP:
+		texture = textureMap.at(index + "-up");
+		break;
+	case AdDirection::RIGHT:
+		texture = textureMap.at(index + "-right");
+		break;
+	case AdDirection::LEFT:
+		texture = textureMap.at(index);
+		break;
 	}
 
 	return texture;
 }
 
-void CAdManager::AddAd(Json::Value * ad)
+void CAdManager::AddAd(Json::Value* ad)
 {
 	if ((*ad).get("IsActive", "").asString() == "1")
 	{

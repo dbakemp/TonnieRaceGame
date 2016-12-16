@@ -1,6 +1,4 @@
 #include "SDL.h"
-#include "SDL_image.h"
-#include "SDL_ttf.h"
 #include "CStateManager.h"
 #include "CCamera.h"
 #include "CIntroState.h"
@@ -8,12 +6,8 @@
 #include "CInputManager.h"
 #include "CDeltaHelper.h"
 #include "CEntityManager.h"
-#include "CBox2DManager.h"
-#include "CUILabel.h"
 #include "CUIImage.h"
 #include "CUIButton.h"
-#include <iostream>
-#include "CDebugLogger.h"
 #include "EUIAlignment.h"
 #include <functional>
 
@@ -80,7 +74,7 @@ void CIntroState::handleEvents(CEngine* engine)
 void CIntroState::update(CEngine* engine)
 {
 	engine->entityManager->Tick();
-	SDL_Delay((1000.0/60) - engine->deltaHelper->delta);
+	SDL_Delay((1000.0 / 60) - engine->deltaHelper->delta);
 	checkSeque();
 }
 
@@ -89,7 +83,7 @@ void CIntroState::draw(CEngine* engine)
 	engine->drawManager->Tick(engine->renderer);
 }
 
-void CIntroState::input(CEngine* engine, SDL_Event * event)
+void CIntroState::input(CEngine* engine, SDL_Event* event)
 {
 	engine->inputManager->Tick(event);
 }
@@ -103,18 +97,23 @@ void CIntroState::checkSeque()
 
 void CIntroState::OnButtonClick(CUIButton* button)
 {
-	if (button->GetText() == "Spelen") {
+	if (button->GetText() == "Spelen")
+	{
 		shouldSeque = true;
 		stateSeque = EGameState::LevelSelector;
-	} else if (button->GetText() == "Help") {
+	}
+	else if (button->GetText() == "Help")
+	{
 		shouldSeque = true;
 		stateSeque = EGameState::Help;
 	}
-	else if (button->GetText() == "Scores") {
+	else if (button->GetText() == "Scores")
+	{
 		shouldSeque = true;
 		stateSeque = EGameState::Scores;
 	}
-	else if (button->GetText() == "Credits") {
+	else if (button->GetText() == "Credits")
+	{
 		shouldSeque = true;
 		stateSeque = EGameState::Credits;
 	}

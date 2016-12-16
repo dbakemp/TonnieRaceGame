@@ -2,7 +2,7 @@
 #include "CDeltaHelper.h"
 #include "CDrawManager.h"
 
-CEntityParticleEmitter::CEntityParticleEmitter(CEngine * engine) : CEntity(engine), IDrawListener(engine, (int)CDrawManager::Layers::Object)
+CEntityParticleEmitter::CEntityParticleEmitter(CEngine* engine) : CEntity(engine), IDrawListener(engine, (int)CDrawManager::Layers::Object)
 {
 	this->xPos = 0;
 	this->yPos = 0;
@@ -13,7 +13,7 @@ CEntityParticleEmitter::~CEntityParticleEmitter()
 {
 }
 
-void CEntityParticleEmitter::Draw(SDL_Renderer * renderer)
+void CEntityParticleEmitter::Draw(SDL_Renderer* renderer)
 {
 }
 
@@ -21,7 +21,8 @@ void CEntityParticleEmitter::Update()
 {
 	timer += engine->deltaHelper->delta;
 
-	if (timer > 0.1) {
+	if (timer > 0.1)
+	{
 		AddParticle();
 		timer -= 0.1;
 	}

@@ -1,4 +1,4 @@
-#ifndef IENTITYLISTENER_H 
+#ifndef IENTITYLISTENER_H
 #define IENTITYLISTENER_H
 
 #include "SDL.h"

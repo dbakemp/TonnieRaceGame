@@ -8,11 +8,11 @@
 #define _MINOR 1
 #define _BUILD 37
 
-CEntityBuild::CEntityBuild(CEngine * engine) : CEntity(engine), IDrawListener(engine, (int)CDrawManager::Layers::UI), IInputListener(engine)
+CEntityBuild::CEntityBuild(CEngine* engine) : CEntity(engine), IDrawListener(engine, (int)CDrawManager::Layers::UI), IInputListener(engine)
 {
 	visible = false;
 
-	text = "Development Build: ["+std::to_string(_MAJOR)+"."+ std::to_string(_MINOR) +"."+ std::to_string(_BUILD)+"]";
+	text = "Development Build: [" + std::to_string(_MAJOR) + "." + std::to_string(_MINOR) + "." + std::to_string(_BUILD) + "]";
 
 
 	label = new CUILabel(engine, "Bangers", "");
@@ -35,11 +35,11 @@ void CEntityBuild::Update()
 {
 }
 
-void CEntityBuild::Draw(SDL_Renderer * renderer)
+void CEntityBuild::Draw(SDL_Renderer* renderer)
 {
 }
 
-void CEntityBuild::Input(SDL_Event * event)
+void CEntityBuild::Input(SDL_Event* event)
 {
 	switch (event->type)
 	{

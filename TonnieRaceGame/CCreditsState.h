@@ -23,8 +23,8 @@ public:
 	CCreditsState(CEngine* engine);
 
 private:
-	libvlc_instance_t *inst;
-	libvlc_media_player_t *mp;
-	libvlc_media_t *m;
+	libvlc_instance_t* inst;
+	libvlc_media_player_t* mp;
+	libvlc_media_t* m;
 };
 #endif

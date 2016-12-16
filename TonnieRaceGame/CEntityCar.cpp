@@ -30,7 +30,7 @@ CEntityCar::CEntityCar(CEngine* engine, CMap* map) : CEntity(engine), IDrawListe
 
 	SDL_Surface* texture = IMG_Load("Resources/Images/spritesheet_vehicles.png");
 	this->spriteSheet = engine->textureManager->GetTexture("Images/spritesheet_vehicles.png");
-	srcRect = { 631, 0, 41, 66 };
+	srcRect = {631, 0, 41, 66};
 
 	bodyDef.type = b2_dynamicBody;
 	body = engine->world->CreateBody(&bodyDef);
@@ -64,7 +64,7 @@ CEntityCar::CEntityCar(CEngine* engine, CMap* map) : CEntity(engine), IDrawListe
 	jointDef.localAnchorB.SetZero();
 
 	CEntityTire* tire = new CEntityTire(engine, map, spawn->x, spawn->y);
-	tire->ChangeZIndex(zIndex-1);
+	tire->ChangeZIndex(zIndex - 1);
 	jointDef.bodyB = tire->body;
 	jointDef.localAnchorA.Set(0.5 + xPos, 1.75f + yPos);
 	engine->world->CreateJoint(&jointDef);
@@ -111,12 +111,12 @@ void CEntityCar::Draw(SDL_Renderer* renderer)
 	}
 
 	double angle = body->GetAngle() * (180.0 / M_PI);
-	SDL_Point center = { 20.5, 33 };
+	SDL_Point center = {20.5, 33};
 
-	SDL_Rect dstrect = { ((aabb.upperBound.x + aabb.lowerBound.x)/2 * 5)-engine->camera->GetXPos() -(srcRect.w/2), ((aabb.upperBound.y + aabb.lowerBound.y) / 2 * 5) - engine->camera->GetYPos() - (srcRect.h / 2), 41, 66 };
+	SDL_Rect dstrect = {((aabb.upperBound.x + aabb.lowerBound.x) / 2 * 5) - engine->camera->GetXPos() - (srcRect.w / 2), ((aabb.upperBound.y + aabb.lowerBound.y) / 2 * 5) - engine->camera->GetYPos() - (srcRect.h / 2), 41, 66};
 
 	SDL_RenderCopyEx(engine->renderer, spriteSheet, &srcRect, &dstrect, angle, &center, SDL_FLIP_VERTICAL);
-	
+
 	if (!debugVisible) { return; }
 	Box2DUtils::DrawBody(renderer, body, engine->camera, 0, 0, 0, 0, 0, 0, 255, 255, false);
 }
@@ -132,13 +132,15 @@ void CEntityCar::Input(SDL_Event* event)
 			break;
 		case SDLK_d: controlState |= InputDirections::RIGHT;
 			break;
-		case SDLK_f: 
+		case SDLK_f:
 			debugVisible = !debugVisible;
 			break;
 		case SDLK_SPACE:
-			if (activePowerup != nullptr && !powerupActive) {
+			if (activePowerup != nullptr && !powerupActive)
+			{
 				powerupActive = true;
-				for (CEntityTire* tire : tires) {
+				for (CEntityTire* tire : tires)
+				{
 					tire->powerupActive = true;
 					tire->type = static_cast<int>(activePowerup->type);
 				}
@@ -191,7 +193,8 @@ void CEntityCar::OnControllerAxis(const SDL_ControllerAxisEvent sdlEvent)
 
 void CEntityCar::CollisionBegin(CEntity* collider)
 {
-	if (collider->GetType() == Type::CHECKPOINT) {
+	if (collider->GetType() == Type::CHECKPOINT)
+	{
 		CEntityCheckpoint* checkpoint = static_cast<CEntityCheckpoint*>(collider);
 		ProcessCheckpoint(checkpoint);
 	}
@@ -201,24 +204,28 @@ void CEntityCar::CollisionEnd(CEntity* collider)
 {
 }
 
-void CEntityCar::ProcessCheckpoint(CEntityCheckpoint * checkpoint)
+void CEntityCar::ProcessCheckpoint(CEntityCheckpoint* checkpoint)
 {
-	if (checkpoint->checkpointIndex == currentCheckpoint + 1) {
+	if (checkpoint->checkpointIndex == currentCheckpoint + 1)
+	{
 		currentCheckpoint = checkpoint->checkpointIndex;
 	}
-	else if (currentCheckpoint+1 == engine->currentMap->checkpoints && checkpoint->isFinish) {
-		if (currentLap+1 == engine->currentMap->laps) {
+	else if (currentCheckpoint + 1 == engine->currentMap->checkpoints && checkpoint->isFinish)
+	{
+		if (currentLap + 1 == engine->currentMap->laps)
+		{
 			CDebugLogger::PrintDebug("Race finish here");
 			FinishCallback();
 		}
-		else {
+		else
+		{
 			currentCheckpoint = checkpoint->checkpointIndex;
 			currentLap++;
 		}
 	}
 }
 
-void CEntityCar::ActivatePowerup(CEntityPowerup * powerup)
+void CEntityCar::ActivatePowerup(CEntityPowerup* powerup)
 {
 	this->activePowerup = powerup;
 	CDebugLogger::PrintDebug("Powerup opgepakt");
@@ -231,7 +238,8 @@ void CEntityCar::SetFinishCallback(std::function<void(IBox2DListener*)> callback
 
 void CEntityCar::FinishCallback()
 {
-	if (finishCallback != nullptr) {
+	if (finishCallback != nullptr)
+	{
 		finishCallback(this);
 	}
 }
@@ -242,7 +250,7 @@ void CEntityCar::Update()
 	//control steering
 	double lockAngle = 50 * DEGTORAD;
 	double turnSpeedPerSec = 250 * DEGTORAD;
-	double turnPerTimeStep = turnSpeedPerSec / (1.0/engine->deltaHelper->delta);
+	double turnPerTimeStep = turnSpeedPerSec / (1.0 / engine->deltaHelper->delta);
 	double desiredAngle = 0;
 
 	switch (controlState)
@@ -253,7 +261,8 @@ void CEntityCar::Update()
 		break;
 	}
 
-	if (powerupActive && activePowerup != nullptr && static_cast<int>(this->activePowerup->type) == 1) {
+	if (powerupActive && activePowerup != nullptr && static_cast<int>(this->activePowerup->type) == 1)
+	{
 		desiredAngle = 0 - desiredAngle;
 	}
 
@@ -264,14 +273,17 @@ void CEntityCar::Update()
 	flJoint->SetLimits(newAngle, newAngle);
 	frJoint->SetLimits(newAngle, newAngle);
 
-	if (powerupActive) {
+	if (powerupActive)
+	{
 		powerupTimer += engine->deltaHelper->delta;
-		if (powerupTimer > (rand() % (10 - 5 + 1) + 5)) {
+		if (powerupTimer > (rand() % (10 - 5 + 1) + 5))
+		{
 			CDebugLogger::PrintDebug("Powerup verlopen");
 			powerupTimer = 0;
 			powerupActive = false;
 			activePowerup = nullptr;
-			for (CEntityTire* tire : tires) {
+			for (CEntityTire* tire : tires)
+			{
 				tire->powerupActive = false;
 			}
 		}

@@ -42,7 +42,7 @@ public:
 	SDL_Rect srcRect;
 	CEntityPowerup* activePowerup;
 private:
-	CEngine* engine; 
+	CEngine* engine;
 	CEntityParticleEmitter* emitter;
 	b2AABB aabb;
 	std::function<void(IBox2DListener*)> finishCallback;

@@ -1,7 +1,6 @@
 #ifndef CSCORESSTATE_H
 #define CSCORESSTATE_H
 
-#include <vector>
 #include "SDL.h"
 #include "CGameState.h"
 #include "CUIImage.h"

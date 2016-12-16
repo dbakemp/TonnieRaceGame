@@ -1,9 +1,9 @@
 #include "CUIContainer.h"
 #include "CDrawManager.h"
 
-CUIContainer::CUIContainer(CEngine * engine) : CEntity(engine), IInputListener(engine), IDrawListener(engine, (int)CDrawManager::Layers::UI)
+CUIContainer::CUIContainer(CEngine* engine) : CEntity(engine), IInputListener(engine), IDrawListener(engine, (int)CDrawManager::Layers::UI)
 {
-	this->container = { 0, 0, 0, 0 };
+	this->container = {0, 0, 0, 0};
 	this->engine = engine;
 }
 
@@ -11,7 +11,7 @@ CUIContainer::~CUIContainer()
 {
 }
 
-void CUIContainer::Draw(SDL_Renderer * renderer)
+void CUIContainer::Draw(SDL_Renderer* renderer)
 {
 	if (!debugVisible) { return; }
 	SDL_RenderDrawRect(engine->renderer, &dstrect);
@@ -21,17 +21,19 @@ void CUIContainer::Update()
 {
 }
 
-void CUIContainer::Input(SDL_Event * event)
+void CUIContainer::Input(SDL_Event* event)
 {
-	if (event->type == SDL_WINDOWEVENT) {
-		switch (event->window.event) {
+	if (event->type == SDL_WINDOWEVENT)
+	{
+		switch (event->window.event)
+		{
 		case SDL_WINDOWEVENT_RESIZED:
 			PreRender();
 			break;
 		}
 	}
-	else if (event->type == SDL_KEYDOWN) {
-
+	else if (event->type == SDL_KEYDOWN)
+	{
 		switch (event->key.keysym.sym)
 		{
 		case SDLK_f:
@@ -64,7 +66,7 @@ void CUIContainer::SetVerticalAlignment(EUIALignmentVertical alignment)
 
 void CUIContainer::SetContainer(int x, int y, int w, int h)
 {
-	container = { x, y, w, h };
+	container = {x, y, w, h};
 	PreRender();
 }
 
@@ -80,7 +82,7 @@ void CUIContainer::SetHeight(int height)
 	PreRender();
 }
 
-void CUIContainer::AddUIElement(IUIEntity * element)
+void CUIContainer::AddUIElement(IUIEntity* element)
 {
 	uiElements.push_back(element);
 	element->SetContainer(dstrect.x, dstrect.y, dstrect.w, dstrect.h);
@@ -106,14 +108,16 @@ void CUIContainer::PreRender()
 	int xOffset = 0;
 	int yOffset = 0;
 
-	if (container.w != 0 || container.h != 0 || container.x != 0 || container.y != 0) {
+	if (container.w != 0 || container.h != 0 || container.x != 0 || container.y != 0)
+	{
 		wOffset = container.w;
 		hOffset = container.h;
 		xOffset = container.x;
 		yOffset = container.y;
 	}
 
-	switch (horizontalAlignment) {
+	switch (horizontalAlignment)
+	{
 	case EUIALignmentHorizontal::LEFT:
 		x = xOffset + xPos;
 		break;
@@ -125,7 +129,8 @@ void CUIContainer::PreRender()
 		break;
 	}
 
-	switch (verticalAlignment) {
+	switch (verticalAlignment)
+	{
 	case EUIALignmentVertical::TOP:
 		y = yOffset + yPos;
 		break;
@@ -137,10 +142,11 @@ void CUIContainer::PreRender()
 		break;
 	}
 
-	dstrect = { x, y, srcrect.w, srcrect.h };
+	dstrect = {x, y, srcrect.w, srcrect.h};
 	UIdstrect = dstrect;
 
-	for (IUIEntity* element : uiElements) {
+	for (IUIEntity* element : uiElements)
+	{
 		element->SetContainer(dstrect.x, dstrect.y, dstrect.w, dstrect.h);
 	}
 }

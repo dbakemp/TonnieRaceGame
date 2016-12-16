@@ -1,4 +1,4 @@
-#ifndef IBOX2DLISTENER_H 
+#ifndef IBOX2DLISTENER_H
 #define IBOX2DLISTENER_H
 
 #include "SDL.h"

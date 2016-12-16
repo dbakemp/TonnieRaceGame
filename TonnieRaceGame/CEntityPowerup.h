@@ -18,7 +18,13 @@ public:
 	double timer;
 	SDL_Texture* spriteSheet;
 	SDL_Rect srcRect;
-	enum class PowerupType { SPEED = 0, DRUNK = 1 };
+
+	enum class PowerupType
+	{
+		SPEED = 0,
+		DRUNK = 1
+	};
+
 	PowerupType type;
 
 	void Draw(SDL_Renderer* renderer);

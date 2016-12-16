@@ -23,7 +23,8 @@ typedef void (CGAState::*Callback)();
 class CEntityCarAI : public CEntity, public IDrawListener, public IBox2DListener, public ILapCountable
 {
 public:
-	struct CarGenetics {
+	struct CarGenetics
+	{
 		float carDensity = 0.1f;
 		float slowDownBias = 0.8f;
 		int maxForwardSpeed = 600;

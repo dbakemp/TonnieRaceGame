@@ -1,25 +1,24 @@
 #include "CUIButton.h"
 #include "CDrawManager.h"
 #include "EUIAlignment.h"
-#include "SDL_image.h"
 #include "CTextureManager.h"
 
-CUIButton::CUIButton(CEngine * engine) : CEntity(engine), IInputListener(engine), IDrawListener(engine,  (int)CDrawManager::Layers::UI)
+CUIButton::CUIButton(CEngine* engine) : CEntity(engine), IInputListener(engine), IDrawListener(engine, (int)CDrawManager::Layers::UI)
 {
 	this->engine = engine;
-	this->container = { 0, 0, 0, 0 };
+	this->container = {0, 0, 0, 0};
 	this->mouseDown = false;
 	this->clickCallback = nullptr;
 	this->clickCallHoldback = nullptr;
 }
 
-CUIButton::CUIButton(CEngine * engine, std::string font, std::string text, std::string texture) : CEntity(engine), IInputListener(engine), IDrawListener(engine, (int)CDrawManager::Layers::UI)
+CUIButton::CUIButton(CEngine* engine, std::string font, std::string text, std::string texture) : CEntity(engine), IInputListener(engine), IDrawListener(engine, (int)CDrawManager::Layers::UI)
 {
 	this->engine = engine;
 
 	this->texture = engine->textureManager->GetTexture(texture);
 
-	this->container = { 0, 0, 0, 0 };
+	this->container = {0, 0, 0, 0};
 
 	label = new CUILabel(engine);
 	label->SetFont(font);
@@ -37,43 +36,50 @@ CUIButton::~CUIButton()
 	label = nullptr;
 }
 
-void CUIButton::Draw(SDL_Renderer * renderer)
+void CUIButton::Draw(SDL_Renderer* renderer)
 {
 	SDL_RenderCopy(engine->renderer, texture, NULL, &dstrect);
 
-	if (!debugVisible) { return;  }
+	if (!debugVisible) { return; }
 	SDL_RenderDrawRect(engine->renderer, &dstrect);
 }
 
 void CUIButton::Update()
 {
-	if (mouseDown) {
+	if (mouseDown)
+	{
 		if (clickCallHoldback != nullptr) { clickCallHoldback(this); }
 	}
 }
 
 void CUIButton::Input(SDL_Event* event)
 {
-	if (event->type == SDL_MOUSEBUTTONDOWN) {
-		if ((event->motion.x > dstrect.x && event->motion.x < dstrect.x + dstrect.w) && (event->motion.y > dstrect.y && event->motion.y < dstrect.y + dstrect.h)) {
+	if (event->type == SDL_MOUSEBUTTONDOWN)
+	{
+		if ((event->motion.x > dstrect.x && event->motion.x < dstrect.x + dstrect.w) && (event->motion.y > dstrect.y && event->motion.y < dstrect.y + dstrect.h))
+		{
 			mouseDown = true;
 		}
 	}
-	else if (event->type == SDL_MOUSEBUTTONUP) {
-		if (mouseDown) {
+	else if (event->type == SDL_MOUSEBUTTONUP)
+	{
+		if (mouseDown)
+		{
 			if (clickCallback != nullptr) { clickCallback(this); }
 			mouseDown = false;
 		}
 	}
-	else if (event->type == SDL_WINDOWEVENT) {
-		switch (event->window.event) {
-			case SDL_WINDOWEVENT_RESIZED:
-				PreRender();
-				break;
+	else if (event->type == SDL_WINDOWEVENT)
+	{
+		switch (event->window.event)
+		{
+		case SDL_WINDOWEVENT_RESIZED:
+			PreRender();
+			break;
 		}
 	}
-	else if (event->type == SDL_KEYDOWN) {
-
+	else if (event->type == SDL_KEYDOWN)
+	{
 		switch (event->key.keysym.sym)
 		{
 		case SDLK_f:
@@ -126,14 +132,16 @@ void CUIButton::PreRender()
 	int xOffset = 0;
 	int yOffset = 0;
 
-	if (container.w != 0 || container.h != 0 || container.x != 0 || container.y != 0) {
+	if (container.w != 0 || container.h != 0 || container.x != 0 || container.y != 0)
+	{
 		wOffset = container.w;
 		hOffset = container.h;
 		xOffset = container.x;
 		yOffset = container.y;
 	}
 
-	switch (horizontalAlignment) {
+	switch (horizontalAlignment)
+	{
 	case EUIALignmentHorizontal::LEFT:
 		x = xOffset + xPos;
 		break;
@@ -145,7 +153,8 @@ void CUIButton::PreRender()
 		break;
 	}
 
-	switch (verticalAlignment) {
+	switch (verticalAlignment)
+	{
 	case EUIALignmentVertical::TOP:
 		y = yOffset + yPos;
 		break;
@@ -157,7 +166,7 @@ void CUIButton::PreRender()
 		break;
 	}
 
-	dstrect = { x, y, srcrect.w, srcrect.h };
+	dstrect = {x, y, srcrect.w, srcrect.h};
 	UIdstrect = dstrect;
 
 	label->SetContainer(dstrect.x, dstrect.y, dstrect.w, dstrect.h);
@@ -180,7 +189,7 @@ void CUIButton::SetFontSize(int fontSize)
 
 void CUIButton::SetContainer(int x, int y, int w, int h)
 {
-	container = { x, y, w, h };
+	container = {x, y, w, h};
 	PreRender();
 }
 
@@ -202,4 +211,3 @@ std::string CUIButton::GetText()
 {
 	return label->GetText();
 }
-

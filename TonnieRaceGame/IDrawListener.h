@@ -1,9 +1,8 @@
-#ifndef IDRAWLISTENER_H 
+#ifndef IDRAWLISTENER_H
 #define IDRAWLISTENER_H
 
 #include "SDL.h"
 #include <iostream>
-#include "string.h"
 #include "SDL_ttf.h"
 
 class CEngine;

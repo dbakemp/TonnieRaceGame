@@ -11,7 +11,12 @@ public:
 	std::vector<IDrawListener*> listeners;
 	std::vector<IDrawListener*> listenersIndexed[30];
 
-	enum class Layers { Tile = 5, Object = 15, UI = 25};
+	enum class Layers
+	{
+		Tile = 5,
+		Object = 15,
+		UI = 25
+	};
 
 	void AddListener(IDrawListener* drawListener, int index);
 	void RemoveListener(IDrawListener* drawListener);
@@ -23,4 +28,4 @@ public:
 };
 
 
-#endif 
+#endif

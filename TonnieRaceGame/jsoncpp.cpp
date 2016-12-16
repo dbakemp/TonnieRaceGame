@@ -4607,7 +4607,7 @@ bool Value::isMember(const CppTL::ConstString& key) const {
 #endif
 #endif
 
-#if defined(__BORLANDC__)  
+#if defined(__BORLANDC__)
 #include <float.h>
 #define isfinite _finite
 #define snprintf _snprintf

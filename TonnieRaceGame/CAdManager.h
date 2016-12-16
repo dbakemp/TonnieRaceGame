@@ -10,7 +10,14 @@
 class CAdManager
 {
 public:
-	enum class AdDirection { UP, DOWN, LEFT, RIGHT };
+	enum class AdDirection
+	{
+		UP,
+		DOWN,
+		LEFT,
+		RIGHT
+	};
+
 	CAdManager(CEngine* engine);
 	~CAdManager();
 	SDL_Texture* GetRandomAd(AdDirection direction);
@@ -23,4 +30,4 @@ private:
 	CEngine* engine;
 };
 
-#endif 
+#endif

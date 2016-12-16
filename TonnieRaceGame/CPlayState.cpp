@@ -1,12 +1,10 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include "SDL.h"
 #include "CStateManager.h"
-#include "SDL_image.h"
 #include "CPlayState.h"
 #include "CEngine.h"
 #include "CEntityCarAI.h"
 #include "CEntityCar.h"
-#include "CEntitySmallSquare.h"
 #include "CEntityBuild.h"
 #include "CInputManager.h"
 #include "CEntityManager.h"
@@ -14,13 +12,10 @@
 #include "CDeltaHelper.h"
 #include "CDrawManager.h"
 #include "CLevelFactory.h"
-#include "CBox2DManager.h"
-#include "CCollisionHelper.h"
 #include "CEntityLapCounter.h"
 #include "CEntityFpsCounter.h"
 #include "CEntitySpeedoMeter.h"
-#include "SDL_ttf.h"
-#include "CDebugLogger.h"
+#include "CCollisionHelper.h"
 #include <functional>
 
 void CPlayState::init(CEngine* engine)
@@ -41,7 +36,7 @@ void CPlayState::init(CEngine* engine)
 
 	CLevelFactory* factory = new CLevelFactory(engine);
 
-	factory->LoadMap("Resources/Maps/"+engine->level);
+	factory->LoadMap("Resources/Maps/" + engine->level);
 	engine->musicHelper->playTrack("Resources/Music/beep.mp3", true);
 
 	engine->currentMap = factory->map;
@@ -50,7 +45,8 @@ void CPlayState::init(CEngine* engine)
 
 	CEntityCar* car = new CEntityCar(engine, factory->map);
 	int spawns = factory->map->availableSpawns.size();
-	for (int i = 0; i < spawns; i++) {
+	for (int i = 0; i < spawns; i++)
+	{
 		new CEntityCarAI(engine, factory->map);
 	}
 
@@ -60,7 +56,7 @@ void CPlayState::init(CEngine* engine)
 	CEntityFpsCounter* fpsCounter = new CEntityFpsCounter(engine);
 	CEntityLapCounter* lapCounter = new CEntityLapCounter(engine);
 	CEntitySpeedoMeter* speedoMeter = new CEntitySpeedoMeter(engine);
-	speedoMeter->ChangeZIndex(speedoMeter->zIndex+1);
+	speedoMeter->ChangeZIndex(speedoMeter->zIndex + 1);
 	CEntityBuild* build = new CEntityBuild(engine);
 
 	speedoMeter->SetChild(car);
@@ -75,7 +71,8 @@ void CPlayState::clean(CEngine* engine)
 
 	int count = engine->world->GetBodyCount();
 	b2Body* body = engine->world->GetBodyList();
-	for (int i = 0; i < count; i++) {
+	for (int i = 0; i < count; i++)
+	{
 		b2Body* nextBody = body->GetNext();
 		engine->world->DestroyBody(body);
 		body = nullptr;
@@ -119,10 +116,10 @@ void CPlayState::draw(CEngine* engine)
 	engine->drawManager->Tick(engine->renderer);
 }
 
-void CPlayState::input(CEngine* engine, SDL_Event * event)
+void CPlayState::input(CEngine* engine, SDL_Event* event)
 {
-	if (event->type == SDL_KEYDOWN) {
-
+	if (event->type == SDL_KEYDOWN)
+	{
 		switch (event->key.keysym.sym)
 		{
 		case SDLK_ESCAPE:
@@ -143,7 +140,7 @@ void CPlayState::checkSeque()
 	engine->musicHelper->stopAll();
 }
 
-void CPlayState::OnFinish(IBox2DListener * car)
+void CPlayState::OnFinish(IBox2DListener* car)
 {
 }
 
@@ -155,4 +152,3 @@ CPlayState::CPlayState(CEngine* engine)
 CPlayState::~CPlayState()
 {
 }
-

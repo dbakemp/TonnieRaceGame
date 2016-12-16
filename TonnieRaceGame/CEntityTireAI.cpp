@@ -1,7 +1,7 @@
 #include "CEntityTireAI.h"
-#include "Box2DUtils.h" 
-#include "CDeltaHelper.h" 
-#include "CDrawManager.h" 
+#include "Box2DUtils.h"
+#include "CDeltaHelper.h"
+#include "CDrawManager.h"
 #include "CMap.h"
 #include <SDL.h>
 #include <iostream>

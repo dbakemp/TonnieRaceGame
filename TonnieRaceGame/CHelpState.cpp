@@ -1,6 +1,4 @@
 #include "SDL.h"
-#include "SDL_image.h"
-#include "SDL_ttf.h"
 #include "CStateManager.h"
 #include "CCamera.h"
 #include "CHelpState.h"
@@ -8,8 +6,6 @@
 #include "CDeltaHelper.h"
 #include "CInputManager.h"
 #include "CEntityManager.h"
-#include "CBox2DManager.h"
-#include <iostream>
 #include <curl/curl.h>
 #include "CUILabel.h"
 #include "CUIContainer.h"
@@ -74,7 +70,7 @@ void CHelpState::init(CEngine* engine)
 	CUIContainer* containerrr = new CUIContainer(engine);
 	containerrr->SetHorizontalAlignment(EUIALignmentHorizontal::RIGHT);
 	containerrr->SetVerticalAlignment(EUIALignmentVertical::BOTTOM);
-	containerrr->SetHeight(200- labelr->GetRectangle().h - 5);
+	containerrr->SetHeight(200 - labelr->GetRectangle().h - 5);
 	containerrr->SetWidth(150);
 	containerrr->AddUIElement(labelrra);
 	containerrr->AddUIElement(labelrrb);
@@ -102,7 +98,6 @@ void CHelpState::init(CEngine* engine)
 	engine->musicHelper->playTrack("Resources/Music/plingplongplong.mp3", false);
 
 	this->engine = engine;
-	
 }
 
 void CHelpState::clean(CEngine* engine)
@@ -134,7 +129,7 @@ void CHelpState::draw(CEngine* engine)
 	engine->drawManager->Tick(engine->renderer);
 }
 
-void CHelpState::input(CEngine* engine, SDL_Event * event)
+void CHelpState::input(CEngine* engine, SDL_Event* event)
 {
 	engine->inputManager->Tick(event);
 }
@@ -153,7 +148,8 @@ CHelpState::CHelpState(CEngine* engine)
 
 void CHelpState::OnButtonClick(CUIButton* button)
 {
-	if (button->GetText() == "Terug") {
+	if (button->GetText() == "Terug")
+	{
 		shouldSeque = true;
 		stateSeque = EGameState::Menu;
 	}

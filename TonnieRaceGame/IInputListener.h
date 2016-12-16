@@ -1,4 +1,4 @@
-#ifndef IINPUTLISTENER_H 
+#ifndef IINPUTLISTENER_H
 #define IINPUTLISTENER_H
 
 #include "SDL.h"

@@ -5,7 +5,6 @@
 #include "IBox2DListener.h"
 #include "IInputListener.h"
 #include "CEntity.h"
-#include "SDL_ttf.h"
 #include "CEngine.h"
 #include "EUIAlignment.h"
 #include "IUIEntity.h"

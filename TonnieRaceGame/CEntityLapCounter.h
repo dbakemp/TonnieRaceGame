@@ -8,7 +8,8 @@
 #include "CUILabel.h"
 #include "SDL_ttf.h"
 
-class CEntityLapCounter : public CEntity {
+class CEntityLapCounter : public CEntity
+{
 public:
 	CEntityLapCounter(CEngine* engine);
 	~CEntityLapCounter();

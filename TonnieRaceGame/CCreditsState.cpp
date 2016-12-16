@@ -1,16 +1,9 @@
 #include "SDL.h"
-#include "SDL_image.h"
-#include "SDL_ttf.h"
 #include "CStateManager.h"
 #include "CCamera.h"
 #include "CCreditsState.h"
-#include "CDrawManager.h"
 #include "CInputManager.h"
 #include "CDebugLogger.h"
-#include <iostream>
-
-#include <stdio.h>
-#include <stdlib.h>
 
 #include <SDL_syswm.h>
 #include <vlc/vlc.h>
@@ -19,7 +12,7 @@ void CCreditsState::init(CEngine* engine)
 {
 	bool done = false;
 
-	char const *vlc_argv[] =
+	char const* vlc_argv[] =
 	{
 		//"--width=10",
 		//"--height=400",
@@ -49,7 +42,6 @@ void CCreditsState::init(CEngine* engine)
 	// play the media_player
 	libvlc_media_player_play(mp);
 
-	
 
 	//Wait 40 secs, length of the outro video
 	Sleep(40000);
@@ -92,7 +84,7 @@ void CCreditsState::draw(CEngine* engine)
 {
 }
 
-void CCreditsState::input(CEngine* engine, SDL_Event * event)
+void CCreditsState::input(CEngine* engine, SDL_Event* event)
 {
 	if (event->type == SDL_KEYDOWN)
 	{

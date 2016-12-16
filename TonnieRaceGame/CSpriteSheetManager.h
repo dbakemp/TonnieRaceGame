@@ -1,17 +1,15 @@
 #ifndef CSPRITESHEETMANAGER_H
 #define CSPRITESHEETMANAGER_H
 #include "SDL.h"
-#include "CIntegerHelper.h"
 #include "CEngine.h"
-#include "SDL_image.h"
-#include <Box2D\Box2D.h>
 #include <vector>
 #include <json\json.h>
 
 class CSpriteSheetManager
 {
 public:
-	struct SSpriteSheet {
+	struct SSpriteSheet
+	{
 		int columns;
 		int spacing;
 		int width;
@@ -32,4 +30,4 @@ private:
 	CEngine* engine;
 };
 
-#endif 
+#endif

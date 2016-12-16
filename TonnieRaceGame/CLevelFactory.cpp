@@ -13,7 +13,6 @@
 #include "SDL.h"
 #include <poly2tri.h>
 #include <vector>
-#include <iostream>
 #include <fstream>
 
 CLevelFactory::CLevelFactory(CEngine* engine)
@@ -58,7 +57,8 @@ void CLevelFactory::CreateMap(Json::Value* root)
 	map->spriteSheetPowerUps = engine->textureManager->GetTexture("Spritesheets/spritesheet_powerups.png");
 
 	CDebugLogger::PrintDebug("Loading Spritesheet");
-	for (Json::Value spriteSheet : (*root)["tilesets"]) {
+	for (Json::Value spriteSheet : (*root)["tilesets"])
+	{
 		CreateSpriteSheet(&spriteSheet);
 	}
 
@@ -119,7 +119,7 @@ void CLevelFactory::CreateTiles(Json::Value* root)
 	{
 		if (tile.asInt() != 0)
 		{
-			new CEntityTile(this->engine, engine->spriteSheetManager->GetSpriteSheetByTileId(tile.asInt()) , tile.asInt(), number, map->width, map->height, map->tilewidth, map->tileheight);
+			new CEntityTile(this->engine, engine->spriteSheetManager->GetSpriteSheetByTileId(tile.asInt()), tile.asInt(), number, map->width, map->height, map->tilewidth, map->tileheight);
 		}
 		number++;
 	}
@@ -166,7 +166,7 @@ void CLevelFactory::CreateBorder(Json::Value* root)
 	triangles.clear();
 }
 
-void CLevelFactory::CreateCheckpoints(Json::Value * root)
+void CLevelFactory::CreateCheckpoints(Json::Value* root)
 {
 	CDebugLogger::PrintDebug("Creating Checkpoints");
 
@@ -180,7 +180,8 @@ void CLevelFactory::CreateCheckpoints(Json::Value * root)
 
 	bool isFinish = (*root).get("properties", "").get("isFinish", false).asBool();
 
-	if (isFinish) {
+	if (isFinish)
+	{
 		map->laps = (*root).get("properties", "").get("laps", 3).asInt();
 	}
 
@@ -190,7 +191,7 @@ void CLevelFactory::CreateCheckpoints(Json::Value * root)
 	delete end;
 }
 
-void CLevelFactory::CreateWaypoints(Json::Value * root)
+void CLevelFactory::CreateWaypoints(Json::Value* root)
 {
 	CDebugLogger::PrintDebug("Creating Waypoints");
 
@@ -207,7 +208,7 @@ void CLevelFactory::CreateWaypoints(Json::Value * root)
 	}
 }
 
-void CLevelFactory::CreateAd(Json::Value * root)
+void CLevelFactory::CreateAd(Json::Value* root)
 {
 	CDebugLogger::PrintDebug("Creating Ad");
 
@@ -215,16 +216,20 @@ void CLevelFactory::CreateAd(Json::Value * root)
 
 	CAdManager::AdDirection directionEnum;
 
-	if (direction == "down") {
+	if (direction == "down")
+	{
 		directionEnum = CAdManager::AdDirection::DOWN;
 	}
-	else if (direction == "up") {
+	else if (direction == "up")
+	{
 		directionEnum = CAdManager::AdDirection::DOWN;
 	}
-	else if (direction == "right") {
+	else if (direction == "right")
+	{
 		directionEnum = CAdManager::AdDirection::RIGHT;
 	}
-	else {
+	else
+	{
 		directionEnum = CAdManager::AdDirection::LEFT;
 	}
 
@@ -237,8 +242,8 @@ void CLevelFactory::CreateAd(Json::Value * root)
 
 void CLevelFactory::CreateSpriteSheet(Json::Value* root)
 {
-
-	if ((*root).get("columns", 0).asInt() != 0) {
+	if ((*root).get("columns", 0).asInt() != 0)
+	{
 		CSpriteSheetManager::SSpriteSheet* spriteSheet = new CSpriteSheetManager::SSpriteSheet();
 
 		std::string location = (*root).get("properties", "").get("resourcepath", "").asString();
@@ -250,16 +255,18 @@ void CLevelFactory::CreateSpriteSheet(Json::Value* root)
 		spriteSheet->width = (*root).get("imagewidth", 0).asInt();
 		spriteSheet->height = (*root).get("imageheight", 0).asInt();
 		spriteSheet->minTileIndex = (*root).get("firstgid", 0).asInt();
-		spriteSheet->maxTileIndex = spriteSheet->minTileIndex+(*root).get("tilecount", 0).asInt()-1;
+		spriteSheet->maxTileIndex = spriteSheet->minTileIndex + (*root).get("tilecount", 0).asInt() - 1;
 
 		spriteSheet->texture = engine->textureManager->GetTexture(location);
 
 		engine->spriteSheetManager->AddSpriteSheet(spriteSheet);
 	}
-	else {
+	else
+	{
 		int minIndex = (*root).get("firstgid", 0).asInt();
 		int tileCount = (*root).get("tilecount", 0).asInt();
-		for (int i = 0; i < tileCount; i++) {
+		for (int i = 0; i < tileCount; i++)
+		{
 			CSpriteSheetManager::SSpriteSheet* spriteSheet = new CSpriteSheetManager::SSpriteSheet();
 
 			spriteSheet->columns = (*root).get("columns", 0).asInt();
@@ -280,7 +287,6 @@ void CLevelFactory::CreateSpriteSheet(Json::Value* root)
 			engine->spriteSheetManager->AddSpriteSheet(spriteSheet);
 		}
 	}
-
 }
 
 void CLevelFactory::CreateSpawns(Json::Value* root)
@@ -290,7 +296,7 @@ void CLevelFactory::CreateSpawns(Json::Value* root)
 	map->availableSpawns.push_back(new CEntitySpawn(engine, (*root).get("x", 0).asInt() / 5, (*root).get("y", 0).asInt() / 5));
 }
 
-void CLevelFactory::CreatePowerups(Json::Value* root) 
+void CLevelFactory::CreatePowerups(Json::Value* root)
 {
 	CDebugLogger::PrintDebug("Creating Powerups");
 	CEntityPowerup* powerup = new CEntityPowerup(engine, map, (*root).get("x", 0).asDouble(), (*root).get("y", 0).asDouble());

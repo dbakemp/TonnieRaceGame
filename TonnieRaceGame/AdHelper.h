@@ -11,4 +11,3 @@ public:
 	void fetchAd(std::string title, std::string url, std::string filename);
 	~AdHelper();
 };
-

@@ -2,7 +2,6 @@
 #define CSTATEMANAGER_H
 
 #include <vector>
-#include "SDL.h"
 #include "CGameState.h"
 
 using namespace std;
@@ -32,7 +31,7 @@ public:
 
 	CGameState* getCurrentState();
 private:
-	vector<CGameState*> states; 
+	vector<CGameState*> states;
 	CEngine* engine;
 };
 

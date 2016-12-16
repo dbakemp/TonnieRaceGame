@@ -1,12 +1,9 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include "SDL.h"
 #include "CStateManager.h"
-#include "SDL_image.h"
 #include "CGAState.h"
 #include "CEngine.h"
 #include "CEntityCarAI.h"
-#include "CEntityCar.h"
-#include "CEntitySmallSquare.h"
 #include "CEntityBuild.h"
 #include "CInputManager.h"
 #include "CEntityManager.h"
@@ -16,10 +13,8 @@
 #include "CLevelFactory.h"
 #include "CBox2DManager.h"
 #include "CCollisionHelper.h"
-#include "CEntityLapCounter.h"
 #include "CEntityFpsCounter.h"
 #include "CEntitySpeedoMeter.h"
-#include "SDL_ttf.h"
 #include "CDebugLogger.h"
 #include <functional>
 
@@ -98,7 +93,7 @@ void CGAState::draw(CEngine* engine)
 	engine->drawManager->Tick(engine->renderer);
 }
 
-void CGAState::input(CEngine* engine, SDL_Event * event)
+void CGAState::input(CEngine* engine, SDL_Event* event)
 {
 	engine->inputManager->Tick(event);
 }

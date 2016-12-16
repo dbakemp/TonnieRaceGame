@@ -1,7 +1,7 @@
 #include "CEntityTire.h"
-#include "Box2DUtils.h" 
-#include "CDeltaHelper.h" 
-#include "CDrawManager.h" 
+#include "Box2DUtils.h"
+#include "CDeltaHelper.h"
+#include "CDrawManager.h"
 #include "CMap.h"
 #include <SDL.h>
 #include <iostream>
@@ -136,10 +136,12 @@ void CEntityTire::UpdateFriction()
 
 void CEntityTire::UpdateDrive()
 {
-	if (powerupActive && type == 0) {
+	if (powerupActive && type == 0)
+	{
 		maxDriveForce = 500;
 	}
-	else {
+	else
+	{
 		maxDriveForce = 400;
 	}
 

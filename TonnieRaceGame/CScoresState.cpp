@@ -1,6 +1,4 @@
 #include "SDL.h"
-#include "SDL_image.h"
-#include "SDL_ttf.h"
 #include "CStateManager.h"
 #include "CCamera.h"
 #include "CScoresState.h"
@@ -8,8 +6,6 @@
 #include "CDeltaHelper.h"
 #include "CInputManager.h"
 #include "CEntityManager.h"
-#include "CBox2DManager.h"
-#include <iostream>
 #include <curl/curl.h>
 #include "CUILabel.h"
 #include "CUIImage.h"
@@ -73,7 +69,7 @@ void CScoresState::draw(CEngine* engine)
 	engine->drawManager->Tick(engine->renderer);
 }
 
-void CScoresState::input(CEngine* engine, SDL_Event * event)
+void CScoresState::input(CEngine* engine, SDL_Event* event)
 {
 	engine->inputManager->Tick(event);
 }
@@ -98,7 +94,8 @@ CScoresState::~CScoresState()
 
 void CScoresState::OnButtonClick(CUIButton* button)
 {
-	if (button->GetText() == "Terug") {
+	if (button->GetText() == "Terug")
+	{
 		shouldSeque = true;
 		stateSeque = EGameState::Menu;
 	}

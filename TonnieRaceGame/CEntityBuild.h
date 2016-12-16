@@ -5,7 +5,6 @@
 #include "IInputListener.h"
 #include "CEntity.h"
 #include "CEngine.h"
-#include "SDL_ttf.h"
 #include "CUILabel.h"
 
 class CEntityBuild : public CEntity, public IDrawListener, public IInputListener

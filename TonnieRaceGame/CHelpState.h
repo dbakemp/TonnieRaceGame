@@ -1,7 +1,6 @@
-#ifndef CHELPSTATE_H 
+#ifndef CHELPSTATE_H
 #define CHELPSTATE_H
 
-#include <vector>
 #include "SDL.h"
 #include "CGameState.h"
 #include "CUIButton.h"

@@ -1,6 +1,5 @@
 #include "CEntityLapCounter.h"
 #include "CDrawManager.h"
-#include <string.h>
 #include "CMap.h"
 #include "EUIAlignment.h"
 
@@ -16,7 +15,6 @@ CEntityLapCounter::CEntityLapCounter(CEngine* engine) : CEntity(engine)
 
 CEntityLapCounter::~CEntityLapCounter()
 {
-
 }
 
 void CEntityLapCounter::Update()

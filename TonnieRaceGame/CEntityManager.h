@@ -1,6 +1,6 @@
 #ifndef CENTITYMANAGER_H
 #define CENTITYMANAGER_H
-#include "SDL.h"
+
 #include <vector>
 
 class IEntityListener;

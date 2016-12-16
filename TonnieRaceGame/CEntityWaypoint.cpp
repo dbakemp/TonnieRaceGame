@@ -4,7 +4,7 @@
 #include "Box2DUtils.h"
 #include "CDrawManager.h"
 
-CEntityWaypoint::CEntityWaypoint(CEngine * engine, double x, double y, int index) : CEntity(engine), IDrawListener(engine, (int)CDrawManager::Layers::Object), IBox2DListener(engine), IInputListener(engine)
+CEntityWaypoint::CEntityWaypoint(CEngine* engine, double x, double y, int index) : CEntity(engine), IDrawListener(engine, (int)CDrawManager::Layers::Object), IBox2DListener(engine), IInputListener(engine)
 {
 	visible = false;
 	this->SetType(Type::WAYPOINT);
@@ -33,7 +33,7 @@ CEntityWaypoint::~CEntityWaypoint()
 {
 }
 
-void CEntityWaypoint::Draw(SDL_Renderer * renderer)
+void CEntityWaypoint::Draw(SDL_Renderer* renderer)
 {
 	if (!visible) { return; }
 	Box2DUtils::DrawBody(renderer, body, engine->camera, 0, 0, 0, 0, 0, 0, 255, 255, false);
@@ -43,18 +43,19 @@ void CEntityWaypoint::Update()
 {
 }
 
-void CEntityWaypoint::Create(b2World * world)
+void CEntityWaypoint::Create(b2World* world)
 {
 }
 
 void CEntityWaypoint::CollisionBegin(CEntity* collider)
 {
-	if (collider->GetType() == Type::CAR) {
+	if (collider->GetType() == Type::CAR)
+	{
 		CEntityCar* car = static_cast<CEntityCar*>(collider);
 	}
 }
 
-void CEntityWaypoint::CollisionEnd(CEntity * collider)
+void CEntityWaypoint::CollisionEnd(CEntity* collider)
 {
 }
 

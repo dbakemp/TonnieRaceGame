@@ -12,7 +12,7 @@ CUILabel::CUILabel(CEngine* engine) : CEntity(engine), IInputListener(engine), I
 	this->fontSize = 16;
 	this->horizontalAlignment = EUIALignmentHorizontal::LEFT;
 	this->verticalAlignment = EUIALignmentVertical::TOP;
-	this->container = { 0, 0, 0, 0 };
+	this->container = {0, 0, 0, 0};
 	this->visible = true;
 }
 
@@ -24,7 +24,7 @@ CUILabel::CUILabel(CEngine* engine, std::string font, std::string text) : CEntit
 	this->fontSize = 16;
 	this->horizontalAlignment = EUIALignmentHorizontal::LEFT;
 	this->verticalAlignment = EUIALignmentVertical::TOP;
-	this->container = { 0, 0, 0, 0 };
+	this->container = {0, 0, 0, 0};
 	this->visible = true;
 
 	SetFont(font);
@@ -37,7 +37,7 @@ CUILabel::~CUILabel()
 	engine = nullptr;
 }
 
-void CUILabel::Draw(SDL_Renderer * renderer)
+void CUILabel::Draw(SDL_Renderer* renderer)
 {
 	if (!visible) { return; }
 	SDL_RenderCopy(engine->renderer, texture, NULL, &dstrect);
@@ -50,17 +50,19 @@ void CUILabel::Update()
 {
 }
 
-void CUILabel::Input(SDL_Event * event)
+void CUILabel::Input(SDL_Event* event)
 {
-	if (event->type == SDL_WINDOWEVENT) {
-		switch (event->window.event) {
+	if (event->type == SDL_WINDOWEVENT)
+	{
+		switch (event->window.event)
+		{
 		case SDL_WINDOWEVENT_RESIZED:
 			PreRender();
 			break;
 		}
 	}
-	else if (event->type == SDL_KEYDOWN) {
-
+	else if (event->type == SDL_KEYDOWN)
+	{
 		switch (event->key.keysym.sym)
 		{
 		case SDLK_f:
@@ -106,13 +108,13 @@ void CUILabel::SetVerticalAlignment(EUIALignmentVertical alignment)
 
 void CUILabel::SetContainer(int x, int y, int w, int h)
 {
-	container = { x, y, w, h };
+	container = {x, y, w, h};
 	PreRender();
 }
 
 void CUILabel::SetFontSize(int fontSize)
 {
-	this->fontSize = fontSize; 
+	this->fontSize = fontSize;
 	SetFont(fontName);
 }
 
@@ -142,12 +144,12 @@ void CUILabel::ToggleVisibility()
 
 void CUILabel::PreRender()
 {
-
-	if (texture != nullptr) {
+	if (texture != nullptr)
+	{
 		SDL_DestroyTexture(texture);
 	}
 
-	SDL_Surface* surface = TTF_RenderText_Blended(font, text.c_str(), { 255, 255, 255 });
+	SDL_Surface* surface = TTF_RenderText_Blended(font, text.c_str(), {255, 255, 255});
 	texture = SDL_CreateTextureFromSurface(engine->renderer, surface);
 
 	SDL_QueryTexture(texture, NULL, NULL, &srcrect.w, &srcrect.h);
@@ -160,14 +162,16 @@ void CUILabel::PreRender()
 	int xOffset = 0;
 	int yOffset = 0;
 
-	if (container.w != 0 || container.h != 0 || container.x != 0 || container.y != 0) {
+	if (container.w != 0 || container.h != 0 || container.x != 0 || container.y != 0)
+	{
 		wOffset = container.w;
 		hOffset = container.h;
 		xOffset = container.x;
 		yOffset = container.y;
 	}
 
-	switch (horizontalAlignment) {
+	switch (horizontalAlignment)
+	{
 	case EUIALignmentHorizontal::LEFT:
 		x = xOffset + xPos;
 		break;
@@ -179,7 +183,8 @@ void CUILabel::PreRender()
 		break;
 	}
 
-	switch (verticalAlignment) {
+	switch (verticalAlignment)
+	{
 	case EUIALignmentVertical::TOP:
 		y = yOffset + yPos;
 		break;
@@ -191,7 +196,7 @@ void CUILabel::PreRender()
 		break;
 	}
 
-	dstrect = { x, y, srcrect.w, srcrect.h };
+	dstrect = {x, y, srcrect.w, srcrect.h};
 	UIdstrect = dstrect;
 
 	SDL_FreeSurface(surface);

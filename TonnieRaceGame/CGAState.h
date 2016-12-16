@@ -1,7 +1,6 @@
 #ifndef CGASTATE_H
 #define CGASTATE_H
 
-#include <vector>
 #include "SDL.h"
 #include "CGameState.h"
 #include "CCamera.h"

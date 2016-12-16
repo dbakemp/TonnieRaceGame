@@ -25,4 +25,4 @@ private:
 	CEngine* engine;
 };
 
-#endif 
+#endif

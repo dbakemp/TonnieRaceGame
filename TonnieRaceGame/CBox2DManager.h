@@ -1,6 +1,5 @@
 #ifndef CBOX2DMANAGER_H
 #define CBOX2DMANAGER_H
-#include "SDL.h"
 #include <Box2D\Box2D.h>
 #include <vector>
 #include "CEngine.h"
@@ -19,9 +18,9 @@ public:
 	void Clear();
 
 	~CBox2DManager();
-private: 
+private:
 	CEngine* engine;
 };
 
 
-#endif 
+#endif
