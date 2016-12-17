@@ -1,6 +1,7 @@
 #include "SDL.h"
 #include "CDrawManager.h"
 #include "IDrawListener.h"
+#include "CCameraManager.h"
 #include <algorithm>
 
 void CDrawManager::AddListener(IDrawListener* drawListener, int index)
@@ -17,13 +18,41 @@ void CDrawManager::RemoveListener(IDrawListener* drawListener)
 
 void CDrawManager::Tick(SDL_Renderer* renderer)
 {
-	for (std::vector<IDrawListener*> listeners : listenersIndexed)
+	SDL_RenderClear(renderer);
+
+	int renders = 1;
+	if (engine->cameraManager->Count() > 0) {
+		renders = engine->cameraManager->Count();
+	}
+
+	for (int i = 0; i < renders; i++) {
+		if (engine->cameraManager->Count() > 0) {
+			SDL_RenderSetClipRect(renderer, &engine->cameraManager->GetCurrentCamera()->GetViewPort());
+		}
+
+		for (int i = 0; i < 25; i++)
+		{
+			for (IDrawListener* listener : listenersIndexed[i])
+			{
+				listener->Draw(renderer);
+			}
+		}
+
+		engine->cameraManager->GetNextCamera();
+
+	}
+
+	SDL_Rect rect = { 0, 0, engine->windowWidth, engine->windowHeight };
+	SDL_RenderSetClipRect(renderer, &rect);
+	for (int i = 25; i < 30; i++)
 	{
-		for (IDrawListener* listener : listeners)
+		for (IDrawListener* listener : listenersIndexed[i])
 		{
 			listener->Draw(renderer);
 		}
 	}
+
+	SDL_RenderPresent(renderer);
 }
 
 void CDrawManager::ChangeZIndex(IDrawListener* drawListener, int index)
@@ -42,6 +71,11 @@ void CDrawManager::Clear()
 		i++;
 	}
 	listeners.clear();
+}
+
+CDrawManager::CDrawManager(CEngine * engine)
+{
+	this->engine = engine;
 }
 
 CDrawManager::~CDrawManager()

@@ -3,6 +3,7 @@
 #include "CTextureManager.h"
 #include "CCamera.h"
 #include "CDeltaHelper.h"
+#include "CCameraManager.h"
 
 CEntitySmokeParticle::CEntitySmokeParticle(CEngine* engine) : CEntity(engine), IDrawListener(engine, ((int)CDrawManager::Layers::Object) - 1)
 {
@@ -23,16 +24,16 @@ CEntitySmokeParticle::~CEntitySmokeParticle()
 
 void CEntitySmokeParticle::Draw(SDL_Renderer* renderer)
 {
+	dstrect = { (int)xPos - engine->cameraManager->GetCurrentCamera()->GetXPos(), (int)yPos - engine->cameraManager->GetCurrentCamera()->GetYPos(), srcrect.w, srcrect.h };
 	SDL_Point center = {srcrect.x, srcrect.y};
-	SDL_RenderCopyEx(engine->renderer, texture, NULL, &dstrect, angle, &center, SDL_FLIP_NONE);
+	SDL_RenderCopyEx(renderer, texture, NULL, &dstrect, angle, &center, SDL_FLIP_NONE);
 }
 
 void CEntitySmokeParticle::Update()
 {
-	dstrect = {(int)xPos - engine->camera->GetXPos(), (int)yPos - engine->camera->GetYPos(), srcrect.w, srcrect.h};
 	angle += angulatVelocity;
 
-	timer += engine->deltaHelper->delta;
+	timer += engine->deltaHelper->GetScaledDelta();
 
 	if (timer > 0.3)
 	{

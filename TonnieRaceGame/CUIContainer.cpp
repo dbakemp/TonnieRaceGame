@@ -14,7 +14,7 @@ CUIContainer::~CUIContainer()
 void CUIContainer::Draw(SDL_Renderer* renderer)
 {
 	if (!debugVisible) { return; }
-	SDL_RenderDrawRect(engine->renderer, &dstrect);
+	SDL_RenderDrawRect(renderer, &dstrect);
 }
 
 void CUIContainer::Update()

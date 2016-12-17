@@ -40,10 +40,10 @@ CUILabel::~CUILabel()
 void CUILabel::Draw(SDL_Renderer* renderer)
 {
 	if (!visible) { return; }
-	SDL_RenderCopy(engine->renderer, texture, NULL, &dstrect);
+	SDL_RenderCopy(renderer, texture, NULL, &dstrect);
 
 	if (!debugVisible) { return; }
-	SDL_RenderDrawRect(engine->renderer, &dstrect);
+	SDL_RenderDrawRect(renderer, &dstrect);
 }
 
 void CUILabel::Update()

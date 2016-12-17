@@ -11,11 +11,11 @@ class CInputManager;
 class CEntityManager;
 class CBox2DManager;
 class CStateManager;
+class CCameraManager;
 class CFontManager;
 class CDeltaHelper;
 class CCollisionHelper;
 class CSpriteSheetManager;
-class CCamera;
 class CAdManager;
 class CTextureManager;
 class CMap;
@@ -35,7 +35,7 @@ public:
 	CAdManager* adManager;
 	CMap* currentMap;
 	CFontManager* fontManager;
-	CCamera* camera;
+	CCameraManager* cameraManager;
 	SDL_Window* window;
 	SDL_Renderer* renderer;
 	b2World* world;
@@ -49,6 +49,7 @@ public:
 	int fpsCounter;
 	std::string level;
 	int windowHeight, windowWidth;
+	bool multiPlayer;
 private:
 	void Tick();
 	void ResizeWindow(int width, int height);

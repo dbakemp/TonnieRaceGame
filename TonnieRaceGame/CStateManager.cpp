@@ -4,7 +4,6 @@
 #include "CPlayState.h"
 #include "CWinState.h"
 #include "CHelpState.h"
-#include "CGAState.h"
 #include "CScoresState.h"
 #include "CCreditsState.h"
 #include "CLevelSelectorState.h"
@@ -50,8 +49,6 @@ void CStateManager::changeState(EGameState state, CEngine* engine)
 	case Win: states.push_back(new CWinState(engine));
 		break;
 	case Scores: states.push_back(new CScoresState(engine));
-		break;
-	case GA: states.push_back(new CGAState(engine));
 		break;
 	case LevelSelector: states.push_back(new CLevelSelectorState(engine));
 		break;

@@ -12,6 +12,7 @@
 #include "CTextureManager.h"
 #include "CCamera.h"
 #include "CDebugLogger.h"
+#include "CCameraManager.h"
 #include "CLevelFactory.h"
 #include <time.h>
 #include <iostream>
@@ -31,15 +32,17 @@ CEngine::CEngine()
 	fpsCounter = 1;
 	level = 1;
 	showFPSCounter = true;
+	multiPlayer = false;
 
 	adHelper = new AdHelper();
 	musicHelper = new MusicHelper();
 	spriteSheetManager = new CSpriteSheetManager(this);
 	collisionHelper = new CCollisionHelper();
 	deltaHelper = new CDeltaHelper();
-	drawManager = new CDrawManager();
+	drawManager = new CDrawManager(this);
 	fontManager = new CFontManager(this);
 	inputManager = new CInputManager();
+	cameraManager = new CCameraManager(this);
 	entityManager = new CEntityManager();
 	box2DManager = new CBox2DManager(this);
 	stateManager = new CStateManager(this);
@@ -92,7 +95,7 @@ CEngine::~CEngine()
 	delete deltaHelper;
 	delete currentMap;
 	delete fontManager;
-	delete camera;
+	delete cameraManager;
 	delete world;
 	delete musicHelper;
 	delete collisionHelper;
@@ -111,8 +114,6 @@ void CEngine::Tick()
 	{
 		deltaHelper->SetDelta();
 
-		SDL_RenderClear(renderer);
-
 		SDL_Event event;
 		while (SDL_PollEvent(&event) != 0)
 		{
@@ -125,6 +126,21 @@ void CEngine::Tick()
 				switch (event.window.event) {
 					case SDL_WINDOWEVENT_RESIZED:
 						ResizeWindow(event.window.data1, event.window.data2);
+						cameraManager->UpdateViewPort();
+					break;
+				}
+			} else if (event.type == SDL_KEYDOWN)
+			{
+				switch (event.key.keysym.sym)
+				{
+				case SDLK_PAGEDOWN:
+					deltaHelper->SetScale(deltaHelper->GetScale() - 0.05);
+					break;
+				case SDLK_PAGEUP:
+					deltaHelper->SetScale(deltaHelper->GetScale() + 0.05);
+					break;
+				case SDLK_HOME:
+					deltaHelper->SetScale(1);
 					break;
 				}
 			}
@@ -133,8 +149,6 @@ void CEngine::Tick()
 
 		stateManager->getCurrentState()->update(this);
 		stateManager->getCurrentState()->draw(this);
-
-		SDL_RenderPresent(renderer);
 	}
 }
 

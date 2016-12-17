@@ -38,10 +38,10 @@ CUIButton::~CUIButton()
 
 void CUIButton::Draw(SDL_Renderer* renderer)
 {
-	SDL_RenderCopy(engine->renderer, texture, NULL, &dstrect);
+	SDL_RenderCopy(renderer, texture, NULL, &dstrect);
 
 	if (!debugVisible) { return; }
-	SDL_RenderDrawRect(engine->renderer, &dstrect);
+	SDL_RenderDrawRect(renderer, &dstrect);
 }
 
 void CUIButton::Update()
@@ -101,6 +101,7 @@ void CUIButton::SetPosition(int x, int y)
 void CUIButton::SetText(std::string text)
 {
 	label->SetText(text);
+	PreRender();
 }
 
 void CUIButton::SetFont(std::string font)

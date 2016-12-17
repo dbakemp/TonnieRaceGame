@@ -2,6 +2,7 @@
 #define CDRAWMANAGER_H
 #include "SDL.h"
 #include <vector>
+#include "CEngine.h"
 
 class IDrawListener;
 
@@ -23,8 +24,10 @@ public:
 	void Tick(SDL_Renderer* renderer);
 	void ChangeZIndex(IDrawListener* drawListener, int index);
 	void Clear();
-
+	CDrawManager(CEngine* engine);
 	~CDrawManager();
+private:
+	CEngine* engine;
 };
 
 

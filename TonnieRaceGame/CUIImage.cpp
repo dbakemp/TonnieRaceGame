@@ -40,7 +40,7 @@ void CUIImage::Draw(SDL_Renderer* renderer)
 {
 	if (container.x == 0 && container.y == 0 && container.w == 0 && container.h == 0)
 	{
-		SDL_RenderCopy(engine->renderer, texture, NULL, &dstrect);
+		SDL_RenderCopy(renderer, texture, NULL, &dstrect);
 	}
 	else
 	{
@@ -54,7 +54,7 @@ void CUIImage::Draw(SDL_Renderer* renderer)
 			srcrect.w = totalWidthRight;
 			dstrect.w = srcrect.w;
 
-			SDL_RenderCopy(engine->renderer, texture, &srcrect, &dstrect);
+			SDL_RenderCopy(renderer, texture, &srcrect, &dstrect);
 		}
 		else if (totalWidthLeft > 0 && totalWidthLeft <= dstrect.w)
 		{
@@ -62,16 +62,16 @@ void CUIImage::Draw(SDL_Renderer* renderer)
 			dstrect.x = dstrect.x + totalWidthLeft;
 			dstrect.w = srcrect.w - totalWidthLeft;
 
-			SDL_RenderCopy(engine->renderer, texture, &srcrect, &dstrect);
+			SDL_RenderCopy(renderer, texture, &srcrect, &dstrect);
 		}
 		else if (dstrect.x + originalWidth > container.x && dstrect.x < container.w + container.x)
 		{
-			SDL_RenderCopy(engine->renderer, texture, &srcrect, &dstrect);
+			SDL_RenderCopy(renderer, texture, &srcrect, &dstrect);
 		}
 	}
 
 	if (!debugVisible) { return; }
-	SDL_RenderDrawRect(engine->renderer, &dstrect);
+	SDL_RenderDrawRect(renderer, &dstrect);
 }
 
 void CUIImage::Update()

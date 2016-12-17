@@ -5,9 +5,10 @@
 
 CCamera::CCamera(CEngine* engine)
 {
-	posX = -500;
-	posY = -500;
+	posX = 0;
+	posY = 0;
 	child = nullptr;
+	viewport = { 0, 0, engine->windowWidth, engine->windowHeight };
 	this->engine = engine;
 }
 
@@ -26,8 +27,8 @@ void CCamera::Update()
 
 	if (child != nullptr)
 	{
-		posX += (((aabb.lowerBound.x * 5) - ((engine->windowWidth - ((aabb.upperBound.x - aabb.lowerBound.x) * 5)) / 2) - posX));
-		posY += (((aabb.lowerBound.y * 5) - ((engine->windowHeight - ((aabb.upperBound.y - aabb.lowerBound.y) * 5)) / 2) - posY));
+		posX = (((aabb.lowerBound.x * 5) - ((viewport.w - ((aabb.upperBound.x - aabb.lowerBound.x) * 5)) / 2))) - viewport.x;
+		posY = (((aabb.lowerBound.y * 5) - ((viewport.h - ((aabb.upperBound.y - aabb.lowerBound.y) * 5)) / 2))) - viewport.y;
 	}
 }
 
@@ -49,4 +50,14 @@ int CCamera::GetXPos()
 int CCamera::GetYPos()
 {
 	return posY;
+}
+
+void CCamera::SetViewPort(int w, int h, int x, int y)
+{
+	viewport = { x, y, w, h };
+}
+
+SDL_Rect CCamera::GetViewPort()
+{
+	return viewport;
 }

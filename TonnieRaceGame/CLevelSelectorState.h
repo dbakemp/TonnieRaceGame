@@ -28,6 +28,7 @@ public:
 	void draw(CEngine* engine);
 	void input(CEngine* engine, SDL_Event* event);
 	void checkSeque();
+	void ToggleMultiplayer();
 
 	void ScrollLeft();
 	void ScrollRight();
@@ -39,5 +40,6 @@ private:
 	void OnButtonClick(CUIButton* button);
 	CEngine* engine;
 	CUIHorizontalScrollView* scrollView;
+	CUIButton* multiplayerToggle;
 };
 #endif

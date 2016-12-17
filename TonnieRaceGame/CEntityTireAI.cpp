@@ -5,6 +5,7 @@
 #include "CMap.h"
 #include <SDL.h>
 #include <iostream>
+#include "CCameraManager.h"
 
 CEntityTireAI::CEntityTireAI(CEngine* engine, CMap* map, int x, int y, CEntityCarAI::CarGenetics* carGenetics) : CEntity(engine), IDrawListener(engine, (int)CDrawManager::Layers::Object), IBox2DListener(engine)
 {
@@ -34,7 +35,7 @@ CEntityTireAI::~CEntityTireAI()
 
 void CEntityTireAI::Draw(SDL_Renderer* renderer)
 {
-	Box2DUtils::DrawBody(renderer, body, engine->camera, 0, 0, 0, 255, 0, 0, 0, 255, false);
+	Box2DUtils::DrawBody(renderer, body, engine->cameraManager->GetCurrentCamera(), 0, 0, 0, 255, 0, 0, 0, 255, false);
 }
 
 void CEntityTireAI::Update()
@@ -50,7 +51,7 @@ void CEntityTireAI::Create(b2World* world)
 
 void CEntityTireAI::UpdateFriction()
 {
-	float maxLateralImpulse = engine->deltaHelper->delta * 1000;
+	float maxLateralImpulse = engine->deltaHelper->GetScaledDelta() * 1000;
 	b2Vec2 impulse = body->GetMass() * -GetLateralVelocity();
 	if (impulse.Length() > maxLateralImpulse)
 		impulse *= maxLateralImpulse / impulse.Length();

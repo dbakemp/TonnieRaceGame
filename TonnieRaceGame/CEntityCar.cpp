@@ -12,6 +12,8 @@
 #include <SDL_image.h>
 #include "CEntityPowerup.h"
 #include "CTextureManager.h"
+#include "CCameraManager.h"
+#include "CCameraManager.h"
 
 #ifndef DEGTORAD
 #define DEGTORAD 0.0174532925199432957f
@@ -113,12 +115,12 @@ void CEntityCar::Draw(SDL_Renderer* renderer)
 	double angle = body->GetAngle() * (180.0 / M_PI);
 	SDL_Point center = {20.5, 33};
 
-	SDL_Rect dstrect = {((aabb.upperBound.x + aabb.lowerBound.x) / 2 * 5) - engine->camera->GetXPos() - (srcRect.w / 2), ((aabb.upperBound.y + aabb.lowerBound.y) / 2 * 5) - engine->camera->GetYPos() - (srcRect.h / 2), 41, 66};
+	SDL_Rect dstrect = {((aabb.upperBound.x + aabb.lowerBound.x) / 2 * 5) - engine->cameraManager->GetCurrentCamera()->GetXPos() - (srcRect.w / 2), ((aabb.upperBound.y + aabb.lowerBound.y) / 2 * 5) - engine->cameraManager->GetCurrentCamera()->GetYPos() - (srcRect.h / 2), 41, 66};
 
-	SDL_RenderCopyEx(engine->renderer, spriteSheet, &srcRect, &dstrect, angle, &center, SDL_FLIP_VERTICAL);
+	SDL_RenderCopyEx(renderer, spriteSheet, &srcRect, &dstrect, angle, &center, SDL_FLIP_VERTICAL);
 
 	if (!debugVisible) { return; }
-	Box2DUtils::DrawBody(renderer, body, engine->camera, 0, 0, 0, 0, 0, 0, 255, 255, false);
+	Box2DUtils::DrawBody(renderer, body, engine->cameraManager->GetCurrentCamera(), 0, 0, 0, 0, 0, 0, 255, 255, false);
 }
 
 void CEntityCar::Input(SDL_Event* event)
@@ -250,7 +252,7 @@ void CEntityCar::Update()
 	//control steering
 	double lockAngle = 50 * DEGTORAD;
 	double turnSpeedPerSec = 250 * DEGTORAD;
-	double turnPerTimeStep = turnSpeedPerSec / (1.0 / engine->deltaHelper->delta);
+	double turnPerTimeStep = turnSpeedPerSec / (1.0 / engine->deltaHelper->GetScaledDelta());
 	double desiredAngle = 0;
 
 	switch (controlState)
@@ -275,7 +277,7 @@ void CEntityCar::Update()
 
 	if (powerupActive)
 	{
-		powerupTimer += engine->deltaHelper->delta;
+		powerupTimer += engine->deltaHelper->GetScaledDelta();
 		if (powerupTimer > (rand() % (10 - 5 + 1) + 5))
 		{
 			CDebugLogger::PrintDebug("Powerup verlopen");

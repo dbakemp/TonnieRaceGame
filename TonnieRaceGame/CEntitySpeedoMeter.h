@@ -11,15 +11,18 @@
 #include "IBox2DListener.h"
 #include "SDL_ttf.h"
 
-class CEntitySpeedoMeter : public CEntity, public IDrawListener
+class CEntitySpeedoMeter : public CEntity, public IDrawListener, public IInputListener
 {
 public:
 	CEntitySpeedoMeter(CEngine* engine);
 	~CEntitySpeedoMeter();
 	void Update();
 	void Draw(SDL_Renderer* renderer);
+	void Input(SDL_Event* event) override;
 	void SetChild(IBox2DListener* child);
 	IBox2DListener* GetChild();
+	void SetCamera(CCamera* camera);
+	void UpdateContainers();
 
 private:
 	IBox2DListener* child;
@@ -36,6 +39,7 @@ private:
 	int tickindex = 0;
 	float32 ticksum = 0;
 	float32 ticklist[200];
+	CCamera* camera;
 };
 
 #endif

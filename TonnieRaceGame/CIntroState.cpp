@@ -74,7 +74,7 @@ void CIntroState::handleEvents(CEngine* engine)
 void CIntroState::update(CEngine* engine)
 {
 	engine->entityManager->Tick();
-	SDL_Delay((1000.0 / 60) - engine->deltaHelper->delta);
+	SDL_Delay((1000.0 / 60) - engine->deltaHelper->GetScaledDelta());
 	checkSeque();
 }
 

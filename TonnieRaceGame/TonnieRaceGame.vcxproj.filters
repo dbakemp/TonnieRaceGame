@@ -116,9 +116,6 @@
     <ClCompile Include="CDeltaHelper.cpp">
       <Filter>Helpers</Filter>
     </ClCompile>
-    <ClCompile Include="CGAState.cpp">
-      <Filter>States</Filter>
-    </ClCompile>
     <ClCompile Include="CHelpState.cpp">
       <Filter>States</Filter>
     </ClCompile>
@@ -181,6 +178,9 @@
     </ClCompile>
     <ClCompile Include="CUIHorizontalScrollView.cpp">
       <Filter>Entities\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="CCameraManager.cpp">
+      <Filter>Managers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -304,9 +304,6 @@
     <ClInclude Include="CGameState.h">
       <Filter>States</Filter>
     </ClInclude>
-    <ClInclude Include="CGAState.h">
-      <Filter>States</Filter>
-    </ClInclude>
     <ClInclude Include="CHelpState.h">
       <Filter>States</Filter>
     </ClInclude>
@@ -363,6 +360,9 @@
     </ClInclude>
     <ClInclude Include="CUIHorizontalScrollView.h">
       <Filter>Entities\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="CCameraManager.h">
+      <Filter>Managers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

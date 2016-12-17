@@ -49,6 +49,18 @@ void CLevelSelectorState::init(CEngine* engine)
 	buttonScrollRight->SetClickCallback(std::bind(&CLevelSelectorState::ScrollRight, this));
 
 
+	std::string multiplayerText = "Multiplayer Off";
+	if(engine->multiPlayer)
+	{
+		multiplayerText = "Multiplayer On";
+	}
+	multiplayerToggle = new CUIButton(engine, "Bangers", multiplayerText, "Images/rood.png");
+	multiplayerToggle->SetHorizontalAlignment(EUIALignmentHorizontal::CENTER);
+	multiplayerToggle->SetVerticalAlignment(EUIALignmentVertical::BOTTOM);
+	multiplayerToggle->SetPosition(0, -50);
+	multiplayerToggle->SetFontSize(23);
+	multiplayerToggle->SetClickCallback(std::bind(&CLevelSelectorState::ToggleMultiplayer, this));
+
 	Json::Value root;
 	Json::Reader reader;
 
@@ -101,7 +113,7 @@ void CLevelSelectorState::handleEvents(CEngine* engine)
 void CLevelSelectorState::update(CEngine* engine)
 {
 	engine->entityManager->Tick();
-	SDL_Delay((1000.0 / 120) - engine->deltaHelper->delta);
+	SDL_Delay((1000.0 / 120) - engine->deltaHelper->GetScaledDelta());
 	checkSeque();
 }
 
@@ -120,6 +132,19 @@ void CLevelSelectorState::checkSeque()
 	if (!shouldSeque) { return; }
 
 	engine->stateManager->changeState(stateSeque, engine);
+}
+
+void CLevelSelectorState::ToggleMultiplayer()
+{
+	engine->multiPlayer = !engine->multiPlayer;
+
+	if(engine->multiPlayer)
+	{
+		multiplayerToggle->SetText("Multiplayer On");
+	} else
+	{
+		multiplayerToggle->SetText("Multiplayer Off");
+	}
 }
 
 void CLevelSelectorState::ScrollLeft()

@@ -22,7 +22,7 @@ CUIHorizontalScrollView::~CUIHorizontalScrollView()
 void CUIHorizontalScrollView::Draw(SDL_Renderer* renderer)
 {
 	if (!debugVisible) { return; }
-	SDL_RenderDrawRect(engine->renderer, &dstrect);
+	SDL_RenderDrawRect(renderer, &dstrect);
 }
 
 void CUIHorizontalScrollView::Update()

@@ -19,7 +19,7 @@ void CEntityParticleEmitter::Draw(SDL_Renderer* renderer)
 
 void CEntityParticleEmitter::Update()
 {
-	timer += engine->deltaHelper->delta;
+	timer += engine->deltaHelper->GetScaledDelta();
 
 	if (timer > 0.1)
 	{

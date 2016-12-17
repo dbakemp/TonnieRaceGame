@@ -10,7 +10,6 @@
 #include "CEntityWaypoint.h"
 #include "CEntityCheckpoint.h"
 #include "CEntityPowerup.h"
-#include "CGAState.h"
 #include <vector>
 #include <Box2D\Box2D.h>
 #include <functional>
@@ -18,7 +17,6 @@
 
 class CEntityTireAI;
 class CMap;
-typedef void (CGAState::*Callback)();
 
 class CEntityCarAI : public CEntity, public IDrawListener, public IBox2DListener, public ILapCountable
 {

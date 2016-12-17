@@ -242,6 +242,7 @@ xcopy "$(SolutionDir)TonnieRaceGame\Resources\*.*" "$(TargetDir)Resources" /Y /I
     <ClCompile Include="CAdManager.cpp" />
     <ClCompile Include="CBox2DManager.cpp" />
     <ClCompile Include="CCamera.cpp" />
+    <ClCompile Include="CCameraManager.cpp" />
     <ClCompile Include="CCollisionHelper.cpp" />
     <ClCompile Include="CCreditsState.cpp" />
     <ClCompile Include="CDebugLogger.cpp" />
@@ -267,7 +268,6 @@ xcopy "$(SolutionDir)TonnieRaceGame\Resources\*.*" "$(TargetDir)Resources" /Y /I
     <ClCompile Include="CEntityTireAI.cpp" />
     <ClCompile Include="CEntityWaypoint.cpp" />
     <ClCompile Include="CFontManager.cpp" />
-    <ClCompile Include="CGAState.cpp" />
     <ClCompile Include="CInputManager.cpp" />
     <ClCompile Include="CIntegerHelper.cpp" />
     <ClCompile Include="CLevelFactory.cpp" />
@@ -307,6 +307,7 @@ xcopy "$(SolutionDir)TonnieRaceGame\Resources\*.*" "$(TargetDir)Resources" /Y /I
     <ClInclude Include="CAdManager.h" />
     <ClInclude Include="CBox2DManager.h" />
     <ClInclude Include="CCamera.h" />
+    <ClInclude Include="CCameraManager.h" />
     <ClInclude Include="CCollisionHelper.h" />
     <ClInclude Include="CCreditsState.h" />
     <ClInclude Include="CDebugLogger.h" />
@@ -333,7 +334,6 @@ xcopy "$(SolutionDir)TonnieRaceGame\Resources\*.*" "$(TargetDir)Resources" /Y /I
     <ClInclude Include="CEntityWaypoint.h" />
     <ClInclude Include="CFontManager.h" />
     <ClInclude Include="CGameState.h" />
-    <ClInclude Include="CGAState.h" />
     <ClInclude Include="CInputManager.h" />
     <ClInclude Include="CIntegerHelper.h" />
     <ClInclude Include="CLevelFactory.h" />

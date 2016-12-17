@@ -4,7 +4,7 @@
 #include <iomanip>
 #include "CTextureManager.h"
 
-CEntitySpeedoMeter::CEntitySpeedoMeter(CEngine* engine) : CEntity(engine), IDrawListener(engine, (int)CDrawManager::Layers::UI)
+CEntitySpeedoMeter::CEntitySpeedoMeter(CEngine* engine) : CEntity(engine), IInputListener(engine), IDrawListener(engine, (int)CDrawManager::Layers::UI)
 {
 	this->font = font;
 	this->engine = engine;
@@ -56,9 +56,22 @@ void CEntitySpeedoMeter::Update()
 
 void CEntitySpeedoMeter::Draw(SDL_Renderer* renderer)
 {
-	SDL_Rect backrect = {25, engine->windowHeight - 30, 120, 17};
+	SDL_Rect backrect = { camera->GetViewPort().x+25, camera->GetViewPort().h - 30, 120, 17};
 
-	SDL_RenderCopyEx(engine->renderer, meter_texture, NULL, &backrect, angle, &point, SDL_FLIP_NONE);
+	SDL_RenderCopyEx(renderer, meter_texture, NULL, &backrect, angle, &point, SDL_FLIP_NONE);
+}
+
+void CEntitySpeedoMeter::Input(SDL_Event* event)
+{
+	if (event->type == SDL_WINDOWEVENT)
+	{
+		switch (event->window.event)
+		{
+		case SDL_WINDOWEVENT_RESIZED:
+			UpdateContainers();
+			break;
+		}
+	}
 }
 
 void CEntitySpeedoMeter::SetChild(IBox2DListener* child)
@@ -69,4 +82,16 @@ void CEntitySpeedoMeter::SetChild(IBox2DListener* child)
 IBox2DListener* CEntitySpeedoMeter::GetChild()
 {
 	return child;
+}
+
+void CEntitySpeedoMeter::SetCamera(CCamera* camera)
+{
+	this->camera = camera;
+	UpdateContainers();
+}
+
+void CEntitySpeedoMeter::UpdateContainers()
+{
+	speedometer->SetContainer(camera->GetViewPort().x, camera->GetViewPort().y, camera->GetViewPort().w, camera->GetViewPort().h);
+	labelContainer->SetContainer(camera->GetViewPort().x, camera->GetViewPort().y, camera->GetViewPort().w, camera->GetViewPort().h);
 }

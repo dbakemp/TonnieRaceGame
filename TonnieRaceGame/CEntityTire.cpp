@@ -6,6 +6,7 @@
 #include <SDL.h>
 #include <iostream>
 #include "CDebugLogger.h"
+#include "CCameraManager.h"
 
 CEntityTire::CEntityTire(CEngine* engine, CMap* map, int x, int y) : CEntity(engine), IDrawListener(engine, (int)CDrawManager::Layers::Object), IInputListener(engine), IBox2DListener(engine)
 {
@@ -34,7 +35,7 @@ CEntityTire::~CEntityTire()
 
 void CEntityTire::Draw(SDL_Renderer* renderer)
 {
-	Box2DUtils::DrawBody(renderer, body, engine->camera, 0, 0, 0, 255, 0, 0, 0, 255, false);
+	Box2DUtils::DrawBody(renderer, body, engine->cameraManager->GetCurrentCamera(), 0, 0, 0, 255, 0, 0, 0, 255, false);
 }
 
 void CEntityTire::Input(SDL_Event* event)
@@ -120,7 +121,7 @@ void CEntityTire::Create(b2World* world)
 
 void CEntityTire::UpdateFriction()
 {
-	float maxLateralImpulse = engine->deltaHelper->delta * 1000;
+	float maxLateralImpulse = engine->deltaHelper->GetScaledDelta() * 1000;
 	b2Vec2 impulse = body->GetMass() * -GetLateralVelocity();
 	if (impulse.Length() > maxLateralImpulse)
 		impulse *= maxLateralImpulse / impulse.Length();

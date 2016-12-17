@@ -17,6 +17,7 @@
 #include "CEntitySpeedoMeter.h"
 #include "CCollisionHelper.h"
 #include <functional>
+#include "CCameraManager.h"
 
 void CPlayState::init(CEngine* engine)
 {
@@ -41,9 +42,9 @@ void CPlayState::init(CEngine* engine)
 
 	engine->currentMap = factory->map;
 
-	engine->camera = new CCamera(engine);
-
 	CEntityCar* car = new CEntityCar(engine, factory->map);
+	CEntityCarAI* enemy = new CEntityCarAI(engine, factory->map);
+
 	int spawns = factory->map->availableSpawns.size();
 	for (int i = 0; i < spawns; i++)
 	{
@@ -51,16 +52,36 @@ void CPlayState::init(CEngine* engine)
 	}
 
 	car->SetFinishCallback(std::bind(&CPlayState::OnFinish, this, std::placeholders::_1));
-	engine->camera->SetChild(car);
 
 	CEntityFpsCounter* fpsCounter = new CEntityFpsCounter(engine);
-	CEntityLapCounter* lapCounter = new CEntityLapCounter(engine);
-	CEntitySpeedoMeter* speedoMeter = new CEntitySpeedoMeter(engine);
-	speedoMeter->ChangeZIndex(speedoMeter->zIndex + 1);
 	CEntityBuild* build = new CEntityBuild(engine);
 
-	speedoMeter->SetChild(car);
-	lapCounter->SetLapCountable(car);
+	engine->cameraManager->AddCamera();
+	if (engine->multiPlayer)
+	{
+		engine->cameraManager->AddCamera();
+	}
+
+	engine->cameraManager->GetCameraByIndex(0)->SetChild(car);
+	CEntityLapCounter* lapCountera = new CEntityLapCounter(engine);
+	CEntitySpeedoMeter* speedoMetera = new CEntitySpeedoMeter(engine);
+	speedoMetera->ChangeZIndex(speedoMetera->zIndex + 1);
+	speedoMetera->SetChild(car);
+	lapCountera->SetLapCountable(car);
+	lapCountera->SetCamera(engine->cameraManager->GetCameraByIndex(0));
+	speedoMetera->SetCamera(engine->cameraManager->GetCameraByIndex(0));
+
+	if (engine->multiPlayer)
+	{
+		engine->cameraManager->GetCameraByIndex(1)->SetChild(enemy);
+		CEntityLapCounter* lapCounterb = new CEntityLapCounter(engine);
+		CEntitySpeedoMeter* speedoMeterb = new CEntitySpeedoMeter(engine);
+		speedoMeterb->ChangeZIndex(speedoMeterb->zIndex + 1);
+		speedoMeterb->SetChild(enemy);
+		lapCounterb->SetLapCountable(enemy);
+		lapCounterb->SetCamera(engine->cameraManager->GetCameraByIndex(1));
+		speedoMeterb->SetCamera(engine->cameraManager->GetCameraByIndex(1));
+	}
 
 	delete factory;
 }
@@ -81,12 +102,11 @@ void CPlayState::clean(CEngine* engine)
 
 	delete engine->adManager;
 	engine->adManager = nullptr;
-	delete engine->camera;
-	engine->camera = nullptr;
 	delete engine->world;
 	engine->world = nullptr;
 	delete engine->currentMap;
 	engine->currentMap = nullptr;
+	engine->cameraManager->ClearAll();
 }
 
 void CPlayState::pause()
@@ -103,9 +123,9 @@ void CPlayState::handleEvents(CEngine* engine)
 
 void CPlayState::update(CEngine* engine)
 {
-	engine->camera->Update();
+	engine->cameraManager->Update();
 	engine->entityManager->Tick();
-	engine->world->Step(engine->deltaHelper->delta, 8, 3);
+	engine->world->Step(engine->deltaHelper->GetScaledDelta(), 8, 3);
 	checkSeque();
 }
 

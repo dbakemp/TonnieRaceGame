@@ -3,6 +3,7 @@
 #include "CDebugLogger.h"
 #include "Box2DUtils.h"
 #include "CDrawManager.h"
+#include "CCameraManager.h"
 
 CEntityWaypoint::CEntityWaypoint(CEngine* engine, double x, double y, int index) : CEntity(engine), IDrawListener(engine, (int)CDrawManager::Layers::Object), IBox2DListener(engine), IInputListener(engine)
 {
@@ -36,7 +37,7 @@ CEntityWaypoint::~CEntityWaypoint()
 void CEntityWaypoint::Draw(SDL_Renderer* renderer)
 {
 	if (!visible) { return; }
-	Box2DUtils::DrawBody(renderer, body, engine->camera, 0, 0, 0, 0, 0, 0, 255, 255, false);
+	Box2DUtils::DrawBody(renderer, body, engine->cameraManager->GetCurrentCamera(), 0, 0, 0, 0, 0, 0, 255, 255, false);
 }
 
 void CEntityWaypoint::Update()

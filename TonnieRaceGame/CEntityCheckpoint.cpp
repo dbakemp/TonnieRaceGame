@@ -3,6 +3,7 @@
 #include "CDebugLogger.h"
 #include "Box2DUtils.h"
 #include "CDrawManager.h"
+#include "CCameraManager.h"
 
 CEntityCheckpoint::CEntityCheckpoint(CEngine* engine, b2Vec2* start, b2Vec2* end, int index, bool finish) : CEntity(engine), IDrawListener(engine, (int)CDrawManager::Layers::Object), IBox2DListener(engine), IInputListener(engine)
 {
@@ -38,7 +39,7 @@ CEntityCheckpoint::~CEntityCheckpoint()
 void CEntityCheckpoint::Draw(SDL_Renderer* renderer)
 {
 	if (!visible) { return; }
-	Box2DUtils::DrawBody(renderer, body, engine->camera, 0, 0, 0, 0, 0, 0, 255, 255, false);
+	Box2DUtils::DrawBody(renderer, body, engine->cameraManager->GetCurrentCamera(), 0, 0, 0, 0, 0, 0, 255, 255, false);
 }
 
 void CEntityCheckpoint::Update()
