@@ -18,6 +18,8 @@
 #include "CCollisionHelper.h"
 #include <functional>
 #include "CCameraManager.h"
+#include "CPlayer2ControlSchemeCar.h"
+#include "CPlayer1ControlSchemeCar.h"
 
 void CPlayState::init(CEngine* engine)
 {
@@ -43,7 +45,9 @@ void CPlayState::init(CEngine* engine)
 	engine->currentMap = factory->map;
 
 	CEntityCar* car = new CEntityCar(engine, factory->map);
-	CEntityCarAI* enemy = new CEntityCarAI(engine, factory->map);
+	car->SetControlScheme(new CPlayer1ControlSchemeCar());
+	CEntityCar* carb = new CEntityCar(engine, factory->map);
+	carb->SetControlScheme(new CPlayer2ControlSchemeCar());
 
 	int spawns = factory->map->availableSpawns.size();
 	for (int i = 0; i < spawns; i++)
@@ -73,12 +77,12 @@ void CPlayState::init(CEngine* engine)
 
 	if (engine->multiPlayer)
 	{
-		engine->cameraManager->GetCameraByIndex(1)->SetChild(enemy);
+		engine->cameraManager->GetCameraByIndex(1)->SetChild(carb);
 		CEntityLapCounter* lapCounterb = new CEntityLapCounter(engine);
 		CEntitySpeedoMeter* speedoMeterb = new CEntitySpeedoMeter(engine);
 		speedoMeterb->ChangeZIndex(speedoMeterb->zIndex + 1);
-		speedoMeterb->SetChild(enemy);
-		lapCounterb->SetLapCountable(enemy);
+		speedoMeterb->SetChild(carb);
+		lapCounterb->SetLapCountable(carb);
 		lapCounterb->SetCamera(engine->cameraManager->GetCameraByIndex(1));
 		speedoMeterb->SetCamera(engine->cameraManager->GetCameraByIndex(1));
 	}

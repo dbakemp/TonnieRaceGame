@@ -182,6 +182,18 @@
     <ClCompile Include="CCameraManager.cpp">
       <Filter>Managers</Filter>
     </ClCompile>
+    <ClCompile Include="CPlayer1ControlSchemeCar.cpp">
+      <Filter>ControlSchemes</Filter>
+    </ClCompile>
+    <ClCompile Include="CPlayer2ControlSchemeCar.cpp">
+      <Filter>ControlSchemes</Filter>
+    </ClCompile>
+    <ClCompile Include="CPlayer1ControlSchemeTire.cpp">
+      <Filter>ControlSchemes</Filter>
+    </ClCompile>
+    <ClCompile Include="CPlayer2ControlSchemeTire.cpp">
+      <Filter>ControlSchemes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CCamera.h" />
@@ -364,6 +376,21 @@
     <ClInclude Include="CCameraManager.h">
       <Filter>Managers</Filter>
     </ClInclude>
+    <ClInclude Include="IControlScheme.h">
+      <Filter>ControlSchemes</Filter>
+    </ClInclude>
+    <ClInclude Include="CPlayer1ControlSchemeCar.h">
+      <Filter>ControlSchemes</Filter>
+    </ClInclude>
+    <ClInclude Include="CPlayer2ControlSchemeCar.h">
+      <Filter>ControlSchemes</Filter>
+    </ClInclude>
+    <ClInclude Include="CPlayer1ControlSchemeTire.h">
+      <Filter>ControlSchemes</Filter>
+    </ClInclude>
+    <ClInclude Include="CPlayer2ControlSchemeTire.h">
+      <Filter>ControlSchemes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="TonnieRaceGame.rc" />
@@ -412,6 +439,9 @@
     </Filter>
     <Filter Include="Etc">
       <UniqueIdentifier>{486971c5-757c-45f9-9c46-96a07c713d52}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ControlSchemes">
+      <UniqueIdentifier>{11ecf4fc-27c7-4732-8920-535b13c5cfa2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

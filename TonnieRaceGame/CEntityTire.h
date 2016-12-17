@@ -8,6 +8,7 @@
 #include "CEngine.h"
 #include <Box2D\Box2D.h>
 
+class IControlScheme;
 class CMap;
 
 class CEntityTire : public CEntity, public IDrawListener, public IInputListener, public IBox2DListener
@@ -27,6 +28,7 @@ public:
 
 	b2Vec2 GetLateralVelocity();
 	b2Vec2 GetForwardVelocity();
+	void SetControlScheme(IControlScheme* controlScheme);
 
 	float maxForwardSpeed;
 	float maxBackwardsSpeed;
@@ -36,6 +38,7 @@ public:
 
 private:
 	CEngine* engine;
+	IControlScheme* controlScheme;
 };
 
 #endif

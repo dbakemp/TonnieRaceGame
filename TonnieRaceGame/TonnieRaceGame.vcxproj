@@ -274,6 +274,10 @@ xcopy "$(SolutionDir)TonnieRaceGame\Resources\*.*" "$(TargetDir)Resources" /Y /I
     <ClCompile Include="CLevelSelectorState.cpp" />
     <ClCompile Include="CMap.cpp" />
     <ClCompile Include="CIntroState.cpp" />
+    <ClCompile Include="CPlayer1ControlSchemeCar.cpp" />
+    <ClCompile Include="CPlayer1ControlSchemeTire.cpp" />
+    <ClCompile Include="CPlayer2ControlSchemeCar.cpp" />
+    <ClCompile Include="CPlayer2ControlSchemeTire.cpp" />
     <ClCompile Include="CPlayState.cpp" />
     <ClCompile Include="CSpriteSheetManager.cpp" />
     <ClCompile Include="CStateManager.cpp" />
@@ -340,6 +344,10 @@ xcopy "$(SolutionDir)TonnieRaceGame\Resources\*.*" "$(TargetDir)Resources" /Y /I
     <ClInclude Include="CLevelSelectorState.h" />
     <ClInclude Include="CMap.h" />
     <ClInclude Include="CIntroState.h" />
+    <ClInclude Include="CPlayer1ControlSchemeCar.h" />
+    <ClInclude Include="CPlayer1ControlSchemeTire.h" />
+    <ClInclude Include="CPlayer2ControlSchemeCar.h" />
+    <ClInclude Include="CPlayer2ControlSchemeTire.h" />
     <ClInclude Include="CPlayState.h" />
     <ClInclude Include="CSpriteSheetManager.h" />
     <ClInclude Include="CStateManager.h" />
@@ -356,6 +364,7 @@ xcopy "$(SolutionDir)TonnieRaceGame\Resources\*.*" "$(TargetDir)Resources" /Y /I
     <ClInclude Include="EUIStretch.h" />
     <ClInclude Include="HighscoresHelper.h" />
     <ClInclude Include="IBox2DListener.h" />
+    <ClInclude Include="IControlScheme.h" />
     <ClInclude Include="IDrawListener.h" />
     <ClInclude Include="IEntityListener.h" />
     <ClInclude Include="IInputListener.h" />

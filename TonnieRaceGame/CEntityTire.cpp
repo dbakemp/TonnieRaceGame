@@ -7,6 +7,7 @@
 #include <iostream>
 #include "CDebugLogger.h"
 #include "CCameraManager.h"
+#include "IControlScheme.h"
 
 CEntityTire::CEntityTire(CEngine* engine, CMap* map, int x, int y) : CEntity(engine), IDrawListener(engine, (int)CDrawManager::Layers::Object), IInputListener(engine), IBox2DListener(engine)
 {
@@ -40,7 +41,7 @@ void CEntityTire::Draw(SDL_Renderer* renderer)
 
 void CEntityTire::Input(SDL_Event* event)
 {
-	switch (event->type)
+	/*switch (event->type)
 	{
 	case SDL_KEYDOWN:
 		switch (event->key.keysym.sym)
@@ -64,7 +65,8 @@ void CEntityTire::Input(SDL_Event* event)
 	case SDL_CONTROLLERBUTTONUP:
 		OnControllerButton(event->cbutton);
 		break;
-	}
+	}*/
+	controlScheme->Input(event);
 }
 
 void CEntityTire::OnControllerButton(const SDL_ControllerButtonEvent sdlEvent)
@@ -201,4 +203,10 @@ b2Vec2 CEntityTire::GetForwardVelocity()
 {
 	b2Vec2 currentForwardNormal = body->GetWorldVector(b2Vec2(0, 1));
 	return b2Dot(currentForwardNormal, body->GetLinearVelocity()) * currentForwardNormal;
+}
+
+void CEntityTire::SetControlScheme(IControlScheme* controlScheme)
+{
+	this->controlScheme = controlScheme;
+	controlScheme->SetTire(this);
 }

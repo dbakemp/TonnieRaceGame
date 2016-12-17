@@ -14,6 +14,7 @@
 #include <vector>
 #include <Box2D\Box2D.h>
 #include <functional>
+#include "IControlScheme.h"
 
 class CMap;
 
@@ -37,6 +38,7 @@ public:
 	bool powerupActive;
 	void SetFinishCallback(std::function<void(IBox2DListener*)> callback);
 	void FinishCallback();
+	void SetControlScheme(IControlScheme* controlScheme);
 
 	SDL_Texture* spriteSheet;
 	SDL_Rect srcRect;
@@ -46,6 +48,7 @@ private:
 	CEntityParticleEmitter* emitter;
 	b2AABB aabb;
 	std::function<void(IBox2DListener*)> finishCallback;
+	IControlScheme* controlScheme;
 };
 
 #endif

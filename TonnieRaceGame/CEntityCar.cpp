@@ -125,7 +125,7 @@ void CEntityCar::Draw(SDL_Renderer* renderer)
 
 void CEntityCar::Input(SDL_Event* event)
 {
-	switch (event->type)
+	/*switch (event->type)
 	{
 	case SDL_KEYDOWN:
 		switch (event->key.keysym.sym)
@@ -164,7 +164,9 @@ void CEntityCar::Input(SDL_Event* event)
 		OnControllerAxis(event->caxis);
 		break;
 		break;
-	}
+	}*/
+
+	controlScheme->Input(event);
 }
 
 
@@ -243,6 +245,17 @@ void CEntityCar::FinishCallback()
 	if (finishCallback != nullptr)
 	{
 		finishCallback(this);
+	}
+}
+
+void CEntityCar::SetControlScheme(IControlScheme* controlScheme)
+{
+	this->controlScheme = controlScheme;
+	controlScheme->SetCar(this);
+
+	for(CEntityTire* tire: tires)
+	{
+		tire->SetControlScheme(controlScheme->GetNewTireScheme());
 	}
 }
 
