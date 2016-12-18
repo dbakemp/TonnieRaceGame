@@ -197,7 +197,12 @@ void CEntityCar::OnControllerAxis(const SDL_ControllerAxisEvent sdlEvent)
 
 void CEntityCar::CollisionBegin(CEntity* collider)
 {
-	if (collider->GetType() == Type::CHECKPOINT)
+	if (collider->GetType() == Type::WAYPOINT)
+	{
+		CEntityWaypoint* waypoint = static_cast<CEntityWaypoint*>(collider);
+		ProcessWaypoint(waypoint);
+	}
+	else if (collider->GetType() == Type::CHECKPOINT)
 	{
 		CEntityCheckpoint* checkpoint = static_cast<CEntityCheckpoint*>(collider);
 		ProcessCheckpoint(checkpoint);
@@ -235,6 +240,30 @@ void CEntityCar::ActivatePowerup(CEntityPowerup* powerup)
 	CDebugLogger::PrintDebug("Powerup opgepakt");
 }
 
+void CEntityCar::ProcessWaypoint(CEntityWaypoint* waypoint)
+{
+	if (waypoint->index == currentWaypoint)
+	{
+		if (currentWaypoint == engine->currentMap->waypoints.size() - 1)
+		{
+			ChangeWaypoint(engine->currentMap->waypoints[0]);
+			currentWaypoint = 0;
+		}
+		else
+		{
+			ChangeWaypoint(engine->currentMap->waypoints[currentWaypoint + 1]);
+			currentWaypoint++;
+		}
+	}
+}
+
+void CEntityCar::ChangeWaypoint(CEntityWaypoint* waypoint)
+{
+	heading = waypoint;
+	biasX = CIntegerHelper::GetRandomIntBetween(-(waypoint->radius), waypoint->radius);
+	biasY = CIntegerHelper::GetRandomIntBetween(-(waypoint->radius), waypoint->radius);
+}
+
 void CEntityCar::SetFinishCallback(std::function<void(IBox2DListener*)> callback)
 {
 	finishCallback = callback;
@@ -242,6 +271,8 @@ void CEntityCar::SetFinishCallback(std::function<void(IBox2DListener*)> callback
 
 void CEntityCar::FinishCallback()
 {
+	controlScheme->FinishCallback();
+
 	if (finishCallback != nullptr)
 	{
 		finishCallback(this);
@@ -262,7 +293,7 @@ void CEntityCar::SetControlScheme(IControlScheme* controlScheme)
 
 void CEntityCar::Update()
 {
-	//control steering
+	/*//control steering
 	double lockAngle = 50 * DEGTORAD;
 	double turnSpeedPerSec = 250 * DEGTORAD;
 	double turnPerTimeStep = turnSpeedPerSec / (1.0 / engine->deltaHelper->GetScaledDelta());
@@ -303,7 +334,8 @@ void CEntityCar::Update()
 			}
 		}
 	}
-	emitter->SetPosition(((aabb.upperBound.x + aabb.lowerBound.x) / 2 * 5), ((aabb.upperBound.y + aabb.lowerBound.y) / 2 * 5));
+	emitter->SetPosition(((aabb.upperBound.x + aabb.lowerBound.x) / 2 * 5), ((aabb.upperBound.y + aabb.lowerBound.y) / 2 * 5));*/
+	controlScheme->Update();
 }
 
 void CEntityCar::Create(b2World* world)

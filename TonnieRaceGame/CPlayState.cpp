@@ -3,7 +3,6 @@
 #include "CStateManager.h"
 #include "CPlayState.h"
 #include "CEngine.h"
-#include "CEntityCarAI.h"
 #include "CEntityCar.h"
 #include "CEntityBuild.h"
 #include "CInputManager.h"
@@ -20,6 +19,7 @@
 #include "CCameraManager.h"
 #include "CPlayer2ControlSchemeCar.h"
 #include "CPlayer1ControlSchemeCar.h"
+#include "CAIControlSchemeCar.h"
 
 void CPlayState::init(CEngine* engine)
 {
@@ -45,15 +45,7 @@ void CPlayState::init(CEngine* engine)
 	engine->currentMap = factory->map;
 
 	CEntityCar* car = new CEntityCar(engine, factory->map);
-	car->SetControlScheme(new CPlayer1ControlSchemeCar());
-	CEntityCar* carb = new CEntityCar(engine, factory->map);
-	carb->SetControlScheme(new CPlayer2ControlSchemeCar());
-
-	int spawns = factory->map->availableSpawns.size();
-	for (int i = 0; i < spawns; i++)
-	{
-		new CEntityCarAI(engine, factory->map);
-	}
+	car->SetControlScheme(new CPlayer1ControlSchemeCar(engine));
 
 	car->SetFinishCallback(std::bind(&CPlayState::OnFinish, this, std::placeholders::_1));
 
@@ -77,6 +69,8 @@ void CPlayState::init(CEngine* engine)
 
 	if (engine->multiPlayer)
 	{
+		CEntityCar* carb = new CEntityCar(engine, factory->map);
+		carb->SetControlScheme(new CPlayer2ControlSchemeCar(engine));
 		engine->cameraManager->GetCameraByIndex(1)->SetChild(carb);
 		CEntityLapCounter* lapCounterb = new CEntityLapCounter(engine);
 		CEntitySpeedoMeter* speedoMeterb = new CEntitySpeedoMeter(engine);
@@ -85,6 +79,13 @@ void CPlayState::init(CEngine* engine)
 		lapCounterb->SetLapCountable(carb);
 		lapCounterb->SetCamera(engine->cameraManager->GetCameraByIndex(1));
 		speedoMeterb->SetCamera(engine->cameraManager->GetCameraByIndex(1));
+	}
+
+	int spawns = factory->map->availableSpawns.size();
+	for (int i = 0; i < spawns; i++)
+	{
+		CEntityCar* tempCar = new CEntityCar(engine, factory->map);
+		tempCar->SetControlScheme(new CAIControlSchemeCar(engine));
 	}
 
 	delete factory;

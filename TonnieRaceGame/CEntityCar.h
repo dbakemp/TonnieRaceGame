@@ -34,6 +34,8 @@ public:
 	void CollisionEnd(CEntity* collider) override;
 	void ProcessCheckpoint(CEntityCheckpoint* checkpoint);
 	void ActivatePowerup(CEntityPowerup* powerup);
+	void ProcessWaypoint(CEntityWaypoint* waypoint);
+	void ChangeWaypoint(CEntityWaypoint* waypoint);
 	double powerupTimer;
 	bool powerupActive;
 	void SetFinishCallback(std::function<void(IBox2DListener*)> callback);
@@ -43,10 +45,18 @@ public:
 	SDL_Texture* spriteSheet;
 	SDL_Rect srcRect;
 	CEntityPowerup* activePowerup;
-private:
-	CEngine* engine;
 	CEntityParticleEmitter* emitter;
 	b2AABB aabb;
+
+	CEntityWaypoint* heading;
+
+	int currentWaypoint;
+	int biasX, biasY;
+	double backupTimer;
+	double backingupTimer;
+	bool shouldBackup;
+private:
+	CEngine* engine;
 	std::function<void(IBox2DListener*)> finishCallback;
 	IControlScheme* controlScheme;
 };

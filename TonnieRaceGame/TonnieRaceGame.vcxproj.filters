@@ -44,9 +44,6 @@
     <ClCompile Include="CEntityCar.cpp">
       <Filter>Entities</Filter>
     </ClCompile>
-    <ClCompile Include="CEntityCarAI.cpp">
-      <Filter>Entities</Filter>
-    </ClCompile>
     <ClCompile Include="CEntityCheckpoint.cpp">
       <Filter>Entities</Filter>
     </ClCompile>
@@ -60,9 +57,6 @@
       <Filter>Entities</Filter>
     </ClCompile>
     <ClCompile Include="CEntityTire.cpp">
-      <Filter>Entities</Filter>
-    </ClCompile>
-    <ClCompile Include="CEntityTireAI.cpp">
       <Filter>Entities</Filter>
     </ClCompile>
     <ClCompile Include="CEntityWaypoint.cpp">
@@ -194,6 +188,12 @@
     <ClCompile Include="CPlayer2ControlSchemeTire.cpp">
       <Filter>ControlSchemes</Filter>
     </ClCompile>
+    <ClCompile Include="CAIControlSchemeCar.cpp">
+      <Filter>ControlSchemes</Filter>
+    </ClCompile>
+    <ClCompile Include="CAIControlSchemeTire.cpp">
+      <Filter>ControlSchemes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CCamera.h" />
@@ -241,9 +241,6 @@
     <ClInclude Include="CEntityCar.h">
       <Filter>Entities</Filter>
     </ClInclude>
-    <ClInclude Include="CEntityCarAI.h">
-      <Filter>Entities</Filter>
-    </ClInclude>
     <ClInclude Include="CEntityCheckpoint.h">
       <Filter>Entities</Filter>
     </ClInclude>
@@ -257,9 +254,6 @@
       <Filter>Entities</Filter>
     </ClInclude>
     <ClInclude Include="CEntityTire.h">
-      <Filter>Entities</Filter>
-    </ClInclude>
-    <ClInclude Include="CEntityTireAI.h">
       <Filter>Entities</Filter>
     </ClInclude>
     <ClInclude Include="CEntityWaypoint.h">
@@ -389,6 +383,12 @@
       <Filter>ControlSchemes</Filter>
     </ClInclude>
     <ClInclude Include="CPlayer2ControlSchemeTire.h">
+      <Filter>ControlSchemes</Filter>
+    </ClInclude>
+    <ClInclude Include="CAIControlSchemeCar.h">
+      <Filter>ControlSchemes</Filter>
+    </ClInclude>
+    <ClInclude Include="CAIControlSchemeTire.h">
       <Filter>ControlSchemes</Filter>
     </ClInclude>
   </ItemGroup>

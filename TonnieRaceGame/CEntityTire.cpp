@@ -112,9 +112,7 @@ void CEntityTire::OnControllerButton(const SDL_ControllerButtonEvent sdlEvent)
 
 void CEntityTire::Update()
 {
-	UpdateFriction();
-	UpdateDrive();
-	UpdateTurn();
+	controlScheme->Update();
 }
 
 void CEntityTire::Create(b2World* world)

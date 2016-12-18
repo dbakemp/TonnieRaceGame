@@ -13,6 +13,10 @@ public:
 	virtual void SetCar(CEntityCar* car) = 0;
 	virtual void SetTire(CEntityTire* tire) = 0;
 	virtual IControlScheme* GetNewTireScheme() = 0;
+	virtual void UpdateFriction() = 0;
+	virtual void UpdateDrive() = 0;
+	virtual void UpdateTurn() = 0;
+	virtual void FinishCallback() = 0;
 	CEntityCar* car;
 	CEntityTire* tire;
 private:

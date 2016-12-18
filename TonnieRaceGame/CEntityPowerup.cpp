@@ -8,7 +8,6 @@
 #include "SDL_image.h"
 #include "stdlib.h"
 #include "CEntityCar.h"
-#include "CEntityCarAI.h"
 #include "CDebugLogger.h"
 #include "CCameraManager.h"
 

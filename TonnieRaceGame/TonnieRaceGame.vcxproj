@@ -240,6 +240,8 @@ xcopy "$(SolutionDir)TonnieRaceGame\Resources\*.*" "$(TargetDir)Resources" /Y /I
     <ClCompile Include="AdHelper.cpp" />
     <ClCompile Include="Box2DUtils.cpp" />
     <ClCompile Include="CAdManager.cpp" />
+    <ClCompile Include="CAIControlSchemeCar.cpp" />
+    <ClCompile Include="CAIControlSchemeTire.cpp" />
     <ClCompile Include="CBox2DManager.cpp" />
     <ClCompile Include="CCamera.cpp" />
     <ClCompile Include="CCameraManager.cpp" />
@@ -253,7 +255,6 @@ xcopy "$(SolutionDir)TonnieRaceGame\Resources\*.*" "$(TargetDir)Resources" /Y /I
     <ClCompile Include="CEntityBorder.cpp" />
     <ClCompile Include="CEntityBuild.cpp" />
     <ClCompile Include="CEntityCar.cpp" />
-    <ClCompile Include="CEntityCarAI.cpp" />
     <ClCompile Include="CEntityCheckpoint.cpp" />
     <ClCompile Include="CEntityFpsCounter.cpp" />
     <ClCompile Include="CEntityLapCounter.cpp" />
@@ -265,7 +266,6 @@ xcopy "$(SolutionDir)TonnieRaceGame\Resources\*.*" "$(TargetDir)Resources" /Y /I
     <ClCompile Include="CEntitySpawn.cpp" />
     <ClCompile Include="CEntityTile.cpp" />
     <ClCompile Include="CEntityTire.cpp" />
-    <ClCompile Include="CEntityTireAI.cpp" />
     <ClCompile Include="CEntityWaypoint.cpp" />
     <ClCompile Include="CFontManager.cpp" />
     <ClCompile Include="CInputManager.cpp" />
@@ -309,6 +309,8 @@ xcopy "$(SolutionDir)TonnieRaceGame\Resources\*.*" "$(TargetDir)Resources" /Y /I
     <ClInclude Include="AdHelper.h" />
     <ClInclude Include="Box2DUtils.h" />
     <ClInclude Include="CAdManager.h" />
+    <ClInclude Include="CAIControlSchemeCar.h" />
+    <ClInclude Include="CAIControlSchemeTire.h" />
     <ClInclude Include="CBox2DManager.h" />
     <ClInclude Include="CCamera.h" />
     <ClInclude Include="CCameraManager.h" />
@@ -322,7 +324,6 @@ xcopy "$(SolutionDir)TonnieRaceGame\Resources\*.*" "$(TargetDir)Resources" /Y /I
     <ClInclude Include="CEntityBorder.h" />
     <ClInclude Include="CEntityBuild.h" />
     <ClInclude Include="CEntityCar.h" />
-    <ClInclude Include="CEntityCarAI.h" />
     <ClInclude Include="CEntityCheckpoint.h" />
     <ClInclude Include="CEntityFpsCounter.h" />
     <ClInclude Include="CEntityLapCounter.h" />
@@ -334,7 +335,6 @@ xcopy "$(SolutionDir)TonnieRaceGame\Resources\*.*" "$(TargetDir)Resources" /Y /I
     <ClInclude Include="CEntitySpawn.h" />
     <ClInclude Include="CEntityTile.h" />
     <ClInclude Include="CEntityTire.h" />
-    <ClInclude Include="CEntityTireAI.h" />
     <ClInclude Include="CEntityWaypoint.h" />
     <ClInclude Include="CFontManager.h" />
     <ClInclude Include="CGameState.h" />

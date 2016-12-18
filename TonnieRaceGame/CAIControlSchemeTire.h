@@ -1,13 +1,13 @@
-#ifndef CPLAYER2CONTROLSCHEMETIRE_H
-#define CPLAYER2CONTROLSCHEMETIRE_H
+#ifndef CAICONTROLSCHEMETIRE_H
+#define CAICONTROLSCHEMETIRE_H
 
 #include "IBox2DListener.h"
 #include "IControlScheme.h"
 
-class CPlayer2ControlSchemeTire : public IControlScheme
+class CAIControlSchemeTire : public IControlScheme
 {
 public:
-	explicit CPlayer2ControlSchemeTire(CEngine* engine);
+	explicit CAIControlSchemeTire(CEngine* engine);
 	void Input(SDL_Event* event) override;
 	void Update() override;
 	void SetCar(CEntityCar* car) override;
@@ -19,6 +19,6 @@ public:
 	IControlScheme* GetNewTireScheme() override;
 private:
 	CEngine* engine;
-};
+}; 
 
 #endif
