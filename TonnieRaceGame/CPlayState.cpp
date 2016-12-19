@@ -20,6 +20,7 @@
 #include "CPlayer2ControlSchemeCar.h"
 #include "CPlayer1ControlSchemeCar.h"
 #include "CAIControlSchemeCar.h"
+#include "CEntityPositionCounter.h"
 
 void CPlayState::init(CEngine* engine)
 {
@@ -61,11 +62,14 @@ void CPlayState::init(CEngine* engine)
 	engine->cameraManager->GetCameraByIndex(0)->SetChild(car);
 	CEntityLapCounter* lapCountera = new CEntityLapCounter(engine);
 	CEntitySpeedoMeter* speedoMetera = new CEntitySpeedoMeter(engine);
+	CEntityPositionCounter* positionCountera = new CEntityPositionCounter(engine);
 	speedoMetera->ChangeZIndex(speedoMetera->zIndex + 1);
 	speedoMetera->SetChild(car);
+	positionCountera->SetCar(car);
 	lapCountera->SetLapCountable(car);
 	lapCountera->SetCamera(engine->cameraManager->GetCameraByIndex(0));
 	speedoMetera->SetCamera(engine->cameraManager->GetCameraByIndex(0));
+	positionCountera->SetCamera(engine->cameraManager->GetCameraByIndex(0));
 
 	if (engine->multiPlayer)
 	{
@@ -74,11 +78,14 @@ void CPlayState::init(CEngine* engine)
 		engine->cameraManager->GetCameraByIndex(1)->SetChild(carb);
 		CEntityLapCounter* lapCounterb = new CEntityLapCounter(engine);
 		CEntitySpeedoMeter* speedoMeterb = new CEntitySpeedoMeter(engine);
+		CEntityPositionCounter* positionCounterb = new CEntityPositionCounter(engine);
 		speedoMeterb->ChangeZIndex(speedoMeterb->zIndex + 1);
 		speedoMeterb->SetChild(carb);
+		positionCounterb->SetCar(carb);
 		lapCounterb->SetLapCountable(carb);
 		lapCounterb->SetCamera(engine->cameraManager->GetCameraByIndex(1));
 		speedoMeterb->SetCamera(engine->cameraManager->GetCameraByIndex(1));
+		positionCounterb->SetCamera(engine->cameraManager->GetCameraByIndex(1));
 	}
 
 	int spawns = factory->map->availableSpawns.size();
@@ -131,6 +138,7 @@ void CPlayState::update(CEngine* engine)
 	engine->cameraManager->Update();
 	engine->entityManager->Tick();
 	engine->world->Step(engine->deltaHelper->GetScaledDelta(), 8, 3);
+	engine->currentMap->CheckPositions();
 	checkSeque();
 }
 

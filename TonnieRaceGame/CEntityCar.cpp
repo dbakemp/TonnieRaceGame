@@ -29,6 +29,8 @@ CEntityCar::CEntityCar(CEngine* engine, CMap* map) : CEntity(engine), IDrawListe
 	this->powerupActive = false;
 	this->activePowerup = nullptr;
 	this->powerupTimer = 0;
+	this->position = 1;
+	this->finishCallback = nullptr;
 
 	SDL_Surface* texture = IMG_Load("Resources/Images/spritesheet_vehicles.png");
 	this->spriteSheet = engine->textureManager->GetTexture("Images/spritesheet_vehicles.png");
@@ -93,7 +95,8 @@ CEntityCar::CEntityCar(CEngine* engine, CMap* map) : CEntity(engine), IDrawListe
 	frJoint = static_cast<b2RevoluteJoint*>(engine->world->CreateJoint(&jointDef));
 	tires.push_back(tire);
 
-	this->finishCallback = nullptr;
+	map->cars.push_back(this);
+
 	this->engine = engine;
 }
 
@@ -288,6 +291,16 @@ void CEntityCar::SetControlScheme(IControlScheme* controlScheme)
 	{
 		tire->SetControlScheme(controlScheme->GetNewTireScheme());
 	}
+}
+
+void CEntityCar::SetPosition(int position)
+{
+	this->position = position;
+}
+
+int CEntityCar::GetPosition()
+{
+	return position;
 }
 
 

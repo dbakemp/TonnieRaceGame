@@ -16,7 +16,7 @@ void CCreditsState::init(CEngine* engine)
 	{
 		//"--width=10",
 		//"--height=400",
-		//"--fullscreen",
+		"--fullscreen",
 		//t.c_str(),
 		"--no-embedded-video", "--no-video-deco",
 	};

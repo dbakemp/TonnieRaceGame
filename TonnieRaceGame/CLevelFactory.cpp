@@ -43,7 +43,7 @@ void CLevelFactory::CreateMap(Json::Value* root)
 {
 	CDebugLogger::PrintDebug("Creating Map");
 
-	map = new CMap();
+	map = new CMap(engine);
 
 	map->height = root->get("height", 0).asInt();
 	map->width = root->get("width", 0).asInt();
@@ -186,7 +186,8 @@ void CLevelFactory::CreateCheckpoints(Json::Value* root)
 	}
 
 	map->checkpoints++;
-	new CEntityCheckpoint(this->engine, start, end, index, isFinish);
+	CEntityCheckpoint* checkpoint = new CEntityCheckpoint(this->engine, start, end, index, isFinish);
+	map->checkpointsList.push_back(checkpoint);
 	delete start;
 	delete end;
 }

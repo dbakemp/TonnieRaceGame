@@ -41,6 +41,8 @@ public:
 	void SetFinishCallback(std::function<void(IBox2DListener*)> callback);
 	void FinishCallback();
 	void SetControlScheme(IControlScheme* controlScheme);
+	void SetPosition(int position);
+	int GetPosition();
 
 	SDL_Texture* spriteSheet;
 	SDL_Rect srcRect;
@@ -59,6 +61,7 @@ private:
 	CEngine* engine;
 	std::function<void(IBox2DListener*)> finishCallback;
 	IControlScheme* controlScheme;
+	int position;
 };
 
 #endif

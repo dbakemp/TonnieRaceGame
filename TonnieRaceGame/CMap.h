@@ -6,12 +6,17 @@
 #include "CEntityWaypoint.h"
 #include "CEntityPowerup.h"
 #include "CEntitySpawn.h"
+#include "CEntityCheckpoint.h"
+
+class CEntityCar;
 
 class CMap
 {
 public:
-	CMap();
+	CMap(CEngine* engine);
 	~CMap();
+
+	void CheckPositions();
 
 	SDL_Texture* spriteSheet;
 	std::string spriteSheetLocation;
@@ -31,11 +36,16 @@ public:
 	int laps;
 	int checkpoints;
 
+	CEntityCheckpoint* GetCheckpointByIndex(int index);
+
 	std::vector<CEntityWaypoint*> waypoints;
 	std::vector<CEntitySpawn*> availableSpawns;
 	std::vector<CEntitySpawn*> takenSpawns;
+	std::vector<CEntityCheckpoint*> checkpointsList;
+	std::vector<CEntityCar*> cars;
 	CEntitySpawn* GetSpawn();
 private:
+	CEngine* engine;
 };
 
 #endif
