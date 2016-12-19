@@ -49,16 +49,16 @@ void CLevelSelectorState::init(CEngine* engine)
 	buttonScrollRight->SetClickCallback(std::bind(&CLevelSelectorState::ScrollRight, this));
 
 
-	std::string multiplayerText = "Multiplayer Off";
+	std::string multiplayerText = "Multiplayer: Uit";
 	if(engine->multiPlayer)
 	{
-		multiplayerText = "Multiplayer On";
+		multiplayerText = "Multiplayer: Aan";
 	}
 	multiplayerToggle = new CUIButton(engine, "Bangers", multiplayerText, "Images/rood.png");
 	multiplayerToggle->SetHorizontalAlignment(EUIALignmentHorizontal::CENTER);
 	multiplayerToggle->SetVerticalAlignment(EUIALignmentVertical::BOTTOM);
 	multiplayerToggle->SetPosition(0, -50);
-	multiplayerToggle->SetFontSize(23);
+	multiplayerToggle->SetFontSize(22);
 	multiplayerToggle->SetClickCallback(std::bind(&CLevelSelectorState::ToggleMultiplayer, this));
 
 	Json::Value root;
@@ -140,10 +140,10 @@ void CLevelSelectorState::ToggleMultiplayer()
 
 	if(engine->multiPlayer)
 	{
-		multiplayerToggle->SetText("Multiplayer On");
+		multiplayerToggle->SetText("Multiplayer: Aan");
 	} else
 	{
-		multiplayerToggle->SetText("Multiplayer Off");
+		multiplayerToggle->SetText("Multiplayer: Uit");
 	}
 }
 
