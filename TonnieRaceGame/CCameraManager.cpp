@@ -66,13 +66,15 @@ void CCameraManager::Update()
 
 void CCameraManager::UpdateViewPort()
 {
-	int width = engine->windowWidth / count;
-	int height = engine->windowHeight;
-	int index = 0;
+	if (count != 0) {
+		int width = engine->windowWidth / count;
+		int height = engine->windowHeight;
+		int index = 0;
 
-	for (CCamera* camera : cameraList) {
-		camera->SetViewPort(width, height, index*width, 0);
-		index++;
+		for (CCamera* camera : cameraList) {
+			camera->SetViewPort(width, height, index*width, 0);
+			index++;
+		}
 	}
 }
 

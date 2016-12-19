@@ -447,7 +447,7 @@
                     {
                      "index":0,
                      "isFinish":true,
-                     "laps":6
+                     "laps":2
                     },
                  "propertytypes":
                     {
@@ -948,8 +948,8 @@
                  "name":"",
                  "polyline":[
                         {
-                         "x":0,
-                         "y":0
+                         "x":12,
+                         "y":223
                         }, 
                         {
                          "x":-62.6666666666667,
