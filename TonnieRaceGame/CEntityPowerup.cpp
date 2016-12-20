@@ -87,7 +87,6 @@ void CEntityPowerup::Update()
 
 void CEntityPowerup::CollisionBegin(CEntity* collider)
 {
-	CDebugLogger::PrintDebug("Robin is een anuspieiper");
 	if (visible)
 	{
 		if (collider->GetType() == Type::CAR)

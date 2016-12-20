@@ -46,7 +46,7 @@ public:
 
 	SDL_Texture* spriteSheet;
 	SDL_Rect srcRect;
-	CEntityPowerup* activePowerup;
+	CEntityPowerup::PowerupType activePowerup;
 	CEntityParticleEmitter* emitter;
 	b2AABB aabb;
 

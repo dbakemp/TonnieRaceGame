@@ -21,6 +21,7 @@ public:
 
 	enum class PowerupType
 	{
+		NONE = -1,
 		SPEED = 0,
 		DRUNK = 1
 	};

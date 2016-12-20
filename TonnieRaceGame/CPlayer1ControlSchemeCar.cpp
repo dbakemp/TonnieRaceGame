@@ -32,16 +32,26 @@ void CPlayer1ControlSchemeCar::Input(SDL_Event* event)
 			car->debugVisible = !car->debugVisible;
 			break;
 		case SDLK_SPACE:
-			if (car->activePowerup != nullptr && !car->powerupActive)
+			if (car->activePowerup != CEntityPowerup::PowerupType::NONE && !car->powerupActive)
 			{
 				car->powerupActive = true;
 				for (CEntityTire* tire : car->tires)
 				{
 					tire->powerupActive = true;
-					tire->type = static_cast<int>(car->activePowerup->type);
+					tire->type = static_cast<int>(car->activePowerup);
 				}
 				CDebugLogger::PrintDebug("Powerup geactiveerd");
 			}
+			break;
+		case SDLK_F5:
+			//Powerup1 oppakken
+			CDebugLogger::PrintDebug("CHEAT: Powerup speed oppakken");
+			car->activePowerup = CEntityPowerup::PowerupType::SPEED;
+			break;
+		case SDLK_F6:
+			//Powerup2 oppakken
+			CDebugLogger::PrintDebug("CHEAT: Powerup dronken oppakken");
+			car->activePowerup = CEntityPowerup::PowerupType::DRUNK;
 			break;
 		}
 		break;
@@ -77,7 +87,7 @@ void CPlayer1ControlSchemeCar::Update()
 		break;
 	}
 
-	if (car->powerupActive && car->activePowerup != nullptr && static_cast<int>(car->activePowerup->type) == 1)
+	if (car->powerupActive && car->activePowerup != CEntityPowerup::PowerupType::NONE && static_cast<int>(car->activePowerup) == 1)
 	{
 		desiredAngle = 0 - desiredAngle;
 	}
@@ -97,7 +107,7 @@ void CPlayer1ControlSchemeCar::Update()
 			CDebugLogger::PrintDebug("Powerup verlopen");
 			car->powerupTimer = 0;
 			car->powerupActive = false;
-			car->activePowerup = nullptr;
+			car->activePowerup = CEntityPowerup::PowerupType::NONE;
 			for (CEntityTire* tire : car->tires)
 			{
 				tire->powerupActive = false;

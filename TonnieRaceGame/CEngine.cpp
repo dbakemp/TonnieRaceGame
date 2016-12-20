@@ -142,6 +142,22 @@ void CEngine::Tick()
 				case SDLK_HOME:
 					deltaHelper->SetScale(1);
 					break;
+				case SDLK_F1:
+					//Alles vrijspelen
+					CDebugLogger::PrintDebug("CHEAT: Alles vrijspelen");
+					break;
+				case SDLK_F2:
+					//Laatste lap van level
+					CDebugLogger::PrintDebug("CHEAT: Laatste lap van level");
+					break;
+				case SDLK_F3:
+					//Level afronden(winnen)
+					CDebugLogger::PrintDebug("CHEAT: Level afronden (winnen)");
+					break;
+				case SDLK_F4:
+					//Level afronden(verliezen)
+					CDebugLogger::PrintDebug("CHEAT: Level afronden (verliezen)");
+					break;
 				}
 			}
 			stateManager->getCurrentState()->input(this, &event);

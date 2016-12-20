@@ -19,16 +19,16 @@ CEntityPowerupHUD::~CEntityPowerupHUD()
 
 void CEntityPowerupHUD::Update()
 {
-	if (this->car->activePowerup == nullptr)
+	if (this->car->activePowerup == CEntityPowerup::PowerupType::NONE)
 	{
 		image->SetImage("");
 	}
 
-	else if (this->car->activePowerup->type == CEntityPowerup::PowerupType::DRUNK)
+	else if (this->car->activePowerup == CEntityPowerup::PowerupType::DRUNK)
 	{
 		image->SetImage("Images/beerPowerup.png");
 	}
-	else if (this->car->activePowerup->type == CEntityPowerup::PowerupType::SPEED)
+	else if (this->car->activePowerup == CEntityPowerup::PowerupType::SPEED)
 	{
 		image->SetImage("Images/speedPowerup.png");
 	}

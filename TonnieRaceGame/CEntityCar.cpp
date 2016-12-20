@@ -27,7 +27,7 @@ CEntityCar::CEntityCar(CEngine* engine, CMap* map) : CEntity(engine), IDrawListe
 	this->currentLap = 0;
 	this->debugVisible = false;
 	this->powerupActive = false;
-	this->activePowerup = nullptr;
+	this->activePowerup = CEntityPowerup::PowerupType::NONE;
 	this->powerupTimer = 0;
 	this->position = 1;
 	this->finishCallback = nullptr;
@@ -239,7 +239,7 @@ void CEntityCar::ProcessCheckpoint(CEntityCheckpoint* checkpoint)
 
 void CEntityCar::ActivatePowerup(CEntityPowerup* powerup)
 {
-	this->activePowerup = powerup;
+	this->activePowerup = powerup->type;
 	CDebugLogger::PrintDebug("Powerup opgepakt");
 }
 
