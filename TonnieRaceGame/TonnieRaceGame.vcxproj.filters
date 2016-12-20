@@ -197,6 +197,9 @@
     <ClCompile Include="CEntityPositionCounter.cpp">
       <Filter>Entities\GUI</Filter>
     </ClCompile>
+    <ClCompile Include="CEntityPowerupHUD.cpp">
+      <Filter>Entities\GUI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CCamera.h" />
@@ -395,6 +398,9 @@
       <Filter>ControlSchemes</Filter>
     </ClInclude>
     <ClInclude Include="CEntityPositionCounter.h">
+      <Filter>Entities\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CEntityPowerupHUD.h">
       <Filter>Entities\GUI</Filter>
     </ClInclude>
   </ItemGroup>

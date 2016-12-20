@@ -10,6 +10,7 @@
 #include "CEntityCar.h"
 #include "CDebugLogger.h"
 #include "CCameraManager.h"
+#include "CIntegerHelper.h"
 
 CEntityPowerup::CEntityPowerup(CEngine* engine, CMap* map, double xPos, double yPos) : CEntity(engine), IDrawListener(engine, (int)CDrawManager::Layers::Object), IBox2DListener(engine), IInputListener(engine)
 {
@@ -21,7 +22,7 @@ CEntityPowerup::CEntityPowerup(CEngine* engine, CMap* map, double xPos, double y
 	this->timer = 0;
 
 	int count = 2;
-	PowerupType type = static_cast<PowerupType>(rand() % 2);
+	PowerupType type = static_cast<PowerupType>(CIntegerHelper::GetRandomIntBetween(0,1));
 	int rowNumber = 0;
 	int columnNumber = static_cast<int>(type);
 	int size = 36;
@@ -86,15 +87,16 @@ void CEntityPowerup::Update()
 
 void CEntityPowerup::CollisionBegin(CEntity* collider)
 {
+	CDebugLogger::PrintDebug("Robin is een anuspieiper");
 	if (visible)
 	{
-		visible = false;
 		if (collider->GetType() == Type::CAR)
 		{
 			CEntityCar* car = dynamic_cast<CEntityCar*>(collider);
 			if (car != NULL)
 			{
 				car->ActivatePowerup(this);
+				visible = false;
 			}
 		}
 	}

@@ -21,6 +21,7 @@
 #include "CPlayer1ControlSchemeCar.h"
 #include "CAIControlSchemeCar.h"
 #include "CEntityPositionCounter.h"
+#include "CEntityPowerupHUD.h"
 
 void CPlayState::init(CEngine* engine)
 {
@@ -41,7 +42,7 @@ void CPlayState::init(CEngine* engine)
 	CLevelFactory* factory = new CLevelFactory(engine);
 
 	factory->LoadMap("Resources/Maps/" + engine->level);
-	engine->musicHelper->playTrack("Resources/Music/beep.mp3", true);
+	engine->musicHelper->playTrack("Resources/Music/daargaatze.mp3", true);
 
 	engine->currentMap = factory->map;
 
@@ -63,13 +64,17 @@ void CPlayState::init(CEngine* engine)
 	CEntityLapCounter* lapCountera = new CEntityLapCounter(engine);
 	CEntitySpeedoMeter* speedoMetera = new CEntitySpeedoMeter(engine);
 	CEntityPositionCounter* positionCountera = new CEntityPositionCounter(engine);
+	CEntityPowerupHUD* powerupHUDa = new CEntityPowerupHUD(engine);
 	speedoMetera->ChangeZIndex(speedoMetera->zIndex + 1);
 	speedoMetera->SetChild(car);
 	positionCountera->SetCar(car);
+	powerupHUDa->SetCar(car);
 	lapCountera->SetLapCountable(car);
 	lapCountera->SetCamera(engine->cameraManager->GetCameraByIndex(0));
 	speedoMetera->SetCamera(engine->cameraManager->GetCameraByIndex(0));
 	positionCountera->SetCamera(engine->cameraManager->GetCameraByIndex(0));
+	powerupHUDa->SetCamera(engine->cameraManager->GetCameraByIndex(0));
+
 
 	if (engine->multiPlayer)
 	{
@@ -79,13 +84,16 @@ void CPlayState::init(CEngine* engine)
 		CEntityLapCounter* lapCounterb = new CEntityLapCounter(engine);
 		CEntitySpeedoMeter* speedoMeterb = new CEntitySpeedoMeter(engine);
 		CEntityPositionCounter* positionCounterb = new CEntityPositionCounter(engine);
+		CEntityPowerupHUD* powerupHUDb = new CEntityPowerupHUD(engine);
 		speedoMeterb->ChangeZIndex(speedoMeterb->zIndex + 1);
 		speedoMeterb->SetChild(carb);
 		positionCounterb->SetCar(carb);
+		powerupHUDb->SetCar(carb);
 		lapCounterb->SetLapCountable(carb);
 		lapCounterb->SetCamera(engine->cameraManager->GetCameraByIndex(1));
 		speedoMeterb->SetCamera(engine->cameraManager->GetCameraByIndex(1));
 		positionCounterb->SetCamera(engine->cameraManager->GetCameraByIndex(1));
+		powerupHUDb->SetCamera(engine->cameraManager->GetCameraByIndex(1));
 	}
 
 	int spawns = factory->map->availableSpawns.size();

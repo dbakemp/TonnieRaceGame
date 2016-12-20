@@ -31,6 +31,7 @@ public:
 	void SetTag(std::string tag);
 	void SetClickCallback(std::function<void(IUIEntity*)> callback);
 	void SetClickHoldCallback(std::function<void(IUIEntity*)> callback);
+	void SetImage(std::string texture);
 	std::string GetTag();
 private:
 	CEngine* engine;

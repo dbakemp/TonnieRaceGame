@@ -173,6 +173,12 @@ void CUIImage::SetClickHoldCallback(std::function<void(IUIEntity*)> callback)
 	this->clickCallHoldback = callback;
 }
 
+void CUIImage::SetImage(std::string texture)
+{
+	this->texture = engine->textureManager->GetTexture(texture);
+	PreRender();
+}
+
 std::string CUIImage::GetTag()
 {
 	return tag;
