@@ -22,6 +22,7 @@
 #include "CAIControlSchemeCar.h"
 #include "CEntityPositionCounter.h"
 #include "CEntityPowerupHUD.h"
+#include "CEntityScoreboard.h"
 
 void CPlayState::init(CEngine* engine)
 {
@@ -42,7 +43,10 @@ void CPlayState::init(CEngine* engine)
 	CLevelFactory* factory = new CLevelFactory(engine);
 
 	factory->LoadMap("Resources/Maps/" + engine->level);
-	engine->musicHelper->playTrack("Resources/Music/daargaatze.mp3", true);
+
+
+	//engine->musicHelper->playTrack("Resources/Music/daargaatze.mp3", true);
+	engine->musicHelper->playBackgroundMusic();
 
 	engine->currentMap = factory->map;
 
@@ -65,15 +69,18 @@ void CPlayState::init(CEngine* engine)
 	CEntitySpeedoMeter* speedoMetera = new CEntitySpeedoMeter(engine);
 	CEntityPositionCounter* positionCountera = new CEntityPositionCounter(engine);
 	CEntityPowerupHUD* powerupHUDa = new CEntityPowerupHUD(engine);
+	CEntityScoreboard* scoreBoard = new CEntityScoreboard(engine);
 	speedoMetera->ChangeZIndex(speedoMetera->zIndex + 1);
 	speedoMetera->SetChild(car);
 	positionCountera->SetCar(car);
 	powerupHUDa->SetCar(car);
+	scoreBoard->SetCar(car);
 	lapCountera->SetLapCountable(car);
 	lapCountera->SetCamera(engine->cameraManager->GetCameraByIndex(0));
 	speedoMetera->SetCamera(engine->cameraManager->GetCameraByIndex(0));
 	positionCountera->SetCamera(engine->cameraManager->GetCameraByIndex(0));
 	powerupHUDa->SetCamera(engine->cameraManager->GetCameraByIndex(0));
+	scoreBoard->SetCamera(engine->cameraManager->GetCameraByIndex(0));
 
 
 	if (engine->multiPlayer)

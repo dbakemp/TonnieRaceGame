@@ -31,6 +31,7 @@ CEntityCar::CEntityCar(CEngine* engine, CMap* map) : CEntity(engine), IDrawListe
 	this->powerupTimer = 0;
 	this->position = 1;
 	this->finishCallback = nullptr;
+	this->isFinished = false;
 
 	SDL_Surface* texture = IMG_Load("Resources/Images/spritesheet_vehicles.png");
 	this->spriteSheet = engine->textureManager->GetTexture("Images/spritesheet_vehicles.png");
@@ -280,6 +281,9 @@ void CEntityCar::FinishCallback()
 	{
 		finishCallback(this);
 	}
+
+	//Draw scorebord
+	isFinished = true;
 }
 
 void CEntityCar::SetControlScheme(IControlScheme* controlScheme)

@@ -1,4 +1,5 @@
 #include "MusicHelper.h"
+#include "CIntegerHelper.h"
 #include <string>
 
 
@@ -13,6 +14,15 @@ MusicHelper::MusicHelper()
 
 MusicHelper::~MusicHelper()
 {
+}
+
+void MusicHelper::playBackgroundMusic()
+{
+	std::string songs[] = {"hdl.mp3", "intro.mp3", "myfavouritegame.mp3", "paradisecity.mp3", "spaansetroep.mp3"};
+
+	int songIndex = CIntegerHelper::GetRandomIntBetween(0, 5);
+
+	playTrack("Resources/Music/" + songs[songIndex], true);
 }
 
 void MusicHelper::playTrack(std::string file, bool loop)

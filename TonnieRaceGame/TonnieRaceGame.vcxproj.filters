@@ -200,6 +200,9 @@
     <ClCompile Include="CEntityPowerupHUD.cpp">
       <Filter>Entities\GUI</Filter>
     </ClCompile>
+    <ClCompile Include="CEntityScoreboard.cpp">
+      <Filter>Entities\GUI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CCamera.h" />
@@ -401,6 +404,9 @@
       <Filter>Entities\GUI</Filter>
     </ClInclude>
     <ClInclude Include="CEntityPowerupHUD.h">
+      <Filter>Entities\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CEntityScoreboard.h">
       <Filter>Entities\GUI</Filter>
     </ClInclude>
   </ItemGroup>

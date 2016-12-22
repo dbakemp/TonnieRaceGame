@@ -12,6 +12,8 @@ public:
 	MusicHelper();
 	~MusicHelper();
 
+	void playBackgroundMusic();
+
 	void playTrack(std::string file, bool loop);
 	void stopAll();
 

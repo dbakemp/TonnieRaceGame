@@ -38,6 +38,7 @@ public:
 	void ChangeWaypoint(CEntityWaypoint* waypoint);
 	double powerupTimer;
 	bool powerupActive;
+	bool isFinished;
 	void SetFinishCallback(std::function<void(IBox2DListener*)> callback);
 	void FinishCallback();
 	void SetControlScheme(IControlScheme* controlScheme);
