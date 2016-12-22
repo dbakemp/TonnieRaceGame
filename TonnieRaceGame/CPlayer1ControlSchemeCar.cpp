@@ -53,6 +53,27 @@ void CPlayer1ControlSchemeCar::Input(SDL_Event* event)
 			CDebugLogger::PrintDebug("CHEAT: Powerup dronken oppakken");
 			car->activePowerup = CEntityPowerup::PowerupType::DRUNK;
 			break;
+		case SDLK_F2:
+			//Laatste lap van level
+			CDebugLogger::PrintDebug("CHEAT: Laatste lap van level");
+			car->currentLap = engine->currentMap->laps - 1;
+			break;
+		case SDLK_F3:
+			//Level afronden(winnen)
+			CDebugLogger::PrintDebug("CHEAT: Level afronden (winnen)");
+			car->currentLap = engine->currentMap->laps - 1;
+			car->FinishCallback();
+			break;
+		case SDLK_F4:
+			//Level afronden(verliezen)
+			CDebugLogger::PrintDebug("CHEAT: Level afronden (verliezen)");
+			car->currentLap = engine->currentMap->laps - 1;
+			car->FinishCallback();
+			break;
+		case SDLK_KP_PLUS:
+			engine->musicHelper->stopAll();
+			engine->musicHelper->playBackgroundMusic();
+			break;
 		}
 		break;
 	case SDL_KEYUP:

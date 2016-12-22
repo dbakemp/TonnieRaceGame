@@ -23,6 +23,7 @@
 #include "CEntityPositionCounter.h"
 #include "CEntityPowerupHUD.h"
 #include "CEntityScoreboard.h"
+#include "CDebugLogger.h"
 
 void CPlayState::init(CEngine* engine)
 {
@@ -175,6 +176,7 @@ void CPlayState::input(CEngine* engine, SDL_Event* event)
 			shouldSeque = true;
 			break;
 		}
+
 	}
 
 	engine->inputManager->Tick(event);

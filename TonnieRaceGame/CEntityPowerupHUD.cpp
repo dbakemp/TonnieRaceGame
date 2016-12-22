@@ -19,22 +19,25 @@ CEntityPowerupHUD::~CEntityPowerupHUD()
 
 void CEntityPowerupHUD::Update()
 {
-	if (this->car->activePowerup == CEntityPowerup::PowerupType::NONE)
+	if (!this->car->isFinished)
 	{
-		image->SetImage("");
-	}
+		if (this->car->activePowerup == CEntityPowerup::PowerupType::NONE)
+		{
+			image->SetImage("");
+		}
 
-	else if (this->car->activePowerup == CEntityPowerup::PowerupType::DRUNK)
-	{
-		image->SetImage("Images/beerPowerup.png");
-	}
-	else if (this->car->activePowerup == CEntityPowerup::PowerupType::SPEED)
-	{
-		image->SetImage("Images/speedPowerup.png");
-	}
-	else
-	{
+		else if (this->car->activePowerup == CEntityPowerup::PowerupType::DRUNK)
+		{
+			image->SetImage("Images/beerPowerup.png");
+		}
+		else if (this->car->activePowerup == CEntityPowerup::PowerupType::SPEED)
+		{
+			image->SetImage("Images/speedPowerup.png");
+		}
+		else
+		{
 			//Robin is een gaylord
+		}
 	}
 }
 
