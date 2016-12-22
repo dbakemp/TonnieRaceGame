@@ -61,16 +61,21 @@ void CPlayer1ControlSchemeCar::Input(SDL_Event* event)
 		case SDLK_F3:
 			//Level afronden(winnen)
 			CDebugLogger::PrintDebug("CHEAT: Level afronden (winnen)");
+
+			TeleportCar();
 			car->currentLap = engine->currentMap->laps - 1;
 			car->FinishCallback();
 			break;
 		case SDLK_F4:
 			//Level afronden(verliezen)
 			CDebugLogger::PrintDebug("CHEAT: Level afronden (verliezen)");
+
+			TeleportCar();
 			car->currentLap = engine->currentMap->laps - 1;
 			car->FinishCallback();
 			break;
 		case SDLK_KP_PLUS:
+			//Volgende (random) achtergrondnummer
 			engine->musicHelper->stopAll();
 			engine->musicHelper->playBackgroundMusic();
 			break;
@@ -90,6 +95,29 @@ void CPlayer1ControlSchemeCar::Input(SDL_Event* event)
 		break;
 		break;
 	}
+}
+
+void CPlayer1ControlSchemeCar::TeleportCar()
+{
+	b2AABB aabb;
+	aabb.lowerBound = b2Vec2(FLT_MAX, FLT_MAX);
+	aabb.upperBound = b2Vec2(-FLT_MAX, -FLT_MAX);
+	b2Fixture* fixture = engine->currentMap->checkpointsList.back->body->GetFixtureList();
+	while (fixture != NULL)
+	{
+		aabb.Combine(aabb, fixture->GetAABB(0));
+		fixture = fixture->GetNext();
+	}
+
+	b2Vec2 veca = { (car->aabb.lowerBound.x + car->aabb.upperBound.x) / 2, (car->aabb.lowerBound.y + car->aabb.upperBound.y) / 2 };
+	b2Vec2 vecb = { (aabb.lowerBound.x + aabb.upperBound.x) / 2, (aabb.lowerBound.y + aabb.upperBound.y) / 2 };
+	b2Vec2 vecc = veca - vecb;
+
+	float distancea = vecc.Normalize();
+
+	b2Vec2 vecd = { (car->aabb.lowerBound.x + car->aabb.upperBound.x) / 2, (car->aabb.lowerBound.y + car->aabb.upperBound.y) / 2 };
+
+	car->body->SetTransform(vecd, car->body->GetAngle());
 }
 
 void CPlayer1ControlSchemeCar::Update()

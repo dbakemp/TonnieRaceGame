@@ -9,6 +9,7 @@ class CPlayer1ControlSchemeCar : public IControlScheme
 public:
 	explicit CPlayer1ControlSchemeCar(CEngine* engine);
 	void Input(SDL_Event* event) override;
+	void TeleportCar();
 	void Update() override; 
 	void SetCar(CEntityCar* car) override;
 	void SetTire(CEntityTire* tire) override;
