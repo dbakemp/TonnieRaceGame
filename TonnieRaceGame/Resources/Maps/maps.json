@@ -15,9 +15,14 @@
   {
     "mapname":"map4.json",
     "mapicon":"map4.png"
-  },    {
+  },    
+  {
     "mapname":"map5.json",
     "mapicon":"map5.png"
+  },    
+  {
+    "mapname":"map6.json",
+    "mapicon":"map6.png"
   }
 ]
 }
