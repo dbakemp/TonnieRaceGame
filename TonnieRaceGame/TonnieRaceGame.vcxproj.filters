@@ -131,9 +131,6 @@
     <ClCompile Include="Box2DUtils.cpp">
       <Filter>Debug</Filter>
     </ClCompile>
-    <ClCompile Include="CWinState.cpp">
-      <Filter>States</Filter>
-    </ClCompile>
     <ClCompile Include="include\sweep\sweep_context.cc">
       <Filter>Etc</Filter>
     </ClCompile>
@@ -211,6 +208,9 @@
     </ClCompile>
     <ClCompile Include="CTimerHelper.cpp">
       <Filter>Helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="CLoadingState.cpp">
+      <Filter>States</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -355,9 +355,6 @@
     <ClInclude Include="EUIAlignment.h">
       <Filter>Entities\UI</Filter>
     </ClInclude>
-    <ClInclude Include="CWinState.h">
-      <Filter>States</Filter>
-    </ClInclude>
     <ClInclude Include="resource.h">
       <Filter>Etc</Filter>
     </ClInclude>
@@ -426,6 +423,9 @@
     </ClInclude>
     <ClInclude Include="CTimerHelper.h">
       <Filter>Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="CLoadingState.h">
+      <Filter>States</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

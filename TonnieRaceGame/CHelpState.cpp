@@ -95,8 +95,6 @@ void CHelpState::init(CEngine* engine)
 	containerr->AddUIElement(containerrr);
 	containerr->AddUIElement(containerrl);
 
-	engine->musicHelper->playTrack("Resources/Music/plingplongplong.mp3", false);
-
 	this->engine = engine;
 }
 

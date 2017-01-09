@@ -277,6 +277,7 @@ xcopy "$(SolutionDir)TonnieRaceGame\Resources\*.*" "$(TargetDir)Resources" /Y /I
     <ClCompile Include="CIntegerHelper.cpp" />
     <ClCompile Include="CLevelFactory.cpp" />
     <ClCompile Include="CLevelSelectorState.cpp" />
+    <ClCompile Include="CLoadingState.cpp" />
     <ClCompile Include="CMap.cpp" />
     <ClCompile Include="CIntroState.cpp" />
     <ClCompile Include="CPlayer1ControlSchemeCar.cpp" />
@@ -295,7 +296,6 @@ xcopy "$(SolutionDir)TonnieRaceGame\Resources\*.*" "$(TargetDir)Resources" /Y /I
     <ClCompile Include="CUIHorizontalScrollView.cpp" />
     <ClCompile Include="CUIImage.cpp" />
     <ClCompile Include="CUILabel.cpp" />
-    <ClCompile Include="CWinState.cpp" />
     <ClCompile Include="HighscoresHelper.cpp" />
     <ClCompile Include="IBox2DListener.cpp" />
     <ClCompile Include="IDrawListener.cpp" />
@@ -353,6 +353,7 @@ xcopy "$(SolutionDir)TonnieRaceGame\Resources\*.*" "$(TargetDir)Resources" /Y /I
     <ClInclude Include="CIntegerHelper.h" />
     <ClInclude Include="CLevelFactory.h" />
     <ClInclude Include="CLevelSelectorState.h" />
+    <ClInclude Include="CLoadingState.h" />
     <ClInclude Include="CMap.h" />
     <ClInclude Include="CIntroState.h" />
     <ClInclude Include="CPlayer1ControlSchemeCar.h" />
@@ -371,7 +372,6 @@ xcopy "$(SolutionDir)TonnieRaceGame\Resources\*.*" "$(TargetDir)Resources" /Y /I
     <ClInclude Include="CUIHorizontalScrollView.h" />
     <ClInclude Include="CUIImage.h" />
     <ClInclude Include="CUILabel.h" />
-    <ClInclude Include="CWinState.h" />
     <ClInclude Include="EUIAlignment.h" />
     <ClInclude Include="EUIStretch.h" />
     <ClInclude Include="HighscoresHelper.h" />

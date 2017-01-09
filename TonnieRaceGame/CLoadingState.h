@@ -1,12 +1,11 @@
-#ifndef CWINSTATE_H
-#define CWINSTATE_H
+#ifndef CLOADINGSTATE_H
+#define CLOADINGSTATE_H
 
 #include "SDL.h"
 #include "CGameState.h"
+#include "CUIButton.h"
 
-#include "SDL_ttf.h"
-
-class CWinState : public CGameState
+class CLoadingState : public CGameState
 {
 public:
 	void init(CEngine* engine);
@@ -19,11 +18,15 @@ public:
 	void update(CEngine* engine);
 	void draw(CEngine* engine);
 	void input(CEngine* engine, SDL_Event* event);
+	void checkSeque();
 
-	CWinState(CEngine* engine);
+	bool shouldSeque;
+	EGameState stateSeque;
 
+	CLoadingState(CEngine* engine);
 
 private:
-	TTF_Font* font;
+	void OnButtonClick(CUIButton* button);
+	CEngine* engine;
 };
 #endif

@@ -35,7 +35,6 @@ CEngine::CEngine()
 	showFPSCounter = true;
 	multiPlayer = false;
 
-	adHelper = new AdHelper();
 	musicHelper = new MusicHelper();
 	spriteSheetManager = new CSpriteSheetManager(this);
 	collisionHelper = new CCollisionHelper();
@@ -80,7 +79,7 @@ CEngine::CEngine()
 		}
 	}
 
-	EGameState state = EGameState::Menu;
+	EGameState state = EGameState::Loading;
 	stateManager->changeState(state, this);
 	musicHelper->playTrack("Resources/Music/title.mp3", false);
 	Tick();
