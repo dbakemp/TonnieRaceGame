@@ -206,11 +206,11 @@
     <ClCompile Include="CEntityFinished.cpp">
       <Filter>Entities\GUI</Filter>
     </ClCompile>
-    <ClCompile Include="CEntityTimer.cpp">
-      <Filter>Entities</Filter>
-    </ClCompile>
     <ClCompile Include="CTimerHelper.cpp">
       <Filter>Helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="CEntityTimer.cpp">
+      <Filter>Entities\GUI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -421,11 +421,11 @@
     <ClInclude Include="CEntityFinished.h">
       <Filter>Entities\GUI</Filter>
     </ClInclude>
-    <ClInclude Include="CEntityTimer.h">
-      <Filter>Entities</Filter>
-    </ClInclude>
     <ClInclude Include="CTimerHelper.h">
       <Filter>Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="CEntityTimer.h">
+      <Filter>Entities\GUI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

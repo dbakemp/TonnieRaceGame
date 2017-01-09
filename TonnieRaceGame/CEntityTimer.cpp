@@ -5,7 +5,7 @@
 CEntityTimer::CEntityTimer(CEngine * engine) : CEntity(engine), IDrawListener(engine, (int)CDrawManager::Layers::UI), IInputListener(engine)
 {
 	label = new CUILabel(engine, "Bangers", "");
-	label->SetPosition(0, 10);
+	label->SetPosition(0, 40);
 	label->SetFontSize(50);
 	label->SetHorizontalAlignment(EUIALignmentHorizontal::CENTER);
 	label->SetVisibility(true);

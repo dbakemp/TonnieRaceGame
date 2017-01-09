@@ -74,22 +74,18 @@ void CPlayState::init(CEngine* engine)
 	CEntitySpeedoMeter* speedoMetera = new CEntitySpeedoMeter(engine);
 	CEntityPositionCounter* positionCountera = new CEntityPositionCounter(engine);
 	CEntityPowerupHUD* powerupHUDa = new CEntityPowerupHUD(engine);
-	CEntityScoreboard* scoreBoard = new CEntityScoreboard(engine);
 	CEntityFinished* finishedTexta = new CEntityFinished(engine);
 	speedoMetera->ChangeZIndex(speedoMetera->zIndex + 1);
 	speedoMetera->SetChild(car);
 	positionCountera->SetCar(car);
 	powerupHUDa->SetCar(car);
-	scoreBoard->SetCar(car);
 	finishedTexta->SetCar(car);
 	lapCountera->SetLapCountable(car);
 	lapCountera->SetCamera(engine->cameraManager->GetCameraByIndex(0));
 	speedoMetera->SetCamera(engine->cameraManager->GetCameraByIndex(0));
 	positionCountera->SetCamera(engine->cameraManager->GetCameraByIndex(0));
 	powerupHUDa->SetCamera(engine->cameraManager->GetCameraByIndex(0));
-	scoreBoard->SetCamera(engine->cameraManager->GetCameraByIndex(0));
-	finishedTexta->SetCamera(engine->cameraManager->GetCameraByIndex(0));
-
+	powerupHUDa->SetCamera(engine->cameraManager->GetCameraByIndex(0));
 
 	if (engine->multiPlayer)
 	{
@@ -113,6 +109,10 @@ void CPlayState::init(CEngine* engine)
 		powerupHUDb->SetCamera(engine->cameraManager->GetCameraByIndex(1));
 		finishedTextb->SetCamera(engine->cameraManager->GetCameraByIndex(1));
 	}
+
+	CEntityScoreboard* scoreBoard = new CEntityScoreboard(engine);
+	scoreBoard->SetCar(car);
+	scoreBoard->SetCamera(engine->cameraManager->GetCameraByIndex(0));
 
 	int spawns = factory->map->availableSpawns.size();
 	for (int i = 0; i < spawns; i++)
