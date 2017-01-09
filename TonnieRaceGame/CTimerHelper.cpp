@@ -30,6 +30,11 @@ std::string CTimerHelper::Lap()
 	return std::string(2 - minutesString.length(), '0')+ minutesString +":"+ std::string(2 - secondsString.length(), '0') + secondsString+","+std::string(3 - milliString.length(), '0') + milliString;
 }
 
+int CTimerHelper::LapAsInt()
+{
+	return currentTime - startTime;
+}
+
 void CTimerHelper::Update()
 {
 	if (running) {

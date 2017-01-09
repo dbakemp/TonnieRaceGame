@@ -2,7 +2,7 @@
 #include "CStateManager.h"
 #include "CIntroState.h"
 #include "CPlayState.h"
-#include "CWinState.h"
+#include "CLoadingState.h"
 #include "CHelpState.h"
 #include "CScoresState.h"
 #include "CCreditsState.h"
@@ -46,7 +46,7 @@ void CStateManager::changeState(EGameState state, CEngine* engine)
 		break;
 	case Help: states.push_back(new CHelpState(engine));
 		break;
-	case Win: states.push_back(new CWinState(engine));
+	case Loading: states.push_back(new CLoadingState(engine));
 		break;
 	case Scores: states.push_back(new CScoresState(engine));
 		break;

@@ -13,7 +13,7 @@ enum EGameState
 	Playing,
 	Pause,
 	Credits,
-	Win,
+	Loading,
 	Help,
 	Scores,
 	GA,

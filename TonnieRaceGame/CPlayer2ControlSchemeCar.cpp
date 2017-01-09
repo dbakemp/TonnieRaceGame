@@ -43,8 +43,17 @@ void CPlayer2ControlSchemeCar::Input(SDL_Event* event)
 				CDebugLogger::PrintDebug("Powerup geactiveerd");
 			}
 			break;
-		}
+		case SDLK_0:
+			//Level afronden(winnen)
+			CDebugLogger::PrintDebug("CHEAT: Level afronden (winnen)");
+
+			//TeleportCar();
+			car->currentLap = engine->currentMap->laps - 1;
+			car->FinishCallback();
+			break;
+		}		
 		break;
+
 	case SDL_KEYUP:
 		switch (event->key.keysym.sym)
 		{
@@ -53,9 +62,6 @@ void CPlayer2ControlSchemeCar::Input(SDL_Event* event)
 		case SDLK_RIGHT: car->controlState &= ~IInputListener::InputDirections::RIGHT;
 			break;
 		}
-		break;
-	case SDL_CONTROLLERAXISMOTION:
-		car->OnControllerAxis(event->caxis);
 		break;
 		break;
 	}

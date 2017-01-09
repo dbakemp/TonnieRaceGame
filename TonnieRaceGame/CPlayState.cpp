@@ -25,6 +25,7 @@
 #include "CTimerHelper.h"
 #include "CEntityTimer.h"
 #include "CEntityScoreboard.h"
+#include "CEntityFinished.h"
 #include "CDebugLogger.h"
 
 void CPlayState::init(CEngine* engine)
@@ -73,19 +74,22 @@ void CPlayState::init(CEngine* engine)
 	CEntitySpeedoMeter* speedoMetera = new CEntitySpeedoMeter(engine);
 	CEntityPositionCounter* positionCountera = new CEntityPositionCounter(engine);
 	CEntityPowerupHUD* powerupHUDa = new CEntityPowerupHUD(engine);
-	CEntityScoreboard* scoreBoard = new CEntityScoreboard(engine);
+	CEntityFinished* finishedTexta = new CEntityFinished(engine);
 	speedoMetera->ChangeZIndex(speedoMetera->zIndex + 1);
 	speedoMetera->SetChild(car);
 	positionCountera->SetCar(car);
 	powerupHUDa->SetCar(car);
-	scoreBoard->SetCar(car);
+	finishedTexta->SetCar(car);
 	lapCountera->SetLapCountable(car);
 	lapCountera->SetCamera(engine->cameraManager->GetCameraByIndex(0));
 	speedoMetera->SetCamera(engine->cameraManager->GetCameraByIndex(0));
 	positionCountera->SetCamera(engine->cameraManager->GetCameraByIndex(0));
 	powerupHUDa->SetCamera(engine->cameraManager->GetCameraByIndex(0));
-	scoreBoard->SetCamera(engine->cameraManager->GetCameraByIndex(0));
+	powerupHUDa->SetCamera(engine->cameraManager->GetCameraByIndex(0));
+	finishedTexta->SetCamera(engine->cameraManager->GetCameraByIndex(0));
 
+	CEntityScoreboard* scoreBoard = new CEntityScoreboard(engine);
+	scoreBoard->SetCar(car);
 
 	if (engine->multiPlayer)
 	{
@@ -96,15 +100,19 @@ void CPlayState::init(CEngine* engine)
 		CEntitySpeedoMeter* speedoMeterb = new CEntitySpeedoMeter(engine);
 		CEntityPositionCounter* positionCounterb = new CEntityPositionCounter(engine);
 		CEntityPowerupHUD* powerupHUDb = new CEntityPowerupHUD(engine);
+		CEntityFinished* finishedTextb = new CEntityFinished(engine);
 		speedoMeterb->ChangeZIndex(speedoMeterb->zIndex + 1);
 		speedoMeterb->SetChild(carb);
 		positionCounterb->SetCar(carb);
 		powerupHUDb->SetCar(carb);
 		lapCounterb->SetLapCountable(carb);
+		finishedTextb->SetCar(carb);
 		lapCounterb->SetCamera(engine->cameraManager->GetCameraByIndex(1));
 		speedoMeterb->SetCamera(engine->cameraManager->GetCameraByIndex(1));
 		positionCounterb->SetCamera(engine->cameraManager->GetCameraByIndex(1));
 		powerupHUDb->SetCamera(engine->cameraManager->GetCameraByIndex(1));
+		finishedTextb->SetCamera(engine->cameraManager->GetCameraByIndex(1));
+		scoreBoard->SetCar(carb);
 	}
 
 	int spawns = factory->map->availableSpawns.size();

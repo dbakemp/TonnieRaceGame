@@ -27,7 +27,9 @@ void CDrawManager::Tick(SDL_Renderer* renderer)
 
 	for (int i = 0; i < renders; i++) {
 		if (engine->cameraManager->Count() > 0) {
-			SDL_RenderSetClipRect(renderer, &engine->cameraManager->GetCurrentCamera()->GetViewPort());
+			SDL_Rect rect = engine->cameraManager->GetCurrentCamera()->GetViewPort();
+			rect.x += i*2;
+			SDL_RenderSetClipRect(renderer, &rect);
 		}
 
 		for (int i = 0; i < 25; i++)
@@ -39,7 +41,6 @@ void CDrawManager::Tick(SDL_Renderer* renderer)
 		}
 
 		engine->cameraManager->GetNextCamera();
-
 	}
 
 	SDL_Rect rect = { 0, 0, engine->windowWidth, engine->windowHeight };

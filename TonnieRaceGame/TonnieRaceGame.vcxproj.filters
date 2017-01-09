@@ -200,14 +200,16 @@
     <ClCompile Include="CEntityPowerupHUD.cpp">
       <Filter>Entities\GUI</Filter>
     </ClCompile>
-<<<<<<< HEAD
+    <ClCompile Include="CEntityScoreboard.cpp">
+      <Filter>Entities\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CEntityFinished.cpp">
+      <Filter>Entities\GUI</Filter>
+    </ClCompile>
     <ClCompile Include="CTimerHelper.cpp">
       <Filter>Helpers</Filter>
     </ClCompile>
     <ClCompile Include="CEntityTimer.cpp">
-=======
-    <ClCompile Include="CEntityScoreboard.cpp">
->>>>>>> origin/master
       <Filter>Entities\GUI</Filter>
     </ClCompile>
   </ItemGroup>
@@ -413,14 +415,16 @@
     <ClInclude Include="CEntityPowerupHUD.h">
       <Filter>Entities\GUI</Filter>
     </ClInclude>
-<<<<<<< HEAD
+    <ClInclude Include="CEntityScoreboard.h">
+      <Filter>Entities\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CEntityFinished.h">
+      <Filter>Entities\GUI</Filter>
+    </ClInclude>
     <ClInclude Include="CTimerHelper.h">
       <Filter>Helpers</Filter>
     </ClInclude>
     <ClInclude Include="CEntityTimer.h">
-=======
-    <ClInclude Include="CEntityScoreboard.h">
->>>>>>> origin/master
       <Filter>Entities\GUI</Filter>
     </ClInclude>
   </ItemGroup>
