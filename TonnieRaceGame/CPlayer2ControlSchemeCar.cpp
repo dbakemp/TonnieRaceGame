@@ -38,7 +38,7 @@ void CPlayer2ControlSchemeCar::Input(SDL_Event* event)
 				for (CEntityTire* tire : car->tires)
 				{
 					tire->powerupActive = true;
-					tire->type = static_cast<int>(car->activePowerup);
+					tire->type = car->activePowerup;
 				}
 				CDebugLogger::PrintDebug("Powerup geactiveerd");
 			}
