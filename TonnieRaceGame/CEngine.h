@@ -11,6 +11,7 @@ class CInputManager;
 class CEntityManager;
 class CBox2DManager;
 class CStateManager;
+class CProfileManager;
 class CCameraManager;
 class CFontManager;
 class CDeltaHelper;
@@ -32,6 +33,7 @@ public:
 	CEntityManager* entityManager;
 	CBox2DManager* box2DManager;
 	CStateManager* stateManager;
+	CProfileManager* profileManager;
 	CDeltaHelper* deltaHelper;
 	CAdManager* adManager;
 	CMap* currentMap;

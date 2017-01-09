@@ -283,7 +283,10 @@ xcopy "$(SolutionDir)TonnieRaceGame\Resources\*.*" "$(TargetDir)Resources" /Y /I
     <ClCompile Include="CPlayer1ControlSchemeTire.cpp" />
     <ClCompile Include="CPlayer2ControlSchemeCar.cpp" />
     <ClCompile Include="CPlayer2ControlSchemeTire.cpp" />
+    <ClCompile Include="CPlayerProfile.cpp" />
     <ClCompile Include="CPlayState.cpp" />
+    <ClCompile Include="CProfileCreationState.cpp" />
+    <ClCompile Include="CProfileManager.cpp" />
     <ClCompile Include="CSpriteSheetManager.cpp" />
     <ClCompile Include="CStateManager.cpp" />
     <ClCompile Include="CHelpState.cpp" />
@@ -359,7 +362,10 @@ xcopy "$(SolutionDir)TonnieRaceGame\Resources\*.*" "$(TargetDir)Resources" /Y /I
     <ClInclude Include="CPlayer1ControlSchemeTire.h" />
     <ClInclude Include="CPlayer2ControlSchemeCar.h" />
     <ClInclude Include="CPlayer2ControlSchemeTire.h" />
+    <ClInclude Include="CPlayerProfile.h" />
     <ClInclude Include="CPlayState.h" />
+    <ClInclude Include="CProfileCreationState.h" />
+    <ClInclude Include="CProfileManager.h" />
     <ClInclude Include="CSpriteSheetManager.h" />
     <ClInclude Include="CStateManager.h" />
     <ClInclude Include="CHelpState.h" />

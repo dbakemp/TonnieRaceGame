@@ -212,6 +212,13 @@
     <ClCompile Include="CTimerHelper.cpp">
       <Filter>Helpers</Filter>
     </ClCompile>
+    <ClCompile Include="CProfileManager.cpp">
+      <Filter>Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="CPlayerProfile.cpp" />
+    <ClCompile Include="CProfileCreationState.cpp">
+      <Filter>States</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CCamera.h" />
@@ -426,6 +433,13 @@
     </ClInclude>
     <ClInclude Include="CTimerHelper.h">
       <Filter>Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="CProfileManager.h">
+      <Filter>Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="CPlayerProfile.h" />
+    <ClInclude Include="CProfileCreationState.h">
+      <Filter>States</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
