@@ -96,6 +96,9 @@ void CEntityPowerup::CollisionBegin(CEntity* collider)
 			{
 				car->ActivatePowerup(this);
 				visible = false;
+				if (this->type == CEntityPowerup::PowerupType::DRUNK) {
+					car->powerupActive = true;
+				}
 			}
 		}
 	}
