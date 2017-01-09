@@ -10,17 +10,26 @@ CEntityScoreboard::CEntityScoreboard(CEngine* engine) : CEntity(engine), IInputL
 	image->SetPosition(0, 0);
 	image->SetHorizontalAlignment(EUIALignmentHorizontal::CENTER);
 	image->SetVerticalAlignment(EUIALignmentVertical::CENTER);
+	image->ChangeZIndex(image->zIndex+1);
 	this->engine = engine;
 }
 
 CEntityScoreboard::~CEntityScoreboard()
 {
+	cars.clear();
 }
 
 void CEntityScoreboard::Update()
 {
-	if (this->car->isFinished)
-	{
+	bool finished = true;
+
+	for (CEntityCar* car : cars) {
+		if (!car->isFinished) {
+			finished = false;
+		}
+	}
+
+	if (finished) {
 		image->SetImage("Images/scoreboard.png");
 	}
 }
@@ -46,7 +55,7 @@ void CEntityScoreboard::SetCamera(CCamera* camera)
 
 void CEntityScoreboard::SetCar(CEntityCar * car)
 {
-	this->car = car;
+	cars.push_back(car);
 }
 
 void CEntityScoreboard::UpdateContainers()

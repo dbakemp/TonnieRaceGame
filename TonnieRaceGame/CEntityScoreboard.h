@@ -22,7 +22,7 @@ public:
 	void SetCar(CEntityCar* car);
 	void UpdateContainers();
 private:
-	CEntityCar* car;
+	std::vector<CEntityCar*> cars;
 	CEngine* engine;
 	CUIImage* image;
 	CCamera* camera;

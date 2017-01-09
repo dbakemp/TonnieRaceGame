@@ -86,6 +86,10 @@ void CPlayState::init(CEngine* engine)
 	positionCountera->SetCamera(engine->cameraManager->GetCameraByIndex(0));
 	powerupHUDa->SetCamera(engine->cameraManager->GetCameraByIndex(0));
 	powerupHUDa->SetCamera(engine->cameraManager->GetCameraByIndex(0));
+	finishedTexta->SetCamera(engine->cameraManager->GetCameraByIndex(0));
+
+	CEntityScoreboard* scoreBoard = new CEntityScoreboard(engine);
+	scoreBoard->SetCar(car);
 
 	if (engine->multiPlayer)
 	{
@@ -108,11 +112,8 @@ void CPlayState::init(CEngine* engine)
 		positionCounterb->SetCamera(engine->cameraManager->GetCameraByIndex(1));
 		powerupHUDb->SetCamera(engine->cameraManager->GetCameraByIndex(1));
 		finishedTextb->SetCamera(engine->cameraManager->GetCameraByIndex(1));
+		scoreBoard->SetCar(carb);
 	}
-
-	CEntityScoreboard* scoreBoard = new CEntityScoreboard(engine);
-	scoreBoard->SetCar(car);
-	scoreBoard->SetCamera(engine->cameraManager->GetCameraByIndex(0));
 
 	int spawns = factory->map->availableSpawns.size();
 	for (int i = 0; i < spawns; i++)
