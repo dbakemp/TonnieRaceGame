@@ -19,6 +19,7 @@ class CSpriteSheetManager;
 class CAdManager;
 class CTextureManager;
 class CMap;
+class CTimerHelper;
 
 class CEngine
 {
@@ -43,6 +44,7 @@ public:
 	CCollisionHelper* collisionHelper;
 	CSpriteSheetManager* spriteSheetManager;
 	CTextureManager* textureManager;
+	CTimerHelper* timerHelper;
 	bool running;
 	bool showFPSCounter;
 	bool gameControllerConnected;

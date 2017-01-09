@@ -22,6 +22,8 @@
 #include "CAIControlSchemeCar.h"
 #include "CEntityPositionCounter.h"
 #include "CEntityPowerupHUD.h"
+#include "CTimerHelper.h"
+#include "CEntityTimer.h"
 
 void CPlayState::init(CEngine* engine)
 {
@@ -53,6 +55,7 @@ void CPlayState::init(CEngine* engine)
 
 	CEntityFpsCounter* fpsCounter = new CEntityFpsCounter(engine);
 	CEntityBuild* build = new CEntityBuild(engine);
+	CEntityTimer* timer = new CEntityTimer(engine);
 
 	engine->cameraManager->AddCamera();
 	if (engine->multiPlayer)
@@ -104,6 +107,7 @@ void CPlayState::init(CEngine* engine)
 	}
 
 	delete factory;
+	engine->timerHelper->Start();
 }
 
 void CPlayState::clean(CEngine* engine)
@@ -143,6 +147,7 @@ void CPlayState::handleEvents(CEngine* engine)
 
 void CPlayState::update(CEngine* engine)
 {
+	engine->timerHelper->Update();
 	engine->cameraManager->Update();
 	engine->entityManager->Tick();
 	engine->world->Step(engine->deltaHelper->GetScaledDelta(), 8, 3);

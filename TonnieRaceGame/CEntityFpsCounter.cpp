@@ -6,7 +6,7 @@ CEntityFpsCounter::CEntityFpsCounter(CEngine* engine) : CEntity(engine), IDrawLi
 {
 	label = new CUILabel(engine, "Bangers", "");
 	label->SetPosition(10, 10);
-	label->SetFontSize(30);
+	label->SetFontSize(36);
 	label->SetVisibility(true);
 	this->engine = engine;
 }

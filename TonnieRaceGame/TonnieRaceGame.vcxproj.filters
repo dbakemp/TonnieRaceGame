@@ -200,6 +200,12 @@
     <ClCompile Include="CEntityPowerupHUD.cpp">
       <Filter>Entities\GUI</Filter>
     </ClCompile>
+    <ClCompile Include="CTimerHelper.cpp">
+      <Filter>Helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="CEntityTimer.cpp">
+      <Filter>Entities\GUI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CCamera.h" />
@@ -401,6 +407,12 @@
       <Filter>Entities\GUI</Filter>
     </ClInclude>
     <ClInclude Include="CEntityPowerupHUD.h">
+      <Filter>Entities\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CTimerHelper.h">
+      <Filter>Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="CEntityTimer.h">
       <Filter>Entities\GUI</Filter>
     </ClInclude>
   </ItemGroup>

@@ -23,6 +23,7 @@
 #include "CEntityCar.h"
 #include "AdHelper.h"
 #include "CDebugLogger.h"
+#include "CTimerHelper.h"
 
 CEngine::CEngine()
 {
@@ -47,6 +48,7 @@ CEngine::CEngine()
 	box2DManager = new CBox2DManager(this);
 	stateManager = new CStateManager(this);
 	textureManager = new CTextureManager(this);
+	timerHelper = new CTimerHelper();
 
 	SDL_Init(SDL_INIT_EVERYTHING);
 	window = SDL_CreateWindow("Tonnie's Grote Racewereld", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, windowWidth, windowHeight, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
