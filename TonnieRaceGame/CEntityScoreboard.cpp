@@ -2,7 +2,9 @@
 #include "CDrawManager.h"
 #include "CMap.h"
 #include "EUIAlignment.h"
-
+#include "CMap.h"
+#include "CUIContainer.h"
+#include "CTimerHelper.h"
 
 CEntityScoreboard::CEntityScoreboard(CEngine* engine) : CEntity(engine), IInputListener(engine)
 {
@@ -11,6 +13,15 @@ CEntityScoreboard::CEntityScoreboard(CEngine* engine) : CEntity(engine), IInputL
 	image->SetHorizontalAlignment(EUIALignmentHorizontal::CENTER);
 	image->SetVerticalAlignment(EUIALignmentVertical::CENTER);
 	image->ChangeZIndex(image->zIndex+1);
+	showing = false;
+
+	container = new CUIContainer(engine);
+	container->SetHorizontalAlignment(EUIALignmentHorizontal::CENTER);
+	container->SetVerticalAlignment(EUIALignmentVertical::CENTER);
+	container->SetHeight(400);
+	container->SetWidth(300);
+	container->SetPosition(0, 0);
+
 	this->engine = engine;
 }
 
@@ -29,9 +40,31 @@ void CEntityScoreboard::Update()
 		}
 	}
 
-	if (finished) {
+	if (finished && !showing) {
 		image->SetImage("Images/scoreboard.png");
+
+		for (CEntityCar* car : engine->currentMap->cars) {
+			CUILabel* label = new CUILabel(engine, "Bangers", "");
+			label->SetPosition(0, 70 + (42 * labels.size()));
+			label->SetFontSize(40);
+			label->SetHorizontalAlignment(EUIALignmentHorizontal::CENTER);
+			label->SetVerticalAlignment(EUIALignmentVertical::TOP);
+			label->ChangeZIndex(label->zIndex+2);
+			container->AddUIElement(label);
+			labels.push_back(label);
+		}
+
+		showing = true;
 	}
+
+	if (showing) {
+		for (int i = 0; i < engine->currentMap->allCars.size(); i++) {
+			if (engine->currentMap->allCars[i]->finishTime != 0) {
+				labels[i]->SetText(engine->timerHelper->IntToString(engine->currentMap->allCars[i]->finishTime));
+			}
+		}
+	}
+
 }
 
 void CEntityScoreboard::Input(SDL_Event* event)
@@ -61,4 +94,5 @@ void CEntityScoreboard::SetCar(CEntityCar * car)
 void CEntityScoreboard::UpdateContainers()
 {
 	image->SetContainer(camera->GetViewPort().x, camera->GetViewPort().y, camera->GetViewPort().w, camera->GetViewPort().h);
+	container->SetContainer(camera->GetViewPort().x, camera->GetViewPort().y, camera->GetViewPort().w, camera->GetViewPort().h);
 }
