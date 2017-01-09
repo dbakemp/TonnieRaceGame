@@ -29,10 +29,6 @@ void CPlayer2ControlSchemeTire::Input(SDL_Event* event)
 			break;
 		}
 		break;
-	case SDL_CONTROLLERBUTTONDOWN:
-	case SDL_CONTROLLERBUTTONUP:
-		tire->OnControllerButton(event->cbutton);
-		break;
 	}
 }
 

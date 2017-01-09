@@ -54,9 +54,6 @@ void CPlayer2ControlSchemeCar::Input(SDL_Event* event)
 			break;
 		}
 		break;
-	case SDL_CONTROLLERAXISMOTION:
-		car->OnControllerAxis(event->caxis);
-		break;
 		break;
 	}
 }
