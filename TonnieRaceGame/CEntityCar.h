@@ -58,6 +58,7 @@ public:
 	double backupTimer;
 	double backingupTimer;
 	bool shouldBackup;
+	int finishTime;
 private:
 	CEngine* engine;
 	std::function<void(IBox2DListener*)> finishCallback;

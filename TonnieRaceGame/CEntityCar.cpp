@@ -14,6 +14,7 @@
 #include "CTextureManager.h"
 #include "CCameraManager.h"
 #include "CCameraManager.h"
+#include "CTimerHelper.h"
 
 #ifndef DEGTORAD
 #define DEGTORAD 0.0174532925199432957f
@@ -32,6 +33,7 @@ CEntityCar::CEntityCar(CEngine* engine, CMap* map) : CEntity(engine), IDrawListe
 	this->position = 1;
 	this->finishCallback = nullptr;
 	this->isFinished = false;
+	this->finishTime = 0;
 
 	SDL_Surface* texture = IMG_Load("Resources/Images/spritesheet_vehicles.png");
 	this->spriteSheet = engine->textureManager->GetTexture("Images/spritesheet_vehicles.png");
@@ -227,8 +229,10 @@ void CEntityCar::ProcessCheckpoint(CEntityCheckpoint* checkpoint)
 	{
 		if (currentLap + 1 == engine->currentMap->laps)
 		{
-			CDebugLogger::PrintDebug("Race finish here");
-			FinishCallback();
+			if (!isFinished) {
+				CDebugLogger::PrintDebug("Race finish here");
+				FinishCallback();
+			}
 		}
 		else
 		{
@@ -284,6 +288,7 @@ void CEntityCar::FinishCallback()
 
 	//Draw scorebord
 	isFinished = true;
+	finishTime = engine->timerHelper->LapAsInt();
 }
 
 void CEntityCar::SetControlScheme(IControlScheme* controlScheme)
