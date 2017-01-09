@@ -77,9 +77,11 @@ void CPlayState::init(CEngine* engine)
 	CEntityFinished* finishedTexta = new CEntityFinished(engine);
 	speedoMetera->ChangeZIndex(speedoMetera->zIndex + 1);
 	speedoMetera->SetChild(car);
+	speedoMetera->SetCar(car);
 	positionCountera->SetCar(car);
 	powerupHUDa->SetCar(car);
 	finishedTexta->SetCar(car);
+	lapCountera->SetCar(car);
 	lapCountera->SetLapCountable(car);
 	lapCountera->SetCamera(engine->cameraManager->GetCameraByIndex(0));
 	speedoMetera->SetCamera(engine->cameraManager->GetCameraByIndex(0));
@@ -103,8 +105,10 @@ void CPlayState::init(CEngine* engine)
 		CEntityFinished* finishedTextb = new CEntityFinished(engine);
 		speedoMeterb->ChangeZIndex(speedoMeterb->zIndex + 1);
 		speedoMeterb->SetChild(carb);
+		speedoMeterb->SetCar(carb);
 		positionCounterb->SetCar(carb);
 		powerupHUDb->SetCar(carb);
+		lapCounterb->SetCar(carb);
 		lapCounterb->SetLapCountable(carb);
 		finishedTextb->SetCar(carb);
 		lapCounterb->SetCamera(engine->cameraManager->GetCameraByIndex(1));

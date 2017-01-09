@@ -5,6 +5,7 @@
 #include "CMap.h"
 #include "CUIContainer.h"
 #include "CTimerHelper.h"
+#include "CDebugLogger.h"
 
 CEntityScoreboard::CEntityScoreboard(CEngine* engine) : CEntity(engine), IInputListener(engine)
 {
@@ -14,6 +15,18 @@ CEntityScoreboard::CEntityScoreboard(CEngine* engine) : CEntity(engine), IInputL
 	image->SetVerticalAlignment(EUIALignmentVertical::CENTER);
 	image->ChangeZIndex(image->zIndex+1);
 	showing = false;
+
+	leftImage = new CUIImage(engine);
+	leftImage->SetPosition(-450, -200);
+	leftImage->SetHorizontalAlignment(EUIALignmentHorizontal::CENTER);
+	leftImage->SetVerticalAlignment(EUIALignmentVertical::CENTER);
+	leftImage->ChangeZIndex(image->zIndex + 1);
+
+	rightImage = new CUIImage(engine);
+	rightImage->SetPosition(450, -200);
+	rightImage->SetHorizontalAlignment(EUIALignmentHorizontal::CENTER);
+	rightImage->SetVerticalAlignment(EUIALignmentVertical::CENTER);
+	rightImage->ChangeZIndex(image->zIndex + 1);
 
 	container = new CUIContainer(engine);
 	container->SetHorizontalAlignment(EUIALignmentHorizontal::CENTER);
@@ -58,9 +71,48 @@ void CEntityScoreboard::Update()
 	}
 
 	if (showing) {
-		for (int i = 0; i < engine->currentMap->allCars.size(); i++) {
+		for (int i = 0; i < engine->currentMap->allCars.size(); i++) 
+		{
 			if (engine->currentMap->allCars[i]->finishTime != 0) {
-				labels[i]->SetText(engine->timerHelper->IntToString(engine->currentMap->allCars[i]->finishTime));
+				
+				std::string title = "";
+				if (cars[0]->finishTime == engine->currentMap->allCars[i]->finishTime)
+				{ 
+					title = "P1: ";
+				}
+				else if (cars.size() == 2 && cars[1]->finishTime == engine->currentMap->allCars[i]->finishTime)
+				{
+					title = "P2: ";
+				}
+				else
+				{
+					title = "AI: ";
+				}
+
+				labels[i]->SetText(title + engine->timerHelper->IntToString(engine->currentMap->allCars[i]->finishTime));
+
+			}
+
+			if (cars[0]->finishTime == engine->currentMap->allCars[0]->finishTime)
+			{
+				leftImage->SetImage("Images/gewonnen-left.png");
+			}
+			else
+			{
+				leftImage->SetImage("Images/verloren-left.png");
+			}
+
+
+			if (cars.size() == 2)
+			{
+				if (cars[1]->finishTime == engine->currentMap->allCars[0]->finishTime)
+				{
+					rightImage->SetImage("Images/gewonnen-right.png");
+				}
+				else
+				{
+					rightImage->SetImage("Images/verloren-right.png");
+				}
 			}
 		}
 	}

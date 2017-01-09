@@ -30,6 +30,8 @@ private:
 	CUIImage* image;
 	CCamera* camera;
 	CUIContainer* container;
+	CUIImage* leftImage;
+	CUIImage* rightImage;
 };
 
 #endif

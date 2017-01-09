@@ -20,7 +20,15 @@ CEntityPositionCounter::~CEntityPositionCounter()
 
 void CEntityPositionCounter::Update()
 {
-	label->SetText(std::to_string(car->GetPosition()) + "/" + std::to_string(engine->currentMap->cars.size()));
+	if (!car->isFinished)
+	{
+		label->SetText(std::to_string(car->GetPosition()) + "/" + std::to_string(engine->currentMap->cars.size()));
+	}
+	else
+	{
+		label->SetText("");
+	}
+	
 }
 
 void CEntityPositionCounter::Input(SDL_Event* event)
