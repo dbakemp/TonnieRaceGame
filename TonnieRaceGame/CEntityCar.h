@@ -38,6 +38,7 @@ public:
 	void ChangeWaypoint(CEntityWaypoint* waypoint);
 	double powerupTimer;
 	bool powerupActive;
+	bool isFinished;
 	void SetFinishCallback(std::function<void(IBox2DListener*)> callback);
 	void FinishCallback();
 	void SetControlScheme(IControlScheme* controlScheme);
@@ -46,7 +47,7 @@ public:
 
 	SDL_Texture* spriteSheet;
 	SDL_Rect srcRect;
-	CEntityPowerup* activePowerup;
+	CEntityPowerup::PowerupType activePowerup;
 	CEntityParticleEmitter* emitter;
 	b2AABB aabb;
 

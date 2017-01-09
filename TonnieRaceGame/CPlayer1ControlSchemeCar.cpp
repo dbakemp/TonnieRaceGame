@@ -32,16 +32,52 @@ void CPlayer1ControlSchemeCar::Input(SDL_Event* event)
 			car->debugVisible = !car->debugVisible;
 			break;
 		case SDLK_SPACE:
-			if (car->activePowerup != nullptr && !car->powerupActive)
+			if (car->activePowerup != CEntityPowerup::PowerupType::NONE && !car->powerupActive)
 			{
 				car->powerupActive = true;
 				for (CEntityTire* tire : car->tires)
 				{
 					tire->powerupActive = true;
-					tire->type = static_cast<int>(car->activePowerup->type);
+					tire->type = static_cast<int>(car->activePowerup);
 				}
 				CDebugLogger::PrintDebug("Powerup geactiveerd");
 			}
+			break;
+		case SDLK_F5:
+			//Powerup1 oppakken
+			CDebugLogger::PrintDebug("CHEAT: Powerup speed oppakken");
+			car->activePowerup = CEntityPowerup::PowerupType::SPEED;
+			break;
+		case SDLK_F6:
+			//Powerup2 oppakken
+			CDebugLogger::PrintDebug("CHEAT: Powerup dronken oppakken");
+			car->activePowerup = CEntityPowerup::PowerupType::DRUNK;
+			break;
+		case SDLK_F2:
+			//Laatste lap van level
+			CDebugLogger::PrintDebug("CHEAT: Laatste lap van level");
+			car->currentLap = engine->currentMap->laps - 1;
+			break;
+		case SDLK_F3:
+			//Level afronden(winnen)
+			CDebugLogger::PrintDebug("CHEAT: Level afronden (winnen)");
+
+			//TeleportCar();
+			car->currentLap = engine->currentMap->laps - 1;
+			car->FinishCallback();
+			break;
+		case SDLK_F4:
+			//Level afronden(verliezen)
+			CDebugLogger::PrintDebug("CHEAT: Level afronden (verliezen)");
+
+			//TeleportCar();
+			car->currentLap = engine->currentMap->laps - 1;
+			car->FinishCallback();
+			break;
+		case SDLK_KP_PLUS:
+			//Volgende (random) achtergrondnummer
+			engine->musicHelper->stopAll();
+			engine->musicHelper->playBackgroundMusic();
 			break;
 		}
 		break;
@@ -61,6 +97,29 @@ void CPlayer1ControlSchemeCar::Input(SDL_Event* event)
 	}
 }
 
+//void CPlayer1ControlSchemeCar::TeleportCar()
+//{
+//	b2AABB aabb;
+//	aabb.lowerBound = b2Vec2(FLT_MAX, FLT_MAX);
+//	aabb.upperBound = b2Vec2(-FLT_MAX, -FLT_MAX);
+//	b2Fixture* fixture = engine->currentMap->checkpointsList.back->body->GetFixtureList();
+//	while (fixture != NULL)
+//	{
+//		aabb.Combine(aabb, fixture->GetAABB(0));
+//		fixture = fixture->GetNext();
+//	}
+//
+//	b2Vec2 veca = { (car->aabb.lowerBound.x + car->aabb.upperBound.x) / 2, (car->aabb.lowerBound.y + car->aabb.upperBound.y) / 2 };
+//	b2Vec2 vecb = { (aabb.lowerBound.x + aabb.upperBound.x) / 2, (aabb.lowerBound.y + aabb.upperBound.y) / 2 };
+//	b2Vec2 vecc = veca - vecb;
+//
+//	float distancea = vecc.Normalize();
+//
+//	b2Vec2 vecd = { (car->aabb.lowerBound.x + car->aabb.upperBound.x) / 2, (car->aabb.lowerBound.y + car->aabb.upperBound.y) / 2 };
+//
+//	car->body->SetTransform(vecd, car->body->GetAngle());
+//}
+
 void CPlayer1ControlSchemeCar::Update()
 {	
 	//control steering
@@ -77,7 +136,7 @@ void CPlayer1ControlSchemeCar::Update()
 		break;
 	}
 
-	if (car->powerupActive && car->activePowerup != nullptr && static_cast<int>(car->activePowerup->type) == 1)
+	if (car->powerupActive && car->activePowerup != CEntityPowerup::PowerupType::NONE && static_cast<int>(car->activePowerup) == 1)
 	{
 		desiredAngle = 0 - desiredAngle;
 	}
@@ -97,7 +156,7 @@ void CPlayer1ControlSchemeCar::Update()
 			CDebugLogger::PrintDebug("Powerup verlopen");
 			car->powerupTimer = 0;
 			car->powerupActive = false;
-			car->activePowerup = nullptr;
+			car->activePowerup = CEntityPowerup::PowerupType::NONE;
 			for (CEntityTire* tire : car->tires)
 			{
 				tire->powerupActive = false;

@@ -144,6 +144,10 @@ void CEngine::Tick()
 				case SDLK_HOME:
 					deltaHelper->SetScale(1);
 					break;
+				case SDLK_F1:
+					//Alles vrijspelen
+					CDebugLogger::PrintDebug("CHEAT: Alles vrijspelen");
+					break;
 				}
 			}
 			stateManager->getCurrentState()->input(this, &event);
