@@ -137,9 +137,9 @@ void CEntityTire::UpdateFriction()
 
 void CEntityTire::UpdateDrive()
 {
-	if (powerupActive && type == 0)
+	if (powerupActive && type == CEntityPowerup::PowerupType::SPEED)
 	{
-		maxDriveForce = 500;
+		maxDriveForce = 1400;
 	}
 	else
 	{

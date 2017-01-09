@@ -90,6 +90,11 @@ void CAIControlSchemeCar::Update()
 		desiredAngle = -desiredAngle;
 	}
 
+	if (car->powerupActive && car->activePowerup == CEntityPowerup::PowerupType::DRUNK)
+	{
+		desiredAngle = 0 - desiredAngle;
+	}
+
 	double angleNow = car->flJoint->GetJointAngle();
 	double angleToTurn = desiredAngle - angleNow;
 	angleToTurn = b2Clamp(angleToTurn, -turnPerTimeStep, turnPerTimeStep);
@@ -142,6 +147,26 @@ void CAIControlSchemeCar::Update()
 			else
 			{
 				tire->maxForwardSpeed = 0;
+			}
+		}
+	}
+
+	if (car->powerupActive)
+	{
+		car->powerupTimer += engine->deltaHelper->GetScaledDelta();
+		float time = (rand() % (5 - 2 + 1) + 2);
+		if (this->car->activePowerup == CEntityPowerup::PowerupType::SPEED) {
+			time = (rand() % (10 - 5 + 1) + 5);
+		}
+		if (car->powerupTimer > time)
+		{
+			car->powerupTimer = 0;
+			car->powerupActive = false;
+			car->activePowerup = CEntityPowerup::PowerupType::NONE;
+			for (CEntityTire* tire : car->tires)
+			{
+				tire->powerupActive = false;
+				tire->type = CEntityPowerup::PowerupType::NONE;
 			}
 		}
 	}

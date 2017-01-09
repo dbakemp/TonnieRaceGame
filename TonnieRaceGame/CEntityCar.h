@@ -43,6 +43,7 @@ public:
 	void FinishCallback();
 	void SetControlScheme(IControlScheme* controlScheme);
 	void SetPosition(int position);
+	void UsePowerup();
 	int GetPosition();
 
 	SDL_Texture* spriteSheet;

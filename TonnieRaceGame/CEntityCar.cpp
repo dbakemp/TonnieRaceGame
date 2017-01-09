@@ -14,6 +14,7 @@
 #include "CTextureManager.h"
 #include "CCameraManager.h"
 #include "CCameraManager.h"
+#include "CAIControlSchemeCar.h"
 #include "CTimerHelper.h"
 
 #ifndef DEGTORAD
@@ -245,7 +246,9 @@ void CEntityCar::ProcessCheckpoint(CEntityCheckpoint* checkpoint)
 void CEntityCar::ActivatePowerup(CEntityPowerup* powerup)
 {
 	this->activePowerup = powerup->type;
-	CDebugLogger::PrintDebug("Powerup opgepakt");
+	if (dynamic_cast<CAIControlSchemeCar*>(this->controlScheme) != NULL) {
+		this->UsePowerup();
+	}
 }
 
 void CEntityCar::ProcessWaypoint(CEntityWaypoint* waypoint)
@@ -305,6 +308,20 @@ void CEntityCar::SetControlScheme(IControlScheme* controlScheme)
 void CEntityCar::SetPosition(int position)
 {
 	this->position = position;
+}
+
+void CEntityCar::UsePowerup()
+{
+	if (this->activePowerup != CEntityPowerup::PowerupType::NONE && !this->powerupActive)
+	{
+		this->powerupActive = true;
+		for (CEntityTire* tire : this->tires)
+		{
+			tire->powerupActive = true;
+			tire->type = this->activePowerup;
+		}
+		CDebugLogger::PrintDebug("Powerup geactiveerd");
+	}
 }
 
 int CEntityCar::GetPosition()

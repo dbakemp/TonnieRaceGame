@@ -7,6 +7,7 @@
 #include "CEntity.h"
 #include "CEngine.h"
 #include <Box2D\Box2D.h>
+#include "CEntityPowerup.h"
 
 class IControlScheme;
 class CMap;
@@ -34,7 +35,7 @@ public:
 	float maxBackwardsSpeed;
 	float maxDriveForce;
 	bool powerupActive;
-	int type;
+	CEntityPowerup::PowerupType type;
 
 private:
 	CEngine* engine;

@@ -44,6 +44,15 @@ void CAIControlSchemeTire::UpdateFriction()
 
 void CAIControlSchemeTire::UpdateDrive()
 {
+	if (tire->powerupActive && tire->type == CEntityPowerup::PowerupType::SPEED)
+	{
+		tire->maxDriveForce = 900;
+	}
+	else
+	{
+		tire->maxDriveForce = 500;
+	}
+
 	float desiredSpeed = 0;
 	desiredSpeed = tire->maxForwardSpeed;
 
