@@ -2,27 +2,33 @@
 "maps":[
   {
     "mapname":"map1.json",
-    "mapicon":"map1.png"
+    "mapicon": "map1.png",
+    "blockedmapicon": "map1-blocked.png"
   },
   {
     "mapname":"map2.json",
-    "mapicon":"map2.png"
+    "mapicon": "map2.png",
+    "blockedmapicon": "map2-blocked.png"
   },
   {
     "mapname":"map3.json",
-    "mapicon":"map3.png"
+    "mapicon": "map3.png",
+    "blockedmapicon": "map3-blocked.png"
   },
   {
     "mapname":"map4.json",
-    "mapicon":"map4.png"
+    "mapicon": "map4.png",
+    "blockedmapicon": "map4-blocked.png"
   },    
   {
     "mapname":"map5.json",
-    "mapicon":"map5.png"
+    "mapicon": "map5.png",
+    "blockedmapicon": "map5-blocked.png"
   },    
   {
     "mapname":"map6.json",
-    "mapicon":"map6.png"
+    "mapicon": "map6.png",
+    "blockedmapicon": "map6-blocked.png"
   }
 ]
 }

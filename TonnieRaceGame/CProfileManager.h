@@ -15,7 +15,7 @@ public:
 	void loadProfile();
 	void saveProfile();
 
-	void checkLevelUnlocked();
+	bool checkLevelUnlocked(std::string mapName);
 
 	CPlayerProfile* currentProfile;
 private:

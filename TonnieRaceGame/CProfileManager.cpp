@@ -30,10 +30,10 @@ void CProfileManager::loadProfile() {
 
 		if (reader.parse(profileFile, profileJson, false))
 		{
-			currentProfile->name = profileJson["profile"]["name"].toStyledString();
+			currentProfile->name = profileJson["profile"]["name"].asString();
 			for (Json::Value map : profileJson["profile"]["unlockedMaps"])
 			{
-				currentProfile->unlockedLevels.insert(std::pair<std::string, bool>(map.get("name", "").toStyledString(), map.get("unlocked", "").asBool()));
+				currentProfile->unlockedLevels.insert(std::pair<std::string, bool>(map.get("name", "").asString(), map.get("unlocked", "").asBool()));
 			}
 		}
 	}
@@ -51,8 +51,16 @@ void CProfileManager::saveProfile() {
 	}
 }
 
-void CProfileManager::checkLevelUnlocked() {
+bool CProfileManager::checkLevelUnlocked(std::string mapName) {
+	bool unlocked = false;
 
+	for (std::pair<std::string, bool> map : currentProfile->unlockedLevels) {
+		if (map.first == mapName) {
+			unlocked = map.second;
+		}
+	}
+
+	return unlocked;
 }
 
 bool CProfileManager::checkForExistingProfile(std::string filename) {
