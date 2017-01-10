@@ -77,6 +77,16 @@ void CHelpState::init(CEngine* engine)
 	toetsie->SetVerticalAlignment(EUIALignmentVertical::CENTER);
 	toetsie->SetPosition(-300, 0);
 
+	CUIImage* spacebarrie = new CUIImage(engine, "Images/spacebarrie.png");
+	spacebarrie->SetHorizontalAlignment(EUIALignmentHorizontal::CENTER);
+	spacebarrie->SetVerticalAlignment(EUIALignmentVertical::CENTER);
+	spacebarrie->SetPosition(-300, 100);
+
+	CUIImage* shieft = new CUIImage(engine, "Images/shieft.png");
+	shieft->SetHorizontalAlignment(EUIALignmentHorizontal::CENTER);
+	shieft->SetVerticalAlignment(EUIALignmentVertical::CENTER);
+	shieft->SetPosition(-300, 150);
+
 	CUILabel* labelr = new CUILabel(engine, "Bangers", "Controller Besturing");
 	labelr->SetFontSize(30);
 	labelr->SetHorizontalAlignment(EUIALignmentHorizontal::CENTER);
