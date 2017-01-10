@@ -7,6 +7,7 @@
 #include "CDeltaHelper.h"
 #include "CAIControlSchemeCar.h"
 #include "CProfileManager.h"
+#include <stdio.h>
 
 #ifndef DEGTORAD
 #define DEGTORAD 0.0174532925199432957f
@@ -68,6 +69,15 @@ void CPlayer1ControlSchemeCar::Input(SDL_Event* event)
 			CDebugLogger::PrintDebug("CHEAT: Level afronden (verliezen)");
 			car->currentLap = engine->currentMap->laps - 1;
 			car->FinishCallback();
+			break;
+		case SDLK_F8:
+			CDebugLogger::PrintDebug("CHEAT: Delete profiel");
+			if (remove("profile.txt") != 0)
+				CDebugLogger::PrintDebug("ERROR: Kan het profiel niet verwijderen");
+			else {
+				CDebugLogger::PrintDebug("SUCCESS: Het profiel is verwijderd");
+				engine->running = false;
+			}
 			break;
 		case SDLK_F7:
 			//Alle levels vrijspelen
