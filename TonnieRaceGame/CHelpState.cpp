@@ -62,11 +62,20 @@ void CHelpState::init(CEngine* engine)
 	x->SetVerticalAlignment(EUIALignmentVertical::CENTER);
 	x->SetPosition(220, 10);
 
+	CUIImage* kruiske = new CUIImage(engine, "Images/kruiske.png");
+	kruiske->SetHorizontalAlignment(EUIALignmentHorizontal::CENTER);
+	kruiske->SetVerticalAlignment(EUIALignmentVertical::CENTER);
+	kruiske->SetPosition(270, 45);
+
+	CUIImage* aaaaatje = new CUIImage(engine, "Images/aaaaatje.png");
+	aaaaatje->SetHorizontalAlignment(EUIALignmentHorizontal::CENTER);
+	aaaaatje->SetVerticalAlignment(EUIALignmentVertical::CENTER);
+	aaaaatje->SetPosition(220, 45);
+
 	CUIImage* toetsie = new CUIImage(engine, "Images/toetsenbord.png");
 	toetsie->SetHorizontalAlignment(EUIALignmentHorizontal::CENTER);
 	toetsie->SetVerticalAlignment(EUIALignmentVertical::CENTER);
 	toetsie->SetPosition(-300, 0);
-
 
 	CUILabel* labelr = new CUILabel(engine, "Bangers", "Controller Besturing");
 	labelr->SetFontSize(30);
@@ -83,13 +92,19 @@ void CHelpState::init(CEngine* engine)
 	labelrrb->SetFontSize(20);
 	labelrrb->SetHorizontalAlignment(EUIALignmentHorizontal::LEFT);
 	labelrrb->SetVerticalAlignment(EUIALignmentVertical::TOP);
-	labelrrb->SetPosition(10, 0 + labelrra->GetRectangle().y + labelrra->GetRectangle().h + 5);
+	labelrrb->SetPosition(10, 0 + labelrra->GetRectangle().y + labelrra->GetRectangle().h + 10);
 
 	CUILabel* labelrrc = new CUILabel(engine, "Bangers", "Toeteren");
 	labelrrc->SetFontSize(20);
 	labelrrc->SetHorizontalAlignment(EUIALignmentHorizontal::LEFT);
 	labelrrc->SetVerticalAlignment(EUIALignmentVertical::TOP);
-	labelrrc->SetPosition(10, 0 + labelrrb->GetRectangle().y + labelrrb->GetRectangle().h + 5);
+	labelrrc->SetPosition(10, 0 + labelrrb->GetRectangle().y + labelrrb->GetRectangle().h + 10);
+
+	CUILabel* labelrrd = new CUILabel(engine, "Bangers", "Power-Up");
+	labelrrd->SetFontSize(20);
+	labelrrd->SetHorizontalAlignment(EUIALignmentHorizontal::LEFT);
+	labelrrd->SetVerticalAlignment(EUIALignmentVertical::TOP);
+	labelrrd->SetPosition(10, 0 + labelrrc->GetRectangle().y + labelrrc->GetRectangle().h + 10);
 
 	CUIContainer* containerlc = new CUIContainer(engine);
 	containerlc->SetHorizontalAlignment(EUIALignmentHorizontal::CENTER);
@@ -111,6 +126,7 @@ void CHelpState::init(CEngine* engine)
 	containerrr->AddUIElement(labelrra);
 	containerrr->AddUIElement(labelrrb);
 	containerrr->AddUIElement(labelrrc);
+	containerrr->AddUIElement(labelrrd);
 
 	CUIContainer* containerl = new CUIContainer(engine);
 	containerl->SetHorizontalAlignment(EUIALignmentHorizontal::CENTER);

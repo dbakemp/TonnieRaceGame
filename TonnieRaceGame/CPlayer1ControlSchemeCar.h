@@ -20,7 +20,7 @@ public:
 	IControlScheme* GetNewTireScheme() override;
 private:
 	CEngine* engine;
-	void CPlayer1ControlSchemeCar::OnControllerButton(const SDL_ControllerButtonEvent sdlEvent)
+	void CPlayer1ControlSchemeCar::OnControllerButton(const SDL_ControllerButtonEvent sdlEvent);
 };
 
 #endif
