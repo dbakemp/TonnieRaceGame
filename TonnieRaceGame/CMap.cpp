@@ -70,6 +70,7 @@ CMap::~CMap()
 	availableSpawns.clear();
 	takenSpawns.clear();
 	cars.clear();
+	allCars.clear();
 }
 
 void CMap::CheckPositions()

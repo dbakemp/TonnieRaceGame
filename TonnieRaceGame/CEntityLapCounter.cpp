@@ -19,7 +19,15 @@ CEntityLapCounter::~CEntityLapCounter()
 
 void CEntityLapCounter::Update()
 {
-	label->SetText("Lap:" + std::to_string(lapCountable->currentLap + 1) + "/" + std::to_string(engine->currentMap->laps));
+	if (!car->isFinished)
+	{
+		label->SetText("Lap:" + std::to_string(lapCountable->currentLap + 1) + "/" + std::to_string(engine->currentMap->laps));
+	}
+	else
+	{
+		label->SetText("");
+	}
+	
 }
 
 void CEntityLapCounter::Input(SDL_Event* event)
@@ -43,6 +51,11 @@ void CEntityLapCounter::SetLapCountable(ILapCountable* lapCountable)
 ILapCountable* CEntityLapCounter::GetLapCountable()
 {
 	return lapCountable;
+}
+
+void CEntityLapCounter::SetCar(CEntityCar* car)
+{
+	this->car = car;
 }
 
 void CEntityLapCounter::SetCamera(CCamera* camera)

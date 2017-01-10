@@ -43,6 +43,7 @@ public:
 	std::vector<CEntitySpawn*> takenSpawns;
 	std::vector<CEntityCheckpoint*> checkpointsList;
 	std::vector<CEntityCar*> cars;
+	std::vector<CEntityCar*> allCars;
 	CEntitySpawn* GetSpawn();
 private:
 	CEngine* engine;

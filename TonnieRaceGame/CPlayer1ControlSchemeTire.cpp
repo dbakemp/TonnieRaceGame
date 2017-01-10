@@ -70,9 +70,9 @@ void CPlayer1ControlSchemeTire::UpdateFriction()
 
 void CPlayer1ControlSchemeTire::UpdateDrive()
 {
-	if (tire->powerupActive && tire->type == 0)
+	if (tire->powerupActive && tire->type == CEntityPowerup::PowerupType::SPEED)
 	{
-		tire->maxDriveForce = 500;
+		tire->maxDriveForce = 700;
 	}
 	else
 	{

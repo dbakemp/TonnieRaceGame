@@ -38,13 +38,22 @@ void CPlayer2ControlSchemeCar::Input(SDL_Event* event)
 				for (CEntityTire* tire : car->tires)
 				{
 					tire->powerupActive = true;
-					tire->type = static_cast<int>(car->activePowerup);
+					tire->type = car->activePowerup;
 				}
 				CDebugLogger::PrintDebug("Powerup geactiveerd");
 			}
 			break;
-		}
+		case SDLK_0:
+			//Level afronden(winnen)
+			CDebugLogger::PrintDebug("CHEAT: Level afronden (winnen)");
+
+			//TeleportCar();
+			car->currentLap = engine->currentMap->laps - 1;
+			car->FinishCallback();
+			break;
+		}		
 		break;
+
 	case SDL_KEYUP:
 		switch (event->key.keysym.sym)
 		{

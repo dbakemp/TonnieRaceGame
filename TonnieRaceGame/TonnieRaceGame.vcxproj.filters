@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="CCamera.cpp" />
@@ -131,9 +131,6 @@
     <ClCompile Include="Box2DUtils.cpp">
       <Filter>Debug</Filter>
     </ClCompile>
-    <ClCompile Include="CWinState.cpp">
-      <Filter>States</Filter>
-    </ClCompile>
     <ClCompile Include="include\sweep\sweep_context.cc">
       <Filter>Etc</Filter>
     </ClCompile>
@@ -206,9 +203,6 @@
     <ClCompile Include="CEntityFinished.cpp">
       <Filter>Entities\GUI</Filter>
     </ClCompile>
-    <ClCompile Include="CEntityTimer.cpp">
-      <Filter>Entities</Filter>
-    </ClCompile>
     <ClCompile Include="CTimerHelper.cpp">
       <Filter>Helpers</Filter>
     </ClCompile>
@@ -217,6 +211,10 @@
     </ClCompile>
     <ClCompile Include="CPlayerProfile.cpp" />
     <ClCompile Include="CProfileCreationState.cpp">
+    <ClCompile Include="CEntityTimer.cpp">
+      <Filter>Entities\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CLoadingState.cpp">
       <Filter>States</Filter>
     </ClCompile>
   </ItemGroup>
@@ -362,9 +360,6 @@
     <ClInclude Include="EUIAlignment.h">
       <Filter>Entities\UI</Filter>
     </ClInclude>
-    <ClInclude Include="CWinState.h">
-      <Filter>States</Filter>
-    </ClInclude>
     <ClInclude Include="resource.h">
       <Filter>Etc</Filter>
     </ClInclude>
@@ -428,9 +423,6 @@
     <ClInclude Include="CEntityFinished.h">
       <Filter>Entities\GUI</Filter>
     </ClInclude>
-    <ClInclude Include="CEntityTimer.h">
-      <Filter>Entities</Filter>
-    </ClInclude>
     <ClInclude Include="CTimerHelper.h">
       <Filter>Helpers</Filter>
     </ClInclude>
@@ -439,6 +431,10 @@
     </ClInclude>
     <ClInclude Include="CPlayerProfile.h" />
     <ClInclude Include="CProfileCreationState.h">
+    <ClInclude Include="CEntityTimer.h">
+      <Filter>Entities\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CLoadingState.h">
       <Filter>States</Filter>
     </ClInclude>
   </ItemGroup>

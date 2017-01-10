@@ -14,6 +14,9 @@
 #include "CTextureManager.h"
 #include "CCameraManager.h"
 #include "CCameraManager.h"
+#include "CAIControlSchemeCar.h"
+#include "CTimerHelper.h"
+#include <algorithm>
 
 #ifndef DEGTORAD
 #define DEGTORAD 0.0174532925199432957f
@@ -32,6 +35,7 @@ CEntityCar::CEntityCar(CEngine* engine, CMap* map) : CEntity(engine), IDrawListe
 	this->position = 1;
 	this->finishCallback = nullptr;
 	this->isFinished = false;
+	this->finishTime = 0;
 
 	SDL_Surface* texture = IMG_Load("Resources/Images/spritesheet_vehicles.png");
 	this->spriteSheet = engine->textureManager->GetTexture("Images/spritesheet_vehicles.png");
@@ -97,6 +101,7 @@ CEntityCar::CEntityCar(CEngine* engine, CMap* map) : CEntity(engine), IDrawListe
 	tires.push_back(tire);
 
 	map->cars.push_back(this);
+	map->allCars.push_back(this);
 
 	this->engine = engine;
 }
@@ -227,8 +232,10 @@ void CEntityCar::ProcessCheckpoint(CEntityCheckpoint* checkpoint)
 	{
 		if (currentLap + 1 == engine->currentMap->laps)
 		{
-			CDebugLogger::PrintDebug("Race finish here");
-			FinishCallback();
+			if (!isFinished) {
+				CDebugLogger::PrintDebug("Race finish here");
+				FinishCallback();
+			}
 		}
 		else
 		{
@@ -241,7 +248,9 @@ void CEntityCar::ProcessCheckpoint(CEntityCheckpoint* checkpoint)
 void CEntityCar::ActivatePowerup(CEntityPowerup* powerup)
 {
 	this->activePowerup = powerup->type;
-	CDebugLogger::PrintDebug("Powerup opgepakt");
+	if (dynamic_cast<CAIControlSchemeCar*>(this->controlScheme) != NULL) {
+		this->UsePowerup();
+	}
 }
 
 void CEntityCar::ProcessWaypoint(CEntityWaypoint* waypoint)
@@ -284,6 +293,12 @@ void CEntityCar::FinishCallback()
 
 	//Draw scorebord
 	isFinished = true;
+	finishTime = engine->timerHelper->LapAsInt();
+
+	
+	std::sort(engine->currentMap->allCars.begin(), engine->currentMap->allCars.end(), [](CEntityCar* i, CEntityCar* j) -> bool { 
+		return ((i->finishTime < j->finishTime) && i->finishTime != 0);
+	});
 }
 
 void CEntityCar::SetControlScheme(IControlScheme* controlScheme)
@@ -300,6 +315,20 @@ void CEntityCar::SetControlScheme(IControlScheme* controlScheme)
 void CEntityCar::SetPosition(int position)
 {
 	this->position = position;
+}
+
+void CEntityCar::UsePowerup()
+{
+	if (this->activePowerup != CEntityPowerup::PowerupType::NONE && !this->powerupActive)
+	{
+		this->powerupActive = true;
+		for (CEntityTire* tire : this->tires)
+		{
+			tire->powerupActive = true;
+			tire->type = this->activePowerup;
+		}
+		CDebugLogger::PrintDebug("Powerup geactiveerd");
+	}
 }
 
 int CEntityCar::GetPosition()

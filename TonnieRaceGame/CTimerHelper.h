@@ -14,6 +14,8 @@ public:
 	void Start();
 	void Stop();
 	std::string Lap();
+	int LapAsInt();
+	std::string IntToString(int timestamp);
 	void Update();
 private:
 

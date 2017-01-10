@@ -10,6 +10,7 @@
 #include "SDL_ttf.h"
 #include "CCamera.h"
 #include "CEntityCar.h"
+#include "CUIContainer.h"
 
 class CEntityScoreboard : public CEntity, public IInputListener
 {
@@ -21,11 +22,16 @@ public:
 	void SetCamera(CCamera* camera);
 	void SetCar(CEntityCar* car);
 	void UpdateContainers();
+	bool showing;
 private:
-	CEntityCar* car;
+	std::vector<CEntityCar*> cars;
+	std::vector<CUILabel*> labels;
 	CEngine* engine;
 	CUIImage* image;
 	CCamera* camera;
+	CUIContainer* container;
+	CUIImage* leftImage;
+	CUIImage* rightImage;
 };
 
 #endif

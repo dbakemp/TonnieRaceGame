@@ -43,6 +43,7 @@ public:
 	void FinishCallback();
 	void SetControlScheme(IControlScheme* controlScheme);
 	void SetPosition(int position);
+	void UsePowerup();
 	int GetPosition();
 
 	SDL_Texture* spriteSheet;
@@ -58,6 +59,7 @@ public:
 	double backupTimer;
 	double backingupTimer;
 	bool shouldBackup;
+	int finishTime;
 private:
 	CEngine* engine;
 	std::function<void(IBox2DListener*)> finishCallback;

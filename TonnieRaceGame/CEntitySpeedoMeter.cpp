@@ -52,13 +52,22 @@ void CEntitySpeedoMeter::Update()
 
 	speedLabel->SetText(speedRounded);
 	angle = ticksum / 200;
+
+	if (car->isFinished)
+	{
+		speedometer->SetImage("");
+		speedLabel->SetText("");
+	}
 }
 
 void CEntitySpeedoMeter::Draw(SDL_Renderer* renderer)
 {
 	SDL_Rect backrect = { camera->GetViewPort().x+25, camera->GetViewPort().h - 30, 120, 17};
 
-	SDL_RenderCopyEx(renderer, meter_texture, NULL, &backrect, angle, &point, SDL_FLIP_NONE);
+	if (!car->isFinished)
+	{
+		SDL_RenderCopyEx(renderer, meter_texture, NULL, &backrect, angle, &point, SDL_FLIP_NONE);
+	}
 }
 
 void CEntitySpeedoMeter::Input(SDL_Event* event)
@@ -89,6 +98,12 @@ void CEntitySpeedoMeter::SetCamera(CCamera* camera)
 	this->camera = camera;
 	UpdateContainers();
 }
+
+void CEntitySpeedoMeter::SetCar(CEntityCar* car)
+{
+	this->car = car;
+}
+
 
 void CEntitySpeedoMeter::UpdateContainers()
 {
