@@ -20,6 +20,8 @@ CPlayer1ControlSchemeCar::CPlayer1ControlSchemeCar(CEngine* engine)
 
 void CPlayer1ControlSchemeCar::Input(SDL_Event* event)
 {
+
+
 	switch (event->type)
 	{
 	case SDL_KEYDOWN:
@@ -34,6 +36,9 @@ void CPlayer1ControlSchemeCar::Input(SDL_Event* event)
 			break;
 		case SDLK_SPACE:
 			car->UsePowerup();
+			break;
+		case SDLK_LSHIFT:
+			engine->musicHelper->playTrack("Resources/Music/toot.mp3", false);
 			break;
 		case SDLK_F5:
 			//Powerup1 oppakken
@@ -93,6 +98,18 @@ void CPlayer1ControlSchemeCar::Input(SDL_Event* event)
 		car->OnControllerAxis(event->caxis);
 		break;
 		break;
+	case SDL_CONTROLLERBUTTONDOWN:
+	case SDL_CONTROLLERBUTTONUP:
+		OnControllerButton(event->cbutton);
+		break;
+	}
+}
+
+void CPlayer1ControlSchemeCar::OnControllerButton(const SDL_ControllerButtonEvent sdlEvent)
+{
+	if (sdlEvent.button == SDL_CONTROLLER_BUTTON_A)
+	{
+		car->UsePowerup();
 	}
 }
 

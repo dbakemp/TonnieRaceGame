@@ -82,10 +82,29 @@ void HighscoresHelper::getHighscore(int level)
 	}
 }
 
-//void HighscoresHelper::addHighScore(std::string name, std::string score, int level)
-//{ 
-//
-//}
+void HighscoresHelper::addHighScore(std::string name, std::string score, int level)
+{ 
+	CURL *curl;
+	CURLcode res;
+
+	/* In windows, this will init the winsock stuff */
+	curl_global_init(CURL_GLOBAL_ALL);
+
+	std::string urlString = "http://timmeehh.xyz/index.php?page=api&sub=highscores&action=insert&Name="+ name + "&Score=" + score + "&Level=" + std::to_string(level);
+
+	char* url = (char*)urlString.c_str();
+	curl = curl_easy_init();
+	if (curl)
+	{
+		curl_easy_setopt(curl, CURLOPT_URL, url);
+		res = curl_easy_perform(curl);
+		/* always cleanup */
+		curl_easy_cleanup(curl);
+		CDebugLogger::PrintDebug("Highscore uploadddedddffdsadfsdafsfadadfdafsn");
+	}
+	curl_global_cleanup();
+
+}
 
 HighscoresHelper::~HighscoresHelper()
 {

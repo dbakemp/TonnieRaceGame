@@ -217,6 +217,9 @@
     <ClCompile Include="CLoadingState.cpp">
       <Filter>States</Filter>
     </ClCompile>
+    <ClCompile Include="CEnterNameState.cpp">
+      <Filter>States</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CCamera.h" />
@@ -435,6 +438,9 @@
       <Filter>Entities\GUI</Filter>
     </ClInclude>
     <ClInclude Include="CLoadingState.h">
+      <Filter>States</Filter>
+    </ClInclude>
+    <ClInclude Include="CEnterNameState.h">
       <Filter>States</Filter>
     </ClInclude>
   </ItemGroup>

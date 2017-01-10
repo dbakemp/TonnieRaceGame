@@ -8,6 +8,7 @@
 #include "CCreditsState.h"
 #include "CLevelSelectorState.h"
 #include "CProfileCreationState.h"
+#include "CEnterNameState.h"
 
 CStateManager::CStateManager(CEngine* engine)
 {
@@ -46,6 +47,8 @@ void CStateManager::changeState(EGameState state, CEngine* engine)
 	case Credits: states.push_back(new CCreditsState(engine));
 		break;
 	case Help: states.push_back(new CHelpState(engine));
+		break;
+	case EnterName: states.push_back(new CEnterNameState(engine));
 		break;
 	case Loading: states.push_back(new CLoadingState(engine));
 		break;
