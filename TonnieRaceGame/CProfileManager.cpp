@@ -6,10 +6,10 @@
 #include <json/json.h>
 
 CProfileManager::CProfileManager() {
-	existingProfile = true;
+	//existingProfile = false;
 
+	existingProfile = checkForExistingProfile("profile.txt");
 	if (existingProfile) loadProfile();
-	//existingProfile = checkForExistingProfile("profile.txt");
 
 	//CDebugLogger::PrintDebug(currentProfile->name);
 }

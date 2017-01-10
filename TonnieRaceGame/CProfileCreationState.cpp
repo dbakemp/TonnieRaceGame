@@ -91,7 +91,7 @@ void CProfileCreationState::input(CEngine* engine, SDL_Event* event)
 	switch (event->type) {
 	case SDL_TEXTINPUT:
 		/* Add new text onto the end of our text */
-		CDebugLogger::PrintDebug(event->text.text);
+		//CDebugLogger::PrintDebug(event->text.text);
 		currentName += event->text.text;
 		break;
 	case SDL_KEYDOWN:
@@ -101,7 +101,14 @@ void CProfileCreationState::input(CEngine* engine, SDL_Event* event)
 			//lop off character
 			currentName.pop_back();
 		}
+		if (event->key.keysym.sym == SDLK_RETURN) {
+			engine->profileManager->currentProfile = new CPlayerProfile();
+			engine->profileManager->currentProfile->initializeNewProfile(currentName);
+			engine->profileManager->saveProfile();
 
+			shouldSeque = true;
+			stateSeque = EGameState::Menu;
+		}
 		break;
 	}
 }

@@ -1,1 +1,0 @@
-{"profile":{"name":"Tonnie","unlockedMaps":[{"name":"\"map1.json\"\n","unlocked":true},{"name":"\"map2.json\"\n","unlocked":false},{"name":"\"map3.json\"\n","unlocked":false},{"name":"\"map4.json\"\n","unlocked":false},{"name":"\"map5.json\"\n","unlocked":false},{"name":"\"map6.json\"\n","unlocked":false}]}}

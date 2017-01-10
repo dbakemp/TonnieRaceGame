@@ -31,8 +31,7 @@ public:
 	CProfileCreationState(CEngine* engine);
 	~CProfileCreationState();
 private:
-
-
+	
 	void OnButtonClick(CUIButton* button);
 	CEngine* engine;
 	CUIImage* background;

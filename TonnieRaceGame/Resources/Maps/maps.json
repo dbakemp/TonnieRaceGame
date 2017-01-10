@@ -3,32 +3,38 @@
   {
     "mapname":"map1.json",
     "mapicon": "map1.png",
-    "blockedmapicon": "map1-blocked.png"
+    "blockedmapicon": "map1-blocked.png",
+    "startmap":  true
   },
   {
     "mapname":"map2.json",
     "mapicon": "map2.png",
-    "blockedmapicon": "map2-blocked.png"
+    "blockedmapicon": "map2-blocked.png",
+    "startmap":  false
   },
   {
     "mapname":"map3.json",
     "mapicon": "map3.png",
-    "blockedmapicon": "map3-blocked.png"
+    "blockedmapicon": "map3-blocked.png",
+    "startmap":  false
   },
   {
     "mapname":"map4.json",
     "mapicon": "map4.png",
-    "blockedmapicon": "map4-blocked.png"
+    "blockedmapicon": "map4-blocked.png",
+    "startmap":  false
   },    
   {
     "mapname":"map5.json",
     "mapicon": "map5.png",
-    "blockedmapicon": "map5-blocked.png"
+    "blockedmapicon": "map5-blocked.png",
+    "startmap":  false
   },    
   {
     "mapname":"map6.json",
     "mapicon": "map6.png",
-    "blockedmapicon": "map6-blocked.png"
+    "blockedmapicon": "map6-blocked.png",
+    "startmap":  false
   }
 ]
 }
