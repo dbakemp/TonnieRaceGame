@@ -5,6 +5,7 @@
 #include "CGameState.h"
 #include "CUIImage.h"
 #include "CUIButton.h"
+#include "CUIContainer.h"
 
 class CScoresState : public CGameState
 {
@@ -32,5 +33,7 @@ private:
 	CEngine* engine;
 	CUIImage* background;
 	std::vector<CUILabel*> labels;
+	std::vector<std::string> scores;
+	CUIContainer* container;
 };
 #endif

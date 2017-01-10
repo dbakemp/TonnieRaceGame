@@ -11,6 +11,7 @@
 #include "CUIImage.h"
 #include "HighscoresHelper.h"
 #include "CUIButton.h"
+#include "CUIContainer.h"
 #include "EUIAlignment.h"
 
 void CScoresState::init(CEngine* engine)
@@ -18,7 +19,7 @@ void CScoresState::init(CEngine* engine)
 	HighscoresHelper* highscoreHelper = new HighscoresHelper();
 	highscoreHelper->getHighscore(1);
 	
-	labels = highscoreHelper->processJSON();
+	scores = highscoreHelper->processJSON();
 
 	CUIImage* background = new CUIImage(engine, "Images/main.png");
 	background->SetHorizontalAlignment(EUIALignmentHorizontal::CENTER);
@@ -43,9 +44,27 @@ void CScoresState::init(CEngine* engine)
 	label->SetPosition(0, -200);
 	label->SetFontSize(36);
 
-	for (CUILabel* label : labels)
+	container = new CUIContainer(engine);
+	container->SetHorizontalAlignment(EUIALignmentHorizontal::CENTER);
+	container->SetVerticalAlignment(EUIALignmentVertical::CENTER);
+	container->SetHeight(400);
+	container->SetWidth(300);
+	container->SetPosition(0, 0);
+
+	int i = 1;
+	for (std::string score : scores)
 	{
 
+		std::string nameScore = std::to_string(i) + ". " + score;
+		CUILabel* label = new CUILabel(engine, "Bangers", nameScore);
+		label->SetPosition(0, -25 + (52 * labels.size()));
+		label->SetFontSize(40);
+		label->SetHorizontalAlignment(EUIALignmentHorizontal::CENTER);
+		label->SetVerticalAlignment(EUIALignmentVertical::TOP);
+		label->ChangeZIndex(label->zIndex + 2);
+		container->AddUIElement(label);
+		labels.push_back(label);
+		i++;
 	}
 
 	this->engine = engine;

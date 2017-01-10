@@ -7,6 +7,6 @@ public:
 	HighscoresHelper();
 	void getHighscore(int level);
 	void addHighScore(std::string name, std::string score, int level);
-	std::vector<CUILabel*> processJSON();
+	std::vector<std::string> processJSON();
 	~HighscoresHelper();
 };

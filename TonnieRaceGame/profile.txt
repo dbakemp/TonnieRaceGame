@@ -1,0 +1,31 @@
+{
+   "profile" : {
+      "name" : "kontman",
+      "unlockedMaps" : [
+         {
+            "name" : "map1.json",
+            "unlocked" : true
+         },
+         {
+            "name" : "map2.json",
+            "unlocked" : false
+         },
+         {
+            "name" : "map3.json",
+            "unlocked" : false
+         },
+         {
+            "name" : "map4.json",
+            "unlocked" : false
+         },
+         {
+            "name" : "map5.json",
+            "unlocked" : false
+         },
+         {
+            "name" : "map6.json",
+            "unlocked" : false
+         }
+      ]
+   }
+}

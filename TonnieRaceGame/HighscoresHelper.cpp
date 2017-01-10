@@ -4,7 +4,6 @@
 
 #include <fstream>
 #include <curl/curl.h>
-
 #include "json\json.h"
 
 HighscoresHelper::HighscoresHelper()
@@ -107,21 +106,25 @@ void HighscoresHelper::addHighScore(std::string name, std::string score, int lev
 
 }
 
-std::vector<CUILabel*> HighscoresHelper::processJSON()
+std::vector<std::string> HighscoresHelper::processJSON()
 {
+	std::vector<std::string> strVec;
+
+
 	std::ifstream ifs("highscores/1.json");
 	Json::Reader reader;
 	Json::Value obj;
 	reader.parse(ifs, obj);
 	const Json::Value& characters = obj["Scores"]; // array of characters
 	for (int i = 0; i < characters.size(); i++) {
-		//CDebugLogger::PrintDebug("AD Framework: Fetching with Title: " + characters[i]["Title"].asString() + " and URL: " + characters[i]["ImageURL"].asString() + " and Filename: " + characters[i]["FileName"].asString());
-
 		std::string naam = characters[i]["Name"].asString();
 		std::string score = characters[i]["Score"].asString();
-
+		std::string t = naam + ": " + score;
+		strVec.push_back(t);
 		CDebugLogger::PrintDebug(naam + "==>" + score);
 	}
+
+	return strVec;
 }
 
 HighscoresHelper::~HighscoresHelper()
