@@ -17,6 +17,7 @@
 #include "CAIControlSchemeCar.h"
 #include "CTimerHelper.h"
 #include <algorithm>
+#include <limits>
 
 #ifndef DEGTORAD
 #define DEGTORAD 0.0174532925199432957f
@@ -35,7 +36,7 @@ CEntityCar::CEntityCar(CEngine* engine, CMap* map) : CEntity(engine), IDrawListe
 	this->position = 1;
 	this->finishCallback = nullptr;
 	this->isFinished = false;
-	this->finishTime = 0;
+	this->finishTime = INT_MAX;
 
 	SDL_Surface* texture = IMG_Load("Resources/Images/spritesheet_vehicles.png");
 	this->spriteSheet = engine->textureManager->GetTexture("Images/spritesheet_vehicles.png");
@@ -297,7 +298,7 @@ void CEntityCar::FinishCallback()
 
 	
 	std::sort(engine->currentMap->allCars.begin(), engine->currentMap->allCars.end(), [](CEntityCar* i, CEntityCar* j) -> bool { 
-		return ((i->finishTime < j->finishTime) && i->finishTime != 0);
+		return ((i->finishTime < j->finishTime));
 	});
 }
 

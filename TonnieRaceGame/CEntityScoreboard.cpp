@@ -87,7 +87,7 @@ void CEntityScoreboard::Update()
 	if (showing) {
 		for (int i = 0; i < engine->currentMap->allCars.size(); i++) 
 		{
-			if (engine->currentMap->allCars[i]->finishTime != 0) {
+			if (engine->currentMap->allCars[i]->finishTime != INT_MAX) {
 				
 				std::string title = "";
 				if (cars[0]->finishTime == engine->currentMap->allCars[i]->finishTime)
