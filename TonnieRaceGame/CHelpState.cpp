@@ -32,6 +32,42 @@ void CHelpState::init(CEngine* engine)
 	labell->SetHorizontalAlignment(EUIALignmentHorizontal::CENTER);
 	labell->SetVerticalAlignment(EUIALignmentVertical::TOP);
 
+	CUIImage* r1 = new CUIImage(engine, "Images/r1.png");
+	r1->SetHorizontalAlignment(EUIALignmentHorizontal::CENTER);
+	r1->SetVerticalAlignment(EUIALignmentVertical::CENTER);
+	r1->SetPosition(270, -50);
+
+	CUIImage* rb = new CUIImage(engine, "Images/rb.png");
+	rb->SetHorizontalAlignment(EUIALignmentHorizontal::CENTER);
+	rb->SetVerticalAlignment(EUIALignmentVertical::CENTER);
+	rb->SetPosition(220, -50);
+
+	CUIImage* l1 = new CUIImage(engine, "Images/l1.png");
+	l1->SetHorizontalAlignment(EUIALignmentHorizontal::CENTER);
+	l1->SetVerticalAlignment(EUIALignmentVertical::CENTER);
+	l1->SetPosition(270, -23);
+
+	CUIImage* lb = new CUIImage(engine, "Images/lb.png");
+	lb->SetHorizontalAlignment(EUIALignmentHorizontal::CENTER);
+	lb->SetVerticalAlignment(EUIALignmentVertical::CENTER);
+	lb->SetPosition(220, -23);
+
+	CUIImage* vierkantje = new CUIImage(engine, "Images/vierkantje.png");
+	vierkantje->SetHorizontalAlignment(EUIALignmentHorizontal::CENTER);
+	vierkantje->SetVerticalAlignment(EUIALignmentVertical::CENTER);
+	vierkantje->SetPosition(270, 10);
+
+	CUIImage* x = new CUIImage(engine, "Images/x.png");
+	x->SetHorizontalAlignment(EUIALignmentHorizontal::CENTER);
+	x->SetVerticalAlignment(EUIALignmentVertical::CENTER);
+	x->SetPosition(220, 10);
+
+	CUIImage* toetsie = new CUIImage(engine, "Images/toetsenbord.png");
+	toetsie->SetHorizontalAlignment(EUIALignmentHorizontal::CENTER);
+	toetsie->SetVerticalAlignment(EUIALignmentVertical::CENTER);
+	toetsie->SetPosition(-300, 0);
+
+
 	CUILabel* labelr = new CUILabel(engine, "Bangers", "Controller Besturing");
 	labelr->SetFontSize(30);
 	labelr->SetHorizontalAlignment(EUIALignmentHorizontal::CENTER);

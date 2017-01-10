@@ -16,6 +16,7 @@ enum EGameState
 	Loading,
 	Help,
 	Scores,
+	EnterName,
 	GA,
 	LevelSelector
 };

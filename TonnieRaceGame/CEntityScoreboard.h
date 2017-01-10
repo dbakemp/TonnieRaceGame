@@ -23,8 +23,8 @@ public:
 	void SetCar(CEntityCar* car);
 	void UpdateContainers();
 	bool showing;
-private:
 	std::vector<CEntityCar*> cars;
+private:	
 	std::vector<CUILabel*> labels;
 	CEngine* engine;
 	CUIImage* image;

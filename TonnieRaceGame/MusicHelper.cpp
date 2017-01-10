@@ -19,9 +19,9 @@ MusicHelper::~MusicHelper()
 
 void MusicHelper::playBackgroundMusic()
 {
-	std::string songs[] = {"hdl.mp3", "intro.mp3", "myfavouritegame.mp3", "paradisecity.mp3", "spaansetroep.mp3"};
+	std::string songs[] = {"hdl.mp3", "intro.mp3", "myfavouritegame.mp3", "paradisecity.mp3", "spaansetroep.mp3", "daargaatze.mp3", "boerharms.mp3"};
 
-	int songIndex = CIntegerHelper::GetRandomIntBetween(0, 4);
+	int songIndex = CIntegerHelper::GetRandomIntBetween(0, 6);
 
 	playTrack("Resources/Music/" + songs[songIndex], true);
 }

@@ -34,6 +34,9 @@ void CPlayer1ControlSchemeCar::Input(SDL_Event* event)
 		case SDLK_SPACE:
 			car->UsePowerup();
 			break;
+		case SDLK_LSHIFT:
+			engine->musicHelper->playTrack("Resources/Music/toot.mp3", false);
+			break;
 		case SDLK_F5:
 			//Powerup1 oppakken
 			CDebugLogger::PrintDebug("CHEAT: Powerup speed oppakken");
