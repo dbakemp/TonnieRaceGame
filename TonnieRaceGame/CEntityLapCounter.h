@@ -9,6 +9,7 @@
 #include "IInputListener.h"
 #include "SDL_ttf.h"
 #include "CCamera.h"
+#include "CEntityCar.h"
 
 class CEntityLapCounter : public CEntity, public IInputListener
 {
@@ -20,12 +21,14 @@ public:
 	void SetLapCountable(ILapCountable* lapCountable);
 	ILapCountable* GetLapCountable();
 	void SetCamera(CCamera* camera);
+	void SetCar(CEntityCar* car);
 	void UpdateContainers();
 private:
 	ILapCountable* lapCountable;
 	CEngine* engine;
 	CUILabel* label;
 	CCamera* camera;
+	CEntityCar* car;
 };
 
 #endif

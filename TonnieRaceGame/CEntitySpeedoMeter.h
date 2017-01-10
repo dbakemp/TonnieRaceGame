@@ -10,6 +10,7 @@
 #include "CUIImage.h"
 #include "IBox2DListener.h"
 #include "SDL_ttf.h"
+#include "CEntityCar.h"
 
 class CEntitySpeedoMeter : public CEntity, public IDrawListener, public IInputListener
 {
@@ -23,6 +24,7 @@ public:
 	IBox2DListener* GetChild();
 	void SetCamera(CCamera* camera);
 	void UpdateContainers();
+	void SetCar(CEntityCar* car);
 
 private:
 	IBox2DListener* child;
@@ -40,6 +42,7 @@ private:
 	float32 ticksum = 0;
 	float32 ticklist[200];
 	CCamera* camera;
+	CEntityCar* car;
 };
 
 #endif

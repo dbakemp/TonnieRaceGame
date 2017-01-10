@@ -16,6 +16,7 @@
 #include "CCameraManager.h"
 #include "CAIControlSchemeCar.h"
 #include "CTimerHelper.h"
+#include <algorithm>
 
 #ifndef DEGTORAD
 #define DEGTORAD 0.0174532925199432957f
@@ -100,6 +101,7 @@ CEntityCar::CEntityCar(CEngine* engine, CMap* map) : CEntity(engine), IDrawListe
 	tires.push_back(tire);
 
 	map->cars.push_back(this);
+	map->allCars.push_back(this);
 
 	this->engine = engine;
 }
@@ -292,6 +294,11 @@ void CEntityCar::FinishCallback()
 	//Draw scorebord
 	isFinished = true;
 	finishTime = engine->timerHelper->LapAsInt();
+
+	
+	std::sort(engine->currentMap->allCars.begin(), engine->currentMap->allCars.end(), [](CEntityCar* i, CEntityCar* j) -> bool { 
+		return ((i->finishTime < j->finishTime) && i->finishTime != 0);
+	});
 }
 
 void CEntityCar::SetControlScheme(IControlScheme* controlScheme)

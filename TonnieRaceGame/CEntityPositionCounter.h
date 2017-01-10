@@ -9,7 +9,6 @@
 #include "IInputListener.h"
 #include "CCamera.h"
 #include "CEntityCar.h"
-#include "CEntityCar.h"
 
 class CEntityPositionCounter : public CEntity, public IInputListener
 {
