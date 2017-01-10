@@ -9,17 +9,23 @@
 #include <curl/curl.h>
 #include "CUILabel.h"
 #include "CUIImage.h"
+#include "HighscoresHelper.h"
 #include "CUIButton.h"
 #include "EUIAlignment.h"
 
 void CScoresState::init(CEngine* engine)
 {
+	HighscoresHelper* highscoreHelper = new HighscoresHelper();
+	highscoreHelper->getHighscore(1);
+	
+	labels = highscoreHelper->processJSON();
+
 	CUIImage* background = new CUIImage(engine, "Images/main.png");
 	background->SetHorizontalAlignment(EUIALignmentHorizontal::CENTER);
 	background->SetVerticalAlignment(EUIALignmentVertical::CENTER);
 	background->SetVerticalStretch(EUIStretchVertical::FIT);
 
-	CUIImage* tonnie = new CUIImage(engine, "Images/logo.png");
+	CUIImage* tonnie = new CUIImage(engine, "Images/scoreboard.png");
 	tonnie->SetHorizontalAlignment(EUIALignmentHorizontal::CENTER);
 	tonnie->SetVerticalAlignment(EUIALignmentVertical::CENTER);
 	tonnie->SetPosition(0, -100);
@@ -31,11 +37,16 @@ void CScoresState::init(CEngine* engine)
 	buttonBack->SetFontSize(30);
 	buttonBack->SetClickCallback(std::bind(&CScoresState::OnButtonClick, this, std::placeholders::_1));
 
-	CUILabel* label = new CUILabel(engine, "Bangers", "Hier komen de highscores!");
+	CUILabel* label = new CUILabel(engine, "Bangers", "Dit zijn de beste scores van Tonnie's grote racewereld!");
 	label->SetHorizontalAlignment(EUIALignmentHorizontal::CENTER);
 	label->SetVerticalAlignment(EUIALignmentVertical::BOTTOM);
 	label->SetPosition(0, -200);
-	label->SetFontSize(50);
+	label->SetFontSize(36);
+
+	for (CUILabel* label : labels)
+	{
+
+	}
 
 	this->engine = engine;
 }

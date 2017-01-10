@@ -31,5 +31,6 @@ private:
 	void OnButtonClick(CUIButton* button);
 	CEngine* engine;
 	CUIImage* background;
+	std::vector<CUILabel*> labels;
 };
 #endif

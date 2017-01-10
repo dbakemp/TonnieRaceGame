@@ -39,6 +39,8 @@ CEntityScoreboard::CEntityScoreboard(CEngine* engine) : CEntity(engine), IInputL
 	container->SetWidth(300);
 	container->SetPosition(0, 0);
 
+
+
 	this->engine = engine;
 }
 
