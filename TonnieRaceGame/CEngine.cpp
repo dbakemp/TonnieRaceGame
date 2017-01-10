@@ -2,6 +2,7 @@
 #include "CDrawManager.h"
 #include "CInputManager.h"
 #include "CEntityManager.h"
+#include "CProfileManager.h"
 #include "CCollisionHelper.h"
 #include "CBox2DManager.h"
 #include "CEntitySmallSquare.h"
@@ -44,6 +45,7 @@ CEngine::CEngine()
 	inputManager = new CInputManager();
 	cameraManager = new CCameraManager(this);
 	entityManager = new CEntityManager();
+	profileManager = new CProfileManager();
 	box2DManager = new CBox2DManager(this);
 	stateManager = new CStateManager(this);
 	textureManager = new CTextureManager(this);
@@ -91,6 +93,7 @@ CEngine::~CEngine()
 	delete adHelper;
 	delete drawManager;
 	delete inputManager;
+	delete profileManager;
 	delete box2DManager;
 	delete stateManager;
 	delete deltaHelper;

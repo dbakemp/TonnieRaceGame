@@ -6,6 +6,7 @@
 #include "CDeltaHelper.h"
 #include "CInputManager.h"
 #include "CEntityManager.h"
+#include "CProfileManager.h"
 #include <curl/curl.h>
 #include "CUIHorizontalScrollView.h"
 #include "CUIImage.h"
@@ -69,7 +70,8 @@ void CLevelSelectorState::init(CEngine* engine)
 	{
 		for (Json::Value map : root["maps"])
 		{
-			addLevel("Maps/" + map.get("mapicon", "").asString(), map.get("mapname", "").asString());
+			if (engine->profileManager->checkLevelUnlocked(map.get("mapname", "").asString())) addLevel("Maps/" + map.get("mapicon", "").asString(), map.get("mapname", "").asString());
+			else addLevel("Maps/" + map.get("blockedmapicon", "").asString(), map.get("mapname", "").asString());			
 		}
 	}
 }
@@ -93,9 +95,11 @@ void CLevelSelectorState::addLevel(std::string image, std::string map)
 void CLevelSelectorState::SelectLevel(IUIEntity* entity)
 {
 	std::string map = entity->GetTag();
-	engine->level = map;
-	shouldSeque = true;
-	stateSeque = EGameState::Playing;
+	if (engine->profileManager->checkLevelUnlocked(map)) {
+		engine->level = map;
+		shouldSeque = true;
+		stateSeque = EGameState::Playing;
+	}
 }
 
 void CLevelSelectorState::pause()
