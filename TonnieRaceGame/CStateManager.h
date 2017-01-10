@@ -18,7 +18,8 @@ enum EGameState
 	Scores,
 	EnterName,
 	GA,
-	LevelSelector
+	LevelSelector, 
+	ProfileCreation
 };
 
 class CStateManager

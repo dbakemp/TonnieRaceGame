@@ -6,6 +6,7 @@
 #include "CPlayer1ControlSchemeTire.h"
 #include "CDeltaHelper.h"
 #include "CAIControlSchemeCar.h"
+#include "CProfileManager.h"
 
 #ifndef DEGTORAD
 #define DEGTORAD 0.0174532925199432957f
@@ -65,10 +66,17 @@ void CPlayer1ControlSchemeCar::Input(SDL_Event* event)
 		case SDLK_F4:
 			//Level afronden(verliezen)
 			CDebugLogger::PrintDebug("CHEAT: Level afronden (verliezen)");
-
+			
 			//TeleportCar();
 			car->currentLap = engine->currentMap->laps - 1;
 			car->FinishCallback();
+			break;
+		case SDLK_F7:
+			CDebugLogger::PrintDebug("CHEAT: Alle levels vrijspelen");
+
+			for (std::string s : engine->profileManager->currentProfile->levelProgression) {
+				engine->profileManager->currentProfile->unlockNextLevel();
+			}
 			break;
 		case SDLK_KP_PLUS:
 			//Volgende (random) achtergrondnummer

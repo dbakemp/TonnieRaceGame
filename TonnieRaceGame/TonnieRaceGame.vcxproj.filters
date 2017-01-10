@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="CCamera.cpp" />
@@ -206,6 +206,11 @@
     <ClCompile Include="CTimerHelper.cpp">
       <Filter>Helpers</Filter>
     </ClCompile>
+    <ClCompile Include="CProfileManager.cpp">
+      <Filter>Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="CPlayerProfile.cpp" />
+    <ClCompile Include="CProfileCreationState.cpp">
     <ClCompile Include="CEntityTimer.cpp">
       <Filter>Entities\GUI</Filter>
     </ClCompile>
@@ -424,6 +429,11 @@
     <ClInclude Include="CTimerHelper.h">
       <Filter>Helpers</Filter>
     </ClInclude>
+    <ClInclude Include="CProfileManager.h">
+      <Filter>Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="CPlayerProfile.h" />
+    <ClInclude Include="CProfileCreationState.h">
     <ClInclude Include="CEntityTimer.h">
       <Filter>Entities\GUI</Filter>
     </ClInclude>

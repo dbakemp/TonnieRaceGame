@@ -6,6 +6,8 @@
 #include "CUIContainer.h"
 #include "CTimerHelper.h"
 #include "CDebugLogger.h"
+#include "CEngine.h"
+#include "CProfileManager.h"
 
 CEntityScoreboard::CEntityScoreboard(CEngine* engine) : CEntity(engine), IInputListener(engine)
 {
@@ -68,6 +70,12 @@ void CEntityScoreboard::Update()
 		}
 
 		showing = true;
+
+		if (cars[0]->finishTime == engine->currentMap->allCars[0]->finishTime)
+		{
+			engine->profileManager->currentProfile->unlockNextLevel();
+			engine->profileManager->saveProfile();
+		}
 	}
 
 	if (showing) {
@@ -78,7 +86,8 @@ void CEntityScoreboard::Update()
 				std::string title = "";
 				if (cars[0]->finishTime == engine->currentMap->allCars[i]->finishTime)
 				{ 
-					title = "P1: ";
+					//title = "P1: ";
+					title = engine->profileManager->currentProfile->name + ": ";
 				}
 				else if (cars.size() == 2 && cars[1]->finishTime == engine->currentMap->allCars[i]->finishTime)
 				{

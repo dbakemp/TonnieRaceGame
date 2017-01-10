@@ -6,6 +6,7 @@
 #include "CDrawManager.h"
 #include "CDeltaHelper.h"
 #include "CInputManager.h"
+#include  "CProfileManager.h"
 #include "CEntityManager.h"
 #include <curl/curl.h>
 #include "CUILabel.h"
@@ -77,7 +78,13 @@ void CLoadingState::checkSeque()
 {
 	if (!shouldSeque) { return; }
 
-	engine->stateManager->changeState(stateSeque, engine);
+	if (engine->profileManager->existingProfile) {
+		engine->stateManager->changeState(stateSeque, engine);
+	}
+	else {
+		engine->stateManager->changeState(ProfileCreation, engine);
+	}
+	
 }
 
 CLoadingState::CLoadingState(CEngine* engine)

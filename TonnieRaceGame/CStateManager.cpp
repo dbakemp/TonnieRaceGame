@@ -7,6 +7,7 @@
 #include "CScoresState.h"
 #include "CCreditsState.h"
 #include "CLevelSelectorState.h"
+#include "CProfileCreationState.h"
 #include "CEnterNameState.h"
 
 CStateManager::CStateManager(CEngine* engine)
@@ -54,6 +55,8 @@ void CStateManager::changeState(EGameState state, CEngine* engine)
 	case Scores: states.push_back(new CScoresState(engine));
 		break;
 	case LevelSelector: states.push_back(new CLevelSelectorState(engine));
+		break;
+	case ProfileCreation: states.push_back(new CProfileCreationState(engine));
 		break;
 	}
 	return;
