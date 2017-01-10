@@ -85,7 +85,9 @@ void CEntityScoreboard::Update()
 	}
 
 	if (showing) {
-		for (int i = 0; i < engine->currentMap->allCars.size(); i++) 
+		int d = 6;
+		if (d > engine->currentMap->allCars.size()) { d = engine->currentMap->allCars.size(); }
+		for (int i = 0; i < d; i++) 
 		{
 			if (engine->currentMap->allCars[i]->finishTime != INT_MAX) {
 				
