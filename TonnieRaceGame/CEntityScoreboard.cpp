@@ -8,6 +8,8 @@
 #include "CDebugLogger.h"
 #include "CEngine.h"
 #include "CProfileManager.h"
+#include "HighscoresHelper.h"
+#include "CTimerHelper.h"
 
 CEntityScoreboard::CEntityScoreboard(CEngine* engine) : CEntity(engine), IInputListener(engine)
 {
@@ -76,6 +78,10 @@ void CEntityScoreboard::Update()
 			engine->profileManager->currentProfile->unlockNextLevel();
 			engine->profileManager->saveProfile();
 		}
+
+		HighscoresHelper* h = new HighscoresHelper();
+		CTimerHelper* t = new CTimerHelper();
+		h->addHighScore(engine->profileManager->currentProfile->name, t->IntToString(cars[0]->finishTime), 1);
 	}
 
 	if (showing) {
