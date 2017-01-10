@@ -66,15 +66,14 @@ void CPlayer1ControlSchemeCar::Input(SDL_Event* event)
 		case SDLK_F4:
 			//Level afronden(verliezen)
 			CDebugLogger::PrintDebug("CHEAT: Level afronden (verliezen)");
-			
-			//TeleportCar();
 			car->currentLap = engine->currentMap->laps - 1;
 			car->FinishCallback();
 			break;
 		case SDLK_F7:
+			//Alle levels vrijspelen
 			CDebugLogger::PrintDebug("CHEAT: Alle levels vrijspelen");
-
-			for (std::string s : engine->profileManager->currentProfile->levelProgression) {
+			for (std::string s : engine->profileManager->currentProfile->levelProgression) 
+			{
 				engine->profileManager->currentProfile->unlockNextLevel();
 			}
 			break;
@@ -112,29 +111,6 @@ void CPlayer1ControlSchemeCar::OnControllerButton(const SDL_ControllerButtonEven
 		car->UsePowerup();
 	}
 }
-
-//void CPlayer1ControlSchemeCar::TeleportCar()
-//{
-//	b2AABB aabb;
-//	aabb.lowerBound = b2Vec2(FLT_MAX, FLT_MAX);
-//	aabb.upperBound = b2Vec2(-FLT_MAX, -FLT_MAX);
-//	b2Fixture* fixture = engine->currentMap->checkpointsList.back->body->GetFixtureList();
-//	while (fixture != NULL)
-//	{
-//		aabb.Combine(aabb, fixture->GetAABB(0));
-//		fixture = fixture->GetNext();
-//	}
-//
-//	b2Vec2 veca = { (car->aabb.lowerBound.x + car->aabb.upperBound.x) / 2, (car->aabb.lowerBound.y + car->aabb.upperBound.y) / 2 };
-//	b2Vec2 vecb = { (aabb.lowerBound.x + aabb.upperBound.x) / 2, (aabb.lowerBound.y + aabb.upperBound.y) / 2 };
-//	b2Vec2 vecc = veca - vecb;
-//
-//	float distancea = vecc.Normalize();
-//
-//	b2Vec2 vecd = { (car->aabb.lowerBound.x + car->aabb.upperBound.x) / 2, (car->aabb.lowerBound.y + car->aabb.upperBound.y) / 2 };
-//
-//	car->body->SetTransform(vecd, car->body->GetAngle());
-//}
 
 void CPlayer1ControlSchemeCar::Update()
 {	
