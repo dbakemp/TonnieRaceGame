@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="CCamera.cpp" />
@@ -206,20 +206,19 @@
     <ClCompile Include="CTimerHelper.cpp">
       <Filter>Helpers</Filter>
     </ClCompile>
+    <ClCompile Include="CProfileManager.cpp">
+      <Filter>Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="CPlayerProfile.cpp" />
+    <ClCompile Include="CProfileCreationState.cpp">
     <ClCompile Include="CEntityTimer.cpp">
       <Filter>Entities\GUI</Filter>
     </ClCompile>
     <ClCompile Include="CLoadingState.cpp">
       <Filter>States</Filter>
     </ClCompile>
-    <ClCompile Include="CProfileManager.cpp">
-      <Filter>Managers</Filter>
-    </ClCompile>
-    <ClCompile Include="CProfileCreationState.cpp">
+    <ClCompile Include="CEnterNameState.cpp">
       <Filter>States</Filter>
-    </ClCompile>
-    <ClCompile Include="CPlayerProfile.cpp">
-      <Filter>Helpers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -430,20 +429,19 @@
     <ClInclude Include="CTimerHelper.h">
       <Filter>Helpers</Filter>
     </ClInclude>
+    <ClInclude Include="CProfileManager.h">
+      <Filter>Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="CPlayerProfile.h" />
+    <ClInclude Include="CProfileCreationState.h">
     <ClInclude Include="CEntityTimer.h">
       <Filter>Entities\GUI</Filter>
     </ClInclude>
     <ClInclude Include="CLoadingState.h">
       <Filter>States</Filter>
     </ClInclude>
-    <ClInclude Include="CProfileManager.h">
-      <Filter>Managers</Filter>
-    </ClInclude>
-    <ClInclude Include="CProfileCreationState.h">
+    <ClInclude Include="CEnterNameState.h">
       <Filter>States</Filter>
-    </ClInclude>
-    <ClInclude Include="CPlayerProfile.h">
-      <Filter>Helpers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

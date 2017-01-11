@@ -250,7 +250,6 @@ xcopy "$(SolutionDir)TonnieRaceGame\Resources\*.*" "$(TargetDir)Resources" /Y /I
     <ClCompile Include="CDebugLogger.cpp" />
     <ClCompile Include="CDrawManager.cpp" />
     <ClCompile Include="CEngine.cpp" />
-    <ClCompile Include="CEnterNameState.cpp" />
     <ClCompile Include="CEntity.cpp" />
     <ClCompile Include="CEntityAd.cpp" />
     <ClCompile Include="CEntityBorder.cpp" />
@@ -329,7 +328,6 @@ xcopy "$(SolutionDir)TonnieRaceGame\Resources\*.*" "$(TargetDir)Resources" /Y /I
     <ClInclude Include="CDebugLogger.h" />
     <ClInclude Include="CDrawManager.h" />
     <ClInclude Include="CEngine.h" />
-    <ClInclude Include="CEnterNameState.h" />
     <ClInclude Include="CEntity.h" />
     <ClInclude Include="CEntityAd.h" />
     <ClInclude Include="CEntityBorder.h" />
