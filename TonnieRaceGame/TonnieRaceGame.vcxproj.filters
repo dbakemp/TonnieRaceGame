@@ -221,7 +221,9 @@
     <ClCompile Include="CPlayerProfile.cpp">
       <Filter>Helpers</Filter>
     </ClCompile>
-    <ClCompile Include="CPauseState.cpp" />
+    <ClCompile Include="CPauseState.cpp">
+      <Filter>States</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CCamera.h" />
@@ -446,7 +448,9 @@
     <ClInclude Include="CPlayerProfile.h">
       <Filter>Helpers</Filter>
     </ClInclude>
-    <ClInclude Include="CPauseState.h" />
+    <ClInclude Include="CPauseState.h">
+      <Filter>States</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="TonnieRaceGame.rc" />

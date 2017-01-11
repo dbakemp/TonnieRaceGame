@@ -192,7 +192,11 @@ void CPlayState::input(CEngine* engine, SDL_Event* event)
 		case SDLK_ESCAPE:
 			//stateSeque = EGameState::Menu;
 			//shouldSeque = true;
-			engine->stateManager->changeStateToPause(engine, this);
+			//engine->stateManager->changeStateToPause(engine, this);
+			engine->musicHelper->pauseMusic();
+			break;
+		case SDLK_6:
+			engine->musicHelper->resumeMusic();
 			break;
 		}
 

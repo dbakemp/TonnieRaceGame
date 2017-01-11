@@ -12,7 +12,7 @@
          },
          {
             "name" : "map3.json",
-            "unlocked" : false
+            "unlocked" : true
          },
          {
             "name" : "map4.json",

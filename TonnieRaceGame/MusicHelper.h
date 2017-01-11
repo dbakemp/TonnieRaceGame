@@ -14,6 +14,9 @@ public:
 
 	void playBackgroundMusic();
 
+	void pauseMusic();
+	void resumeMusic();
+
 	void playTrack(std::string file, bool loop);
 	void stopAll();
 

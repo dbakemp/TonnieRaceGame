@@ -39,6 +39,10 @@ void CEntityPowerupHUD::Update()
 			//Robin is een gaylord
 		}
 	}
+	else
+	{
+		image->SetImage("");
+	}
 }
 
 void CEntityPowerupHUD::Input(SDL_Event* event)

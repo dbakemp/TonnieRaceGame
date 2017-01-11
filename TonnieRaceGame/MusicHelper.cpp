@@ -26,6 +26,22 @@ void MusicHelper::playBackgroundMusic()
 	playTrack("Resources/Music/" + songs[songIndex], true);
 }
 
+void MusicHelper::pauseMusic()
+{
+	for (HSTREAM stream : audioStreams)
+	{
+		BASS_ChannelPause(stream);
+	}
+}
+
+void MusicHelper::resumeMusic()
+{
+	for (HSTREAM stream : audioStreams)
+	{
+		BASS_ChannelPlay(stream, true);
+	}
+}
+
 void MusicHelper::playTrack(std::string file, bool loop)
 {
 	CDebugLogger::PrintDebug(file);
