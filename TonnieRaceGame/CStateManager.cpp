@@ -8,6 +8,7 @@
 #include "CCreditsState.h"
 #include "CLevelSelectorState.h"
 #include "CProfileCreationState.h"
+#include "CPauseState.h"
 
 CStateManager::CStateManager(CEngine* engine)
 {
@@ -41,7 +42,9 @@ void CStateManager::changeState(EGameState state, CEngine* engine)
 		break;
 	case Playing: states.push_back(new CPlayState(engine));
 		break;
-	case Pause: states.push_back(new CIntroState(engine));
+	case Pause: states.push_back(new CPauseState(engine));
+		break;
+	case Resumed: states.push_back(this->playState);
 		break;
 	case Credits: states.push_back(new CCreditsState(engine));
 		break;
@@ -69,6 +72,13 @@ void CStateManager::popState()
 {
 	states.pop_back();
 	return;
+}
+
+void CStateManager::changeStateToPause(CEngine * engine, CPlayState* playState)
+{
+	this->playState = playState;
+	changeState(Pause, engine);
+	std::cout << "troep is naar pause";
 }
 
 CGameState* CStateManager::getCurrentState()

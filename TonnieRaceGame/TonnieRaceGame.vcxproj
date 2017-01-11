@@ -280,6 +280,7 @@ xcopy "$(SolutionDir)TonnieRaceGame\Resources\*.*" "$(TargetDir)Resources" /Y /I
     <ClCompile Include="CLoadingState.cpp" />
     <ClCompile Include="CMap.cpp" />
     <ClCompile Include="CIntroState.cpp" />
+    <ClCompile Include="CPauseState.cpp" />
     <ClCompile Include="CPlayer1ControlSchemeCar.cpp" />
     <ClCompile Include="CPlayer1ControlSchemeTire.cpp" />
     <ClCompile Include="CPlayer2ControlSchemeCar.cpp" />
@@ -359,6 +360,7 @@ xcopy "$(SolutionDir)TonnieRaceGame\Resources\*.*" "$(TargetDir)Resources" /Y /I
     <ClInclude Include="CLoadingState.h" />
     <ClInclude Include="CMap.h" />
     <ClInclude Include="CIntroState.h" />
+    <ClInclude Include="CPauseState.h" />
     <ClInclude Include="CPlayer1ControlSchemeCar.h" />
     <ClInclude Include="CPlayer1ControlSchemeTire.h" />
     <ClInclude Include="CPlayer2ControlSchemeCar.h" />

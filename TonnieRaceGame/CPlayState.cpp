@@ -27,6 +27,7 @@
 #include "CEntityScoreboard.h"
 #include "CEntityFinished.h"
 #include "CDebugLogger.h"
+#include "CPauseState.h"
 
 void CPlayState::init(CEngine* engine)
 {
@@ -189,8 +190,9 @@ void CPlayState::input(CEngine* engine, SDL_Event* event)
 		switch (event->key.keysym.sym)
 		{
 		case SDLK_ESCAPE:
-			stateSeque = EGameState::Menu;
-			shouldSeque = true;
+			//stateSeque = EGameState::Menu;
+			//shouldSeque = true;
+			engine->stateManager->changeStateToPause(engine, this);
 			break;
 		}
 

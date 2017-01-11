@@ -8,7 +8,7 @@
          },
          {
             "name" : "map2.json",
-            "unlocked" : false
+            "unlocked" : true
          },
          {
             "name" : "map3.json",

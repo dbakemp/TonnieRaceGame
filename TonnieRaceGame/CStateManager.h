@@ -12,6 +12,7 @@ enum EGameState
 	Menu,
 	Playing,
 	Pause,
+	Resumed,
 	Credits,
 	Loading,
 	Help,
@@ -22,6 +23,8 @@ enum EGameState
 	ProfileCreation
 };
 
+#include "CPlayState.h"
+
 class CStateManager
 {
 public:
@@ -30,10 +33,11 @@ public:
 	void changeState(EGameState state, CEngine* engine);
 	void pushState(CGameState* state);
 	void popState();
-
+	void changeStateToPause(CEngine* engine, CPlayState* playState);
 	CGameState* getCurrentState();
 private:
 	vector<CGameState*> states;
+	CPlayState* playState;
 	CEngine* engine;
 };
 
