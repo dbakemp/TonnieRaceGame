@@ -94,6 +94,7 @@ void CPauseState::input(CEngine* engine, SDL_Event* event)
 		switch (event->key.keysym.sym)
 		{
 		case SDLK_ESCAPE:
+			engine->musicHelper->resumeMusic();
 			stateSeque = EGameState::Resumed;
 			shouldSeque = true;
 			//engine->stateManager->changeState(Resumed, engine);

@@ -176,15 +176,16 @@ void CPlayState::update(CEngine* engine)
 	engine->entityManager->Tick();
 	engine->world->Step(engine->deltaHelper->GetScaledDelta(), 8, 3);
 	engine->currentMap->CheckPositions();
-	checkSeque();
 
 	if ((lapCountera->GetLapCountable()->currentLap + 1) == engine->currentMap->laps && !endOfRacePlayed) {
 		engine->musicHelper->stopAll();
 		engine->musicHelper->playTrack("Resources/Music/lastround.mp3", false);
 		engine->musicHelper->playLastLapBackgroundMusic();
-		
+
 		endOfRacePlayed = true;
 	}
+
+	checkSeque();
 }
 
 void CPlayState::draw(CEngine* engine)
