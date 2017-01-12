@@ -3,6 +3,8 @@
 #include "CDebugLogger.h"
 #include <string>
 
+#include "bass_fx\bass_fx.h"
+
 
 MusicHelper::MusicHelper()
 {
@@ -24,6 +26,22 @@ void MusicHelper::playBackgroundMusic()
 	int songIndex = CIntegerHelper::GetRandomIntBetween(0, 6);
 
 	playTrack("Resources/Music/" + songs[songIndex], true);
+}
+
+void MusicHelper::playLastLapBackgroundMusic() {
+	std::string boerHarms = "Resources/Music/boerharms.mp3";
+
+	/* Load your soundfile and play it */
+	const char* fileString = boerHarms.c_str();
+
+	HSTREAM music = BASS_StreamCreateFile(FALSE, fileString, 0L, 0L, BASS_STREAM_DECODE);
+	HSTREAM musicFX = BASS_FX_TempoCreate(music, BASS_FX_FREESOURCE);
+
+	audioStreams.push_back(musicFX);
+
+	BASS_ChannelPlay(musicFX, FALSE);
+
+	BASS_ChannelSetAttribute(musicFX, BASS_ATTRIB_TEMPO, 40);
 }
 
 void MusicHelper::pauseMusic()

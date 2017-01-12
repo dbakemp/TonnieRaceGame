@@ -16,7 +16,7 @@
          },
          {
             "name" : "map4.json",
-            "unlocked" : false
+            "unlocked" : true
          },
          {
             "name" : "map5.json",

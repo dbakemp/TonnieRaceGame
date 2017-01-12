@@ -4,6 +4,7 @@
 #include "SDL.h"
 #include "CGameState.h"
 #include "CCamera.h"
+#include  "CEntityLapCounter.h"
 
 class CPlayState : public CGameState
 {
@@ -29,5 +30,9 @@ public:
 
 private:
 	CEngine* engine;
+
+	CEntityLapCounter* lapCountera;
+
+	bool endOfRacePlayed;
 };
 #endif

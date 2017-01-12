@@ -131,8 +131,8 @@ xcopy "$(SolutionDir)TonnieRaceGame\Resources\*.*" "$(TargetDir)Resources" /Y /I
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
-      <AdditionalLibraryDirectories>./lib/Box2D/$(Platform)/$(Configuration);./lib/SDL2/$(Platform)/$(Configuration);./lib/SDL2_gfx/$(Platform)/$(Configuration);./lib/LibCurl/$(Platform)/$(Configuration);./lib/Bass/$(Platform)/$(Configuration);./lib/Bass/c/$(Platform)/$(Configuration);./lib/SDL2_ttf/$(Platform)/$(Configuration);./lib/SDL2_image/$(Platform)/$(Configuration);./lib/libvlc/$(Platform)/$(Configuration);./lib/VLD/$(Platform)/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>Box2D.lib;SDL2.lib;SDL2_gfx.lib;SDL2main.lib;bass.lib;SDL2_image.lib;SDL2_ttf.lib;libcurl_debug.lib;libvlc.lib;libvlccore.lib;vld.lib;vld_x64.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>./lib/Box2D/$(Platform)/$(Configuration);./lib/SDL2/$(Platform)/$(Configuration);./lib/SDL2_gfx/$(Platform)/$(Configuration);./lib/LibCurl/$(Platform)/$(Configuration);./lib/BassFX/$(Platform)/$(Configuration);./lib/Bass/$(Platform)/$(Configuration);./lib/Bass/c/$(Platform)/$(Configuration);./lib/SDL2_ttf/$(Platform)/$(Configuration);./lib/SDL2_image/$(Platform)/$(Configuration);./lib/libvlc/$(Platform)/$(Configuration);./lib/VLD/$(Platform)/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>Box2D.lib;SDL2.lib;SDL2_gfx.lib;SDL2main.lib;bass.lib;bass_fx.lib;SDL2_image.lib;SDL2_ttf.lib;libcurl_debug.lib;libvlc.lib;libvlccore.lib;vld.lib;vld_x64.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>copy "$(SolutionDir)TonnieRaceGame\lib\SDL2_ttf\$(Platform)\$(Configuration)\SDL2_ttf.dll" "$(TargetDir)"
@@ -150,6 +150,8 @@ copy "$(SolutionDir)TonnieRaceGame\lib\SDL2_image\$(Platform)\$(Configuration)\l
 copy "$(SolutionDir)TonnieRaceGame\lib\SDL2_image\$(Platform)\$(Configuration)\libwebp-4.dll" "$(TargetDir)"
 
 copy "$(SolutionDir)TonnieRaceGame\lib\SDL2_image\$(Platform)\$(Configuration)\SDL2_image.dll" "$(TargetDir)"
+
+copy "$(SolutionDir)TonnieRaceGame\lib\BassFX\$(Platform)\$(Configuration)\bass_fx.dll" "$(TargetDir)"
 
 copy "$(SolutionDir)TonnieRaceGame\lib\Bass\$(Platform)\$(Configuration)\bass.dll" "$(TargetDir)"
 

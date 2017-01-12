@@ -13,6 +13,7 @@ public:
 	~MusicHelper();
 
 	void playBackgroundMusic();
+	void playLastLapBackgroundMusic();
 
 	void pauseMusic();
 	void resumeMusic();

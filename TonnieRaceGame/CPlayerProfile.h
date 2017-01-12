@@ -1,6 +1,8 @@
 #ifndef CPLAYERPROFILE_H
 #define CPLAYERPROFILE_H
 
+#include "CEngine.h"
+
 #include <string>
 #include <map>
 #include <vector>
@@ -15,10 +17,10 @@ public:
 	std::vector<std::string> levelProgression;
 
 	void initializeNewProfile(std::string name);
-	void unlockNextLevel();
+	void unlockNextLevel(CEngine* engine);
 	std::string parseToJSON();
 
-	std::string getToUnlock();
+	std::string getToUnlock(CEngine* engine);
 };
 #endif // !CPLAYERPROFILE_H
 
