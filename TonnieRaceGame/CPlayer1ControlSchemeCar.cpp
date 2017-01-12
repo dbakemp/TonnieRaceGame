@@ -84,7 +84,7 @@ void CPlayer1ControlSchemeCar::Input(SDL_Event* event)
 			CDebugLogger::PrintDebug("CHEAT: Alle levels vrijspelen");
 			for (std::string s : engine->profileManager->currentProfile->levelProgression) 
 			{
-				engine->profileManager->currentProfile->unlockNextLevel();
+				engine->profileManager->currentProfile->unlockNextLevel(engine);
 			}
 			break;
 		case SDLK_KP_PLUS:

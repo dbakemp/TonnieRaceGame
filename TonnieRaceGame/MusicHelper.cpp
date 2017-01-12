@@ -3,6 +3,8 @@
 #include "CDebugLogger.h"
 #include <string>
 
+#include "bass_fx\bass_fx.h"
+
 
 MusicHelper::MusicHelper()
 {
@@ -26,6 +28,22 @@ void MusicHelper::playBackgroundMusic()
 	playTrack("Resources/Music/" + songs[songIndex], true);
 }
 
+void MusicHelper::playLastLapBackgroundMusic() {
+	std::string boerHarms = "Resources/Music/boerharms.mp3";
+
+	/* Load your soundfile and play it */
+	const char* fileString = boerHarms.c_str();
+
+	HSTREAM music = BASS_StreamCreateFile(FALSE, fileString, 0L, 0L, BASS_STREAM_DECODE);
+	HSTREAM musicFX = BASS_FX_TempoCreate(music, BASS_FX_FREESOURCE);
+
+	audioStreams.push_back(musicFX);
+
+	BASS_ChannelPlay(musicFX, true);
+
+	BASS_ChannelSetAttribute(musicFX, BASS_ATTRIB_TEMPO, 40);
+}
+
 void MusicHelper::pauseMusic()
 {
 	for (HSTREAM stream : audioStreams)
@@ -38,7 +56,7 @@ void MusicHelper::resumeMusic()
 {
 	for (HSTREAM stream : audioStreams)
 	{
-		BASS_ChannelPlay(stream, true);
+		BASS_ChannelPlay(stream, false);
 	}
 }
 
@@ -60,7 +78,10 @@ void MusicHelper::playTrack(std::string file, bool loop)
 		streamHandle = BASS_StreamCreateFile(FALSE, fileString, 0, 0, 0);
 	}
 
-	audioStreams.push_back(streamHandle);
+	if (file != "Resources/Music/lastround.mp3") {
+		audioStreams.push_back(streamHandle);
+	}
+	
 	BASS_ChannelPlay(streamHandle, FALSE);
 }
 

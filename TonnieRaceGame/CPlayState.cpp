@@ -14,6 +14,9 @@
 #include "CEntityLapCounter.h"
 #include "CEntityFpsCounter.h"
 #include "CEntitySpeedoMeter.h"
+#include "CEntityLapCounter.h"
+#include "ILapCountable.h"
+#include "MusicHelper.h"
 #include "CCollisionHelper.h"
 #include <functional>
 #include "CCameraManager.h"
@@ -71,7 +74,7 @@ void CPlayState::init(CEngine* engine)
 	}
 
 	engine->cameraManager->GetCameraByIndex(0)->SetChild(car);
-	CEntityLapCounter* lapCountera = new CEntityLapCounter(engine);
+	lapCountera = new CEntityLapCounter(engine);
 	CEntitySpeedoMeter* speedoMetera = new CEntitySpeedoMeter(engine);
 	CEntityPositionCounter* positionCountera = new CEntityPositionCounter(engine);
 	CEntityPowerupHUD* powerupHUDa = new CEntityPowerupHUD(engine);
@@ -173,6 +176,15 @@ void CPlayState::update(CEngine* engine)
 	engine->entityManager->Tick();
 	engine->world->Step(engine->deltaHelper->GetScaledDelta(), 8, 3);
 	engine->currentMap->CheckPositions();
+
+	if ((lapCountera->GetLapCountable()->currentLap + 1) == engine->currentMap->laps && !endOfRacePlayed) {
+		engine->musicHelper->stopAll();
+		engine->musicHelper->playTrack("Resources/Music/lastround.mp3", false);
+		engine->musicHelper->playLastLapBackgroundMusic();
+
+		endOfRacePlayed = true;
+	}
+
 	checkSeque();
 }
 

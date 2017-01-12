@@ -1,6 +1,8 @@
 #include "CPlayerProfile.h"
 #include "CDebugLogger.h"
 
+#include  "CEngine.h"
+
 #include <string>
 #include <fstream>
 #include <json/json.h>
@@ -63,18 +65,28 @@ std::string CPlayerProfile::parseToJSON() {
 	return returnString;
 }
 
-void CPlayerProfile::unlockNextLevel() {
-	unlockedLevels.at(getToUnlock()) = true;
+void CPlayerProfile::unlockNextLevel(CEngine* engine) {
+	unlockedLevels.at(getToUnlock(engine)) = true;
 }
 
-std::string CPlayerProfile::getToUnlock() {
+std::string CPlayerProfile::getToUnlock(CEngine* engine) {
 	std::string temp;
 
 	for (int i = 0; i < levelProgression.size(); i++) {
-		if (unlockedLevels.at(levelProgression.at(i)) == true && levelProgression.at(i) != levelProgression.back()) {
+		if (levelProgression.at(i) == engine->level) {
 			temp = levelProgression.at(i + 1);
 		}
 	}
+
+	/*
+	for (int i = 0; i < levelProgression.size(); i++) {
+	if (unlockedLevels.at(levelProgression.at(i)) == true && levelProgression.at(i) != levelProgression.back()) {
+	temp = levelProgression.at(i + 1);
+	}
+	}
+	*/
+
+	
 
 	return temp;
 }

@@ -77,7 +77,7 @@ void CEntityScoreboard::Update()
 
 		if (cars[0]->finishTime == engine->currentMap->allCars[0]->finishTime)
 		{
-			engine->profileManager->currentProfile->unlockNextLevel();
+			engine->profileManager->currentProfile->unlockNextLevel(engine);
 			engine->profileManager->saveProfile();
 		}
 

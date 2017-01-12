@@ -5,6 +5,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <map>
 
 class MusicHelper
 {
@@ -13,6 +14,7 @@ public:
 	~MusicHelper();
 
 	void playBackgroundMusic();
+	void playLastLapBackgroundMusic();
 
 	void pauseMusic();
 	void resumeMusic();
