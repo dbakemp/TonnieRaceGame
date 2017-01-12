@@ -32,14 +32,14 @@ void CEntityFpsCounter::Draw(SDL_Renderer* renderer)
 
 void CEntityFpsCounter::Input(SDL_Event* event)
 {
-	/*switch (event->type)
+	switch (event->type)
 	{
 	case SDL_KEYDOWN:
 		switch (event->key.keysym.sym)
 		{
-		case SDLK_f:
+		case SDLK_q:
 			label->ToggleVisibility();
 			break;
 		}
-	}*/
+	}
 }
