@@ -12,6 +12,7 @@
 
 CStateManager::CStateManager(CEngine* engine)
 {
+	this->playState = nullptr;
 	this->engine = engine;
 }
 
@@ -19,17 +20,25 @@ CStateManager::~CStateManager()
 {
 	getCurrentState()->clean(engine);
 
+	if (playState != nullptr) {
+		playState->clean(engine);
+		playState = nullptr;
+	}
+
 	for (CGameState* state : states)
 	{
-		delete state;
+		if (state != nullptr) {
+			delete state;
+		}
 		state = nullptr;
 	}
+
 	states.clear();
 }
 
-void CStateManager::changeState(EGameState state, CEngine* engine)
+void CStateManager::changeState(EGameState state, CEngine* engine, bool clean)
 {
-	if (states.size() > 0)
+	if (states.size() > 0 && clean)
 	{
 		getCurrentState()->clean(engine);
 	}
@@ -45,6 +54,8 @@ void CStateManager::changeState(EGameState state, CEngine* engine)
 	case Pause: states.push_back(new CPauseState(engine));
 		break;
 	case Resumed: states.push_back(this->playState);
+		states.erase(states.begin()+(states.size()-3));
+		playState = nullptr;
 		break;
 	case Credits: states.push_back(new CCreditsState(engine));
 		break;
@@ -77,7 +88,7 @@ void CStateManager::popState()
 void CStateManager::changeStateToPause(CEngine * engine, CPlayState* playState)
 {
 	this->playState = playState;
-	changeState(Pause, engine);
+	changeState(Pause, engine, false);
 	std::cout << "troep is naar pause";
 }
 

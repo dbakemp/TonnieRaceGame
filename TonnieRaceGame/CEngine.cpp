@@ -89,13 +89,13 @@ CEngine::CEngine()
 
 CEngine::~CEngine()
 {
+	delete stateManager;
 	delete entityManager;
 	delete adHelper;
 	delete drawManager;
 	delete inputManager;
 	delete profileManager;
 	delete box2DManager;
-	delete stateManager;
 	delete deltaHelper;
 	delete currentMap;
 	delete fontManager;
@@ -105,6 +105,7 @@ CEngine::~CEngine()
 	delete collisionHelper;
 	delete spriteSheetManager;
 	delete textureManager;
+	delete timerHelper;
 
 	SDL_DestroyRenderer(renderer);
 	SDL_Quit();

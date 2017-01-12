@@ -30,14 +30,14 @@ class CStateManager
 public:
 	CStateManager(CEngine* engine);
 	~CStateManager();
-	void changeState(EGameState state, CEngine* engine);
+	void changeState(EGameState state, CEngine* engine, bool clean = true);
 	void pushState(CGameState* state);
 	void popState();
 	void changeStateToPause(CEngine* engine, CPlayState* playState);
 	CGameState* getCurrentState();
+	CPlayState* playState;
 private:
 	vector<CGameState*> states;
-	CPlayState* playState;
 	CEngine* engine;
 };
 

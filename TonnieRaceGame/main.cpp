@@ -1,4 +1,4 @@
-//#include <VLD/vld.h> 
+#include <VLD/vld.h> 
 #include "CEngine.h"
 
 int main(int argc, char* argv[])

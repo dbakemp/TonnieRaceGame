@@ -201,10 +201,8 @@ void CPlayState::input(CEngine* engine, SDL_Event* event)
 		switch (event->key.keysym.sym)
 		{
 		case SDLK_ESCAPE:
-			//stateSeque = EGameState::Menu;
-			//shouldSeque = true;
-			//engine->stateManager->changeStateToPause(engine, this);
-			engine->musicHelper->pauseMusic();
+			stateSeque = EGameState::Pause;
+			shouldSeque = true;
 			break;
 		case SDLK_6:
 			engine->musicHelper->resumeMusic();
@@ -220,8 +218,15 @@ void CPlayState::checkSeque()
 {
 	if (!shouldSeque) { return; }
 
-	engine->stateManager->changeState(stateSeque, engine);
-	engine->musicHelper->stopAll();
+	if (stateSeque == EGameState::Pause) {
+		engine->stateManager->changeStateToPause(engine, this);
+		engine->musicHelper->pauseMusic();
+		shouldSeque = false;
+	}
+	else {
+		engine->stateManager->changeState(stateSeque, engine);
+		engine->musicHelper->stopAll();
+	}
 }
 
 void CPlayState::OnFinish(IBox2DListener* car)

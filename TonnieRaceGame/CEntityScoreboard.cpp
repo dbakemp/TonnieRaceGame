@@ -164,6 +164,4 @@ void CEntityScoreboard::SetCar(CEntityCar * car)
 
 void CEntityScoreboard::UpdateContainers()
 {
-	image->SetContainer(camera->GetViewPort().x, camera->GetViewPort().y, camera->GetViewPort().w, camera->GetViewPort().h);
-	container->SetContainer(camera->GetViewPort().x, camera->GetViewPort().y, camera->GetViewPort().w, camera->GetViewPort().h);
 }

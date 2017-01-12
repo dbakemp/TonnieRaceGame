@@ -5,6 +5,7 @@
 #include "CGameState.h"
 #include "CUIButton.h"
 #include "CPlayState.h"
+#include "CUIImage.h"
 
 class CPauseState : public CGameState
 {
@@ -29,5 +30,9 @@ public:
 private:
 	void OnButtonClick(CUIButton* button);
 	CEngine* engine;
+	CUILabel* label;
+	CUIImage* background;
+	CUIImage* tonnie; 
+	CUIButton* buttonBack;
 };
 #endif
