@@ -75,17 +75,35 @@ void CHelpState::init(CEngine* engine)
 	CUIImage* toetsie = new CUIImage(engine, "Images/toetsenbord.png");
 	toetsie->SetHorizontalAlignment(EUIALignmentHorizontal::CENTER);
 	toetsie->SetVerticalAlignment(EUIALignmentVertical::CENTER);
-	toetsie->SetPosition(-300, 0);
+	toetsie->SetPosition(0, 0);
+
+	CUILabel* labelToetsie = new CUILabel(engine, "Bangers", "Auto besturen");
+	labelToetsie->SetFontSize(20);
+	labelToetsie->SetHorizontalAlignment(EUIALignmentHorizontal::LEFT);
+	labelToetsie->SetVerticalAlignment(EUIALignmentVertical::TOP);
+	labelToetsie->SetPosition(100, 190);
 
 	CUIImage* spacebarrie = new CUIImage(engine, "Images/spacebarrie.png");
 	spacebarrie->SetHorizontalAlignment(EUIALignmentHorizontal::CENTER);
 	spacebarrie->SetVerticalAlignment(EUIALignmentVertical::CENTER);
-	spacebarrie->SetPosition(-300, 100);
+	spacebarrie->SetPosition(0, 110);
+
+	CUILabel* labelSpace = new CUILabel(engine, "Bangers", "Powerup uitvoeren");
+	labelSpace->SetFontSize(20);
+	labelSpace->SetHorizontalAlignment(EUIALignmentHorizontal::LEFT);
+	labelSpace->SetVerticalAlignment(EUIALignmentVertical::TOP);
+	labelSpace->SetPosition(78, 260);
 
 	CUIImage* shieft = new CUIImage(engine, "Images/shieft.png");
 	shieft->SetHorizontalAlignment(EUIALignmentHorizontal::CENTER);
 	shieft->SetVerticalAlignment(EUIALignmentVertical::CENTER);
-	shieft->SetPosition(-300, 150);
+	shieft->SetPosition(0, 185);
+
+	CUILabel* labelShieft = new CUILabel(engine, "Bangers", "Toeteren");
+	labelShieft->SetFontSize(20);
+	labelShieft->SetHorizontalAlignment(EUIALignmentHorizontal::LEFT);
+	labelShieft->SetVerticalAlignment(EUIALignmentVertical::TOP);
+	labelShieft->SetPosition(115, 342);
 
 	CUILabel* labelr = new CUILabel(engine, "Bangers", "Controller Besturing");
 	labelr->SetFontSize(30);
@@ -119,8 +137,15 @@ void CHelpState::init(CEngine* engine)
 	CUIContainer* containerlc = new CUIContainer(engine);
 	containerlc->SetHorizontalAlignment(EUIALignmentHorizontal::CENTER);
 	containerlc->SetVerticalAlignment(EUIALignmentVertical::BOTTOM);
-	containerlc->SetHeight(200 - labelr->GetRectangle().h - 5);
+	containerlc->SetHeight(300 - labelr->GetRectangle().h - 5);
 	containerlc->SetWidth(300);
+	containerlc->AddUIElement(labell);
+	containerlc->AddUIElement(toetsie);
+	containerlc->AddUIElement(labelToetsie);
+	containerlc->AddUIElement(spacebarrie);
+	containerlc->AddUIElement(labelSpace);
+	containerlc->AddUIElement(shieft);
+	containerlc->AddUIElement(labelShieft);
 
 	CUIContainer* containerrl = new CUIContainer(engine);
 	containerrl->SetHorizontalAlignment(EUIALignmentHorizontal::LEFT);
