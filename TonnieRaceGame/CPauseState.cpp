@@ -58,6 +58,7 @@ void CPauseState::clean(CEngine* engine)
 	delete background;
 	delete tonnie;
 	delete label;
+	delete buttonBack->GetLabel();
 	delete buttonBack;
 
 	engine->timerHelper->Resume();

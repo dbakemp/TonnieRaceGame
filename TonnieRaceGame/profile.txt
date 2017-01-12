@@ -24,7 +24,7 @@
          },
          {
             "name" : "map6.json",
-            "unlocked" : false
+            "unlocked" : true
          }
       ]
    }
