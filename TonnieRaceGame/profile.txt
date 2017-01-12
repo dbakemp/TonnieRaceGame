@@ -1,6 +1,6 @@
 {
    "profile" : {
-      "name" : "kontman",
+      "name" : "Dikke Tonnie houdt van subkes",
       "unlockedMaps" : [
          {
             "name" : "map1.json",
@@ -16,15 +16,15 @@
          },
          {
             "name" : "map4.json",
-            "unlocked" : true
+            "unlocked" : false
          },
          {
             "name" : "map5.json",
-            "unlocked" : true
+            "unlocked" : false
          },
          {
             "name" : "map6.json",
-            "unlocked" : true
+            "unlocked" : false
          }
       ]
    }

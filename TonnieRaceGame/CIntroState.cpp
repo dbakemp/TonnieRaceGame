@@ -5,9 +5,11 @@
 #include "CDrawManager.h"
 #include "CInputManager.h"
 #include "CDeltaHelper.h"
+#include "CProfileManager.h"
 #include "CEntityManager.h"
 #include "CUIImage.h"
 #include "CUIButton.h"
+#include "CEngine.h"
 #include "EUIAlignment.h"
 #include <functional>
 
@@ -22,6 +24,25 @@ void CIntroState::init(CEngine* engine)
 	tonnie->SetHorizontalAlignment(EUIALignmentHorizontal::CENTER);
 	tonnie->SetVerticalAlignment(EUIALignmentVertical::CENTER);
 	tonnie->SetPosition(0, -100);
+
+	CUIImage* bord = new CUIImage(engine, "Images/menu-board.png");
+	bord->SetHorizontalAlignment(EUIALignmentHorizontal::RIGHT);
+	bord->SetVerticalAlignment(EUIALignmentVertical::TOP);
+	bord->SetPosition(0, 0);
+
+	CUILabel* welcomeBackLabel = new CUILabel(engine, "Bangers", "Welkom terug");
+	welcomeBackLabel->SetFontSize(30);
+	welcomeBackLabel->SetHorizontalAlignment(EUIALignmentHorizontal::RIGHT);
+	welcomeBackLabel->SetVerticalAlignment(EUIALignmentVertical::TOP);
+	welcomeBackLabel->SetPosition(-125, 60);
+
+	std::string name = engine->profileManager->currentProfile->name;
+	name.resize(24);
+	CUILabel* profileNameLabel = new CUILabel(engine, "Bangers", name);
+	profileNameLabel->SetFontSize(30);
+	profileNameLabel->SetHorizontalAlignment(EUIALignmentHorizontal::RIGHT);
+	profileNameLabel->SetVerticalAlignment(EUIALignmentVertical::TOP);
+	profileNameLabel->SetPosition(-60, 115);
 
 	CUIButton* labela = new CUIButton(engine, "Bangers", "Spelen", "Images/blauw.png");
 	labela->SetHorizontalAlignment(EUIALignmentHorizontal::CENTER);
