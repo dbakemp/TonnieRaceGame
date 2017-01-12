@@ -78,7 +78,7 @@ void MusicHelper::playTrack(std::string file, bool loop)
 		streamHandle = BASS_StreamCreateFile(FALSE, fileString, 0, 0, 0);
 	}
 
-	if (file != "Resources/Music/lastround.mp3") {
+	if (file != "Resources/Music/lastround.mp3" && file != "Resources/Music/title.mp3") {
 		audioStreams.push_back(streamHandle);
 	}
 	
