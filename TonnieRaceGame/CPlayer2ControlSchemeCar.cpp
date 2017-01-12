@@ -31,7 +31,7 @@ void CPlayer2ControlSchemeCar::Input(SDL_Event* event)
 		case SDLK_f:
 			car->debugVisible = !car->debugVisible;
 			break;
-		case SDLK_SPACE:
+		case SDLK_RETURN:
 			if (car->activePowerup != CEntityPowerup::PowerupType::NONE && !car->powerupActive)
 			{
 				car->powerupActive = true;
@@ -40,7 +40,7 @@ void CPlayer2ControlSchemeCar::Input(SDL_Event* event)
 					tire->powerupActive = true;
 					tire->type = car->activePowerup;
 				}
-				CDebugLogger::PrintDebug("Powerup geactiveerd");
+				CDebugLogger::PrintDebug("Powerup speler 2 geactiveerd");
 			}
 			break;
 		case SDLK_0:
