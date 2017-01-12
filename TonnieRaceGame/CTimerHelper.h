@@ -17,11 +17,16 @@ public:
 	int LapAsInt();
 	std::string IntToString(int timestamp);
 	void Update();
+	void Pause();
+	void Resume();
 private:
 
 	bool running;
 	int startTime;
 	int currentTime;
+	int pauseTime;
+	int pauseBias;
+	bool paused;
 };
 
 #endif /* CIntegerHelper_hpp */

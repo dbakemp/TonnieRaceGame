@@ -31,6 +31,7 @@ public:
 	void SetClickHoldCallback(std::function<void(CUIButton*)> callback);
 	void SetFontSize(int fontSize);
 	void SetContainer(int x, int y, int w, int h);
+	CUILabel* GetLabel();
 	SDL_Rect GetRectangle();
 	void SetTag(std::string tag);
 	std::string GetTag();

@@ -8,6 +8,7 @@ CTimerHelper::CTimerHelper()
 void CTimerHelper::Start()
 {
 	running = true;
+	paused = false;
 	startTime = clock();
 	currentTime = startTime;
 }
@@ -50,7 +51,24 @@ std::string CTimerHelper::IntToString(int timestamp)
 
 void CTimerHelper::Update()
 {
-	if (running) {
+	if (running && !paused) {
 		currentTime = clock();
+	}
+}
+
+void CTimerHelper::Pause()
+{
+	if (running && !paused) {
+		pauseTime = clock();
+		paused = true;
+	}
+}
+
+void CTimerHelper::Resume()
+{
+	if (running && paused) {
+		pauseBias = clock() - pauseTime;
+		startTime += pauseBias;
+		paused = false;
 	}
 }

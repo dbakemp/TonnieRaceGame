@@ -194,6 +194,11 @@ void CUIButton::SetContainer(int x, int y, int w, int h)
 	PreRender();
 }
 
+CUILabel * CUIButton::GetLabel()
+{
+	return label;
+}
+
 SDL_Rect CUIButton::GetRectangle()
 {
 	return dstrect;
